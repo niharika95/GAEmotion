@@ -1,0 +1,444 @@
+FarceLemma: nah, only variables that you declare as an array
+FarceLemma: you have to make a &quot;Resource object&quot;
+superpws: How?
+FarceLemma: so make a ts file called &quot;resource.ts&quot;
+superpws: Can you give any link or a simple example?
+FarceLemma: inside that make an object
+FarceLemma: export class Resource{
+FarceLemma: ResourceAddress: string;
+FarceLemma: ResourceDescription: string;
+FarceLemma: }
+superpws: Well I have a component/class called &quot;GridComponent&quot; saved in grid.component.ts
+FarceLemma: right
+superpws: Okay so created a separate class for Resources.
+FarceLemma: make another class and import it into grid.component.ts
+superpws: I included it in the same file though (grid.component.ts).. no need to import.
+FarceLemma: sure thats fine!
+superpws: class Resources {    ResourceDescription:string;    ResourceAddress:string; }
+FarceLemma: then make a variable..... resources:Resource[] = [];
+superpws: &quot;resources:Resource[] = [];&quot; this won't contain anything though initially?
+FarceLemma: right
+superpws: I need to set initial value, or push the first value.
+FarceLemma: then you push on your first value in ngOnInit()
+FarceLemma: or you can just put in that Resources object you have in your jsfiddle when declaring the array
+FarceLemma: yo call
+superpws: How to push the value? (created the ngOnInit() already after the constructor)
+JuSeZ: is there a good placeholder img api for UI mockup?
+JuSeZ: like avatars and random custom size images
+None
+FarceLemma: =D
+FarceLemma: and @superpws in ngOnInt(){
+FarceLemma: let firstResource = { ..........}
+FarceLemma: this.resources.push(firstResource)
+FarceLemma: more specifically: let firstResource: Resources = {..........}
+superpws: Okay then?
+FarceLemma: it should be there
+None
+superpws: Doesn't work yet.
+superpws: If I remove the &quot;+ resources.ResourceDescription + resources.ResourceAddress&quot; from the AddResource event, then the event works, otherwise it doesn't.
+yew: Hello there
+yew: Anyone here experienced with RxJS?
+verax5: to use or not to use angular 2?
+verax5: i mean learn
+yew: verax5, Yes, writing in typescript is great.
+zissou: Hi guys, newbie here, I have the property name &quot;Miami Heat&quot; in an object that I'm trying to reference int he template, how do I go about doing that?
+verax5: u try sound smart yew?
+verax5: trying to*
+zissou: teams['Miami Heat'] doesnt work.
+yew: verax5, What do you mean?
+verax5: learning type script isn really an answer but nvm
+yew: verax5m, i've been using it for a week now and its not too bad to get started quickly. You should give it a try.
+beat25: verax5: so salty
+verax5: lol me?
+verax5: i asked a simple question expecting a usefulanswer
+beat25: yes you
+verax5: okay.
+wafflej0ck: verax5, what's the question really? do you plan to go to production soon? do you need third party libraries... are you just looking for something new to poke around at, are you interested in trying out TS?
+YottaByte: working through the angularjs phoneapp tutorial, why define the module in one file, app.js, like &quot;angular.module('phonecatApp', []);&quot; and then register it in another, like angular.module('phonecatApp').component('phoneList', ... ?
+GreenJello: YottaByte, you might have multiple component files for that module
+YottaByte: oh, and if I don't have that in app.js they would continually overwrite each other or something?
+GreenJello: I don't know what happens if you define a module twice, but hopefully it throws an error
+YottaByte: ah yeah, it'll say the module is not available
+kegster: if i'm using npm for my web stuff, after i npm install package --save, what else do i need to do to get gulp to load it?
+AlecTaylor: hi
+AlecTaylor: Elarcis: New Angular is out!
+None
+None
+kegster: is jquery-ui being loaded properly?
+lucas_ai: How can I use angularFire on my nodejs server? Using the regular firebase API is unnecessarily cumbersome in comparison.
+Elarcis: Hi!
+suresh_: hello
+suresh_: who is working on angular
+Elarcis: suresh_: what do you mean?
+suresh_: Hi i just want to know how good is Angula
+Elarcis: okay
+san37: hello guys..how can i get data from a server?with angularjs
+Elarcis: hi san37
+Elarcis: san37: use the $http service provided by angularjs
+Elarcis: san37: there is documentation on how to use it on angularjs's website
+Elarcis: san37: if you have any question we're here
+san37: elarcis...yes i got that..
+san37: i can use json file on my project folder
+Elarcis: san37: I don't get your issue then
+san37: but i cannot get data from remote server which holds data coming from gps devices
+Elarcis: san37: ha, that
+san37: It says XMLHttpRequest cannot load
+Elarcis: san37: does the remote server allow your domain to query it?
+None
+Elarcis: san37: yep. definitely a CORS issue. the server you're trying to reach doesn't allow any request coming from localhost
+san37: how can i solve it
+Elarcis: san37: this has nothing to do with your app, but rather with the server you're trying to query
+Elarcis: san37: without access to the server configuration, I'm afraid you cannot solve it
+san37: $http.get() is the method I am using..
+san37: Am I doing it right??
+Elarcis: san37: yes, you are
+Elarcis: san37: this is a server configuration issue
+Elarcis: san37: the server is not configured to accept requests from domains called 'localhost'
+san37: oo
+None
+san37: I can get data when I enter the ip address of the server
+Elarcis: san37: what do you mean? when you're pinging it?
+Elarcis: san37: or when visiting it through the browser?
+san37: visiting through the browser..
+san37: It is now open for me to get data for developing
+Elarcis: san37: yes, that's normal. if you're typing the ip of the server, you're making requests from the same domain
+san37: Bt it can be accessed by the admin only
+Elarcis: san37: you have to ask the admin to allow other domains to make HTTP requests to the server
+san37: Isnt there any other methods
+san37: ?
+Elarcis: san37: the admin will either allow any domain to contact the server (*), or just a few ones (localhost, and your production domain)
+san37: Actually I am an Intern guy..and I got to work on this real world fleet managemennt project
+Elarcis: san37: if you're an intern, don't be afraid to ask questions to your tutor/admin guy, they're here to help
+Elarcis: san37: and they'll probably know more about the technical constraints of your system than I x)
+san37: yes..you are right Elarics
+san37: thanks to you for steping forward o help me
+imbs: hello frnds
+imbs: i m fresher in angular js please suggest me where i start my tutorial
+imbs: ??
+imbs: #angularjs
+smiche: another monday :d, morning
+ngWalrus: hey
+None
+Elarcis: hi ngWalrus
+icebox: hey
+None
+None
+icebox: I would like to create a poll about ui libs (for angular - 1 or 2) we are using: material, boostrap ui, css (which?) + custom lib, other... what is your experience?
+g_: g
+Guest11504: can anyone here help me with a simple web app?
+icebox: Guest11504: don't ask to ask, just ask
+Guest11504: i'm trying to find the best way to do a conditional $routechange
+Guest11504: basically I want the $route ('/') to go to the '/' page if authenticated and go to ('/signin') if not
+icebox: another poll I woul like to consider is about ui widgets... what are the most used in your apps? layout (flex or grid), nav and menu, selects (combo box), autocomplete, dialog (modal), lists and tables or other
+Elarcis: hi icebox
+icebox: Elarcis: hey
+icebox: Guest11504: there are a few resources googling about that
+Elarcis: icebox: my experience summarized in a sentence: I hate UI frameworks
+icebox: the point about my polls is about coupling the architectural framework (or lib) with a widget one and the grade of flexibility if the app is under refactoring
+Guest11504: I saw some threads but no definitive answers as to the best way or industry standard way
+bos: test
+Guest11504: @icebox
+icebox: Elarcis: agreed :) but we cannot remove them
+slacko223411: hi
+icebox: Guest11504: please, no private messages... ask in the channel
+Guest11504: sorry
+icebox: Guest11504: no problem
+slacko223411: hi ice box
+Elarcis: hi uru
+uru: Morning
+slacko223411: woowwww
+slacko223411: its a wonder
+uru: Elarcis: I've picked up a new game you might like, as a totally off topic tangent
+ngWalrus: and the game is called finding a reason to live in this vast ocean of emptiness
+ngWalrus: my favourite reason is booze
+uru: ngWalrus: We all play that every day, no one really likes it and everyone always looses
+ngWalrus: don't call me loose
+ngWalrus: I'm very tight
+uru: (Insert correct spelling and grammar where desired)
+Elarcis: uru: I'm very interested
+Guest11504: So @icebox,  I'm using angular and firebase. I have google authentication within a controller so i dont think my auth/user object is accessible in the app.config part of my app.  Is it even good practice to have authentication in a controller?
+uru: Elarcis: I'll PM you
+Elarcis: NOOOO! MY INTIMACY
+uru: ::D
+ngWalrus: wow
+ngWalrus: logging in as root
+None
+Guest11504: gg
+runtyrobot: I have an ng-submit running on a login form - and it works a charm - except after I've uploaded it. Now everytime it's trying to make the login call it does so via the 'options' method, instead of post. And I haven't used it anywhere in my code - and have no clue why. Anyone got an idea?
+icebox: runtyrobot: CORS
+Elarcis: kill me please
+icebox: Elarcis: done
+Elarcis: thanks
+icebox: you are welcome :P
+uru: It's just going to take a few years to kick in
+Elarcis: I'm tired of maintaining this huge mess of a project
+AlecTaylor: Hmm, `this.http.get(this.heroesUrl).toPromise()` gives &quot;error TS2339: Property 'toPromise' does not exist on type 'ObservableResponse:'.&quot;
+None
+None
+icebox: AlecTaylor: it is not about http... it is about Observable... check the import
+AlecTaylor: Ahh - import 'rxjs/add/operator/toPromise';
+runtyrobot: icebox: They're on the same server - different subdomains though. I've added the set Access-Control-Allow-Origin - and disabled host-specific rulesets. The issue persists though.
+icebox: runtyrobot: check better, review backend setup... we don't know your setup (and it is backend affair) :)
+klex22: hi, how should i implement 'global' flash messages?  im considering using 'alert' component from ng2-bootstrap and have the top component (AppComponent) store array of alerts (so i dont need to define it on every component). However im not sure how to 'change' this array (add new alert) from the child component?
+Elarcis: klex22: use services
+klex22: Elarcis: ohh so u mean like i should create AlertService singleton which appComponent should inject and use ngFor on it and childComponent should populate it?
+None
+icebox: klex22: ah... for angular 2...
+klex22: icebox: yes for 2
+None
+icebox: klex22: it is similar to toast in material 2
+icebox: *material 1
+klex22: icebox: but thats material2, which doesnt have all of the components yet right?
+AlecTaylor: Where are the code examples stored? - I need to send a PR
+AlecTaylor: (tutorial code examples)
+icebox: klex22: Q: &quot;how should i implement 'global' flash messages?&quot; A: &quot;you may give a look at that widget&quot; :)
+icebox: klex22: source code helps :)
+AlecTaylor: Foxandxss: Whilst you're here, update the version number in topic?
+Foxandxss: sure
+klex22: icebox: but if i use 1 component from md2, i should do the whole page with md2 or not?
+icebox: klex22: I am suggesting to give a look how they implemented what you are asking for :)
+klex22: icebox: ohh ok tnx :P
+tobias: ohai
+ngWalrus: ohaioo
+Guest44949: Hello, anyone know how to route to children without destroying parent?
+Guest44949: anyone here?
+tobias: Guest44949: you want to add a second component to the page?
+tobias: (instead of swapping it out)
+Guest44949: example    productComponent  and productDetailComponent
+Guest44949: they both are not in the same page, i am not using directive
+Guest44949: tobias can you help me?
+hitesh: Hello
+hitesh: Hello
+Guest44949: hello anybody can help?
+hitesh: Hello is there anyone?
+hitesh: Not getting exactly
+grug: there is anyone
+icebox: hitesh: don't ask to ask... just ask
+Elarcis: technically he didn't ask to ask
+icebox: Elarcis: what do you think I should say you? &quot;I k...&quot;
+Elarcis: I KILL YOU
+icebox: :P
+Pyrrhus666: Elarcis: are you achmed the dead terrorist ?
+Elarcis: Pyrrhus666: terrorist no, but probably dead if this project continues to piss me off
+Elarcis: lunch
+parv: hi all!
+soee_: in angular2 is there alternative for ngresource form angular 1 ?
+soee_: *from
+hemangpatel: Hello morning
+hemangpatel: How to write testcases in sync ?
+hemangpatel: means right now my testcases are running async but i want to run in sync fashion
+Nitesh_: hello friends
+Nitesh_: ???
+Nitesh_: ???
+Nitesh_: i have a query regarding angular js
+Nitesh_: please help
+ries: hey guys, I am asked to create a application that works as great in the webrowser and will work on mobile platforms. Both deployment&rsquo;s need to give great user exprience. Is that possible with one codebase? (eg, no if mobile do this&hellip; if desktop do that constructs) or would you advice to create two applications right from the beginning? For example a ionic mobile app and a seperate application for the desktop.
+GreenJello: ries, ideally you build two apps
+GreenJello: there can be very significant differences between a mobile and desktop app
+Ashok: helo guys
+GreenJello: ries, but it's more work, so it depends if you can afford the time
+ries: GreenJello: That&rsquo;s my opinion aswel.. we use bootstrap a lot, but it just doesn&rsquo;t work right for a mobile app.. Not to mention thet rendering of the components doesn&rsquo;t always work great..
+Ashok: anybody has meterial of Angularjs
+ries: &ldquo;but it's more work, so it depends if you can afford the time&rdquo; Agreed&hellip; but if our manager want&rsquo;s to have a good working app, this is what I am going to advice to her
+ries: GreenJello: any exprience what UI framework is nowdays great? We have tried Teleric in the past, but I found their angular implementation fairly week, and the application has slow startup times
+GreenJello: I don't know
+ngWalrus: there are a bunch
+ngWalrus: personally I've used Electron and it seemed to do the job
+ngWalrus: Cordova is another one you could look at
+Elarcis: ries: what we did on a previous project was having an angular module hosting the core of the app, and two other modules, respectively dedicated to the view for desktop and mobile
+k200: hi
+k200: angular ng required prevent rails form from submitting? how can i avoid this?
+icebox: soee_: well... $http was anyway quite recommended (vs. ngResource)... you may give a look at the latest two posts by Todd Motto about forms in angular 2
+Bent0: I'm going fucking nuts. My API requires a birthdate to be yyyy-MM-dd but the HTML5 date input spits out a date ISO string. So I'm doing this.visitor.birthdate = $filter('date')(this.visitor.birthdate,'yyyy-MM-dd') which works but now the console throws an Angular errror: Expected `1988-07-17` to be a date
+icebox: Bent0: maybe you are not using a Date object but a string :)
+Bent0: Somehow whenever I tie the date input directive to a model the output is always an ISO string
+Bent0: instead of just yyyy-MM-dd
+Angus: hi, I have a question. I have an angular app with a login page and a dashboard with templates. I wanted to know how can I load dashboardview with a template. I'm using angular ui-router and I have $stateProvider  for login and another one for template, but in the template I wanted to load more pages (with the header, footer, etc of the template). How can I do that?
+None
+Angus: thanks
+None
+k200: how can i use a form name outside form in another directive ??
+Elarcis: k200: your form is defined in its parent controller, so unless I'm utterly wrong you should be able to send it to a neighboring directive
+Elarcis: k200: otherwise we'll need a bit of code to help you better :)
+k200: Elarcis: ok.
+icebox: k200: and it is the same question of the past week :)
+k200: icebox: no.
+k200: icebox: Elarcis any idea how can i make Angular not stop form submit even if form is invalid on ng required and min max ??
+Elarcis: ng-model-options=&quot;{allowInvalid: true}&quot;
+k200: ok
+k200: will that work in 1.2.x
+Elarcis: dunno
+mrvisser: I have a directive whose children I'd like to iterate that are tagged with another attribute. If I want to iterate over children that have that attribute, do I have to worry about the angular attribute normalization therein?
+mrvisser: e.g., div my-directive:div my-child:/div:div data-my-child:/div:/div:
+mrvisser: when I detect the attribute, should I detect both, or just one or the other?
+umdstu: i have an img tag with ng-src set to a path with some scoped values in there. when the page render, ng-src is gone and there is no src attribute either&hellip; but if i set the background-img of a div instead of an img, it loads fine
+mrvisser: umdstu: can you post the img tag? If it's multiple lines, maybe put it in a gist
+umdstu: mrvisser: i think it might be the &amp; in the url for the second paramater
+umdstu: mrvisser: ng-src=&lsquo;/images/medium/{{item.hash}}?log={{attr}}&amp;auths={{auths}}&rsquo;
+umdstu: though I did try to replace &amp; with &amp;amp; and it had no effect
+icebox: mrvisser: that is a bad practice..
+None
+None
+umdstu: icebox: my turn?? :D
+icebox: umdstu: ah sorry... mistell :)
+umdstu: ?
+umdstu: icebox: no mistell&hellip; i was seeking your wisdom with my issue!
+zx_bud: Hello! I'm reading about angular2, does anyone know the module lifecycle?
+ngWalrus: I'm cleaning an 8-year-old css file
+ngWalrus: surprisingly this isn't so bad
+Pyrrhus666: I&acute;m seeing mailboxes untouched since 2004. and they&acute;re _small_ :)
+mrvisser: icebox: Am I embedding interpolation markup in an expression with my example?
+mrvisser: the attributes don't have values, so there is no expression
+mrvisser: it would be my controller that achieves the goal of iterating children with a particular attribute set
+icebox: mrvisser: no... sorry... as I said... mistell
+mrvisser: ooo I missed that, np
+None
+None
+Elarcis: phew
+Elarcis: I kicked the code's ass
+icebox: great!
+Elarcis: next thing to put on my 'TODO but we'll actually never have time to': cleaning it
+Elarcis: and I've got one hour left to fix one view
+Elarcis: ez
+Elarcis: still late though
+Elarcis: I should stop talking
+sl33k_: If I have two data sources for a page how would the factory/controller be?I have two checkboxes for those data sources
+sl33k_: In the next page I have to show data from both these stores. How would I do that?
+None
+icebox: sl33k_: to share info between &quot;components&quot; use services... for pages, do you mean views or pages?
+Elarcis: you know what's great when treating data as recursive trees? you can get a flat list of all leaves at any level, give it a semantic meaning, and have it still work coherently :D
+Elarcis: I just removed a whole level of complexity from the app
+sl33k_: icebox: I mean views
+icebox: sl33k_: so... use services :)
+icebox: Elarcis: agreed... a little cons... it is a bit difficutl to debug recursive data... I prefer adjacency lists :) it is a flat table with an attribute describing the level of nesting and you may traverse it using a loop
+Elarcis: icebox: true for debugging
+Elarcis: icebox: except with complex objects, I don't see how to implement my system with an adjacency list
+icebox: Elarcis: you need to separate data (the payload) from the navigation info (meta info)...
+icebox: Elarcis: imagine an array like [ {id: 1, level: &quot;1&quot;, data: ...},  {id: 2, level: &quot;1.1&quot;, data: ...}, {id: 3, level: &quot;2&quot;, data: ...} ... ] and so on
+Elarcis: icebox: ok
+icebox: in that case data complexity is irrelevant with respect to how we may traverse the structure
+Elarcis: icebox: agreed
+Elarcis: except in my case, it's a finite and predetermined navigation tree, so it allows for devs to benefit from autocompletion and error checking
+icebox: Elarcis: traversing that list is a bit less elegant than a recursive approach, because you have a loop and a few ifs defining the logic or roots and leafs
+icebox: *the logic of
+Elarcis: icebox: yeah, and I guess you also have to travel through the whole list to get sure you got all the elements
+icebox: Elarcis: that is space vs. time problem... :) you can transform that list in a format suited for an autocomplete search
+Elarcis: icebox: I think we're not on the same wavelength
+icebox: Elarcis: &quot;I k...&quot; :)
+Elarcis: icebox: I'm talking coding time here, not runtime
+Elarcis: damn you to hell
+icebox: Elarcis: exactly coding time vs. runtime... you may solve it in both realms using different approaches
+icebox: Elarcis: just the most convenient for you :)
+Pyrrhus666: a .lessrc from 1993. I feel like a geologist...
+icebox: Pyrrhus666: cool!
+Preuk: Pyrrhus666: have you found a server-side image map yet? :)
+Pyrrhus666: Preuk: several. broken, of course :)
+Preuk: wow. people did actualy use these!
+Pyrrhus666: Preuk: yup. when I came here in 2000 these were still a thing. also : hosting 40+ websites on a 144Kbps modem.
+Pyrrhus666: (no typo, it really was 144Kbps).
+Preuk: circa 2k, i was doing only client-side maps, all major browsers could handle it
+Preuk: double NDIS line ?
+Pyrrhus666: Preuk: yup
+Pyrrhus666: on a pentium 133.
+Preuk: in 2000? omg, outdated in the outdating
+Elarcis: what the - ok, I might be completely slowpoke, but am I forced to declare a new filter() to use in ngRepeat? I can't use a function in my controller? o_o
+Pyrrhus666: Preuk: might&acute;ve been a 166. the machine was upgraded shortly after I arrived :)
+Preuk: 2000 was PIII era
+Preuk: had to make a moitoning web interface on a P200 in 2k3 though...
+Pyrrhus666: Preuk: we were always behind, it had to be cheap, and we built the pc&acute;s ourselves ;)
+Pyrrhus666: Preuk: did you use tools from the P300 era to do that ? ;)
+Preuk: Perl
+Pyrrhus666: ah yes. that was my start as well.
+Preuk: it was pretty funny i must say ... monitoring the fastest piece of network in Europe at that time with the crapiest machine in the lab :)
+Pyrrhus666: Preuk: haha ! we&acute;re you on the academic backbone somewhere ?
+Preuk: renater II in deployment phase IIRC
+Preuk: hum... according to wikipedia it was already nearly decomissioned...ah, well.
+Pyrrhus666: searching for that gives me documents from 1997 :)
+Preuk: i mean the version i worked on was already near EOL
+None
+Preuk: hehe they remade it at last
+Pyrrhus666: Preuk: yeah, I gathered that :)
+None
+Preuk: nope, ain't touched that since 2k3, it was just an internship
+Pyrrhus666: (my french ain&acute;t that good, but I love that title :))
+Preuk: OSPF/BGP conflict... whoops!
+Pyrrhus666: those are protocols I only know the names of, never worked with routing at that level.
+Preuk: neither did I, only fragments from classes remain
+Pyrrhus666: for me that&acute;s fragments from the big &uml;douglas e. comer&acute; book : internetworking with tcp/ip. still a standard, I think :)
+None
+antiPoP: gist updated
+uru: antiPoP: Looks like you need a pipe
+antiPoP: uru, and something simpler? I'm just starting with ng2 and I already have too much new stuff...
+None
+uru: antiPoP: Off the top of my head, no. IMO pipes are worth learning though ;)
+antiPoP: uru, ok thanks, I'll take a look
+uru: antiPoP: So for example you could pass your pipe `time` and `state.start` and have it return a formatted string so you don't have to call `toHMS` at all.
+antiPoP: uru, te issue is that I need these fileds eparate
+antiPoP: separated, as each one will go into it's own widget
+uru: ah ok, possibly might be unavoiable then, without more jiggery-pokery than is worth
+antiPoP: ok,tnx
+uru: Possibly there's something you can do with `countdown()` but I can't say given I've no clue what it is.
+Elarcis: gotta go bye!
+icebox: off... bye
+DustyNuts: Yo Yo angulerso
+akkonrad: angular2. {{array}} displays items from array as: item1,item2,item3. Can I add pipe that will insert custom char between elements or I need to loop through elements?
+uru: akkonrad: You can indeed add a pipe, or you could use `{{array.join(...)}}`
+helloajs: Hey, we just built an entire application using AngularJS took about 2 years. Now we are wondering if we continue to support the product, or we switch things over to Angular2. How long will AngularJS still be supported and around for? We need this application for at least the next 5-10 years.
+geoid___: helloajs
+None
+None
+geoid___: Can anyone help me with a working example?
+None
+geoid___: I have to conclude that the docs are wrong.
+MrMcAroney: Good Evening
+None
+mcfdez: Hello. I have a page with a lot of textareas (one per post of a post lists printed with ng-repeat). How can I use a ng-model (that is used in all textareas) to catch the value of a concret textarea? I mean, if I type in one textarea it is typed in all, but I don't want this
+MrMcAroney: i'm trying to catch / route
+MrMcAroney: nr.repeat
+MrMcAroney: ng-repeat even
+MrMcAroney: mcfdez, ng-repeat=&quot;item in items&quot; and then ng-model=&quot;item&quot;
+antiPoP: is there a placeholder element in ng2 that I can use with ngIf and td:?
+captn_hook: So, if I have styles that I want to apply to a component, but not to any other component. How should I do this? The tricky part is that I'm using D3, so I'm dynamically adding content, and Angular doesn't tag the new stuff as part of the component
+None
+umdstu: any ui-grid users know how to get getVisibleRows() to return only the current page (the truly visible rows), instead of the currentPage + previous page of rows ?
+geoid___: MrMcAroney: what's the question / problem?
+None
+monk12: i didnt see a grunt task to then integrate it into the angular project (but did see a grunt plugin so ill take a look at that... does that seem right, i need 4 dependencies to run eslint in my grunt build: eslint, eslint-plugin-angular, eslint-config-angular, grunt-eslint)
+monk12: *did see a grunt task I mean*
+monk12: guess im a bit confused cause plugin eslint-plugin-angular above mentions using .eslintrc and grunt-eslint mentions using something like so: conf/eslint.json
+tlerix: I've been working my way through the tutorials for Angular 2. I have noticed that different devices viewing the same URL in the app can see each other's form input. Is that normal behavior?
+tlerix: I understand it's probably to do with Angular's two-way data binding
+MANISH: WHAT PACKAGE AVAILABLE FOR  GRAPH AND CHART IN ANGULARJS?
+ah: you could try angular-nvd3
+MANISH: @AH: THANKS
+gho5t: anyone use angular-bootstrap's modal?
+asteinbe: testing 1 2 3
+None
+Zlepper: However none of the animations are being triggered, the elements just pops into the page
+Zlepper: I'm providing the input using the async pipe if that makes any difference.
+tlerix: I have a form that different users can see each other's input if they are accessing it at the same time. How can I prevent that from happening?
+tlerix: It's using ngModel to bind the data to the model in the component
+pomp: hey, anyone here?
+pomp: i have an angular2 question
+gho5t: hi
+tmuwa: anyone here who has build a rest api using jwt-authentication via php?
+captn_hook: Can anyone help me understand importing node_modules into typescript angular components
+captn_hook: I just need to understand what the import is actually doing, because apparently I don't
+zomg: captn_hook: do you know how commonjs modules work? Ie. require('stuff') ?
+captn_hook: Yea, I'm just having trouble with simple stuff which makes me think I have something misconfigured. For instance, I'll npm install jquery.cookie @types/jquery.cookie
+captn_hook: And then I import * as $ from 'jquery.cookie', and I get a &quot;jquery.cookie/index.d.ts is not a module&quot; error. But I'm not sure how to fix it at all
+captn_hook: Oops, @zomg. Should have @ you in my first response
+gho5t: sounds like index.d.ts isn't following the module pattern
+gho5t: does it have an export function
+captn_hook: gho5t: I took an index.d.ts file of a package that wasn't working the other day, and modified it to use the module pattern (or so I thought) and it still didn't work. It looked almost identical to a package that worked fine.
+None
+zomg: captn_hook: nah without @ works just fine on irc :)
+zomg: (@ means channel operator on irc)
+zomg: so there's a difference between the types and the module
+zomg: if you import x from z it would usually just try to load the module, the typedefs are kind of &quot;secondary&quot;
+zomg: (well, I'm not 100% familiar with TS so I might be a bit off)
+zomg: but I'm not entirely sure why it would give that particular error for it..
+captn_hook: zomg: I'm tracking same as you. However, the error throws on the types file
+captn_hook: That's why I'm confused
+Angular: $uibModalInstance giving me an error
+Angular: I am trying to use uibootstrap

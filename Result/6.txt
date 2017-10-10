@@ -1,0 +1,1121 @@
+FlavioZ: subone: for some reason it seems like form is undefined after the first submit
+subone: Are you using a dot in your form name?
+FlavioZ: yep
+subone: hmm, somehow it is getting clobbered
+axsuul: has anyone tried Ember? Why did you choose Angular2 over Ember?
+Literphor: Is it possible to to set up a router to where is uses the same component (`FooComponent`) but give it a different provider based on the route [`ServiceA`, `ServiceB`, `ServiceC`]
+Literphor: I&rsquo;m asking about Angular2
+trenta: Is there a channel for mean.js?
+None
+wrkrcoop: hi im trying to use a directive but having a problem
+None
+wrkrcoop: looks like i ahve 1 too many directives  &hellip; angular.js:13920 Error: [$compile:multidir] Multiple directives [storepanel (module: app), ngController] asking for new/isolated scope on: div class=&quot;storepanel&quot; ng-controller=&quot;StorePanelDirective&quot; store=&quot;store&quot;:
+wrkrcoop: nvm looks like i dont need that ng-controller in the direcetive
+wrkrcoop: so i have an array of products
+wrkrcoop: and i want to display them on rows of 3, how should i do this?
+wrkrcoop: as of now im iterating over the stores with ng-repeat &hellip;
+wrkrcoop: i could have an ng-repeat inside an ng-repeat
+None
+Srgjames: anyone familary with the $http  call in angularjs
+GreenJello: Srgjames, just ask your question
+Srgjames: i have this call  $http.post(&quot;registration_validate.php&quot;, user).success(function(user, status) {
+Srgjames:             alert('success'); and not sure if its working or not
+Srgjames: my php has echo json_encode($message);
+Srgjames: so idk if i have to adjust my post or not
+Z3R0: does it alert?
+kkp: QUIT
+Srgjames: no im not getting an alert
+Srgjames: if i remove the post call ill get an alert
+Srgjames: and i know user holds the correct data
+v0j: @Srgjames, shouldnt that be .then() instead of .success()?
+Srgjames: v0j no difference
+v0j: did you also implement the error callback? just to make sure you catch that error
+Srgjames: to be honest not sure how
+v0j: $http.post(&quot;registration_validate.php&quot;, user).then(function(response) { console.log(response); }, function(error) { console.log(error); });
+None
+v0j: :)
+v0j: ah..gotcha...your issue @Srgjames is that your function must only acccept single argument..not data will be sent on second one (`status`), hence nothing is alerted
+v0j: *no data
+None
+Srgjames: v0j that is my full code
+Srgjames: for the js at least
+v0j: Srgjames, were you able to check the request at least in tools like chrome console/inspector? (or any browser).. to make sure the post went thru and that success response (2XX) is returned from that url
+Srgjames: v0j im in the chrome console up with all showing but dont see know where to look to see if the post went through
+v0j: ok..find &quot;Developer Tools&quot;..then when it showed up, generally at the bottom of your browser, click the Network tab.. there you would see ALL request
+v0j: might be good if you do read some docs re using that tool..greatly help you as developer. :)
+Srgjames: so if its working i should see a request to the registration_validate.php page right ? v0j
+v0j: yes and should also see the response
+Srgjames: not seeing anything being sent or response
+Srgjames: so i chainged how i had $http injected so now im getting an error saying post is ypeError: Cannot read property 'post' of undefined
+None
+Srgjames: v0j
+Z3R0: you have to do &lsquo;$http&rsquo; along with &lsquo;$scope&rsquo; if you define it in string
+v0j: you missed to inject that..so it should be ['$scope', '$http', function($scope,$http)
+v0j: agree with Z3R0
+Z3R0: ^^
+Z3R0: and I hardly code angular anymore&hellip; :/
+v0j: :)
+Z3R0: sorry to say, I switched to vue
+v0j: Srgjames, is this project from scratch? might be worth using angular 2
+v0j: Z3R0 heard some of my colleagues doing that switch as well.. havent looked at that though
+Srgjames: yes it is scratch and i thought this was angular 2
+None
+v0j: Z3R0, care to share article that would convince people like me.. i just started with angular 2 though..been with 1.3. :)
+Z3R0: well I use VueJS / VueX along with Vue-Router, Vue-Resource, Laravel 5.3 (backend)&hellip; I dunno don&rsquo;t really know much about Angular 2&hellip; but I know VueJS was basically the lightweight version of Angular, unfortunately, harder to find support for VueJS, which can be a PITA...
+v0j: cool
+Srgjames: AH HA that worked but now getting a 500 error AHAHAHHAHAHAA
+v0j: same here, with laravel
+v0j: there you got it Srgjames. :D
+Srgjames: now to debugg the 500 error =(
+sheravanan: i guys i m  new to this chat
+Z3R0: lol hi sheravanan
+sheravanan: hi, thank u for the response
+v0j: got an issue now while playing wiht angular 2... i need to disable caching of templates for an ngFor...can't find a way how
+sheravanan: hi lopez! how long working in angular and version
+asteele: this channel is so much more alive now that 2 is coming out ;p
+hellofreidns: hey guys, im starting with angular, to work on an admin panel, should I load the data with an api call, or use something like EJS to populate the data?
+hellofreidns: and then modify with angular
+Srgjames: gotta love missing an = sign v0j
+Srgjames: in an echo
+hellofreidns: any help guys?
+nerdrage: I got html5 mode working with ui-router, what is a good nginx regex to remove the /#/ in case users click a old link?
+nerdrage: it needs to be a nginx rewrite
+maybefbi: ive worked in 30 member teams writing 200+ angular 1 controller single page application. what would happen to such applications if everyone moves to angular 2?
+ThusSpakeHarambe: maybefbi: it would probably go a lot faster, but you'd have to rewrite like 75% of it
+hellofreidns: i just read angular 2 docs.. jeezes it looks so much worse for quick dev
+ThusSpakeHarambe: its actually pretty great once you wrap your head around some of the concepts and how to wire all the components up
+ThusSpakeHarambe: much more intuitive than 1.x imo, just different way of thinking
+ThusSpakeHarambe: and there's not really a definitive &quot;angular&quot; way with angular 2 like there was with 1.x, its more the component way
+hellofreidns: toss in code and it work, thats what i like about 1
+ThusSpakeHarambe: DI is decoupled, the declarative lazy loading with routes makes it easy to just split something up that is getting too heavy into module and a bunch of components
+ThusSpakeHarambe: also angular 2 has ahead of time compilation which I havent gotten a chance to try, but it can help with performance, there are some tradeoffs tho
+ThusSpakeHarambe: honestly the only part about angular 2 that is kind of weird is animations , especially managing complex sequences across a variety of components
+ThusSpakeHarambe: but once you get the hang of it, it pretty simple and they are smooth animations
+None
+maybefbi: ThusSpakeHarambe, what book/video/course did you use to learn angular 2?
+None
+ThusSpakeHarambe: last one is where i learned the most
+maybefbi: ok
+maybefbi: thanks
+None
+maybefbi: noted
+ThusSpakeHarambe: both core team members i think, pretty sure victor savkin wrote the router becausehe wrote a 96 page book about it
+maybefbi: ok
+None
+Srgjames: idk why either
+nerdrage: how do i change /#/search into /search when html5 mode is on in ui-router?
+nerdrage: I have old links that wont work now
+nerdrage: old links need to still work, while also working with the new /#!/ cause of html5 mode
+nerdrage: I dont thing a nginx regex rewrite would work right?
+None
+heartburn: lol what?
+maybefbi: heartburn, yeah he said he isnt joking
+heartburn: who's he tho?
+maybefbi: couldn't disntinguish from the voices. i dont know them that well
+maybefbi: a lot of core devs on that episode
+heartburn: alright, considering that one ng year equals 3 normal years, that might indeed be legit.
+maybefbi: heartburn, but shouldn't we build the tooling for angular 2 first
+maybefbi: i also am waiting for the version 2.1 router
+maybefbi: i only learned angular 1 after the controllerAs syntax came out
+heartburn: i personally can't take ng2 seriously because of how long it took to release it and how convoluted it eventually turned out to be. moving from ng to something simple and straight-forward myself.
+heartburn: ng2 is an epitome of fucking around with tools.
+heartburn: it even has a cli, ffs.
+maybefbi: heartburn, i have the same sentiments. ive seen 200+ controller SPAs in ng1, something doesnt feel write about ng2. when i imagine how it would be like to write 200+ controllers in it, i can't imagine how it will workout in a huge team
+maybefbi: it feels like everyone in the team will have to know ng2 including the artists and the designers, and the CSS guys
+maybefbi: because ng2 is opinionated about how CSS is structured in the project
+maybefbi: so CSS guys can't just use their philosophy to structure CSS
+maybefbi: plus google has a history of just shutting things down
+maybefbi: e.g. GWT. i dont hear about it anymore. there was time when everything gmail, adsense was written in GWT
+maybefbi: now i hear everything is written in ng2
+k200: what is a function Array () { [native object] } is it just array?
+maybefbi: k200, from google: &quot;Native objects are everything else which is not in the JavaScript heap. Native object, in contrast to heap object, is not managed by the V8 garbage collector throughout its lifetime, and can only be accessed from JavaScript using its JavaScript wrapper object.&quot;
+maybefbi: k200, &quot;Arrays - An Array is an Object with numeric keys. They are used extensively in the V8 VM for storing large amounts of data. Sets of key-value pairs used like dictionaries are backed up by arrays.&quot;
+maybefbi: function Array() {...} is a way to extend the existing Array in javscript
+maybefbi: people will say new Array(); after declaring such a function, and they will get an array object
+maybefbi: with all the prototypes inside that object
+k200: its complex.
+k200: i wanted to use underscore to know and if exist get a key from array of hashes.
+None
+k200: ok
+maybefbi: k200, what is the behavior you desire if the key doesn't exist in the array of hashes?
+maybefbi: can you give an example of the desired behavior?
+k200: i have array = [ {hash1}, {hash2} ...... {hashn} ]. where all hash has a key called &quot;t&quot;=[&quot;1&quot;, &quot;2&quot;] i want to know if there is any hash in that arary, whos &quot;t&quot; key contais &quot;3&quot; and if it does returs its value.
+k200: using underscore.
+maybefbi: what if there is no t or what if 3 is not there, do you need a default value?
+k200: i think i got it.
+maybefbi: ok
+k200: usintg _contains and _.filter
+maybefbi: yes it is the right direction
+k200: _.filter(g, function(a){console.log( _.contains(a[&quot;t&quot;], &quot;3&quot;) )})
+heartburn: k200: you don't need _ for that, you can do it with plain js
+None
+None
+heartburn: unless you have to be compatible with ie9 ofc.
+k200: heartburn: no. i wanted do with underscore only.
+heartburn: ok, whatever makes you happy m8.
+k200: :-)
+lakky: hi
+axsuul: has anyone tried Ember? Why did you choose Angular2 over Ember?
+lakky: am vwry new to ember
+Elarcis: Hello, breathing bags of carbon!
+justicefries: axsuul: I don't find that Ember code bases scale nearly as well.
+anli_: If I want to hide certain options, I cannot use ng-options?
+heartburn: not quite sure about hiding, but you totally can disable some.
+None
+heartburn: skip to examples
+axsuul: justicefries: i see, what about opinionatedness?
+heartburn: otherwise, option ng-repeat='option in $ctrl.options track by $index' ng-if='!option.isHidden': ... /option:
+heartburn: otherwise, update the set of options, remove the stuff that should not be there.
+justicefries: haha, they both are. :) it depends on the opinions you want. i tend towards Angular's, and that's more so with 2.x, because I also feel at the same time its less opinionated about how you get data to your components.
+justicefries: than Angular 1.x even.
+justicefries: i've found it hard to break out of ember-data, you just have to sit inside of the model and let Ember's runtime do stuff for you if you want it to all wire up nicely at any significant level of complexity.
+justicefries: i'm actually coming back over here from React even, because its a pre-built set of opinions I mostly agree with (rather than having to hand-wire up 20 libraries), and I can remove things where I don't agree without breaking things.
+justicefries: ember feels nice and spiffy at first when you're jamming through stuff with the CLI, but the cost of each new thing you add to your codebase just feels exponential and gets harder to keep track of.
+axsuul: justicefries: i see, so what do you like about Angular then? Are we talking about Angular2?
+Elarcis: justicefries: more often than not, I find the hardest for people (who don't like a framework) is to learn how to do things the way the framework intends
+icebox: Elarcis: hey
+justicefries: yeah, talking about Angular 2. though I have a long history with angular 1.
+Elarcis: justicefries: a significant number of issues we get here isn't 'how to do that in angular', but 'how to work around angular to do what I want'
+icebox: Elarcis: agreed
+justicefries: Elarcis: yeah, that makes sense.
+icebox: and the weak ring of the chain is widget libs
+Elarcis: 'Hey, I know I should be doing a directive for that, but how can I exploit the scope of an angular comment from an external jquery script?'
+Elarcis: *component
+icebox: heartburn: emit or broadcast?
+justicefries: they can be backed off the cliff though so they're not ending up in a &quot;i built an app 200% tied to angular so I'm going to react, redux, and ultimately repeating the same cycle, oh man, JS fatigue amirite&quot;
+Elarcis: $scope.$on('terribleCode', $rootScope.ircService.getLeaveFunction());
+Elarcis: justicefries: I've done nothing but angular for the past year, I'm happy with it :D
+Elarcis: how are you going to master your tools if you change them every six month?
+justicefries: haha. I've ended up being much more deep in systems and backend, so I took a step back and waited for the angular2 dust to settle.
+justicefries: played with some other things
+justicefries: other than system.js where I'm still not totally convinced, i'm pretty happy with how it played out.
+justicefries: maybe once I front some stuff with http/2 i'll be more convined.
+axsuul: If you're building something in Angular2, what do you do about the mobile version?
+axsuul: Are you guys using NativeScript or... ?
+justicefries: oh, and zones still freak me out a bit I think but I'm getting over that.
+gain_: hello to all, I just want to know if Angular 1 is still supported or with Angular 2 there will be no more updates...
+Elarcis: 'our project isn't an SPA, since we're changing the views inside it, so it's not semantically a SPA'
+None
+Elarcis: is your app on a single page? yes? then it's a SPA. done.
+None
+Elarcis: gain_: yes it is, for at least a long time
+gain_: Elarcis: thanks
+icebox: interesting... from &quot;when will angular 2 be released?&quot; to &quot;when will angular 1 be dismissed?&quot; :)
+Elarcis: icebox: THE RIDE NEVER ENDS
+icebox: the six months cycle will add confusion, I suppose
+None
+icebox: ngWalrus: ^
+Elarcis: icebox: 'I READ ABOUT GITFLOW, THEREFORE IT IS LOVE, IT IS LIFE'
+Elarcis: 'I KNOW CODING, THEREFORE ANYBODY WHO DISAGREES WITH ME IS AN INCOMPETENT'
+Elarcis: I could go on for miles
+icebox: Elarcis: exactly
+Elarcis: icebox: funnier that this guy just never did anything on github
+Elarcis: icebox: he literally came from nowhere, directly telling the vim dev 'your way of working is dumb'
+icebox: Elarcis: once a user sent me an email instead of filling an issue... stating the math behindthe project was wrong... I replied the implementation was correct and the code implemented correctly the algorithm described in a paper... he was supposed to write to the algorithm authors, but he preferred to write me... :) he wrote me, I think, for ten times, trying to explain the algorithm was wrong :)
+lnaia: Elarcis, I had a nice laugh to start the day reading the one about gitflow :D
+Elarcis: icebox: haha
+gain_: icebox: thanks for the fun :D
+icebox: gain_: the ironic part he was right... but the point of the project was not creating a better algortithm for that problem, but implementing a paper reproducing the figures :)
+gain_: icebox: xD xD xD
+icebox: that attitude, that's others need to fix your problems, is quite common
+None
+Preuk: regarding vim rant, well... he should indeed do his homeworks before going after 20y+ contributors, but i admit applying a workflow inherited from CVS to git can't be all nice and clean
+icebox: as stated there... &quot;If you dynamically generate Angular templates or expressions from user-provided content then you are at risk of XSS whatever version of Angular you are using.&quot;
+baako: morning guys i need help please been stuck on this for a while now
+None
+None
+icebox: baako: it seems you have only one view containing that menu
+baako: icebox, what do you mean please
+baako: icebox, thanks for your response by the way
+None
+None
+None
+icebox: baako: I am afraid you need to fill the gap about routing knowledge
+icebox: baako: generally speaking, a plunker would be better to debug your code
+None
+icebox: baako: really no... I don't know what I mean... I cannot debug that code
+icebox: baako: *what you mean
+baako: icebox, dont think ionic runs on plunker
+icebox: baako: are you sure?
+icebox: baako: I saw a few examples
+baako: i will have yo put the whole project on plunker. the project is 90% done am just adding the last 10%
+icebox: baako: no... a minimal working plunker... you need to narrow your issue
+icebox: baako: what do you suggest as alternate way to resolve your issue?
+icebox: baako: how can we help you?
+san37: hello icebox
+san37: how do you do
+icebox: san37: fine thanks
+Elarcis: well that guy is so nice! he came here just to check on you!
+Elarcis: lucky you
+icebox: Elarcis: :P
+uru: lol, is san37 icebox's mum?
+icebox: uru: I don't think so
+baako: icebox, don't know
+baako: will make me a while to get this to work on plunker has the project is using some cordova plugins e.t.c
+icebox: baako: sometimes (or often) showing only a partial view of the code is not enough to understand the issue or to give a concrete help
+icebox: baako: your issue is not about native features using cordova plugins
+baako: icebox, i understand that
+noob: Good morning all
+uNd0xR: hi guys.. when trying to print a page in my angular application, i can only get it to show the visible content, and not what is present if scrolling further down a page. Not sure if this issue is with Angular in general or UI-Router perhaps
+icebox: uNd0xR: or how the browsers work :)
+uNd0xR: i am pretty sure it is ui-router related as every html file outside my ui-view can print just fine, and displays all content, while any ui-view page only can print what is displayed on screen
+uNd0xR: indeed
+Elarcis: baako: if you think about it, you've been struggling on that routing issue since yesterday, would it have taken this long to just try to reproduce your issue in a plunker ? :)
+icebox: uNd0xR: browsers print the content of an url
+uNd0xR: icebox, if i visit the url of my application that i want to print, i can scroll down to see the data below my view. Say i have a ng-repeat that shows numbers from 0 to 30 below eachother. Visiting the page i can see the numbers from 0 to 20 and i then have to scroll down to see the rest of the numbers
+uNd0xR: if i try to print the page, i can only get to see the numbers from 0 to 20
+icebox: uNd0xR: because the values 20-30 values are loaded dynamically... maybe
+icebox: uNd0xR: any link to visit?
+uNd0xR: icebox, not at all.. my print is being limited to the size of my ui-view viewport
+uNd0xR: not yet.. better make one
+uNd0xR: :)
+icebox: uNd0xR: for instance, if I try to print this irc page, I can print only what I see, the past content, what I see scrolling up, is not printed
+icebox: uNd0xR: it seems an expected behaviour
+uNd0xR: icebox, could be.. if i structure the same content in a raw HTML file and choose to print that, it creates as many pages needed to contain all the data
+None
+uNd0xR: problem is that i need to pass data dynamically, and i can't really tell how to pass data to outside my ui-router to be honest..
+icebox: uNd0xR: what is the latest thing you said? a new question?
+uNd0xR: no..
+uNd0xR: well
+uNd0xR: could be.. will look at the print link to see if i can find a solution to my problem while staying inside my ui-view setup
+uNd0xR: linking to a raw html file to be able to print, seems a bit hackish to me..
+uNd0xR: :)
+uNd0xR: (that was a workaround i tried out)
+icebox: uNd0xR: at the moment I tried to print a ui view (with a vertical scrollbar) and it seems all the content is printed
+icebox: uNd0xR: any link reproducing your use case?
+noob: Does anyone know what data-ng-animate=&quot;2&quot; attribute means or does?
+noob: I am seeing this applied to my enter and leave divs
+anli_: When I use ng-options and ng-model, that model will be updated with the whole model object for the certain item, how do I achieve that with the option ng-repeat approach?
+anli_: upon selecting an item, the model will be changed to {name:&quot;foo&quot;, value:34} etc
+None
+anli_: What I need is a way to make one or more option: invisible
+anli_: Hm, maybe just a where would do
+anli_: An expression lets me filter items, I beliave
+anli_: believe
+anli_: Hm, ng-show in the select seems to be it
+uNd0xR: icebox, so it is my setup i have bonked somehow.. i have at a point also had issues with content being &quot;outside&quot; the view on small screens, so a button below a form would be below what was visible and no option to scroll down to the access the button
+None
+uNd0xR: im not sure this really reproduces my issue.
+icebox: uNd0xR: no... I can print it in two pages... from 1 to 49
+uNd0xR: dammit..
+uNd0xR: :)
+None
+None
+uNd0xR: hmm.. at least it narrows down my issue for me..
+None
+ngbot: angular.js/master 1ea3d88 Peter Bacon Darwin: chore(doc-gen): improve version dropdown info
+None
+Elarcis: baako: as long as it illustrates the issue
+baako: Elarcis, doesn't reallt
+Elarcis: baako: I don't get it... isn't your issue about routing?
+baako: it is
+None
+Elarcis: DieguezZ: do that check in $ctrl.fooBar() and always link the same function to your component's callback
+DieguezZ: mmm, i think i can do that Elarcis, ty
+smiche: looking at code from 1 month ago and I have absolutely no clue what it does
+baako: Elarcis, that wasn't helpful was it?
+senayar: if it's callback name it onAction DieguezZ
+Elarcis: senayar: no.
+senayar: why no ? :)
+senayar: read the angular doc
+None
+Elarcis: senayar: because action=&quot;$ctrl.onFooBar()&quot; is a perfectly valid syntax
+senayar: no
+senayar: you don't know action is a callback binding
+Elarcis: senayar: yes it is, it's defined as '&amp;'
+senayar: and ? it can be a normal function and not a callback
+noob: Does anyone know what data-ng-animate=&quot;2&quot; attribute means or does?
+senayar: bindings: {onDelete: '&amp;', onUpdate: '&amp;'}
+Elarcis: senayar: in the world of 'can', two can play that game
+senayar: well they do it like this in angular code
+senayar: and documentation
+Elarcis: senayar: it's funny because the doc you sent me states I'm right
+Elarcis: senayar: on-update=&quot;$ctrl.update('location', value)&quot;
+senayar: yes with on-action
+jlebrech: is there a component i can use to to show a billing breakdown with expand and collapsing?
+Elarcis: senayar: the 'on' part is just because the callback's named this way, there's no automatic transform made by angularjs
+senayar: of course it's just naming convention
+Elarcis: jlebrech: accordion?
+Elarcis: senayar: so what's your issue with an action binding typed '&amp;' that's a callback that can be called by action=&quot;$ctrl.FooBar()&quot; ?
+senayar: lmao
+senayar: nevermind do as you like
+jlebrech: Elarcis: i'm using this atm it's total spaghetti code :D
+Elarcis: senayar: Since I'm using it like this currently and it works perfectly well, I'll do
+senayar: of course you can named it like you want
+senayar: myStupidCallBack
+senayar: work too
+senayar: but it's easier to read on-something than just something
+senayar: so you know what the purpose of binding is made for
+Elarcis: senayar: holy shit we were in a qui proquo
+baako: icebox, are you still here please
+Elarcis: senayar: I thought you meant he should 'call' it via action=&quot;onAction&quot;
+senayar: no I talk about the binding name :p
+Elarcis: senayar: I didn't see you were talking about renaming the binding onAction
+Elarcis: senayar: sorry, we were both right
+Elarcis: senayar: (because I agree with that convention)
+noob: Sorry to keep asking, but does anyone know what data-ng-animate=&quot;2&quot; attribute means or does? On the ng-view div
+Elarcis: noob: no idea
+noob: :( thanks
+senayar: it's an attribute added on animation noob if I am not wrong
+senayar: added by ng-animate
+Ergo: hello, im trying to use angular-ui-router 1.0.0.beta3
+Ergo: is there a way to force it to reload views on hash params? but without the need to specify their names during configuration?
+Ergo: im writing a search component that operates on arbitrary tags
+Ergo: is there a way to specify wildcard?
+senayar: reload : true Eagle_Erwin
+senayar: sorry
+senayar: he already left :O
+baako: Elarcis, please can you help am totally lost now dont know what else to try
+None
+smiche: is there an equivalent of scope.$last in components?
+Ergo^: can ui router reload views based on query params without me specyfying all the param names upfront when registering states?
+ritu: what is the difference between angular js and jquery?
+ritu: what is the difference between angular js and jquery?
+Pyrrhus666: Ergo^: after you left there was this comment : (12:07:53 PM) senayar: reload : true
+None
+ngbot: angular.js/master 1f16c79 Michał Gołębiowski: docs(jqLite): Document that removeAttr doesn't support multiple attributes...
+ngbot: angular.js/master 7ceb5f6 Michał Gołębiowski: refactor(jqLite): Don't get/set props when getting/setting bool attrs...
+ngbot: angular.js/master 4e36245 Michał Gołębiowski: feat(jqLite): remove the attribute for .attr(attribute, null)...
+smiche: funny boy
+smiche: bot*
+None
+noob: senayar: Sorry, just saw this now. Yes I can see that. I was just wondering what it did. But i dont think it really matters anyway. Thanks though
+None
+ngbot: angular.js/v1.5.x 7d08f42 Michał Gołębiowski: docs(jqLite): Document that removeAttr doesn't support multiple attributes...
+ngbot: angular.js/v1.5.x fcccf58 Michał Gołębiowski: chore(jqLite): fix a typo in a test name
+ngbot: angular.js/v1.5.x e3622b5 Michał Gołębiowski: perf(jqLite): move bind/unbind definitions out of the loop...
+Elarcis: back
+rand0m: morning :)
+Elarcis: baako: sorry, but I didn't follow your issue much, I've been answering to your specific questions about things I knew :/
+Elarcis: rand0m: afternoon :D
+rand0m: hello mate, how are you doing today
+BafS: Hi ! I want to code a single page app with Angular2 with some realtime functions. I was thinking to use a classic REST API for the none realtime and then websockets for the realitme part. I tried with Rails but there is not an official lib for the client side, do you recommend a particular stack ? (Meteor ? Tornado ? Socketio ? I'm a bit lost...) Thanks in advance :) !
+bd-: engine.io
+bd-: or socket.io
+BafS: Okay thanks so with something like express I guess ?
+Elarcis: BafS: no idea honestly. if you're not fond of node, I remember reading a python backend was nice for that kind of things
+BafS: Okay thanks but Django doesnt seems to support websockets, maybe Tornado ?
+rand0m: BafS, yeh, tornado works
+None
+None
+grug: looks like you can use sockets with django
+None
+BafS: Ah yes nice, thanks
+None
+BafS: And then for the client side, should I use a lib ?
+rand0m: This is deemed to be as good as Tornado
+None
+Elarcis: baako: no PM please, you'll get more and better help here
+BafS: Yes thanks. But hum, then you handle the websockets by &quot;hand&quot; ?
+BafS: Because with engine.io you have a lib for the client side
+rand0m: yee, I guess all examples I've posted are done the same way
+None
+rand0m: especially crossbar.io
+BafS: Ah yes, there is a lot of stuff going on in this field haha
+None
+rand0m: brb :)
+BafS: ok!
+None
+uru: baako: #ionic for ionic questions
+baako: uru, dead chat
+baako: no one answers anything
+uru: How long did you wait? ;)
+baako: 2 days
+uru: ah, well time to find somewhere else then. Says quite clearly in the topic that this channel is for ng only
+baako: ionic is angular
+uru: I've never used it but from what I understand ionic is built on top of angular, it is not angular.
+Elarcis: Today I discovered non-matching groups in regexes 3
+None
+icebox: uru: maybe the question is legit, but it is hard to give a concrete help
+Elarcis: uru: they're using ui-view
+Elarcis: uru: *ui-router
+uru: ah ok, I did not see a concrete question there ;)
+baako: Elarcis, yea they are
+Elarcis: uru: dead link for me
+Elarcis: baako: no, you are
+None
+Elarcis: uru: stupid proxy then
+Elarcis: uru: I did regex golf a bit
+Elarcis: ah but the proxy marks it as 'games'
+Elarcis: stupid proxy
+uru: Elarcis: Oh :( well the name says it all really, it's a grid that you put strings in to that have to match the row and column's regexes
+Elarcis: uru: ah, I thought the reverse, make regexes to match the strings in the grid :D
+uru: lol, that would be pretty neat too
+Elarcis: uru: now that I think of it, it'd be pretty easy
+uru: But pretty easy though
+Elarcis: ^
+uru: /[a-zA-Z]/ ...
+Elarcis: uru: ^.*$
+uru: lol
+uru: Perhaps you'd have to build them from pre-defined regex segments then
+Elarcis: 'regex lego'
+uru: hah yea
+Elarcis: then 'regex memory', where pairs of regex match the same string, not in the same way
+uru: Oh geex
+uru: My brain hurts just thinking about playing that
+Elarcis: then 'regex airsoft', where regexes shoot plastic bullets
+Elarcis: then 'regex royale', where if you don't find your opponent's regex, you get killed
+uru: uh
+Elarcis: then 'regex regex', where you have to find the regex to describe 'then 'regex regex', where you have to find the regex to describe 'then 'regex regex', where you have to find the regex to describe 'then 'regex regex', where you have to find the regex to describe '...
+vivek__: hi did anyone guide me how to use lazy loading in angular2 with angular cli i am geeting error can't fin the module
+Elarcis: vivek__: sorry I didn't
+None
+Elarcis: uru: oh my god
+Elarcis: uru: it's like an exponential regex
+uru: :) It's pretty cool in a super nerdy programmer way
+Elarcis: yeah, it's like 'isn't it awesome? _suuuuuuuure'
+None
+None
+icebox: iamayam: sorry... mistell
+None
+vivek__: thanks icebox :)
+None
+icebox: vivek__: &quot;loadChildren&quot; is the trick
+vivek__: i m doing with loadchildren only but i m geeting can't fine module
+Elarcis: vivek__: what module?
+vivek__: which i m trying to load on loadchildren cli is not able to create bundle file
+None
+vivek__: see last commnet in this converstation
+icebox: vivek__: ok... wait for a fix :)
+vivek__: my bad :)
+runtyrobot: Quick rookie question! Is it possible to do an ng-if that controls for a certain value? Ie. this case I have three possible values; active, inactive and standby.
+Pyrrhus666: runtyrobot: why not ngSwitch ?
+runtyrobot: because I'm a rookie - and don't know of it yet :P
+Pyrrhus666: so, ngSwitch :P
+runtyrobot: I'll look into it - thanks! :P
+icebox: runtyrobot: after three questions you are no more a newbie :)
+icebox: runtyrobot: status lost :) read the docs
+Pyrrhus666: so I gather a newbie gets like three freebees, and then we point to the docs ? clearcut standard procedure :)
+uru: Pyrrhus666: RTFM ;)
+icebox: Pyrrhus666: and if you have less than 50 pokemon, you cannot ask anything :)
+Pyrrhus666: dammit, my freebees were all used up of course :)
+icebox: Pyrrhus666: well... you accumulated new ones because you spent a lot of time in the channel :)
+Pyrrhus666: woohoo !
+icebox: Pyrrhus666: snaring and contribution are foundations of open zource :)
+icebox: *sharing
+icebox: *source
+icebox: zource is the code developed in Zion :)
+Pyrrhus666: I read that as a faux german accent :)
+Pyrrhus666: &uml;zhe zource&uml;
+icebox: Pyrrhus666: :) no... only a bad finger control... s is close to z
+sonali: hi
+icebox: hey
+sonali: filter in angular js
+PitPanda: Hey all, I have a little problem with IE / edge. I've bundled my app with webpack (just used the one from angular2 docu), since then it seems that internet explorer 11 and edge cant find sub routes defined in my routings except the &quot;home&quot; route &quot;path: ''&quot; my other routes are defined like &quot;path: ':machineName/overview/:id',&quot;. It's working fine in chrome and firefox but not in ie/edge. Here is a screen from my prod node/express server wh
+icebox: sonali: what is the question?
+None
+Pyrrhus666: PitPanda: your comment is too long, it is cut off at &uml;node/express server wh&uml;
+Pyrrhus666: gain_: posted each day for the last 3 days ;)
+PitPanda: ouh ok
+None
+sonali: Define filter in angular js
+gain_: hackernoon
+PitPanda: gain_: its exactly how I feel since 6 weeks haha :D
+baako: this is driving me nuts now
+None
+Pyrrhus666: PitPanda: is a normal dev build working in IE ?
+icebox: ngWalrus: quite common
+PitPanda: sec, let me check
+icebox: ngWalrus: usually we ask also for cooking skills :)
+Gianni_: ngWalrus: cool... :D
+Preuk: icebox: we do require candidates to have a corkscrew at hand
+icebox: Preuk: ahahah
+Preuk: we're currently hiring a candidate who did have a nice answer &quot;no need. i can open a bottle with a pen&quot;
+Preuk: icebox: that's only half a joke, it's the &quot;wtf is happening here?&quot; unsettling question we ask
+icebox: Preuk: I see... anyway a job interview cannot define a human being... eventually it is a choice, often it is a bet, for both sides
+icebox: Preuk: nevertheless I find useless the unsettling questions for a technical profile... better to ask which is the last book read :)
+icebox: Preuk: a poor or brilliant answer doesn't reveal anything of the candidate... but I suppose your mileage may vary
+icebox: baako: resolved?
+Preuk: icebox: it's not the answer, it's the way they react to our dumb attempt at being fun :p
+icebox: Preuk: yes, I know.... but it is only &quot;fun&quot;
+icebox: Preuk: anyway that kind of questions are quite common in job interviews... so stay prepared :)
+soee: if i have components that list some data and each item/object should have some controls to manage it than such controls should go into separate stateless component ?
+None
+icebox: baako: please, explaining us again the goal
+baako: icebox, its working slowly now :D
+senayar: soee: yes you can buy a component for each line if you need a complex logic inside
+icebox: baako: well... it seems ok here
+senayar: div ng-repeat=&quot;foo in foos&quot;: my-foo-component foo=&quot;foo&quot;:/my-foo-component: /div: soee something close to this
+baako: i changed all the ion stuff to angular tested it and workedish then i changed it back to ionic and it workedish. Does angular cache things?
+icebox: baako: open devtools / network tab to see that
+baako: icebox, been using it all this time
+icebox: baako: perfect... there you can see if the resource is from cache or not
+None
+Pyrrhus666: so, I have toddmotto-style components which use ui-router. however, declaring it as a dependency seems unnecesary. with or without the .module(&uml;name&uml;, [ uiRouter ]), it keeps working, as long as I have imported it. is that expected behavior ? (esp. with minified builds I would not have expected this).
+Elarcis: time to test that major incremental database upgrade script
+Pyrrhus666: PitPanda: if that is the case, the problem is either with the minifier/uglifier or you havent declared your dependencies correclty
+icebox: Elarcis: good luck... printers and databases are out of my radar
+Pyrrhus666: Elarcis: make a dump first :P
+Elarcis: icebox: it's an IndexedDB
+Elarcis: Pyrrhus666: I have it :D
+Elarcis: Pyrrhus666: I have a google drive manual quicksync feature
+icebox: Elarcis: ah
+PitPanda: Pyrrhus666: hm, ok. i've commented uglyfier earlier today because it caused some problems. :-X What do you mean by 'you havent declared your dependencies correctly'?
+Elarcis: dammit, I did the update script, but I didn't implement any file format update script, so my backup files aren't readable anymore XDD
+Snugglebash: Can someone tell me what is wrong with this code:
+Snugglebash: service.projectTypes = ('Business Internal Regulatory').split(' ').map(function(type) {
+Snugglebash:             return {abbrev: type};
+Snugglebash:         });
+Snugglebash: oops
+Snugglebash: :/
+Snugglebash: it doesnt split the damn strings
+icebox: Snugglebash: it is js and you pasted the code in the channel
+Snugglebash: icebox: how should i do it?
+icebox: Snugglebash: using a paste service
+icebox: Snugglebash: and this is #angularjs channel not javascript one
+Snugglebash: icebox: i was using it with md-select ng-repeat and it was following the ngmaterial demo
+icebox: Snugglebash: sure... still js knowledge
+icebox: Snugglebash: anyway here it works
+icebox: Snugglebash: it returns three objects with the type string in abbrev property
+icebox: Snugglebash: if you are wondering because projectTypes changes are not reflected in the controller, it is because that approach breaks the reference: you are creating a new reference (a new array) there
+Pyrrhus666: PitPanda: with ng1, minfication mangled variable names so the minified build couldn&acute;t find your injected dependencies (by name !) unless you had declared them the &acute;safe&acute; way. I must admit I  don&acute;t know if that&acute;s  still a thing with ng2...
+Snugglebash: icebox: thank you :) I will make sure to go to the js channel next time
+icebox: Snugglebash: no problem
+Pyrrhus666: nobody has an idea why declaring ui-router as a module-dependency is seemingly not needed ?
+icebox: Pyrrhus666: angular 1 or angular 2 ?
+Pyrrhus666: ng1
+icebox: Pyrrhus666: angular 1 with ES2015?
+Pyrrhus666: yes
+icebox: snippet?
+Pyrrhus666: from earlier : so, I have toddmotto-style components which use ui-router. however, declaring it as a dependency seems unnecesary. with or without the .module(&uml;name&uml;, [ uiRouter ]), it keeps working, as long as I have imported it. is that expected behavior ? (esp. with minified builds I would not have expected this).
+Pyrrhus666: icebox: need more ?
+icebox: Pyrrhus666: no... thinking on it
+None
+Pyrrhus666: darn. he&acute;s an iPerson...
+icebox: Pyrrhus666: do you mean import uiRouter from 'angular-ui-router';  ... vs. ... .module('todo', [ uiRouter  ]) ?
+gitgud: hi. does switching out of a view in angular js give up the previous $scope variables up for garbage collection?
+gitgud: because that's what i want it to happen
+Pyrrhus666: icebox: yes. although to do the second, I need the first (right ?)
+icebox: Pyrrhus666: ah yes
+icebox: Pyrrhus666: and what is the behaviour you see?
+gitgud: so for example
+Pyrrhus666: the behavior is that ui-router keeps working if I remove the dependency, but keep the import.
+icebox: gitgud: I think so
+PitPanda: Pyrrhus666: ah ok. But its curious that all is working fine in ff and chrome but not in IE and edge :|
+gitgud: if i have 3 tabs. home, profile, about. and i went to profile tab from home tab. does angular clear up all the home $scope variables/
+icebox: Pyrrhus666: how?
+gitgud: ?
+gitgud: because if not i'm gonna have to use $destroy functions
+icebox: Pyrrhus666: meaning... removing the dep and keeping the import?
+icebox: gitgud: you said &quot;$scope variables&quot;
+gitgud: yeah
+gitgud: like say i had
+AndChat|455600: anyone use docker in production?
+gitgud: $scope.username in home tab. so home $scope owns $scope.username
+icebox: gitgud: so... gc is applied to those variables as usual in js
+gitgud: when i switch on over to profile tab
+gitgud: icebox, yes but only if those variables are deferenced. so i'm wondering if angular auto deferences them or not?
+gitgud: deferencing them upon view close/destroy
+icebox: gitgud: I think so
+icebox: gitgud: but it is not angular... it is js
+gitgud: if not i might have to loop through
+gitgud: but yes ok thank you icebox
+None
+icebox: Pyrrhus666: ok.. interesting
+gitgud: i understand what you are saying icebox. but for browser to trigger gc on objects said objects have to be deferenced. which was why i was confused. if angular never dereferences them, then its not a js issue its an angular issue
+icebox: gitgud: ok... recap...
+icebox: gitgud: why do you ask for gc? :)
+gitgud: icebox, to optimize performance
+gitgud: my application is fairly large tbh
+gitgud: if angular does not auto deference variables on $scope close i may have to dereference it myself
+icebox: gitgud: I was afraid about that answer :)
+gitgud: why?
+gitgud: because there is a group of people that are saying to let angular handle the business. and another group of people saying angular is not good, performance wise. and its hard to determine who is a fanboy and who is a hater
+macstriker: hi guys, trying to use ui.router
+Pyrrhus666: macstriker: me too !
+gitgud: and this is not just true for angular, this is true for every framework of every language of every OS
+macstriker: Pyrrhus666: how is your progress?
+macstriker: i cant see my views!
+Pyrrhus666: macstriker: it works :)
+macstriker: section data-ng-view:/section:
+macstriker: but cant see output
+Pyrrhus666: macstriker: ui-router uses ui-view
+macstriker: oh
+macstriker: %))
+Pyrrhus666: ng-view is a core angular directive :)
+macstriker: thanks man
+Pyrrhus666: I wish all questions were that easy :)
+icebox: gitgud: the topic is big and maybe a bit opinionated... in my experience, about 10 years with js, I touched that topic only twice or three times.
+gitgud: icebox, the angular dereferencing topic or the gc javascript topic?
+icebox: gitgud: gc javascript topic
+gitgud: i see
+icebox: gitgud: in angular never :)
+gitgud: so i should just trust it
+icebox: gitgud: generally speaking yes, but your mileage may vary... if you are a widget lib developer, you should know what you are doing, when you create listeners or whatever and how to destroy them...
+gitgud: icebox, so for angular and $watch modules, do i need to manually dereference them upon tab change?
+gitgud: view change*
+gitgud: because technically $watch modules are event listeners
+icebox: gitgud: &quot;$watch stuff&quot; is another topic.... it is about watchers...
+gitgud: okay but what is the answer to that question?
+gitgud: does angular stop the watchers on tab change?
+gitgud: or does it keep them around?
+gitgud: cause if the user browsers back and forth, the watchers would add on
+icebox: gitgud: they are event listeners, but watchers are important due to the digest cycle is implemented, impacting on performance
+gitgud: i understand
+icebox: gitgud:  not because they trigger gc
+gitgud: so would i need to remove them on $scope change or nah?
+icebox: gitgud: generally speaking you don't need watchers :) there is only one case: listening attributes changes in a directive :)
+gitgud: :S
+icebox: gitgud: for instance...
+icebox: gitgud: if you need to share info between controllers, use a service... and you don't need watcher to propagate the changes
+gitgud: ok
+None
+gitgud: i see icebox
+gitgud: icebox, so is $watch bad?
+None
+icebox: gitgud: it is abused :)
+gitgud: abused by who?
+icebox: gitgud: the pattern (observer pattern with automagically watcher) of the snippet above is the foundation of angular 1
+icebox: gitgud: newbies
+gitgud: icebox, then if $watch is so bad why did those guys implement it? lol
+icebox: gitgud: it is not bad per se, it is bad if misused or abused
+icebox: gitgud: there are best practices :)
+icebox: gitgud: it is called flexibility
+icebox: gitgud: With Great Power Comes Great Responsibility
+gitgud: spiderman ? really?
+gitgud: lol
+gitgud: i guess it makes sense because we are web developers :D
+icebox: :P
+coder_2014: hello everyone, I've just run `ng build`, `ng build -production` and `npm run build` (I think the correct one is the latest one as I'm using webpack) and a /dist folder has been generated for me. When I open the index.html file I get the following error: `GET file:///inline.js net::ERR_FILE_NOT_FOUND` - anyone can tell me what I'm doing wrong?
+bd-: wtf did ng1 do that broke 'element' that gets passed to link function of a directive
+bd-: upgraded from 1.4 to 1.5 and couldn't find anything in changelog about it
+bd-: needed to wrap all my `element` in a $()
+bd-: also $compile changed too and broke a lot of stuff
+coder_2014: could be the way I'm running the project? just opening the index.html page... ?
+icebox: coder_2014: always opening a page via web server... not directly :)
+coder_2014: thanks icebox
+coder_2014: icebox: do you know any way to dynamically replace placeholders in my code depending on the environment I am ?
+Sami__: hi
+zomg: icebox: sent you a pm
+None
+gitgud: ok ty icebox
+gitgud: :)
+icebox: giyou are welcome
+Elarcis: I made a tar cvzf work on the first try!
+Elarcis: I can now defuse a bomb!
+icebox: Elarcis: ahahah :)
+icebox: Elarcis: before using x test with t
+Pyrrhus666: have you actually written it to tape ? :P
+icebox: Pyrrhus666: tape rocks :)
+AndChat|455600: .
+icebox: Pyrrhus666: I have been using mocha only with angular projects... the rest is with tape
+AndChat|455600: .
+Pyrrhus666: icebox: I _think_ you might not be referring to the magnetic spaghetti I was referring to ;)
+icebox: :P
+icebox: Elarcis: and don't forget... with tar never using absolute path
+Pyrrhus666: icebox: that could be evil.
+Pyrrhus666: (abs paths I mean)
+Preuk: icebox: some versions have safeguards for that
+icebox: Pyrrhus666: after rm -rf /, there is tar with abs paths
+Preuk: BSD version at least do have a --abslute-path option which could be renamed --shoot-own-foot
+Elarcis: aaand, my day's done!
+Elarcis: bye!
+Pyrrhus666: bye !
+Elarcis: icebox: what does tar with an absolute path do?
+Pyrrhus666: Elarcis: extract to an absolute path...
+icebox: Elarcis: bye
+Preuk: Elarcis: when extracting, file will not have a relative path appended to current dir, but will erase same file on system
+Elarcis: ah, you mean without -C then
+Elarcis: :D
+Preuk: well ... unless you try &quot;-C /&quot; of course :)
+trolololo: blaze it
+trolololo: i like pepsi
+icebox: &quot;The only thing that matters in software is the experience of the user.&quot; - Ryan Dahl
+trolololo: deep
+trolololo: not
+Pyrrhus666: icebox: goes nicely with my &uml;as long is it works and is stable&uml; philosophy ;)
+icebox: Pyrrhus666: :P
+Pyrrhus666: on the frontend nobody knows it&acute;s php ;)
+None
+uru: And here's me, a hardcore PHP developer
+Pyrrhus666: Preuk: saw that via reddit. dunno which is worse ;)
+Pyrrhus666: uru: I&acute;ve done php since 4.0-alpha.
+uru: Ok, Pyrrhus666 has me beat then
+Preuk: uru: i've trained teams on sf1.4
+uru: hmm
+Preuk: forgot it all since then...
+uru: Just trying to work out how long I've been using PHP, it was my first language
+Pyrrhus666: Preuk: sf ?
+uru: must be 12-13 years now
+Preuk: started &quot;profesionnal&quot; PHP circa 2005, then on and off till 2012
+Preuk: Pyrrhus666: Symfony Framework
+Preuk: now i'm free :D
+Pyrrhus666: ah yes :)
+uru: I started professional php after leaving uni in 2012 because it was the language I was most comfortable with at the time. I seem to have become an ng developer over the last couple of months now though
+Pyrrhus666: not as much &uml;free&uml; as &uml;in the clutches of a different overlord&uml; ;)
+Preuk: uru: that kind of thing happens, you should feel lucky you're not doing active script :)
+Pyrrhus666: uru: I started php because I hated perl (which I did before)
+uru: Preuk: lol yea, I don't reall mind (for the most part) which language I use, it's just a tool to solve problems with.
+uru: Pyrrhus666: ah!
+Pyrrhus666: worst thing I&acute;ve done was actionscript in flash. god, horrible.
+uru: lol, I dabbled a little in that too before
+Pyrrhus666: it was like programming with an added dimension (the timeline)
+uru: Yea, I kind of enjoyed that, but then I like things that force me to think in new/different ways
+Pyrrhus666: it was confusing as fuck with larger apps. &uml;why is it doing that ? ah, because I set some var on frame 64&uml;
+senayar: we only have .swf can you update our website please ?
+icebox: off... bye
+Pyrrhus666: bye !
+senayar: bye icebox
+Preuk: senayar: WHY mah website not show on phone???
+Pyrrhus666: swf decompilers were a thing....
+Preuk: i've met this kind of thing lately, not for flash but with silverlight
+Pyrrhus666: silverlight needs to die a painful death asap
+Preuk: Pyrrhus666: Microsoft agrees with you
+Ergo: how do i clear $setInterval assuming i dont want to use $scope - on controller change with ui router?
+Ergo: i now i can do $scope.$on('destroy',..)
+None
+Xpert: boas
+Xpert: wenas
+Xpert: hello!
+Ergo: senayar: well we are not supposed to use $scope with components do we?
+Ergo: this is doing $scope.$on()
+enlightenmental: mornin'
+enlightenmental: is anyone aware of a way to catch an undo / redo action in a forms modelOptions.updateOn ?
+senayar: Ergo:
+senayar: if you use angular component 1.5
+senayar: you have an hook called $onDestroy()
+None
+None
+Srgjames: all the data can be found in the  user var
+zomg: Srgjames: so what is the question?
+Srgjames: well no matter what i do i cant seem to get information on the php page
+Srgjames: its as if the var user isnt posting
+zomg: do either of the console.logs print anything after you send it?
+uru: Srgjames: You can also check the browser's network console to see what is going on too
+Srgjames: on my php page i have a if ($_SERVER[&quot;REQUEST_METHOD&quot;] == &quot;POST&quot;) {
+Srgjames: 	if (empty($_POST[&quot;user&quot;]) == false) {
+Srgjames: the server request method passed
+uru: Srgjames: Check the content of the input stream
+Srgjames: but the user fails and the error message is called and sent back to the js page
+uru: Srgjames: When you submit a json object via an xhr request it's not sent as individual post parameters
+uru: So there will be nothing in the $_POST superglobal
+Srgjames: even if my js is only posting user
+Srgjames: which i believe is an array of the rest of my form variables
+zomg: Srgjames: PHP's $_POST populates from multipart/form-data requests
+zomg: Angular sends a &quot;plain&quot; JSON body
+uru: Which will be json encoded before sending as the HTTP body
+zomg: you need to do json_parse(get_stream_contents('php://input'))
+zomg: oh sorry json_decode
+zomg: and get_stream_contents might not be called that, it's been a while since I did any PHP :P
+zomg: but there's a function which gives the contents of a stream, you need to use it with json_decode to get the data
+uru: : json_parse(get_stream_contents('php://input', true)) // For a more sensable format ;)
+uru: oh, oops
+uru: I mean `json_decode(get_stream_contents('php://input'), true)`
+bd-: json_decode(file_get_contents(&quot;php://input&quot;), true);
+bd-: or stream_get_contents, but not get_stream_contents
+zomg: heh close enough =)
+uru: I always forget and have to google
+bd-: infact stream_get_contents needs an open filepointer
+zomg: considering last time I did PHP was like I dunno 5 years ago? :p
+uru: (respect the double claw and all that)
+Srgjames: is that on my js page or my php ?
+bd-: so it wouldn't work unless you fopen php://input first
+uru: Srgjames: php side
+angu: Hey guys
+angu: I'm getting an issue when trying to consume a service.
+angu: well not really consuming a service..
+angu: instead, when using an NgModel in angular 2
+uru: angu: What is the error?
+angu: give me a second and I will write it in detail, uru
+angu: angu: Can't bind to 'ngModel' since it isn't a known property of 'select'
+angu: The thing is that I have a modal
+angu: but the modal doesn't have an @NgModule
+angu: because it's outside of a feature folder
+angu: like on this sample
+None
+angu: uru:  Sorry didn't tagged you
+angu: uru: How could I add an ngModule to this?
+jdummy: I have a synchronous task to run that could *potentially* be slow and/or need a lot of data... I've shoved it into a worker so it doesn't lock the UI, but it makes it take much longer when the task is not slow.
+jdummy: Has anyone dealt with this? Is there some happy medium? The collection that it runs on needs to remain accessible to the app, so Transferable doesn't seem to apply
+angu: uru: You there?
+uru: angu: Sorry, life in the way. iirc you need to import the FormsModule for ngModel (I could be totally wrong about that though)
+angu: uru: I figured it out like 2 minutes ago hahaha
+angu: uru: Eitherway thanks
+angu: uru: I passed FormsModule to the AppsModule
+uru: lol, if the train was not delayed I'd have been able to help ;) Glad you found it though
+dlam: if i have a factory-style service,  and pass it in as a dependence, do i gotta call it with()?   like   $scope.PostFactory = PostFactory()
+angu: uru: The thing that I don't know now is if there is anyway I could refactor this modal into a feature folder with its own module
+angu: uru: Now it's an entryComponent
+angu: and it's outside his folder
+uru: angu: Depends how you want to structure it really
+angu: uru: I would like to move it to a feature folder, with its module, and index.ts file
+angu: uru: I think I would also have to name it as a component
+angu: uru: But I'm not sure if this is possible since it must be declared as an entryCompnonent
+None
+angu: Take a look there if you want
+angu: that's almost the same structure I have
+angu: does the app.component have to change if I want to move it into a feature folder structure?
+cwek: Hi, I have div with ng-repeat, inside ng-repeat it is select: element. Why I get undefnied value on ng-change, but If i use select outside of ng-repeat it works ?
+jdummy: cwek: ng-repeat creates a new scope, probably something to do with that
+wrkrcoop: whats the best way to allow a user to upload a photo?
+wrkrcoop: ive got this:       input type=&quot;file&quot; name=&quot;fileupload&quot; value=&quot;fileupload&quot; accept=&quot;image/*&quot; id=&quot;fileupload&quot;:
+wrkrcoop: but i imagine the user can just edit accept=&ldquo;*&rdquo;
+Xpert: hey
+Xpert: new system finished
+Xpert: boas
+uru: angu: Depends how you have things set up.
+uru: wrkrcoop: Either server side validation or a 3rd party
+wrkrcoop: uru: 3rd party?
+uru: wrkrcoop: Yea, someone else to handle the upload processing and storage
+wrkrcoop: uru: know any companies that do that?
+Xpert: hey Kesarr
+uru: wrkrcoop: We use filestack at work, I don't know about any others though, I've always rolled my own in the past
+wrkrcoop: uru: weird &hellip; seems weird to send the file to another company then to my server?
+uru: wrkrcoop: It uploads to our aws instance but they handle things like validation, image re-processing, generating thumbnails, that kind of thing
+wrkrcoop: uru: oh awesome &hellip;
+uru: And supports things like social intergrations if you need/want that sort of thing
+uru: But for a basic file uploader it's not that hard to make your own
+wrkrcoop: cool im working on that atm
+None
+uru: nope
+wrkrcoop: damn
+uru: tbf you've only shown me some html :)
+None
+uru: Again, not really enough code for me to say :p
+wrkrcoop: bah ok
+wrkrcoop: thanks
+None
+wrkrcoop: but it looks like i have to include the script in my html &hellip; can i just import it into my js?
+wrkrcoop: like import ng-file-upload from &lsquo;ng-file-upload&rsquo;
+wrkrcoop: how do i know if i need to inject ngFileUpload into my main module or just the controller that uses it?
+AlexZan: is Angular2 handled here or another channel?
+angu: Hello guys
+angu: I'm using observable to consume API services
+angu: How do I know that I have received an answer from the service? I mean, I want to select a value by default in my dropdown list.
+icfantv: angu: are you subscribed?
+angu: Yes
+icfantv: one sec
+angu: ok
+angu: I'm doing this
+icfantv: and is your subscribe function not being executed?
+None
+angu: icfantv: Is that what you were referring to?
+icfantv: mmmm, i htink you need flattenMap, or something, one sec
+icfantv: yea, one sec
+angu: Ok good
+angu: I'm calling that method from my component
+icfantv: flatMap
+icfantv: and just to be clear, `this.cars` is NOT an observable
+icfantv: it'll be Cars[]
+angu: icfantv: What would be the difference?
+icfantv: so you want to aggregate all the data from the observable down to an actual model object
+angu: icfantv: wHAT DO YOU MEAN THAT IT'S NOT AN OBSERVABLE?
+icfantv: which is what flatMap does
+angu: Sorry for the caps
+icfantv: np
+icfantv: is this ng2?
+angu: yes.
+icfantv: so the other way is when you're in an ngFor and you pipe to async
+icfantv: that will automatically do the subscribe for you and spit the data out as you want
+angu: I'm a little bit lost
+icfantv: it's ok.
+angu: ONe thing at a time
+icfantv: what's the data type of this.cars?
+angu: It's a Car class
+icfantv: an array of Car objects?
+angu: Yes
+icfantv: yea, so remember when the subscribe function is called
+icfantv: one sec, i wanna make sure i'm not about to lie to you
+None
+icfantv: yea so the subscribe function is called EVERY time the observable gets something
+angu: Yes
+icfantv: which is NOT what you want here otherwise this.cars will only ever get one car and it won't even be a list
+icfantv: this is what flatMap does
+angu: Hmm
+angu: let me check
+angu: No
+angu: I have more than one car.
+icfantv: it aggregates all the cars down to a collection
+angu: I'm loading them in a dropdwon list.
+icfantv: via ngFor?
+angu: so yes, they're in a collection
+angu: Yes.
+icfantv: so i'd be piping that into an async pipe
+icfantv: and not doing a subscribe at all
+icfantv: just let it be an Observable
+icfantv: return the result from the service directly
+angu: Hmmm
+angu: Do you have any sample to check the advantage on your approach?
+icfantv: perhaps.  one sec
+None
+None
+icfantv: the nice thing about `| async` is that it will do the .subscribe and .unsubscribe for you
+icfantv: as well as handling any updates (should the underlying service ever get push updates&hellip;)
+icfantv: i have to admit, however, that i don't necessarily agree w/ ng2's approach here of letting the user navigate to a route and THEN doing the call to get the data.  i did like the idea of resolve functions that let you decide basically that if you don't get the data you need to actually interact with the target of the route, why navigate?
+icfantv: but perhaps many times, it's best to just display an error and/or an empty list
+angu: icfantv: So you want me to implement an asyncpipe?
+w0rp: Does anyone know of any good resources exploring techniques using TypeScript with Angular 1.x and resources? I work at a company where we would like to have something like a $resource which returns instances of model classes, and then use TypeScript to perform static analysis on those instances.
+rand0m: quick noob question
+rand0m: i have an index.js which defines var myapp = angular.module...
+rand0m: and I want to use controllers like myapp.controller...
+rand0m: how do I go on about ti
+rand0m: it*
+icfantv: angu: you don't have to
+angu: icfantv: Then what? just the flatmap?
+icfantv: angu: in your ngOnInit, you make your service call and assign the results to a local class property as an Observable and in your HTML that generates the dropdown list, you make it an async pipe
+icfantv: ahhhh.  no, if you do it this way ^^, you don't need flatMap
+icfantv: :-)
+angu: icfantv: So I leave everything like it is and just make it an async pipe
+angu: I mean in the HTML
+icfantv: w0rp: i would encourage you to stay away from $resource.
+wrkrcoop: is there such thing as onchange?
+icfantv: angu: no.  because your cars property is not an observable
+icfantv: not currently
+icfantv: rand0m: just like that
+w0rp: icfantv: Ah, what is the alternative, then?
+icfantv: rand0m: ifyou're talking about in a DIFFERENT file, then you need to retrieve that app first
+icfantv: which you do with angular.module(&hellip;) WITHOUT the [].
+rand0m: I've tried multiple generators and different file structures, they're too fancy for my understanding
+icfantv: i.e. angular.module('foo', []); &mdash; creates a module foo and angular.module('foo); &mdash; retrieves the module foo
+rand0m: so I write module.exports = angular.module(blah) and require that file?
+angu: icfantv: But my service returns an observable
+icfantv: w0rp: just use the $http service
+icfantv: w0rp: $resource just sits on top of $http anyway.  it does provide some utility, but in my experience, not many people actually write true RESTful services.
+icfantv: angu: yep
+w0rp: I knew that one used the other.
+icfantv: angu: so just assign that to a local property as that observable
+icfantv: angu: just like the TS file i send you
+w0rp: The main thing I am wondering is how to go about introducing classes for models.
+icfantv: w0rp: not sure i follow
+icfantv: w0rp: in my TS experience, you don't really need to create model classes in TS for your data.  you just need interfaces.
+w0rp: The easiest thing to write, which would require a decent amount of boilerplate, would be something like this. $http(...).then(response =: $ctrl.modelInstance = Model.fromJSON(response));
+w0rp: That's the first tihng that comes to mind.
+icfantv: w0rp: the reason being is that you only get compile-time type checking so there's nothing at run time to ensure you have all the right fields on your model (or new ones, for that matter)
+w0rp: Forget my braces there, but basically that.
+w0rp: What we're after are really two things.
+icfantv: aaaaaah.  w0rp i would encourage you to use observables instead - you can always get the promise from the observable and you don't have to worry about data marshalling
+w0rp: 1. We want to know statically which attributes will come back from an API call.
+w0rp: 2. We want to add methods to the models to avoid having to call utility functions on data, and to avoid rewriting some business logic in a lot of places.
+icfantv: w0rp: yep, that's your interface
+icfantv: w0rp: so&hellip;.what do these utility functions do?
+None
+w0rp: Say you have a firstName and a lastName, and you're okay with just putting a space between the two to get a fullName. You want to add a .fullName property you can use everywhere.
+w0rp: There are other, probably better, examples.
+w0rp: That's the basic idea.
+icfantv: rand0m: so long as you break your app up by functional silo, that's fine - but i would strongly encourage you to put your controllers/services, etc&hellip; each in their OWN file
+w0rp: You don't want to have to inject a ThingService and then write ThingService.getFullName(thing), you want to write thing.fullName.
+icfantv: w0rp: that's business and view-specific logic and it does not belong on the model, IMO
+rand0m: icfantv, thats exactly what the structure i've posted is doing
+icfantv: rand0m: good!
+w0rp: So would you actually write something like ThingService.getFullName(thing)?
+icfantv: WHOAAAAAA.  why do you have scriptlets in your JS code?
+rand0m: so my question was how do I couple all these files?
+rand0m: me?
+icfantv: rand0m: yes
+icfantv: i'm having flashbacks from the early 00's
+w0rp: Set up an interface which describes say your JSON data, and then call functions from factories or services or whatever instead of writing properties and methods on classes?
+wrkrcoop: hey in onchange a thing?
+wrkrcoop: ng-change requires a model
+rand0m: ah that structure belongs to yeoman, it uses script tags to fill in content it generates
+icfantv: w0rp: you make the first/last name concatenation in your UI code
+icfantv: w0rp: make a directive if you get tired of doing the same HTML over and over, but that first name last name combo is VIEW code
+icfantv: rand0m: mother of god....
+rand0m: thats how it works :o
+icfantv: rand0m: but anyway, scriptlets aside, that's how you retrieve a controller by name and add a controller to it
+icfantv: i'm looking at controller.js, btw
+angu: icfantv: I changed the ngFor to &quot;let bank of banks | async&quot;
+icfantv: wasn't it cars?
+angu: yes sorry
+icfantv: heh
+w0rp: Take another example. You have objects which are child objects of other objects, and you want to have a notion of some entity being &quot;private.&quot; So if the object itself is marked as private, or if the parent object is private, then the object is private.
+w0rp: Is that view code?
+angu: And then changed my observable
+rand0m: ok I will try now#
+icfantv: w0rp: i would be very cautious of using a ton of inheritance in TS
+angu: and also the service!
+icfantv: angu: ok
+w0rp: I didn't mention inheritance.
+angu:   this.cars = this.carService.getCars();
+icfantv: w0rp: what do you think &quot;you have objects which are child objects of other objects&quot; means in classical OOP?
+angu: cars: ObservableArrayCar::;
+angu: is that okay icfantv ?
+w0rp: Say there is an Organisation model, and a Company model. And either one can be &quot;private.&quot; So you want to have some function, method, or property, which tells you if a Company has private visibilty.
+icfantv: angu: that looks right
+angu: but there is an issue
+w0rp: Do you write Something.isPrivate(companyInstance) and write a function which accepts Organisation | Company as input?
+icfantv: w0rp: then both implement an interface that has a boolean property (or function) called `private`
+icfantv: or isPrivate
+icfantv: w0rp: nope, you define an `interface IEntity { isPrivate: () =: boolean;}`
+icfantv: and then both Organisation and Company implement that interface
+angu: Invalid argument '' for pipe 'AsyncPipe'
+w0rp: Right, so my question is, where do you construct those objects, and how?
+w0rp: Do you write something like this?
+icfantv: but far too often people create interface types and then don't use them.  so you should absolutely have some other place in your code where you define a function that takes in an IEntity object type
+w0rp: $http(...).then(response =: { $ctrl.foo = new Company(response); }
+w0rp: Would you write that?
+icfantv: w0rp: depends on how prolific those objects are in your app.  if you plan on using them everywhere, then i would have a top level common/model directory
+icfantv: w0rp: i mean, that's not ideal - and the ng2 Http service prevents you from having to do that.  but since ng1's $http service returns promises and not Observables, it's not as easy
+w0rp: Do you perhaps write a subclass of an observable for your models, and make all models observable? How do you then get TypeScript to reason about observable objects which have not yet been loaded?
+icfantv: i wouldn't pass in the response object, rather response.data
+icfantv: or have a static method on Company like Company.fromJson(&hellip;)
+icfantv: that's not business logic
+icfantv: w0rp: in your case, you might want to avoid using observables here.  i don't know.  i've never tried integrating them with ng1 services using $http.
+w0rp: Yeah, that makes sense.
+icfantv: surely someone has, but i don't know if there is a slick way to do it or if it's kludgy as all &hellip;.
+icfantv: what will be annoying for you is that you will need to make sure you properly handle data structure errors in your fromJson method
+icfantv: unless you stick w/ just this.foo = data.foo, then, you're ok
+w0rp: So you could have `let instance: Company | undefined;` Then later `CompanyService.get(..., x =: {instance = x;})`.
+icfantv: but elsewhere in your code you'll need to do error checking or proper path resolution if you ever do company.foo.bar.bat.baz
+icfantv: w0rp: yea, that would work.
+w0rp: You could write the serialisation from JSON into a smart object in your service, and then in your components or whatever you get the exact type back with some properties and methods.
+icfantv: but you're in async land
+icfantv: so you need to make sure you remember that
+w0rp: There is one good thing.
+icfantv: gtg.  good luck
+w0rp: Most of our uses of resources has them injected into controllers before they load.
+w0rp: So you can know for a fact that they are not null when the controller runs.
+w0rp: It would just require a bit of saying &quot;yes, this is in fact this type here&quot; I suppose.
+w0rp: Thank you for the short conversation.
+w0rp: I'll TTYL.
+icfantv: sure, np
+angu: icfantv
+angu: I was having an issue with the async pipe
+angu: So I think the idea there with the async pipe is to filter data
+icfantv: angu: i have to go, but that's not right
+angu: or just sort it accordingly
+icfantv: it's not a filter in the [].filter sense
+angu: I totally copied the implementation you just suggested.
+angu: Including changes on the service.
+rand0m: hmm
+rand0m: my controller gets defined first and my angular module last
+None
+Xpert: hey FirewalkR
+Xpert: hello
+rand0m: hi
+Xpert: hi
+Xpert: rand0m where exist patches for C+
+rand0m: c
+rand0m: c+?
+Xpert: yep
+rand0m: not sure
+rand0m: what are you trying to do
+Xpert: finish my new OS
+rand0m: oh
+rand0m: what patches are we talking about
+rand0m: sorry I don't know much, because I am not Xpert :P
+Xpert: =x
+wrkrcoop: hi. im trying to use ngfileupload and it says im supposed to pass $files to a function &hellip; but it doesn&rsquo;t say anything about defining $files &hellip; can someone help me out and explain where the hell $files is coming from?
+rand0m: wrkrcoop, did you follow the instructions as on git page??
+wrkrcoop: rand0m: looked through it&hellip; doesnt really say &hellip; im guessing somehow ngf-select assigns the file to $file &hellip;.
+wrkrcoop: but it doesnt say that
+rand0m: not sure mate I never used it
+rand0m: how ever
+None
+rand0m: see if you're trying to do is on there
+wrkrcoop: thanks
+rand0m: wrkrcoop, any luck
+wrkrcoop: yeah i think so one second
+wrkrcoop: rand0m: yeah so it somehow sets what u upload to $file &hellip; then i pass it into a function and then can encode it with base64
+wrkrcoop: woo that took a while
+rand0m: did the url help?
+rand0m: yay! It works :D!
+SteveC: Does anyone know if there's a IRC chat for ng2?
+zomg: SteveC: you can ask here, but I've noticed there's lot fewer who know about ng2 in general
+SteveC: zomg: yeah I've noticed that myself.
+SteveC: My question is more or less relating to using redux/ng-store with angular 2 (or even react).
+SteveC: I have a certain process that must be completed once a user submits a login form and authenticates via API, but I'm having a hard time controlling the one-way flow of data from parent to child components during that initial store setup phase
+wunoinx: hey
+wunoinc: lol
+SteveC: Does anyone know of a good way to enforce that a child component does not render until the local redux store has been setup?
+SteveC: I've restricted redux store access to just the parent components, but it still attempts to load the data into the children via observables/async.
+SteveC: angular 2 btw

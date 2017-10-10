@@ -1,0 +1,1109 @@
+m0ltar: Why is it that the elem param to directive is an array of one element sometimes?
+m0ltar: E.g. I'm trying to catch blur event on textarea and elem happens to be an array of 1 element
+m0ltar: so can't do elem.val(), need to do elem[0].val()
+juria_roberts: Is there an easy way in angular to change the keynames in the json returned from $http?
+rand0m: juria_roberts, dump the contents from response to a variable, manipulate the variable as per your liking and use the same to render your UI
+kaak: how would I go about animating the change in height to an element with angular?
+kaak: So far as I can tell, ngAnimate really only animates events like enter or leave
+kaak: right now I'm just modifying the style with ng-style and have a CSS animation selector defining the animation time
+wafflejock: kaak, what's the problem in particular? you should be able to just use CSS to do the animations for the most part
+ieeeeessst: hey guys, new angular, but I have a system where I use $routeProvider, but I want to use a login controller/template and a page controller/template, is there anyway to combine the two in my .when('/',...
+ieeeeessst: very new to angular*
+ieeeeessst: i'm kind of confused how to go about having two controllers and templates
+gag: Hello all
+gag: please help me
+gag: Calling these methods invoke an $http with the specified http method, destination and parameters. When the data is returned from the server then the object is an instance of the resource class. The actions save, remove and delete are available on it as methods with the $ prefix. This allows you to easily perform CRUD operations (create, read, update, delete) on server-side data like this:  var User = $resource('/user/:userId', {userI
+gag: Please help me above
+gag: I don't understand
+gag: var User = $resource('/user/:userId', {userId:'@id'});
+gag: var user = User.get({userId:123}, function() {
+gag: user.abc = true;
+gag:  user.$save();
+gag: });
+gag: what is userId:'@id' ?
+lee__: Gag i think your using firebase with angularjs
+Elarcis: wait I didn't leave the chan yesterday?
+Elarcis: hi!
+ngWalrus: hello
+ngWalrus: it was nice waking up at 5:45 to get to work today :(
+anth0ny: I&rsquo;m using the angular-cli and typescript for a new project. I know little about Webpack/Typescript, is it possible to import Immutable.js and rxjs globaly so that I can use some types (like Observable) without importing them into every file?
+zomg: anth0ny: the standard practice is to import them where you use them
+anth0ny: zomg: is there any reason for that? seems a bit cumbersome
+zomg: modularity mostly
+zomg: if your code depends on globals, then those globals need to be initialized before the code runs
+hemangpatel: Hello, I'm looking for option to implement material design in angular2.
+None
+anth0ny: hemangpatel: there&rsquo;s the official material repo (that&rsquo;s not yet released) or just import and use the CSS that you would with any page
+hemangpatel: anth0ny, It's in alpha
+anth0ny: yup, it is
+hemangpatel: So not ready for production :(
+None
+hemangpatel: It's top on angular/material2
+icebox: Elarcis: hey
+soee: any of you tried to use angular 2 i18n and had problems installing dependencies with angular-cli ?
+Elarcis: hi icebox!
+icebox: hey
+icebox: Elarcis: did you build recently angular 2?
+Elarcis: icebox: not really no
+Elarcis: icebox: too busy at work to even consider coding at home
+icebox: Elarcis: shall you clone it and execute &quot;npm install&quot;, please? I get &quot;EBADPLATFORM&quot; on windows with node 6.8.0
+icebox: Elarcis: I think it is npm bug, but it is a shame because npm 3.10.8 is the latest stable
+Hammy: help
+nikitabanthiya14: hii can anybody send me invitation i want to join nodejs channel
+Hammy: is their any body who can teach clear my angular doubts?
+icebox: nikitabanthiya14: you need to register the nickname in irc... that's all
+icebox: nikitabanthiya14: no need an invitation
+icebox: Hammy: don't ask to ask... just ask
+None
+icebox: nikitabanthiya14: and generally speaking, this is #angularjs... not irc help :)
+nikitabanthiya14: @icebox how to register nickname?
+nikitabanthiya14: ooh thank you
+Hammy: how does data hit database and get response?
+icebox: waiting time too short :)
+None
+nikitabanthiya14: i registered and verify mail
+nikitabanthiya14: stilll
+icebox: nikitabanthiya14: #node.js
+icebox: nikitabanthiya14: and please ask it in irc help channel :)
+nikitabanthiya14: done @icebox
+icebox: nikitabanthiya14: you are in :P
+nikitabanthiya14: :p
+Elarcis: icebox: holy shit talk about someone who knows how to ask questions
+Elarcis: icebox: 'how compute data result' =: *leaves almost immediately*
+icebox: Elarcis: as usual :P
+Elarcis: icebox: I mean how can these people live everyday
+Elarcis: icebox: 'hi honey, what we eat OK OFF TO WORK BYE'
+Preuk: Elarcis: 21th century, attention span should not be : 5s or you're overthinking things
+Preuk: &quot;As it happens, the average attention span of a goldfish is a full second longer than the steadily decreasing 8-second average attention span of a person in 2013, according to StatisticBrain.com&quot;
+None
+anli: Is there an angular event for when a component has been created?
+anli: I tried ng-create
+jcool: Hi
+jcool: I am trying to send post data in angular 2.
+anli: Hm, ng-init
+anli: Cool stuff
+jcool: I want to send data like what jQuery does: user[email] = &quot;abc at g dot com&quot;
+jcool: I tried adding Content-type in headers and set it to &quot;application/x-ww-form-urlencoded&quot;
+jcool: but it doesn't works. Anything that I might be missing?
+map_reduce: is angular-cli sponsored by google?
+icebox: map_reduce: it is in angular organization
+map_reduce: icebox: yeah i kno, but is it independent of google?
+icebox: map_reduce: it is owned by Google but they release it under MIT license
+map_reduce: icebox: i hope they start to take care of this stuff properly :(
+icebox: map_reduce: it is open source
+Preuk: map_reduce: can't be worse than how the managed gwt
+Preuk: icebox: trus, but when half of the technical contribution, moreover design level stuff is done by a company, being free might not be enought
+icebox: map_reduce: google or another company backing up a project doesn't guarantee anything... like for a commercial product... it is only an illusion
+map_reduce: icebox: yes, i know - but they can provide $$$
+map_reduce: and thats usually enough with right people
+Preuk: and full-time contribs
+icebox: Preuk: agreed
+icebox: map_reduce: sure... but it doesn't change the game... (only) money doesn't guarantee anything
+map_reduce: icebox: sure, but again You can pay competent people
+icebox: map_reduce: ok... we are a bit abstract... what is your point?
+map_reduce: icebox: ng-cli doesnt work :) again
+map_reduce: i guess ill wait, its frustrating what they do
+icebox: map_reduce: ok... but there is no relationship between &quot;ng-cli doesn't work&quot; and &quot;google&quot;
+map_reduce: i know its beta
+icebox: map_reduce: in terms of cause and effect
+map_reduce: icebox: i mean, with financial backing they could put more effort in QA
+icebox: map_reduce: that premise is wrong
+map_reduce: icebox: could be - please explain
+icebox: map_reduce: how many projects failed in your company (or in my company) even if well funded? :)
+Preuk: icebox: i second that, i can attest that our current problem is not money, it's manpower; can't find the right people at the right time
+icebox: Preuk: agreed... and I think it is not matter if it is open source or commercial project... the right thing is the right thing with open or closed source :)
+icebox: Preuk: with an open source project there is the advantage you can contribute
+icebox: sigh... need to fill an issue about building angular 2 on windows... I cannot sort out that
+icebox: I tried it with different shells and node versions
+dopry_: icebox, tag @dopry in the issue and I'll test it locally if I get a chance.
+None
+dopry_: icebox, if ooh I like some of the repos you have... stuff I used to do but mostly in .NET.
+antiPoP: hi what seed should I use for an ng2 projetc? I'm looking at yeoman, and seems most uses gulp, which seems to start being deprecated in favour of npm
+None
+icebox: antiPoP: that is the best
+icebox: antiPoP: it is the Seed.
+Pyrrhus666: if you go for simple and easy, preboot&acute;s still works fine, and no angular-cli
+None
+icebox: antiPoP: sorry.. I don't use generators :)
+antiPoP: icebox,  np, thanks
+icebox: antiPoP: generally speaking, I don't use generators (no yeoman) and I prefer npm scripts vs. grunt or gulp
+antiPoP: icebox, yes, that's why i was asking about a see or generator using npm, I just found the one above and seems in not used too much
+dopry_: icebox, are you using webpack?
+icebox: dopry_: no
+Pyrrhus666: antiPoP: that generator seems to have had it&acute;s last updates around angular 2.0.0RC1. I&acute;d stay away.
+dopry_: icebox, do you use any livereload/browsersync?
+antiPoP: dopry_, I would prefer to not use webpack or systemjs similar if possible... the ionic one does not had these and worked great...
+icebox: dopry_: no
+antiPoP: dopry_, yes, i want to use browser_sync
+antiPoP: Pyrrhus666, so what would you suggest as a lightweight seed with npm scripts? i think I just need browser_sync and scss
+dopry_: I normally end up using gulp if I want browsersync, if I don't want gulp I fall back to webpack.. I personally really like webpack for preparing my prod packages...
+dopry_: It's pretty good at trimming the fat...
+antiPoP: dopry_, but it's really needed webpack or systemjs? I have never used these
+None
+Pyrrhus666: antiPoP: webpack works fine, and the rest is npm scripts. how else would you build bundles ?
+antiPoP: Pyrrhus666, with ng1 I used just gulp, I think no webpack or systemjs was used there
+antiPoP: I'm new to ng2, but I think that the ionic2 seed (which I tried last week) does not uses these... but I may be wrong
+Pyrrhus666: antiPoP: you could do that with ng2 too I guess. but webpack works fine for me, it&acute;s pretty easy to get a hang of.
+dopry_: antiPoP, you don't really need it, but it can handle doing the ts/js conversion or es6/js conversion hot reload and packaging all in one tool...
+Pyrrhus666: ^ that
+dopry_: it's quite powerful. I'm working on a little ng1.5 app with 5 multipage wizards. I was able to get my js bundles down to like 450K and that's all forms in one bundle.. my next thing is to set it up to bundle the forms independently which should take another 100K off the initial page load.
+dopry_: it provides nice heuristics...  but it can be a bit daunting at first...
+jcool: hi, any solution to pass www-form-data in api request the way jQuery does?
+Pyrrhus666: jcool: $http.post() ?
+jcool: Pyrrhus666, sorry. angular 2. forgot to mention :)
+Pyrrhus666: jcool: http.post() ?
+jcool: Pyrrhus666, not working. I have tried a lot. I tried setting the headers to x-www-form one but it still sends data in son
+jcool: I need to send something like form: user[email]: &quot;ja at g dot com&quot; user[username]: &quot;angular&quot;
+None
+anli: Is there some chrome plugin that lets me see if there is some angular output when loading page that has not been cloaked?
+Elarcis: dopry_: I'm fond of the require.context feature, I'm using it to import every JSON files in a specific folder and merge them to later use them as my locale files :D
+dopry_: Elarcis, I haven't had a chance to really look at that. I'm really only familiar with it in Karma, but I still prefer a build per test in Karma...
+None
+dopry_: Elarcis, do you have any examples of how you handle the locale files online?
+Pyrrhus666: jcool: afaik the http.post method itself doesn&acute;t do anythin to the data, it justs posts to an url. if you get json, you&acute;re doing something before that to make it so... but my experience with ng2&acute;s http is very limited.
+None
+jcool: Pyrrhus666, no issues. thanks for help.
+jcool: icebox, already seen that. not of much help
+Pyrrhus666: baako: like I said yesterday : when you do the state.go, it seems the target state isn&acute;t defined (yet). it depends on the structure of your code. I can&acute;t really see that from the 2 files.
+icebox: jcool: any snippet to reproduce your use case?
+jcool: icebox, sure. let me create one for this use case!
+baako: Pyrrhus666, what do you mean structure? how will i do this please normally
+icebox: jcool: basically you need to tweak the headers
+jcool: icebox, did that. I will just detail a little more. I have a simple form with 3 fields.
+icebox: jcool: like let headers = new Headers(); headers.append('Content-Type', 'application/x-www-form-urlencoded');
+jcool: icebox, I get the data from form as json
+jcool: then I call my service and set headers as you recommended but it still sends son
+jcool: json*
+Pyrrhus666: baako: the state you refer to (app.shops) needs to be defined and included before trying to use it. often that means including/DI&acute;ing the modules where those states are defined
+icebox: jcool: if you can produce it with a plunker, you may fill an issue
+arlekin: hi guys!
+jcool: icebox, I read a lot around and I found that body that is being sent to api if that is of type &quot;FormData&quot; then it will append headers automatically
+Pyrrhus666: baako: I don&acute;t know how to make it any clearer :). for test, you could try defining the app.shops state in the same config block where you define the default state ?
+arlekin: im starting out with ng2 :P (and also with TS, WebPack, WebStorm and overall build systems, because why not :P)
+Pyrrhus666: hi arlekin
+jcool: icebox, what I don't understand is how can I make json data of type FormData
+jcool: icebox, yes, sounds good!
+arlekin: and there should be some black magic that takes care of my imports in webstorm
+arlekin: but there isn't
+arlekin: and i dont know why
+zomg: arlekin: black magic? :P
+antiPoP: well, ill try the mgenchev one... but the ionic2 build system used just npm scripts and was much faster than gulp... I can always move to other thing :)
+jcool: arlekin, black magic? :o
+jcool: don't spell some on me :|
+arlekin: i mean i ran npm install etc, and when i write NgModule i should get completion and quick-fix popup should have a fix imports option but doesn't
+arlekin: so something ain't right
+jcool: arlekin, may be some external extension needed?
+None
+arlekin: jcool: it may well be, but then on jetbrains site there is no such thing
+jcool: icebox,  I saw that as well but that repo has been deprecated in favour of module http integrate on angular/angular
+jcool: and all issues are outdated
+icebox: jcool: I see
+None
+jcool: may be of some use
+arlekin: jcool: yup looking at it past few minutes but it confuses me even more
+arlekin: jcool: i mean the only thing needed for that to work seems to be running npm install
+arlekin: and i already did that
+arlekin: and still no cigar
+jcool: arlekin, According to a comment in the IntelliJ bug tracker, the fixed the issue in 2016.1.2 EAP. I updated to 2016.1.3 EAP, or more specifically:
+jcool: stackvoerflow says this
+arlekin: jcool: well i just looked into my &quot;project files&quot; and it seems that webstorm didn't treat node_modules as project folder
+arlekin: for some reason
+arlekin: prolly cause i ran npm install by hand from console
+falkkk: hy all :-)
+falkkk: someone here who knows loopback apis?
+falkkk: on angular sdk obvisously
+jcool: arlekin, I use VS code :)
+arlekin: jcool: no need to be smug about it :P
+jcool: arlekin, :D
+arlekin: jcool: i also did, now im trying to go with webstorm after 5 years of hating ide's
+jcool: arlekin, I believe in simplicity. Sublime and VS. Saying that I have heard a lot about WS
+Preuk: I'm giving a try at mgechev/angular-seed, but aot build seems broken, can't resolve ApplicationModule...
+Preuk: npm run build.prod runs just fine but build.prod.exp crashes on application_module.d.ts; any clue?
+icebox: falkkk: loopback / angular sdk is only a generator
+icebox: falkkk: any issue with angular or with that generator?
+Elarcis: jcool: heard a lot too, but given the colossal diversity of the JS environment and the quick evolution of its tools, I've got some doubts regarding WS's ability to keep up the pace (that, and the fact's it's a paid product)
+falkkk: im trying to update an Order which is an relation from Customer - so do i Update it via Customer.order.updateById or similiar.. or do i have to call the modell itself to update, like Order.updateById, or is both working?
+Preuk: Elarcis: jetbrains stuff helped me getting along with IDE (used phpstom, now idea). It's far from perfect but framework integration is much less lagging behind than in major free IDEs
+icebox: falkkk: code details reproducing your use case?
+Preuk: eclipse is the worst; not two modules (even semi-officials) work together properly, use the same UI or key bindings
+Preuk: but it's still freaking expensive :(
+jcool: Elarcis, I second that
+Elarcis: Preuk: eeeeeeh, open source has its strengths for that
+Elarcis: Preuk: when the devs ACTUALLY HELP THE MODDING COMMUNITY
+Elarcis: icebox: ^:P
+Preuk: Elarcis: don't get me wrong, i love free software, but sometimes you need specific stuff
+falkkk: not rly @icebox, its not even an error weather lack of experiance
+Elarcis: ...did I draw a happy unicorn?
+Elarcis: ^:D
+icebox: falkkk: I see
+Elarcis: Preuk: yeah, professionnal tools are often more integrated, but not very up to the page
+falkkk: updating it via Customer or via Order, thts the base of this questoin
+Elarcis: Preuk: open source projects are often very trendy, but less finished
+falkkk: i have to be authetificated as well for updating.. so Cutsomer.getCurrent -: success -: ?
+Preuk: i can't go back to a world where i can't refactor 4 classes at one, including IoC and framework-specific references at once
+Elarcis: Preuk: ah, automatic reference finding, such a classic
+Elarcis: Preuk: wait. how can you refactor 4 classes at once?
+icebox: falkkk: really no idea how it works your app
+Preuk: Elarcis: renaming/changing a type in one class, cascading to the whol inheritance tree, related methods, data mappings, etc.
+Elarcis: Preuk: ah, automatic reference finding then
+falkkk: anyway thanks
+Elarcis: Preuk: VSCOde has that with intellisense :D
+Preuk: yep, need a pretty robust and comprehensive AST for that
+arlekin: eh... anyone using webstorm here ?
+arlekin: someone was, im pretty sure
+Preuk: arlekin: i am; i mean intellij (we do java and stuff too here)
+arlekin: Preuk: then maybe you could help brother out - im starting out with ng 2 and just so happens also with webstorm
+arlekin: Preuk: and going with quickstart i ran into issue that webstorm by default excludes node_modules from my project root
+Elarcis: arlekin: the recipe for perfect frustration
+arlekin: and marks it as library root
+Preuk: arlekin: yep, that's the way it hadles it (java style)
+Preuk: in short: if it's not VCS'd, it's not source but lib/dependency
+Preuk: ctral+alt+shift+S (emacs, anyone :p) for module management, you can declare node_modules as source root too if you realy need it, but i'd be careful with that
+arlekin: Preuk: the deal is i really dont care how its marked, i just want to have me some completion
+Preuk: it does
+Preuk: at least, it should :) maybe you have some indexing disabled? powersaving mode maybe?
+arlekin: Preuk: no idea, it should all be pretty default
+Preuk: using ng2 with typescript, it's fine as long as your typings are installed too
+arlekin: Preuk: well i do have them installed
+Preuk: arlekin: haha! in your tsconfig, do you have typeRoots declared?
+Preuk: cause you shoudl indeed specify typeRoots directories as &quot;source&quot; in WS module configuration
+arlekin: Preuk: well, no, but im going straight along the angular quickstart so one would assume it should all &quot;just work&quot;
+Preuk: ok, just make sure your typings/ directory is not excluded then
+arlekin: Preuk: well, that one isn't
+arlekin: just node modules
+Preuk: arlekin: sorry, can't help you much :( never had this problem (but quite a few others i admit)
+arlekin: Preuk: well problem seems kinda popular looking at intellij support forums
+arlekin: but still there ain't no solution
+Preuk: just checked out mgechev/angular-seed, i have completion for every node dependency that has typings
+geoid: Can I use &quot;require&quot; and &quot;controller&quot; properties in the same angular 1.x directive?
+icebox: geoid: yes, you can
+None
+Elarcis: geoid: but you asking the question has me puzzled about why you ask it :D
+Elarcis: geoid: because they're totally not doing the same thing
+icebox: Elarcis: merging controllers (inheritance)... parent one and the nested form
+Elarcis: icebox: they're not really merging a controller to his parent, they're just getting a reference to a specified 'this' scope on the same element or any parent one
+icebox: Elarcis: I know... but I imagined their answer
+Elarcis: icebox: you tortured soul
+arlekin: Preuk: imma pro playah !1!1!1!!1!11 i fixed it
+arlekin: (yay me)
+icebox: Elarcis: confirmed :)
+None
+ngbot: angular.js/master c22615c Martin Staffa: refactor(compileSpec): make tests consistent...
+icebox: arlekin: it is only an illusion
+arlekin: icebox: same as the universe
+icebox: arlekin: next whatever upgrade is going to destroy that confidence :)
+None
+ngbot: angular.js/v1.5.x 3bc3b40 Martin Staffa: refactor(compileSpec): make tests consistent...
+Elarcis: reality is an illusion, the universe is a hologram, buy gold, bye!
+icebox: arlekin: about universe... that is proved
+arlekin: icebox: its a feature, its pushing me to be the best self and ever-improve... yup... im sure thats their goal
+arlekin: also...
+Elarcis: icebox: oh, they proved that it's an hologram? I read they say it's likely
+arlekin: THE CAKE IS A LIE !!!!
+LIERO: hi, I&acute;m trying to reproduce a problem in plunker, but I can&acute;t get any css animations to work at all
+Pyrrhus666: THE CAKE IS A HOLOGRAM
+None
+LIERO: anyone had similar problems? o.o
+icebox: LIERO: removing animations you fix the problem :P
+None
+LIERO: well the problem I&acute;m trying to reproduce is with an animation :P
+icebox: Elarcis: &quot;The most rigorous realization of the holographic principle is the AdS/CFT correspondence by Juan Maldacena. However, J.D. Brown and Marc Henneaux had rigorously proved already in 1986...&quot;
+Elarcis: 'In a larger sense, the theory suggests that the entire universe can be seen as two-dimensional information on the cosmological horizon, the event horizon from which information may still be gathered and not lost due to the natural limitations of spacetime supporting a black hole, an observer and a given setting of these specific elements,[clarification needed] such that the three dimensions we observe are an effective description
+Elarcis: only at macroscopic scales and at low energies.'
+Elarcis: that is a hell of a long and convoluted sentence
+icebox: Elarcis: ok... not mathematical proved, but a feasible theory
+icebox: off... for a break... see you later
+arlekin: Elarcis: see ? you broke our icebox
+Elarcis: icebox: terrifying to imagine our whole universe could be the event horizon of a 4D black hole.
+arlekin: also, you know what is the best thing ever (or since sliced bread) ?
+arlekin: wireless headphones, thats what
+arlekin: i can't fathom how i lived with wired ones
+arlekin: like some animal...
+smiche: was that evergreen book free?
+None
+Elarcis: arlekin: can't wait until you lose one and don't realize it because it's not pulling on the wire
+Elarcis: arlekin: or that you lose one somewhere and can't find it at the end of the wire :D
+Elarcis: arlekin: or that they get discharged before your phone is
+rand0m: morning all :)
+Elarcis: arlekin: In a nutshell, I'm not a fan
+rand0m: wireless headphones? what about jet travel?
+None
+Elarcis: what about low cost, non-hereditary genetic engineering?
+rand0m: thats not available globally, is it/.
+rand0m: ?
+Elarcis: arlekin: AH! then you got taste
+arlekin: Elarcis: they can go on for 9 hours (of using) on one charge, which is much more than i can ever go constantly listening
+coder_2014: I want to dynamically load/unload components from my page. I've read about ComponentFactoryResolver which worked well but this won't allow me loading a set of components in a generic way where I'd need to pass attributes and listen to events. I was thinking instead adding/removing the HTML selector with its input attributes [] and event listeners (). Can anyone tell me if this last option is a good o
+coder_2014: r an horrible practice? Any other solution would be appreciated. Thanks.
+Elarcis: arlekin: thought you were talking about those by a known brand.
+rand0m: arlekin, my room mate has those
+arlekin: and about jet travel - i don't do jet travel
+Elarcis: *another known brand
+rand0m: :o
+arlekin: Elarcis: hah, you have some sense of humor after all
+geoid: Elarcis icebox yes I asked for the purpose of nested directives.. currently I've been communicating via events but it's getting really messy.
+rand0m: haven't you ever travelled by a jumbojet arlekin ?
+arlekin: rand0m: i dont think so, i went abroad by plane, but the last time was like when i was 7
+arlekin: rand0m: why is that so surprising ??
+arlekin: rand0m: in day-to-day life there is no need for air travel
+rand0m: im ignorant thats why
+arlekin: unless you hava a job that requires it
+rand0m: ummm, I used to travel on a fortnight basis because of my job
+rand0m: london to ireland and back every 15 days
+arlekin: rand0m: there you go
+rand0m: also the technology seems so fuciing awesome
+arlekin: rand0m: besides, bluetooth is forbidden on planes ? (it prolly is a stupid question)
+rand0m: nope
+rand0m: I've had my phone turned on on 2 different occasions on long haul flights
+arlekin: rand0m: then im completly confused about your jet-question in relation to wireless headphones
+rand0m: london to india and london to moscow
+arlekin: rand0m: thats some long flying
+rand0m: you said what's the next best thing since sliced bread :P
+rand0m: I said Jet Travel
+arlekin: rand0m: aaaaaaahhh
+arlekin: rand0m: now it all makes sense :D
+rand0m: it seems long flying, but the Boeing 7878 would fly all the way (london to india) in 7.5 hours
+zomg: Helsinki to NYC takes longer, annoyingly enough
+rand0m: ~8000km? not sure
+rand0m: hey zomg
+zomg: hey
+rand0m: ehhh its 8 hours no?
+zomg: yeah
+zomg: that's more than 7.5
+zomg: lol
+rand0m: Finnair 6 &middot; Airbus A330 &pound;1977 8.5 hours
+rand0m: almost &pound;2000 :o
+zomg: you can get it for around 1k at cheapest I think
+rand0m: yeah, 1/2 stop journeys are cheaper, but they are still ~18hours
+zomg: tbh the flying isn't the most annoying part of flying
+zomg: it's the airports :P
+rand0m: I don't mind any airport, unless they dont provide me concierge / business class lounge.
+rand0m: I cry myself to sleep that night.
+zomg: never work for a startup then
+zomg: :p
+None
+arlekin: finally - finished quickstart with ng2
+arlekin: its small step for everyone else and big leap for me
+zomg: yeah
+zomg: we flew OUL-:HEL-:JFK-:ORD (and ORD-:kansas city forget the airport code)
+zomg: similar trip back :P it's great fun when flights are late or delayed and then the next airport you gotta run the entire way to not miss the flight
+zomg: and of course you're in france where none of the airport employees understand a word of english
+zomg: never fly through paris
+zomg: lol
+rand0m: never been to any other european country
+rand0m: ive heard things cdg though
+zomg: yeah everyone says it's pretty much one of the worst airports :D
+rand0m: anyways...
+zomg: funnily enough the only reason we made our flight at CDG was because they had screwed up loading the cargo
+zomg: so at least something positive from their incompetence lol
+rand0m: oh shit speaking of which, brb
+rand0m: back
+rand0m: can anyone help me with my code now??
+Preuk: zomg: in France you'll only find max 20% of people able to speak english
+coder_2014: anyone knows how can I pass attributes and event listeners to a component created using the ViewContainerRef createComponent() method?
+rand0m: Omlette Du Fromage?
+zomg: Preuk: yeah, but you'd think they had some requirements on language skills for airport employees
+Preuk: i've worked with final year CS students, with 12y of english classes
+zomg: even in japan where even fewer people speak english you can expect some competence in that at the airport :P
+Preuk: can't even say 2 intelligible sentences, frightful
+Preuk: french airport staff is like dockers
+coder_2014: ?? is this an airport channel or angularjs ?
+zomg: airportjs
+coder_2014: ha, ha, ha
+coder_2014: :)
+Preuk: angular: airport edition
+rand0m: hah
+Preuk: airport workers are either overpaid overprotected specific jobs
+Preuk: or underpaid, barely legal subcontractors
+None
+rand0m: I'm finding it hard to display data on Project page
+rand0m: can anyone tell me what I'm doing wrong
+rand0m: morning Foxandxss
+Foxandxss: hello
+rand0m: so I think, my UI is not being updated properly
+Pyrrhus666: rand0m: what is the actual problem ? I see stuff on the project page ?
+rand0m: hey Pyrrhus666
+rand0m: the problem is the UI gets rendered even before the data is ready
+rand0m: when you type in a keyword
+rand0m: like jquery/angular/ass what ever
+rand0m: you see a list of projects, and you click on them
+rand0m: and you're supposed to see project details
+rand0m: I see few details, but I have a view inside the page bound to different controller
+rand0m: and that controller isn't firing my request I think#
+Pyrrhus666: which controller is that ?
+rand0m: githubProjectContentsController
+rand0m: acting on page templates/project-contents.html
+rand0m: as defined by 'projectContents@project': { templateUrl: 'templates/project-contents.html', controller: 'githubProjectContentsController' }
+Pyrrhus666: hmm. template is loaded, but not displayed. seems the route/state isn&acute;t triggered or something ?
+rand0m: yeah
+rand0m: I can't figure out why
+Pyrrhus666: where is the projectContents@project state triggered ?
+rand0m: when I add setTimeout() it works
+rand0m: in project-page
+rand0m: WAIT
+rand0m: something happened
+rand0m: it works automatically :s ?
+Pyrrhus666: I don&acute;t see the state being referenced in that page :
+rand0m: in templates/project-page.html you'll see div ui-view=&quot;projectContents&quot;:/div:
+Pyrrhus666: ctrl+f ui-view -: no hits ?
+Pyrrhus666: have you added that later ?
+Pyrrhus666: (and not saved the plunk since ?)
+rand0m: wait
+rand0m: here:
+None
+None
+Pyrrhus666: rand0m: that works. but that ui-view really was absent in the earlier plunk ;)
+rand0m: oh
+rand0m: dumb me :(
+rand0m: I was working on plunk all night
+Pyrrhus666: rand0m: happens to everybody ;)
+rand0m: this morning I worked on my local
+constructor: Can any buddy please help me out on this issue
+constructor: constructor(private authService: AuthService, private siteService: SiteService) { } when I require depencies in constructor of a service I get error
+Pyrrhus666: baako: seems to be a named view. you should have a corresponding ui-view of the same name somewhere.
+constructor:  Bootstrap at least one component before injecting Router. ; Zone: root: ; Task: Promise.then ; Value: Error: Bootstrap at least one component before
+baako: cool
+None
+rand0m: how do I use my fetchRepositoryContents to fetch different content fro different urls?
+rand0m: i.e, not as a singleton
+rand0m: Pyrrhus666, ?
+None
+Pyrrhus666: rand0m: by giving it a url as argument to the fetch method ? or implement a &acute;switchRepo&acute; method ?
+rand0m: currently I pass in a URL and it fetches content and saves it self as a properly of object
+rand0m: i.e gitHubController.myUrlResult
+rand0m: now I want to pass in another URL and get the content; but if I do that, it would again save it in the same property no?
+rand0m: OH WAIT
+rand0m: I can save my content onto scope
+rand0m: let me try
+geoid: Is there a way of getting the nearest parent controller from within a directive?
+None
+rand0m: I've updated the plunk
+Pyrrhus666: geoid: via $parent ?
+geoid: Pyrrhus666 but then you have to know the name of the parent controller property
+rand0m: when you go into search, type in a project name, select a project and go to a project page, you'll see console log
+geoid: and it has to be the immedicate parent
+geoid: I want a reference to the *nearest* parent controller without having to know it's name.
+rand0m: the data is being fetched from githubFactory.fetchRepositoryContents() and is being appended to githubFactory object
+Pyrrhus666: geoid: nearest in angular terms is immediate, right ? no matter the html.
+rand0m: im trying to figure out a way how to reuse this method and have multiple data saved onto the object
+Pyrrhus666: geoid: it&acute;s my only guess...
+geoid: Pyrrhus666 if you say so &ndash; you could be right in terms of scope... so how do I avoid needing to know the name explicitly then?
+Pyrrhus666: geoid: no idea... what are you trying to accomplish with this ?
+klex22: whats better to use now for starting a webpack project...angular-cli or angular2-webpack-starter?
+rand0m: are you going to use bootstrap klex22
+geoid: I have a component which may be re-used as a child of other directives. I'd like it to be able to access it's parent's scope so that it can write to a generic model, rather than using events which create a somewhat tangled web.
+rand0m: as in bootstrap framework
+klex22: rand0m: yes
+rand0m: are you fussed about less/scss
+rand0m: or you want to use only css
+rand0m: and also do you want to use angularui
+klex22: rand0m: not sure yet, if possible i would like to keep my chances open
+rand0m: I've had hard time configuring scss to webpack project to go hand in hand with angular and I gave  up
+Pyrrhus666: geoid: the nested component can have an output to the parent directive ?
+Pyrrhus666: geoid: (as in normal binding)
+rand0m: and angular ui's ui bootstrap uses css i think
+klex22: rand0m: did u start with some starter pack (eg. ng-cli or angular2-webpack-starter) or u did it all by yourself manually?
+rand0m: manually and starter pack
+rand0m: was not satisfied with how things were
+klex22: starter pack didnt include webpack i guess?
+None
+rand0m: aahhh
+rand0m: when you say starterpack, I was talking about yeoman generated packs
+klex22: no i ment those 2 that already include webpack
+Pyrrhus666: rand0m: you could make a factoryfactory of course ;) but why would you have more than one repo as an active object at the same time ?
+constructor: could any buddy please answer this question
+None
+rand0m: Pyrrhus666, its not about multiple repo, i need to call /branches /contents /issues , etc from single controller to get their data and display it on same page
+rand0m: klex22, no idea :s
+Pyrrhus666: rand0m: which are all properties of a single repo. so build a complete repo object in the factory ?
+klex22: rand0m: ok tnx anyway for help :)
+rand0m: you mean just have 1 call and internally the factory makes x calls to get data at once?
+rand0m: baako, could you please create a running plnk?
+Elarcis: the PM removed the workspace's settings from the CVS
+Elarcis: ...WHY.
+Elarcis: 'yeah I made the CVS ignore it _no, you removed it, and no we don't make the CVS ignore it'
+Pyrrhus6661: rand0m: or multiple function, or one with arguments telling it what to fetch, you got the power ;)
+rand0m: wh.. what was he  talking about
+rand0m: wb?
+rand0m: I'll do that, thanks P
+rand0m: Pyrrhus666,
+Pyrrhus666: Elarcis: maybe he disliked your editor preferences ;)
+Elarcis: Pyrrhus666: no, it was because of an 'invalid ts server' error due to the config file
+None
+rand0m: but why commit settings in the first place?
+Pyrrhus666: Elarcis: ah, makes sense. see an error, remove the offending files.
+Pyrrhus666: rand0m: probably so everyone uses the same ?
+arlekin: we should make little internal club here
+Pyrrhus666: arlekin: isn&acute;t it already ?
+arlekin: #hateElarcis'Boss
+rand0m: lol
+arlekin: *#hateElarcis'PM
+Pyrrhus666: ahahaha :)
+rand0m: my PM was like, USE ECLIPSE OR DIE
+rand0m: I used webstorm :P
+arlekin: or if someone does something really dumb we could call it LEP
+arlekin: 'Like Elarcis' PM'
+Pyrrhus666: we already have dicodico for that.
+rand0m: isn't there a plugin which takes care of this? can't remember the name of it
+Elarcis: when I came on the project, they were using brackets with no specific reason why, I used VSCode for myself to try it, and they liked it so much we officially switched to it
+rand0m: how different is vscode from atom?
+sakustar: yes
+rand0m: or the other IDE from facebook?
+sakustar: Elarcis: does vscode have plugins yet
+Pyrrhus666: sakustar: for a long time already
+Elarcis: sakustar: of course it does
+sakustar: long time eh
+sakustar: it wasnt that long ago when i last used it
+sakustar: :D
+arlekin: rand0m: ide from facebook ?
+rand0m: yeee
+Pyrrhus666: sakustar: so you missed ctrl+shift+p -: Extensions ;)
+rand0m: lemme get it
+Elarcis: sakustar: probably before march then
+sakustar: maybe my concept of time is warped again :(
+None
+arlekin: rand0m: lol, first i hear about it
+rand0m: seems like all IDEs are based on same codebase
+Pyrrhus666: rand0m: nah, there&acute;s two. eclipse and atom.
+Pyrrhus666: or electron ? I forget which one is at the base of that pyramid.
+arlekin: electron is the app framewok
+arlekin: *application framework
+arlekin: so to say
+Pyrrhus666: so that&acute;s the base, ok. atom is built on it. like vscode and nuclide I guess.
+arlekin: facebook is so inbreed i guess
+rand0m: electron is a wrapper
+rand0m: atom uses electron
+rand0m: yeee
+rand0m: brb
+arlekin: i just discovered there is a thing named Hack, which looks like some kind of coffeePHP
+Pyrrhus666: arlekin: it&acute;s been around a bit. php5 with more type safety &amp; shit.
+Pyrrhus666: a lot of the ideas from hack have made it into php7
+arlekin: Pyrrhus666: though it seems like everyone is moving on from php except facebook
+Pyrrhus666: arlekin: nah, php will be around for a long time. not just at facebook.
+arlekin: Pyrrhus666: prolly
+Pyrrhus666: although hack/hhvm may be superseeded by php7 now. saw some stuff along that route on hackernews.
+arlekin: i kinda dont have strong opinions since when i got into web it was already after &quot;lets ditch php / php is evil&quot; become a thing
+arlekin: but afaik you write php inside your template, and it gets rendered on the server etc...
+arlekin: right ?
+Pyrrhus666: I have no strong opinion because I got into web when php/fi wasn&acute;t even born yet and I simply see all software as tools to use :)
+Elarcis: Pyrrhus666: TypeHP
+arlekin: cuz if thats so, it gotta be as bad as ppl say
+Pyrrhus666: arlekin: yes, that&acute;s the classical view. I&acute;ve done php for years, but never mix logic with templates. it&acute;s perfectly possible.
+Pyrrhus666: arlekin: you can program badly in any language ;)
+arlekin: Pyrrhus666: well sure
+arlekin: Pyrrhus666: about never going away thing - i hear some banks still are based off of some cobol code or something
+arlekin: cause they can't afford update or something
+soee: how should angular-cli compile sass files and provide css in dev envrionment ?
+Pyrrhus666: that&acute;s becoming a myth though, most has been phased out. but itmight still be true for some.
+Pyrrhus666: on that note : this year we stopped our last application written in perl, over 12 years ago. and we are finally about to ditch our last dedicated php4 applications...
+icebox: back... :)
+bd-: 2 hours just to get ng2/cli dev enviroment running on another machine without errors
+bd-: find solution for set of errors is to downgrade typescript to 2.0.0
+bd-: but then new set of errors.. solution is to upgrade typescript to 2.0.2
+icebox: bd-: :P
+Elarcis: bd-: better solution: fire the guy who made these and build better robots!
+Foxandxss: well, bd- has all the errors for himself
+bd-: i'm starting to think that a VM dev enviroments are mandatory for any js development these days
+Foxandxss: good to have
+Elarcis: And finally, we put that trust to the test. Bam! Robots gave us six extra seconds of cooperation. Good job, robots.
+Foxandxss: I don't like them, perhaps if I were a windows user
+bd-: i'd rather not, it *should* be a simple git clone;npm install
+bd-: but no
+bd-: that never works smoothly
+Elarcis: bd-: I managed to have en env that works first try on almost all machines we used it on
+Elarcis: :D
+Foxandxss: (the CLI is not a git clone btw)
+Elarcis: bd-: proxy issues aside
+None
+bd-: Foxandxss: a project scaffolded by cli
+Foxandxss: ah
+Foxandxss: but same version of cli?
+Foxandxss: brb, lunch
+None
+bd-: i'm down to only protractor errors now
+bd-: making progress
+Elarcis: god, I really LOVE how Typescript just works, even when you don't explicitly write any type, and it still underlines real errors
+Elarcis: smart tools 3
+Elarcis: bd-: predictible that you get protractor errors, it know you're a big detractor
+Elarcis: *badum tss*
+None
+andygmb: gah, i've spent so long on this, i'm trying to get a Promise resolved in $stateprovider.state.resolve function before the controller is init'd
+None
+andygmb: i'm returning a promise which it is supposed to wait for, but it seems to not wait for it to resolve
+andygmb: or i'm missing something else
+None
+[Nord]: ...triggered when something changes
+Pyrrhus666: andygmb: when I do a resolve, the resolve function returns the promise. you&acute;re not doing that...
+andygmb: Pyrrhus666: hm, not sure what you mean
+Pyrrhus666: resolve : { user: function(UserService) { return UserService.get(); } } -- the get method itself returns a promuse
+Pyrrhus666: you return something in the promise resolution ( .then())
+None
+[Nord]: nevermind, I think I found my problem, it has nothing to do with sortable
+geoid: Apropos my earlier question of whether one can use &quot;require&quot; and &quot;controller&quot; in the same directive... how does &quot;bindToController&quot; function within that scenario?
+jcool: geoid, I might not have read your earlier messages but &quot;bindToController&quot; binds your properties to your ControllerAs variable
+Elarcis: geoid: you have to set both bindToController and scope properties of your directive
+Elarcis: geoid: one defines the bindings the other is set to true
+Elarcis: geoid: which one is what is not important
+Elarcis: geoid: yeah, I don't know why either
+geoid: lol... ok I have seen before that and wondered wtf
+Elarcis: jcool: actually not necessarily to the ControllerAs, if it's not defined it works too
+jcool: Elarcis, yeah, but I have not been able to find a better way why we define scope : {} and bind properties in another variable
+Elarcis: jcool: I have no idea, I wonder why as well cc Foxandxss
+icebox: Elarcis: he has not any angular 1 knowledge... totally remove for angular 2 one
+icebox: *removed
+Elarcis: icebox: ha
+Elarcis: HA
+Elarcis: HAHAHAHA
+icebox: Elarcis: no joke :P his answer :)
+jcool: lol
+None
+LIERO: when I change views, the sliding menu shows up on the left side
+LIERO: i tried to use ng-hide=&quot;!ismenuopen&quot; ng-show&quot;=ismenuopen&quot; on the menu directive and then add ng-click=&quot;ismenuopen = !ismenuopen&quot; to the button that toggles the menu
+LIERO: but that breaks the menu sliding animation
+LIERO: is there anyway I can delay the animation after ng-show becomes true?
+geoid: If I am using &quot;require:'^someController&quot; and &quot;controller:'myController'&quot; properties in a directive, how do I access &quot;someController&quot; from within &quot;myController&quot;?
+geoid: that was question (1). Question (2) is: how do I access both &quot;someController&quot; and &quot;myController&quot; from the link function?
+Pyrrhus666: LIERO: I don&acute;t understand your issue ? if I click on view 2 after the initial animation finishes, I don&acute;t see a menu appear ?
+None
+andygmb: but if I just do {{ $ctrl.mappedSection }} it shows the map object fine
+jcool: geoid, whenever you require any controller, that will appear on 4th argument of link function
+icebox: geoid: does the link I suggested a few hours ago give a few hints?
+geoid: icebox it does but not in that combination... i.e. being able to access both &quot;require&quot; anc &quot;controller&quot; controllers from within the link function
+LIERO: Pyrrhus666, I didn&acute;t put in on the second view
+geoid: *and not *anc
+LIERO: just click on the first view again
+LIERO: it just shows up on the left side as view 1 slides in from the right of the screen
+LIERO: i don&acute;t want it to be visible in the view transition animation
+Pyrrhus666: andygmb: you&acute;re still not returning a promise. you&acute;re still resolving the promise on return.
+icebox: geoid: really I should try it
+andygmb: where, in the Promise.all(promises).then() part?
+andygmb: is it the then() that's the issue?
+Pyrrhus666: andygmb: yes
+None
+Pyrrhus666: icebox: bingo ! :)
+icebox: Pyrrhus666: :P
+andygmb: dane
+andygmb: danke*
+icebox: andygmb: bitte
+Pyrrhus666: sch&ouml;n
+Foxandxss: Elarcis: whats the problem?
+Preuk: thx icebox i had lost the link, bookmarking again :)
+Elarcis: Foxandxss: nah, an interrogation, really
+Pyrrhus666: LIERO: you mean the (very fast) &acute;away&acute;animation off the left side ? that also happens when switching from 2 to 1
+LIERO: no
+LIERO: when you go from 2 to 1, you see that black thing
+LIERO: that /was supposed/ to be the menu, but it illustrates the problem all the same
+LIERO: in view 1, if you click the button, it opens it
+geoid: icebox ok I see one can include the local directive's controller within require also... didn't realise that!
+None
+icebox: geoid: nice
+geoid: icebox although that is confusing when the child directive has a scope of false... in which case we have two controllers with the same scope &ndash;&nbsp;am I right?
+None
+Pyrrhus666: andygmb: that, or maybe just return the promises.all() ? (never done that though
+geoid: icebox thank you... amazing link!
+icebox: geoid: you are welcome
+Pyrrhus666: icebox is the amazing link collector and dispenser around here :)
+rand0m: fawk, i need to lose some weight and exercise
+None
+jcool: icebox, can you please share your bookmarks ? :)
+icebox: jcool: ngirc.js.org
+None
+None
+icebox: Pyrrhus666: you can contribute if you don't like it :)
+Pyrrhus666: icebox: I know ;) I just thought the links would be on ngirc.js.org, not yet another site ?
+Pyrrhus666: I was confused by the external links.
+icebox: Pyrrhus666: agreed... in gh-pages md docs render only in the wiki
+icebox: Pyrrhus666: if you have an alternate solution, it is welcome
+None
+Pyrrhus666: icebox: I&acute;m very unacquainted with everything github, don&acute;t know if I could be of use...
+None
+icebox: Pyrrhus666: up to us if we prefer readthedocs or wiki github
+nishu-tryinghard: yearofmoo? is that your blog icebox
+icebox: nishu-tryinghard: I have no blog :)
+None
+icebox: Pyrrhus666: define &quot;like that&quot;
+icebox: Pyrrhus666: understood
+jcool: icebox, github pages hosting?
+icebox: Pyrrhus666: I don't know if we set a custom domain for wiki page
+icebox: Pyrrhus666: I mean, it is possible, but I don't know if dns.js.org policy allows it
+Pyrrhus666: icebox: I has the idea that in response to questions we could easily link to sections with urls as short as possible.
+jcool: something like name:.github.io
+Pyrrhus666: s/has/had/
+icebox: jcool: we did that
+None
+jcool: icebox, oh :)
+icebox: Pyrrhus666: example?
+None
+None
+icebox: Pyrrhus666: ok... github doesn't render md pages :)
+None
+icebox: Pyrrhus666: we should appreciate actually we just push a commit to add a change :)
+nishu-tryinghard: give me your opinion or tell me why use write tests or why not
+icebox: Pyrrhus666: in your configuration you need a build workflow :)
+nishu-tryinghard: you write*
+None
+Pyrrhus666: icebox: what do you mean &acute;push a commit to add a change&acute; ? -- git n00b (and can&acute;t that simply be a html page called &acute;1&acute; ?)
+nishu-tryinghard: &quot;before you even wrote the damn thing!&quot; i though we write tests after we are done coding
+icebox: Pyrrhus666: the requirement is using md format
+runtyrobot: I have an ng-click function, in an ng-repeat - which removes the user (via json) -- how do I remove it from the array/object being parsed in ng-repeat, so it doesn't appear on the list anymore?
+icebox: Pyrrhus666: when you push the commit to ng-irc repo, automagically you see the change in readthedocs
+icebox: Pyrrhus666: using gh-pages it is possible what you say, but you need to play with jekyll setup
+Pyrrhus666: icebox: ah, ok, I sort of understand :)
+nishu-tryinghard: runtyrobot, your can use array methods like splice to remove that index
+runtyrobot: nishu-tryinghard: I'll give it a shot - thanks :)
+icebox: Pyrrhus666: of course, I may be wrong and there is an alternate solution :)
+icebox: Pyrrhus666: the point is... we are open to change when we want :)
+icebox: Pyrrhus666: in the meantime we collect the content
+rand0m: Pyrrhus666, $q.defer(); needs to be re-instantiated everytime I make a call with different parameters. If I don't ,I don't get the data I expect to get
+rand0m: how do I go on about doing that
+icebox: rand0m: behaviour expected
+Pyrrhus666: rand0m: logical. a new promise, a new call, new data.
+rand0m: ahhhhh
+icebox: rand0m: when a promise is resolved (or rejected) is done :)
+Pyrrhus666: and maybe a new dawn ? new hope ? i dunno.
+bd-: why doesn't angular-cli expose any webpack configuration
+rand0m: But I don't want new ones
+Pyrrhus666: rand0m: a promise once resolved is done.
+Pyrrhus666: how poetic/
+None
+icebox: Pyrrhus666: said that two lines before :)
+rand0m: let me update my plnk so its easier to understand
+Pyrrhus666: icebox: haha. hadn&acute;t noticed :) but the ( and ) make it less poetic ;)
+icebox: Pyrrhus666: agreed
+icebox: rand0m: that code seems correct
+None
+icebox: rand0m: every time you call fetchRepositoryContents, a new deferred object is created
+rand0m: in project info controller, Im calling the fetchrepocontents method with different parameters
+icebox: rand0m: (generally speaking, always use .then.catch instead of .(success, failure) )
+icebox: rand0m: ok... it seems ok to me
+rand0m: Im expecting the factory to get the contents and save it in factory's accessKey.data property
+rand0m: but when I run the code I only see 1 call's data
+rand0m: either branch or content, but not both
+icebox: rand0m: no idea.. but from a point a view of the promise is ok
+nishu-tryinghard: rand0m, also in success it does save it &quot;factory.requests[requestObject.accessKey].data = data;&quot;
+rand0m: yeah
+rand0m: line 52 factory.requests[requestObject.accessKey].data = data;
+nishu-tryinghard: so the doesnt store as intended ?
+nishu-tryinghard: it*
+None
+Pyrrhus666: rand0m: you clear that factory.request object on each invocation...
+rand0m: I'm making 2 calls from one controller, I expect 2 requestObjects in factory.requests
+rand0m: then that would defeat the purpose :(
+rand0m: I use the same object to feed content to ui
+icebox: rand0m: check with devtools... but it doesn't seem a promise issue
+Pyrrhus666: rand0m: so why do you clear it on each invocation ?
+rand0m: it points out that  the error is           frcDeferred.resolve(data);
+icebox: rand0m: error?
+rand0m: I think that for each request the frcDeferred var should be differnet
+rand0m: icebox TypeError: Cannot set property 'data' of undefined at githubFactory.js:52
+icebox: rand0m: you are mixing a bit the things :)
+rand0m: oh crap
+rand0m: line 52 is factory.requests[requestObject.accessKey].data = data;
+Pyrrhus666: the things mixing a bit, you are...
+Pyrrhus666: sorry.
+rand0m: eh :s
+nishu-tryinghard: if thats the issue maybe there is no such key as data so you use [] instead of . notation or maybe there is not key with &quot;requestObject.accessKey&quot;. And if you are expecting 2 requestObject then dont clear them like Pyrrhus666 pointed it out
+nishu-tryinghard: But there should be &quot;requestObject.accessKey&quot; so maybe the data key is the only one missing which throws that undefined error
+rand0m: phew
+rand0m: my bad
+nishu-tryinghard: icebox, and Pyrrhus666 do you write tests?
+rand0m: you are right icebox Pyrrhus666
+rand0m: I was mixing things up
+Pyrrhus666: nishu-tryinghard: nope. I think I should though.
+rand0m: and yes I was clearing requests object
+zomg: if you need help with tests just ask me =)
+rand0m: i should've moved it to top
+nishu-tryinghard: zomg, tell me all about it :)
+Pyrrhus666: zomg: just point them to that article ;)
+rand0m: teach me like one of your finnish girls zomg  :P
+rand0m: \/titanic joke
+nishu-tryinghard: or like a 5 year old finnish girl FTFY
+rand0m: :|
+rand0m: brb
+Pyrrhus666: nishu-tryinghard: if we were in the US, you&acute;d have the fbi knocking on your door now ;)
+None
+zomg: I've written basically everything there is to say about unit tests there
+zomg: lol
+zomg: (ok maybe not *everything* but a lot)
+nishu-tryinghard: zomg, iam reading that article right now
+nishu-tryinghard: Pyrrhus666, And say &quot;Like a 5 year old FTFY&quot;?
+Elarcis: zomg: you're a unit testing expert :3
+zomg: assert.equals(true, aboveStatement)
+nishu-tryinghard: thats the only thing which comes to my mind when i think about testing
+Pyrrhus666: nishu-tryinghard: even mentioning 5 yo girls is cause for concern for some ;)
+Elarcis: zomg: aaah, you didn't specify an assertion message!
+nishu-tryinghard: i was correct rand0m :p
+nishu-tryinghard: correcting*
+Pyrrhus666: nishu-tryinghard: (as in the 2 main arguments for anything security related these days : terrorism and child porn. and me mentioning that probably dooms me)
+zomg: Elarcis: I think they're unnecessary usually, only if the assertion requires more informative output :)
+Elarcis: oh, PragmataPro has been updated its ligatures, they're no way better handled by VSCode 3
+Elarcis: *now way
+Pyrrhus666: Elarcis: was there a problem with vscode then ? hadn&acute;t noticed...
+rand0m: yes
+Elarcis: Pyrrhus666: it treated the ligatures as a single char, so the cursor could only be on the left or on the right
+zomg: I recommend investing in a VPN :P
+Elarcis: Pyrrhus666: even when you were editing the middle char
+zomg: I got busted by copyright trolls for piracy because I forgot to turn off seeding in utorrent
+Pyrrhus666: Elarcis: ah, IC.
+zomg: so now I have a VPN, fuck them.
+Elarcis: Pyrrhus666: ICQ
+Pyrrhus666: Elarcis: I still have that, I think
+zomg: VPNs are also good for other kinds of security issues besides that =)
+Pyrrhus666: zomg: I&acute;m using a vpn since our government told isp&acute;s to keep big logs on everything their customers do. fuck that.
+kegster: is there an official way to override a template in angular that's from a module? specifically, i'm tryin to override a small template inside ui-grid
+Pyrrhus666: pity nteflix&acute; reloction doesn&acute;t work anymore though.
+nishu-tryinghard: zomg, do you write test to write your test? and ....
+Pyrrhus666: *netflix relocation
+nishu-tryinghard: test to test your tests, testception! zomg
+zomg: Pyrrhus666: it works sometimes.. you just need to find the endpoint which they don't detect :P
+zomg: I managed to get it working once with tunnelbear, but I suspect they're pretty quick to update their IP blacklists
+Pyrrhus666: zomg: my vpn provider has none left.
+Pyrrhus666: zomg: I used borderless internet for a while, but that&acute;s gone too.
+Pyrrhus666: srsly thinking of quitting netflix and downloading (even though I&acute;ve never really done that)
+Elarcis: kegster: I suppose not
+Pyrrhus666: kegster: doesn&acute;t ui-grid allow for custom templates at some level ? I know ui-bootstrap does...
+None
+coder_2014: anyone knows how can I add an event listener to a dynamically created component?
+icebox: coder_2014: what do you mean?
+coder_2014: I'm dynamically creating components using ViewContainerRef.createComponent() and I now want to bind events as I used to do when I created the selector and the curved brackets
+coder_2014: I used to do icebox (hello)=&quot;alert()&quot;:/icebox:
+coder_2014: but now I'm creating the component dynamically based on some pre-loaded config
+coder_2014: and I still need this component to listen the &quot;hello&quot; event
+coder_2014: note: which is thrown by its child
+coder_2014: :)
+icebox: coder_2014: is that html in the template of the component created dynamically?
+coder_2014: well this component apart of listening to events it also receive attributes, but that's an other story
+icebox: coder_2014: template: `div class=&quot;open-button&quot; (click)='openDialogBox()':Open dialog box/div: `, and click works
+coder_2014: other than that the html is static
+icebox: coder_2014: do you mean that event doesn't work if the component is created dynamically?
+coder_2014: exactly, because I haven't defined the listener
+icebox: coder_2014: but it works if it is stati
+icebox: coder_2014: *static
+rangu: Hello guys
+coder_2014: not sure if we're talking about the same thing
+rangu: I have a question mainly related to frontend.
+icebox: coder_2014: agreed
+coder_2014: I miss the (onEventListen) part when I create the componeny dynamically
+rangu: I have two select boxes, dynamically loaded. One is larger than the other. How do I set them to have the same width?
+icebox: coder_2014: my point is... if the component is not created dynamically does it work correctly?
+coder_2014: yes
+coder_2014: it is
+coder_2014: but when I create it dynamically the event binding part is not there
+icebox: coder_2014: ok... it seems wierdly to me... because the example I gave you it is inside a component created dynamically and it works
+coder_2014: you've shown me a div
+coder_2014: I'm talking about a custom component
+icebox: coder_2014: you too :)
+coder_2014: ?
+coder_2014: I said icebox
+coder_2014: mycustomcomponent
+icebox: coder_2014: and I asked if it was part of the template that html
+coder_2014: this HTML tag mycustomcomponent (onListenEvent)=&quot;alert('a');&quot;:/mycustomcomponent: is placed inside the app.component.html
+icebox: coder_2014: I don't see any diff in term of events... you mean the diff is that custom component is not yet created
+coder_2014: and inside app.component.ts I'm dybamically creating mycustomcomponent
+coder_2014: so I'm trying now to write the equivalent to (onListenEvent) when creating the component on demand
+icebox: coder_2014: so... the point is not about the event... but it is about the order of instance creation in nested components
+coder_2014: mmm
+icebox: coder_2014: ok... no problem... I give up... sorry for the confusion
+coder_2014: well, the only component I'm creating is mycustomcomponent: here, app.component is the boostrap one, it's not dynamically created
+coder_2014: no, maybe it's me that is confused
+coder_2014: or I'm not explaining correctly
+icebox: coder_2014: ten lines of code are better than thousand of words
+coder_2014: okay, let me try to put it all together
+None
+coder_2014: not sure if it's going to make sense now
+coder_2014: I've read about using the this.renderer.listen() but not sure if this is the approach to follow and I couldn't actually make it working
+icebox: coder_2014: sorry... no idea
+coder_2014: no probs
+coder_2014: thanks
+ifaboss: Hello guys
+ifaboss: I need tips
+icebox: ifaboss: don't ask to ask... just ask
+ifaboss: icebox again haha :d still I have problem with http - https
+ifaboss: something was change and it not work now
+ifaboss: I don't know I'm not programmer or something I need just help
+icebox: ifaboss: same problem?
+None
+icebox: ifaboss: ok... but here #angularjs... not #yournetworking
+ifaboss: and anyone here
+ifaboss: cant help me?
+ifaboss: ya?
+icebox: ifaboss: what was the result of your request when you asked it in the past in this channel?
+icebox: ifaboss: because I remember people helped you... what was the conclusion?
+ifaboss: but when I change my script
+ifaboss: was http on https
+ifaboss: and it start robbing
+ifaboss: but when he need take energy from nightclub
+None
+ifaboss: is it
+icebox: ifaboss: is angular issue?
+ifaboss: don't know what is it mate
+ifaboss: angular team create it for me
+icebox: ifaboss: ah ok... you requested it in a random channel :)
+ifaboss: but he don't answer now cause he's off
+ifaboss: hard working
+ifaboss: aaa ok ice
+ifaboss: I didn't know :)
+icebox: ifaboss: angular team what?
+ifaboss: nothing done
+ifaboss: That last one is what's happening here. The browser is blocking access from the HTTPS script to the HTTP server. You need to fix the javascript on your page to access the HTTPS version on the server. Literally a single-character fix, but you need to find where that problem exists. You say you replaced them all, but you missed at least one. Both Firefox and Chrome have debugging tools in them. Both should tell you where in your co
+ifaboss: I need remove something from my scrip
+ifaboss: but don't know what
+Pyrrhus666: icebox: someone supposedly from the channel helped him create a little angular app that helps him cheat at games. the games was updated and his cheat broke. that is all.
+zomg: lol
+icebox: Pyrrhus666: ah...
+ifaboss: pyrrhus you are strange really
+Pyrrhus666: he was around yesterday. different nick, same urls.
+icebox: Pyrrhus666: yes, I remember
+zomg: wait I wonder if it's the same guy who tried to haxor imvu
+icebox: Pyrrhus666: I didn't follow that thread
+zomg: there was someone trying to inject html and scripts into imvu a couple weeks back on ##javascript iirc...
+None
+Pyrrhus666: have a good weekend peeps. I&acute;m off !
+None
+icebox: Pyrrhus666: ciao
+rand0m: bye Pyrrhus666
+icebox: rand0m: I am sure you can work out that :P
+icebox: off... bye
+rand0m: hmmm
+icebox: rand0m: come on :P
+rand0m: I do have a model set
+rand0m: in my controller all I have to do is set the model value
+rand0m: thats what i've done til lnow
+rand0m: till now*
+icebox: rand0m: it seems correct to me that approach... but I think it is missing something
+rand0m: whats missing :s
+icebox: rand0m: read that post and you know it
+icebox: :P
+icebox: really off
+rand0m: it says that I need to manually set $scope.selectedItem = $scope.items[0];
+rand0m: to get value
+rand0m: but I dont want that :s
+rand0m: dang he left
+None
+rand0m: hmm doesnt work on my local
+Aftab: Hello Everyone, I want to ask a question if someone can answer
+geoid: why does my ng-click call stop working when I change my directive scope from &quot;true&quot; to {}? And how can I get it to work again?
+rand0m: geoid
+geoid: yes?
+rand0m: what do you mean
+geoid: I mean I have a directive like my-directive ng-click=&quot;md.clicker()&quot;:/mydirective: defined as directive={scope:true, controllerAs: 'md',controller: function(scope){ scope.clicker = function(){ doSomething; }}
+geoid: if I change from scope: true to scope: {} then the ng-click stops working.
+rand0m: ah
+rand0m: arent you making scope empty by declaring scope: {} ?
+geoid: yes
+geoid: question is how do I keep the ng-click working with an isolate scope?
+geoid: can put whatever into scope object if you think it will help?
+rand0m: do you need to do scope : {}
+geoid: no but it needs to be an object
+geoid: doesn't have to be an empty object
+geoid: so could be scope: {somestuff: '='} etc.
+rand0m: yes you could do the = one
+rand0m: here's an example
+None
+rand0m: with =
+geoid: but what if my click is not inside the template?
+geoid: like in my example
+geoid: where the ng-click is on the same element as the directive attribute.
+rand0m: hmm, I think you should use &amp;
+rand0m: I havent tried it myself
+None
+tkdaj: Is this the room the talk about angular 2 or is there a specific room for that?
+geoid: use &amp; on what?
+rand0m: there is a room, but I dont know the link , sorry :(
+rand0m: scope: { ng-click: &quot;&amp;&quot; } ?
+geoid: no that doesn't work
+geoid: that was my first guess too but it doesn't work
+rand0m: ok then instead of doing scope: {}
+rand0m: remove the whole scope attribute
+rand0m: and if you're using a link function
+rand0m: then use scope.clicker() { ... }
+rand0m: that should work?
+geoid: but I need scope:{}
+rand0m: hmm, leave scope: {} and try again then
+rand0m: i mean type in scope: {} and use link functions scope.clicker
+None
+GitGud: hi
+GitGud: in a $scope if i declare a var do i need to null it out on $scope destroy?
+GitGud: like when i come out of said $scope to another $scope for example
+mst: eh?
+mst: GitGud: javascript is garbage collected. angular is just javascript.
+mst: GitGud: if that doesn't answer your question, please describe what you're doing in more detail
+GitGud: i think it does but just to be sure
+rand0m: geoid, what is that supposed to do
+None
+geoid: click the number
+GitGud: so i have say home, profile, about tabs. and they each have they own $scope. so im in home tab $scope and a var is declared. say var something = &quot;someshit&quot;; (not scope variable). and then user clicks on profile tab and switches to that $scope. is the var something garbage collected? mst
+None
+GitGud: because i know $scope variables get removed and collected automatically. but im not sure if the same is happening for just var inside $scopes
+geoid: GitGud yes they will
+geoid: a scope is a scope :)
+rand0m: wait a second
+rand0m: geoid, you want ngclick on your directive right?
+GitGud: ok thank you geoid
+rand0m: but your directive is replaced by the template being passed
+rand0m: why not add ngclick to template being passed directly?
+geoid: um.. what?
+geoid: oh... I can't
+rand0m: why??
+rand0m: like this
+rand0m: template: 'div ng-click=&quot;hello()&quot;:child:      strong:{{ current }}/strong:/child:/div:'
+rand0m: thats working :/
+geoid: This is just an example but in the real world I need the ng-click not to be defined in this template
+geoid: or do I... let me think about that a bit.
+rand0m: me too
+rand0m: don't think we can use ngclick on directive directly :s
+rand0m: not sure though
+rand0m: you can use a new attribute on-click=&quot;myfun()&quot;
+rand0m: then use on-click attribute to get the function and run it
+None
+geoid: rand0m that page assumes one has jQuery strapped in.
+geoid: which we don't
+geoid: anyhow, moving the ng-click into the template worked for me... so thanks!
+rand0m: np :)
+rand0m: hang around when others pop by and they may give you a better answer
+None
+geoid: although I don't understand the notation used :-/
+geoid: must be ecma6
+rand0m: ok hang on
+rand0m: let me simplify
+None
+jcool: geoid, on mission to achieve something? :)
+rand0m: simple as pie
+geoid: but actually that's cheating... he just moved the click function into the controller
+rand0m: ye
+rand0m: thats where its supposed to be
+rand0m: $scope.current = 1 in main controller
+rand0m: and in directive, he's passing current to template so it renders out whatever the value it has
+rand0m: in this case would be 1
+rand0m: and when you click the element, the increment begins and binding gets updated
+geoid: no.. it's really not where it's supposed to be.. not for what I'm trying to do.
+geoid: I need this directive to work as a component... it's no good to me if I have to define the click function in every view's controller that happens to make use of this directive.
+geoid: I want it to be self-contained.
+geoid: jcool aye!
+rand0m: wb
+None
+ngbot: angular.js/v1.5.x 3fe2f4c Martin Staffa: test($compile): fix tplrt tests for templateUrl
+rangu: Hello guys
+rangu: I have a question regarding to Angular-Angular 2.
+drej: Angular^2
+rangu: What? drej
+gho5t_: Angular^(1x2)
+drej: BEDMAS son
+rand0m: BODMAS
+proudmonkey: Hi all, I'm here to ask if where can we get an Angular sticker for laptop?
+drej: probably the internet
+proudmonkey: is there an official one?
+None
+proudmonkey: thank you sir!
+gho5t_: now just to warn you - you will not be able to pick up more chics with it
+ARandomFurry: [TypeScript, Angular 2.0.2]; I have an array of windows and I want each window to have it's own router-output: tag. I'm lost on how to set up my routes, and the examples I find are either a different router version, or not doing what I'm doing.
+ARandomFurry: Each window is just a component, not a route.
+wrkrcoop: anyone ever used backbone? what do u thinK? might have to use it @ work
+Germanaz0: Hello everybody, somebody using angular material? is there any way to add open animations ?
+jrozner: Is there a way to attach a function to a binding so that when it changes on the frontend it runs it transforms it one way and when it's updated in the controller is transforms it a way for the UI?
+rand0m: sorry Germanaz0 no idea mate :(
+Germanaz0: thanks @rand0m
+rand0m: when you say open animations
+rand0m: what do you mean
+None
+rand0m: here's something I threw up

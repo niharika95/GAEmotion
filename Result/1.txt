@@ -1,0 +1,125 @@
+zomg: Foxandxss: hey :)
+Foxandxss: hey
+dogmatic69: Is it possible to use Observables as a source of constantly updated data?
+dogmatic69: like say I want to display the current temperature on a page and I have some api service sending an update temperature periodically
+nettly: hi!
+nettly: I want to wrap an html element around an angularjs directive
+nettly: but when I do that, only the empty directive dummy elements are wrapped, not the actual html output from them
+zomg: dogmatic69: sure, you would just wire the observable's source into whatever the source for that data is
+zomg: nettly: just put the wrapping element into the template for your directive?
+dogmatic69: zomg: I guess what I want is 1/2 a chat room, eg: only recieve messages, but instant / live
+zomg: you could use websockets for that
+nettly: zomg: it doesn't work :/ the &quot;dummy elements&quot;, the directive ones are wrapped then - not the generated html/elements
+nettly: hm, anyone an idea?
+nettly: I mean, this is an interesting question, right?
+nettly: for css and such I need to wrap around some angular js directive &quot;elements&quot; a normal html div
+nettly: when I do this, the div wraps around those directive elements -but not around the resulting html markup - this would be below
+dogmatic69: Any idea why as soon as I add my new component / custom tag I get &quot;template parse error&quot;?
+dogmatic69: I am using this: dash-header:/dash-header:
+None
+dogmatic69: super simple :(
+dogmatic69: found it, was missing from the NgModule declarations
+NMICA: Hi, is there any way to deploy angular2 application on wildfly(jboss) server
+zomg: NMICA: angular is a client side library, you can deploy it on your vacuum cleaner provided it serves websites
+zomg: lol maybe I should try doing that because my vacuum cleaner does in fact run windows...
+ThusSpakeHarambe: so currently building an app for a new product with angular 2, something we're going to be supporting for a long time, im really liking it, it was super easy to get the hang of and the ability to nest declarative loading of modules with the router is pretty sweet, does require a bit of workflow setup to really get going with it and the embedding css in my
+ThusSpakeHarambe: components was kind of weird, but i just automate the actual embedding part and keep everything separate still, recommend checking it out if you've been hesitant
+zomg: I like your nick
+zomg: lol
+NMICA: I like you idea to run angular2 on vacuum cleaner LOL
+None
+pepee: can you do progressive enhancement with angular?
+nishu-tryinghard: start using Type script or stick with JS ?
+nishu-tryinghard: are most of the librariers in typescript for angular 2? even if thats the case is it easy to use them with ES6
+heartburn: any transpiler language = technical debt in a couple years, if not earlier.
+heartburn: this shit comes and goes, it solves some old, well-known problems and adds fresh new ones, it divides the community, makes you bound to the certain set of options within the ecosystems, and leads to stagnation.
+heartburn: stick with js, nishu-tryinghard. be normal.
+nishu-tryinghard: heartburn, so stick with es6?
+heartburn: yes
+nishu-tryinghard: hope there is a way to get the TS libraries work with angular 2(JS)
+nishu-tryinghard: i mean there will be but at what cost
+heartburn: third-party stuff is delivered precompiled to js.
+heartburn: if it isn't you shouldn't use, because the author is a moron.
+heartburn: s/delivered/shipped/ probably
+nishu-tryinghard: heartburn, not cool that angular official website has no tutorial in javascript at present.
+heartburn: sucks, doesn't it?
+pps: i cnt able to downlode angularjs.....can any one suggest me hw to downlode?
+heartburn: npm i -S angular
+anth0ny_: I&rsquo;d like to create a check that can be easily applied to any method of a class. This check would determine if a user is logged in, and if not show the login form (and then run the method if login completes successfully). In Python, I&rsquo;d create a decorator to wrap a method. In Angular2 with TypeScript, it seems like decorators are a bit different (I often read that they&rsquo;re about applying &ldquo;metadata&rdquo;). Is this an incorrect usage of a decora
+anth0ny_: in Angular2?
+beat25: hi ladies and gents, i got a question for y'all about whether to use a class or just work with services. Let's assume I have a list of entries in my view. All those entries have buttons that perform actions. Now do i just bind that button to a service and pass along the id of the entry? Or do I create a list of instanced entry classes and bind each button to the class function?
+mdk: beat25: if you use service, will you be able to keep then stateless?
+XaroRSA: Is it possible to have a select store a dynamic object value?
+XaroRSA: i am using a select field with ng-options like this
+XaroRSA: ng-options=&quot;key for (key , value) in ctrl.panel.steelseries.PointerType&quot;
+XaroRSA: but the value must be ''Steelseries.PointerType[&quot;TYPE1&quot;]&quot; when it saves
+Foxandxss: yo
+v0j: morning everyone...
+v0j: what's diff from importable Observable from rxjs vs rxjs/Observable? thanks
+NTrash: Anyone know any great sources to really learn angular2?
+lnaia: have done the starter guide from beginning to the end?
+None
+NTrash: Definitely gonna get into that uru, thanks a bunch
+uru: NTrash: Glad to help. I would start with the offical docs though, as they are quite comprehensive and should be more than enough to get you started
+DirectiveScopeQu: In a directive, is there any way to both get access to the directive's tag elements (using an isolated scope?), while still getting a scope object that inherits from $rootScope ? So, in a way, make it so the scope passed to Directive is a &quot;merge&quot; of the isolated scope + rootscope ?
+None
+Docmarten: I have multiple promises all firing at once qith a $q.all([promise1(), promise2(), promise3()...]).then function( ... ).  Once they are all done I process the results which are then populated into my template.  However some of those promises are taking much longer to return than others...thus is there a method I can use that will fire all the promises at once and begin to populate the template
+Docmarten: AS they return versus all at once?  The reason is to get content loaded into the template and not have to wait on the promises that are taking (significantly) longer to return.
+nettly: hi
+nettly: glad here is a nice channel for angular
+nettly: anyone here?
+nettly: cheer for me!
+Docmarten: not many...usually not on the weekend.
+nettly: Docmarten: right :D but I will still try!
+nettly: Docmarten: and at least you are here
+nettly: So I want to wrap angular directive elements into normal div elements - but when I try that, those divs wrap around those directive elements, but not around the rendered html elements - they are below instead.
+nettly: any &quot;easy&quot; way doing that? I need to wrap them because there is no alternative to it in css or html.
+Docmarten: post a sample
+None
+nettly: Docmarten: and it is rendered like that div class=&quot;wrapper&quot;:ion tab.../div: - and below the actual html markup is seen. This also means that the wrapper doesn't wrap around the real elements and is useless.
+Docmarten: yeah, using ionic I don't think you can do that.  because the &quot;tabs&quot; are part of a higher ordering mechanism so when you add your wrappers around the tab headings, its pulling the tabs info up but not your wrappers.
+Docmarten: why are you trying to wrap the tabs?  what is it you are trying to accomplish?
+nettly: Docmarten: right, so I want that the tabs wrap over (multirow) when the available screen width is not sufficient.
+nettly: Docmarten: I can do this with flex-flow and that - but it would not wrap in equal columns. I cannot do this with css - so I use a div wrap.
+nettly: so when I put a wrapper around the tabs, I can easily control that they wrap all together and not just not some items...
+Docmarten: you need to create a controller for your tab headings then.  I assume you are using ionic's tab starter template?
+nettly: yes
+Docmarten: I believe what you are looking to do needs to be controlled from &quot;tabs.html&quot;...thats the root of the higher ordering.  and you can create your own classes that you can control from a .controller('TabsCtrl') in your controllers.js file
+Docmarten: remember, any html template can have its own controller/services and directives...so you can control the master tabs.html the same way
+Docmarten: I too am using ionic tabs, and I am doing similar things with my &quot;tabs.html&quot;
+nettly: Docmarten: also for multirow? :)
+Docmarten: don't know, haven't needed to try that, but I would assume so.
+nettly: Docmarten: how can I get the tabs to bottom? I always have them on top. But many apps have these tab icons at the bottom instead.
+nettly: Docmarten: I don't even know how the tab icons are injected - because then I could wrap them into a footer bar element and force them to bottom.
+Docmarten:  ion-tabs class=&quot;tabs-icon-bottom tabs-bottom ...&quot;:
+Docmarten: starting line of your tabs.html file
+Docmarten: ionic injects the icons using class:  ion-tab class=&quot;icon&quot; icon=&quot;ion-icon-name custom-ion-class&quot; ... :
+Docmarten: nettly: there is easy and extensive help on these subjects that have real world examples to play with.
+Docmarten: ..at ionic site
+nettly: Docmarten: awesome! the tabs-icon-bottom tabs-bottom thing works nice on my Desktop browse and iPhone - but not on the (quite cheap) android tablet - there the tabs are still at the top :O
+Docmarten: there are other methods and special cases you can read about on the ionic support site
+map_reduce: good day
+map_reduce: does anyone know of fix for latest ng-cli issue?
+nettly: map_reduce: that would be?
+None
+nettly: map_reduce: hm, my first thought/reaction would be just downgrading to a known working version of it
+soee: with ui-router, can we have some states that are the same but url might differ based on user profile data ?
+XaroRSA: When I have a object as the value of my select input
+XaroRSA: how can i have the initial value display the key : value on initial state?
+rand0m: XaroRSA, can you please explain
+XaroRSA: rand0m im checking a youtube video quickly that goes over 'initial' select problems, ill brb
+rand0m: ok take your time
+XaroRSA: ok nevermind this guy hacking it
+XaroRSA: rand0m lol got it right with track by !
+XaroRSA: score!
+rand0m: nice :)
+XaroRSA: but lucky guess thou
+XaroRSA: didn't really understand it
+XaroRSA: need to follow up
+XaroRSA: could this be made shorter or better? ng-options=&quot;key as key for (key, value) in ctrl.panel.steelseriesme.LcdColor&quot;
+XaroRSA: seems like alota keys
+umar: what is angularjs 1 release date?
+soee: 2013 i think
+soee: with ui-router, can i have both at the same time: state with url / and state that will match any string ?
+sandy: Are response interceptors put to greater use apart from the monitoring activity?
+TimStephenson: Hey quick question -: I am getting this error &quot;node_modules\ng2-chartjs2\index.js does not export ChartComponent&quot;, are there any guides for how to convert packages to the new Angular 2 form for importing them?

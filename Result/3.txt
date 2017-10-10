@@ -1,0 +1,942 @@
+VincentAdultmon: zomg: err.. Typescript haas been around for ages now
+Wallcraft: Hi all!
+amir_: hello
+Wallcraft: i have to access to an object inside a JSON response called soap:env
+Wallcraft: how i can access it?
+None
+zomg: VincentAdultmon: yes and the implementation was always built on node :P
+Elarcis: Hi!
+Elarcis: Hi icebox, sorry I wanted to contribute to the repo this week-end, but I just felt like a slug the whole two days
+icebox: Elarcis: hey... no problem :)
+Elarcis: :D
+None
+icebox: Elarcis: it seems, after a few iterations, vscode is better than atom
+Elarcis: icebox: it's been way faster for a while now, and I've always thought VSCode's handling of JS was better, but yeah they're slowly getting better and better
+icebox: Elarcis: agreed... also in terms of electron versions... 1.3.7 :)
+Elarcis: icebox: i.e. I was never able to have a simple 'go to declaration' in Atom
+Elarcis: icebox: I have no idea what it changes, honestly
+icebox: Elarcis: well... chrome from 49 to 52 and nodejs 6.5.0
+Elarcis: oh ah
+icebox: Elarcis: really I don't understand the empasse in atom development
+smiche: how do you people decide what to do on server and what on client? can someone help me with my decision :D?
+None
+Elarcis: I don't know what the Atom team works on at each update, but I like VSCode's approach of just providing an API to extensions, and improving that API based on requests from modders
+zomg: smiche: anything you need to be able to trust goes into server. Fairly simple choice :)
+smiche: My personal take on Atom is that it melts my pc on linux.
+zomg: smiche: you can *never* trust anything from the client
+smiche: well I already get some data from the server and need to calculate some statistics about the data. Wondering if it's more efficient to do on server or client.
+zomg: if it's 10k it shouldn't make any difference where you do it
+zomg: I mean any client should be able to handle that
+smiche: okay, that's what I wondered. awesome :p
+smiche: thanks!
+Elarcis: smiche: do the heavy and trust-requiring work server-side (if it needs to make lots of requests to the DB, it's better to do them on the machine that's the closest to the DB), then return just the data the client needs to format and show it to the user
+zomg: we recently had a problem where we were returning 20 megs of JSON on a page load...
+zomg: :D
+Elarcis: haha
+zomg: because we queried mongodb without filtering out the fields we didn't care about
+zomg: the problem only became apparent with customer accounts with *a lot* of data
+smiche: you're using a nodejs server?
+zomg: yeah
+Elarcis: zomg: One day we figured out that making 50 requests to the server to load a simple list was a bit much, so we converted those 50 requests in a new specific List type that's returned by just one
+zomg: it even slowed the page load because the mongodb query itself was taking a long time to return and not just because of having to send 20 megs of JSON =)
+smiche: I'm feeling pretty bad about using a nodejs server, but no time to redo it in something more strictly typed.
+zomg: smiche: eh it's fine
+Elarcis: smiche: can't you do server-side typescript? :D
+zomg: slap Flow or TypeScript on it and there you go, types
+icebox: Elarcis: this is nice: Switch Window... that resolves the point vscode doesn't handle multi project in a window
+Elarcis: icebox: I'd like to be able to separate editors to new windows, much like VS does
+Elarcis: icebox: hop, multi-screen instance just by drag-and-drop
+smiche: plenty of the libraries that I use don't have type declarations. I've already written quite a few but it takes time
+smiche: but I do feel like typescript would be a huge benefit since it's getting fairly hard to maintain the code
+zomg: What's making it hard to maintain?
+smiche: following how objects mutate through route/middleware/service/db connectors
+zomg: interesting
+zomg: I don't see how types would fix that though..
+smiche: can always check the interface to know what the object is about
+zomg: Yeah I suppose that's true :)
+smiche: makes things sort of more predictable, since I forget how I named things and what is what
+Elarcis: smiche: yep, although interfaces are only dev-side and disappear on transpilation
+Elarcis: smiche: for one I find that using classes help tremendously when debugging, just looking at what is the type of my resource
+smiche: same thing that I enjoy about it too
+nishu-tryinghard: Elarcis, are you using typescript to learn angular 2?
+Elarcis: nishu-tryinghard: yes I am
+smiche: is there any official statement on when angular 1 will be abandoned?
+Elarcis: smiche: when it's not used anymore
+smiche: also the async, non-blocking nature of nodejs makes a lot of spaghetti compared to a servlet for example, when db access is synchronous
+Elarcis: also, remember when people said angularjs could not be trusted because it was a Google product and that Google didn't use it for their services?
+Elarcis: what's a servlet? a webservice ?
+smiche: yep, based on java
+icebox: Elarcis: in process sync callback
+Elarcis: smiche: okay, I's been a damn while since I've done Java :D
+Elarcis: icebox: oh, ok
+icebox: smiche: it is not non-blocking nature.. it is callback approach... and you may use other patterns :)
+smiche: yeh I've been going more towards the synchronous approach where possible
+Elarcis: I like C#'s approach of the thing, with async tasks that you can wait for to make your code synchronous again (sort of)
+icebox: smiche: well... cps (Continuation-passing style) is a powerful style of programming
+smiche: with .net core you can do most stuff synchronously as well
+icebox: smiche: but I am sure node.js channel would be more suited to this topic :)
+smiche: I have no doubts about the performance and the benefits of handling errors and not continuing, but once you start nesting 4-5 of them(which isn't too often) it gets pretty nastry to read.
+smiche: yeh my bad I got carried away.
+Elarcis: smiche: welcome to the callback pyramid of doom!
+shabbir: hello AngularJS World
+Elarcis: shabbir: Hello, shabbir!
+zomg: Ugh
+Elarcis: Uncaught SyntaxError: Unexpected token !
+zomg: I'm trying to think of a good example for property based testing
+Elarcis: VM90:1 Uncaught ReferenceError: ugh is not defined(&hellip;)
+zomg: the best one I came up with is fairly good but would require fairly complex implementation for being able to actually demo it...
+zomg: :p
+Elarcis: zomg: what's property based testing?
+zomg: I see the article is going to be useful ;)
+zomg: basically sometimes you have functions which have some rules which should hold true for all inputs
+zomg: for example Math.max will always return biggest number of the inputs
+Elarcis: zomg: okay
+GreenJello: is that where you throw random inputs at it?
+zomg: property based testing can be used to test that kinds of rules by defining what are the acceptable inputs (such as any JS number) and a function to validate the result
+zomg: GreenJello: yep
+shabbir: I'm new to AngularJS , can anyone suggest me some Books to get over it ?
+GreenJello: shabbir, I don't know about books, but egghead.io is a good place to start
+smiche: service $http get isn't working after switching route, pretty random
+nishu-tryinghard: shabbir, go with ng-book 2 or you can just headover to angular documentation and start with quick start.
+nishu-tryinghard: If you started just now without any experience then you have to go thorough a lot of resource understand how stuff works and code communicates in your project and also the controll flow. Go with ng-book 2 or something similar based on what others suggest
+shabbir: I'm using angular documentation but I get stuck more than I get help from it... Thanks a lot everyone for suggestions...
+shabbir: is it okay for a beginner to start right away with Angular 2 ? or should I first follow Angular 1.x ???
+Pyrrhus666: shabbir: starting from the docs is less difficult if you do the quckstart and the ToH tutorial on the angular2 site. the documentation tends to refer to those two quite a lot.
+GreenJello: shabbir, starting with angular 2 is fine, but it's probably going to be more difficult to learn if you're not used to things like typescript and modules
+smiche: is there some limit on $http.get or $q promises? I'm getting a weird behaviour where out of 5 directives last one never gets the promise resolved. and they all access the same route
+Elarcis: smiche: no, there's a browser or server defined limit on how many request can be made from the same client at the same time
+None
+smiche: I suppose I should cache it then or get that data somewhere higher up the hierarchy
+zx_bud: I'm serving the application as webpack'ed app
+Elarcis: smiche: $http implements a caching system, look for it in the doc I think you have to enable it
+Preuk: hello
+smiche: well chrome gives 304 on the responses
+Elarcis: smiche: that's browser cache
+Elarcis: smiche: iirc
+smiche: I suppose I would need to clean that cache somehow
+smiche: I used cacheFactory before and cleaned the cache
+Elarcis: smiche: I don't think you're trying to resolve the right issue there
+smiche: with caching on it works fine so I guess it's the request limit
+Elarcis: smiche: when there are too many requests being made, they're just put into pending mode, they're not blocked
+Elarcis: smiche: you have another issue
+smiche: looking at network tab in dev tools showed that all requests were finished but one of my promises never got resolved
+Elarcis: smiche: yeah, so that's an issue with your code then
+Elarcis: smiche: are all of your promises using the same code?
+smiche: yep
+Elarcis: smiche: it could be that somewhere in your promise chain you forgot to do a return, then
+smiche: 5 are created, 5 are answered on initial page load, changing route and going back 5 created, 4 resolved
+Elarcis: what changes between the two routes?
+smiche: they're pretty much independant controllers with one parent controller
+smiche: and sharing 2 directives
+Elarcis: smiche: looks like one of your controller is the issue then :)
+smiche: with caching things load so fast my highcharts are rendered before the div has completed expanding in width, ends up in a half-wide chart
+smiche: can't figure out what's going on with the service though :/
+smiche: oh you mean controller
+smiche: when I make 200 requests it seems to work
+smiche: oh wait nevermind the last one is chopped off again -.-
+Elarcis: smiche: you're making progress then, if it's always the last promise
+arnas: I have an input field and it's bind to datepicker. When I select date from datepicker, the value of the input doesn't get updated. I need to type in something first for it to change. How can I fix that? :/
+Elarcis: arnas: code sample please
+Elarcis: arnas: this isn't a normal behavior
+Pyrrhus666: arnas: my guess is your datepicker is not angular-aware ?
+Elarcis: arnas: so there must be a quirk somewhere
+arnas: Elarcis, sec
+arnas: Pyrrhus666, I use jQuery UI's datepicker
+Pyrrhus666: that&acute;s your problem right there :P
+Elarcis: ^
+arnas: so isn't it possible to fix it anyhow?
+arnas: to work with jquery ui datepicker
+Pyrrhus666: sure. but you shouldn&acute;t even want to.
+arnas: Pyrrhus666, why?
+Elarcis: arnas: as usual... there should already be a lib that wraps it in an angular directive
+bd-: i hate datepickers, they're mostly all terrible
+None
+smiche: it seems to be my service, the controller calls the service but http get never gets resolved
+Elarcis: bd-: agreed
+Pyrrhus666: bd-: true. even chrome&acute;s native one sucks ass.
+Elarcis: bd-: it looks like no one ever bothered to standardize this shit
+arnas: bd-, well, IE doesn't support type=&quot;date&quot; :)
+arnas: so I have to use something else
+bd-: it would probably be bad even if it did support type=date
+Elarcis: arnas: are you using ng-bootstrap?
+arnas: Elarcis, no
+Elarcis: arnas: ok, then see the link I sent you
+arnas: Elarcis, can I use this ui-date with jquery ui's datepicker?
+Elarcis: arnas: but you should probably rely on a pure angular solution anyway
+Elarcis: arnas: read the page and you'll know if you can
+Pyrrhus666: ui-bootstrap has a halfway decent datepicker. dunno about ng-bootstrap.
+arnas: Elarcis, it says yes :D thanks
+Elarcis: Pyrrhus666: I suggested a outlook-like time input to ng-bootstrap's team, other than that I dunno
+Elarcis: Pyrrhus666: I wonder why nobody does that btw, realtime input deduction for time input
+Pyrrhus666: realtime whatnow ?
+Pyrrhus666: you mean current time as a default or smt ?
+Elarcis: Pyrrhus666: it's pretty obvious that if I type 830, I mean 8:30, I don't want to put the hour, press tab (or even worse, click on the minutes field) and put the minutes
+Pyrrhus666: ah ok. parsing rules.
+Pyrrhus666: yeah, the ux is pretty horrible.
+bd-: i'm using that ui-bootstrap datepicker
+Elarcis: Pyrrhus666: not really, just automatic field switching when the hour is obvious
+Elarcis: Pyrrhus666: only downside is  that it forces the user to put explicit hours, like 0112, because 112 can either be 11:02 or 1:12
+bd-: there's a bunch of angular datepickers which don't work with strings, which is really annoying
+bd-: they all give you, or expect, a Date object
+Elarcis: any dev can tell you: time is hell
+Pyrrhus666: we should just use integer timestamps in UTC and be done with it ;)
+None
+Elarcis: I don't even know, when humanity will be so spread out that relativity could not be ignored, how we're going to not lose our minds over this
+None
+Pyrrhus666: Elarcis: don&acute;t worry, we&acute;ll never get that far before we cease to exist ;)
+smiche: I can't figure out where I'm messing up, maybe chrome thinks I have no references and garbage collects the promise, idk
+Elarcis: 'it's been published at 00:15 UTC+2 LT-Earth'
+Elarcis: smiche: you might try to reproduce your issue in a plunkr
+smiche: okay
+smiche: can I give you the deployed website, I need to implement quite a lot of things to have it working on plunkr?
+Acer_user: Hi which is the best video tutorial to learn angular js
+kamandoko: indonesia
+kamandoko: hy
+Elarcis: kamandoko: hi indonesia
+Elarcis: for Acer_user's defense, they waited more than a minute before getting an answer
+smiche: and it seems to work fine on firefox -.-
+smiche: I would guess chrome is throwing away my promise?
+Elarcis: smiche: at this point, I don't know
+Cinx: Hi
+Cinx: Hi
+Cinx: is someone there?
+None
+Elarcis: sl33k_: your angular material is not working :P
+angrybacon: Would it be possible to $watch over ngModels in a directive B that is child of a directive A and push the new values for these ngModels in the array that is provided in some attribute of A?
+sl33k_: :p
+sl33k_: Have I placed it in the corrent order?
+None
+smiche: Okay it works in chrome, It must be a chromium specific issue -.-
+angrybacon: I require A in B with &quot;require: '^?A'&quot; but it seems the controller I get in A's link is always empty
+bd-: sl33k_: your script tags are mental
+bd-: wrong order and some repeated
+bd-: two versions of angular included
+Elarcis: sl33k_: apparently your script is breaking, it seems there's a polyfill you're missing
+smiche: I just wasted 1h because of chromium clearing my promises or doing weird stuff x.x
+sl33k_: bd-,Elarcis: There was this that was not loading
+None
+Elarcis: bd-: hol sh, didn't even notice that hell of a head tag
+Elarcis: aand, lunch time
+None
+icebox: Foxandxss: trying to store somewhere IRC knowledge :)
+Foxandxss: sounds good to me
+None
+None
+ngbot: angular.js/master 823295f Justas Brazauskas: docs(*): fix typos in comments and docs...
+hemangpatel: Hello, morning there
+heartburn: all the parts/joins/shittalk in one place, with search. :o)
+hemangpatel: What exactly typings.json and systemjs.config.js does in angular 2 ?
+heartburn: adds up to the overhead.
+heartburn: also makes tsc and modules work.
+heartburn: but mostly overhead.
+None
+heartburn: hemangpatel: --^
+heartburn: also #typescript
+None
+ngbot: angular.js/v1.5.x a033eb7 Justas Brazauskas: docs(*): fix typos in comments and docs...
+None
+hemangpatel: heartburn, How it adds overhead ? I thought it runs at only compile time.
+_eddy: morning guys, is any a good recommend blog or some article that i can read about module, service, factory and controller. Did this a while ago but want to refresh my memory thanks
+None
+_eddy: icebox, any for angular 1.5
+icebox: _eddy: that is for angular 1.5 :)
+smiche: sometimes the good old $timeout seems to be the only way to sync up the view x.x
+_eddy: ta lol was looking at the url icebox cheers
+icebox: _eddy: it uses ES2015 instead of ES%, but you can backport the hints :)
+icebox: _eddy: *ES5
+Vicky: Does any one know Free open source like Tableau Software in angular with excel upload and fields drag drop for creating charts
+icebox: smiche: are you sure? any plunker reproducing it?
+smiche: only got the website, plunkr might take too long(jquery ui, router, malahar table, ui sortable + 5-6 more things involved)
+icebox: Vicky: I don't think so... you may give a look ag-grid
+Vicky: Ok
+bd-: : Using controllerAs is dead, in my opinion
+bd-: can they just make up their mind
+bd-: every iteration of these styleguides seem to be counter to the previous one
+icebox: bd-: really? strong opinion
+bd-: that's from that 1.5 motto guide
+star_prone: hi
+star_prone: how do I see all events registered through $broadcast?
+icebox: bd-: &quot;We also don&rsquo;t need controllerAs as $ctrl is a component default&quot;
+Vicky: I have checked ag-grid it is just data grid, i want free open source where i can upload excel data and prepare visualization chart with fields drag and drop
+bd-: so wait we're back to $scope then?
+icebox: bd-: ah I see the point... it is about the syntax, not the effects (no $scope)... never used controllerAs syntax, because using components or routing
+icebox: Vicky: there is no one
+icebox: Vicky: at least ready for angular
+bd-: i feel like there's no point following people's styleguides because they change them so often
+bd-: at least if you wanted to keep your style up to date
+None
+icebox: bd-: really? it seems to me quite coherent the trend
+icebox: Vicky: tableau or qlikview are a whole product... there is not any grid widget with those features
+Vicky: Yes. I know, but i was just looking here if anyone here may have information about this, i don't want to start from scratch.
+icebox: Vicky: well... there are a lot of custom solutions :) but they are commercial or insider projects
+icebox: Vicky: you cannot &quot;buy&quot; that knowledge in irc :)
+Vicky: Ok, Thanks for the help Icebox:
+icebox: Vicky: you are welcome
+Vicky: Icebox: is it good idea that i should start developing this application by me.
+icebox: Vicky: I don't think so...
+Vicky: At least basics, where i can upload data and prepare standard charts.
+icebox: Vicky: because that requirement needs to be very customized based on the customer needs
+icebox: Vicky: upload a file and charts are not matter of angular :)
+Elarcis: star_prone: I don't think you can
+Vicky: I am looking at that bigger picture, here in our organization we have few client to whom we create chart and send them.
+star_prone: Elarcis: :(
+Vicky: icebox : pls ignore above line
+Elarcis: star_prone: $on listens to any event, regardless of $broadcast or $emit
+Vicky: icebox: I am not looking at that bigger picture, here in our organization we have few client to whom we create chart and send them.
+Elarcis: star_prone: however it might be possible that all listeners are stored somewhere, though I don't know where
+icebox: Vicky: it doesn't seem a use case for a SPA... it seems you have a number crunching phase and a report one: the final product is a pdf with charts and text :)
+star_prone: Elarcis: those events are probably some objects or values within objects or arrays or smth. I know that $on listens to any kind of event, it's just that I'm trying to debug something and I don't know where is it coming from. for this reason, I want to see what events are registered at any given point
+Elarcis: star_prone: can't you just search for the name of your event and see what's emitting it?
+nishu-tryinghard: star_prone, yes search your project with that event name and try to log something or send something specific from each of them to track it
+icebox: star_prone: in the scope there is $$listeners
+star_prone: icebox: thanks!!! probably that is what I'm looking for
+star_prone: :d
+icebox: star_prone: at your risk :)
+star_prone: Elarcis: I did that already :(
+senayar: don't hack the framework
+senayar: :D
+star_prone: who, me? I barely know how to use it...
+None
+Elarcis: star_prone: variables and methods starting with $$ are usually named so to warn that they're internal to angularjs and should not be used directly
+asdf_: hello there ?
+asdf_: anybody around ?
+Elarcis: star_prone: if it's to debug, I believe it's worth it
+Elarcis: asdf_: no
+Elarcis: HAHA
+star_prone: Elarcis: I ain't gonna use it, I know what $$ entities are; I will just take a short peek :D
+Elarcis: 'Go ask to #angularjs. _I went there, there's nobody active! _how long did you stay? _...12 seconds?'
+uru: Elarcis: the ngbot should do that automatically ;)
+uru: It could keep tabs on how long people last and keep a leader board
+Elarcis: uru: haha, like someone stays less than two minutes, or ask a question then leaves before anyone talks, we count the number of seconds they stayed here
+uru: Yep
+Elarcis: wow, people with actual ipv6 exist
+Elarcis: I thought it was a legend
+None
+uru: In the early mornings in the mist of the forest before the sun has fully risen
+Elarcis: uru: there lied an old fox
+uru: s/old fox/ipv6 user/
+Elarcis: uru: that sounds like the start of an awesome tale
+senayar: Highchart is raising error smiche
+smiche: yep because link function isn't being called before the controller to set uniqueId
+senayar: it's because controller function is always executed before link function pre and post
+smiche: oh
+senayar: use a component
+senayar: it will solve all  your issue
+senayar: if you can use angular 1.5
+None
+kblin: hi folks
+smiche: weird since it works on local server &amp; deployed the same way, just not on plunkr
+senayar: well if the problem is only to render your highchart just put the code from ctrl into the link function smiche
+nishu-tryinghard: Elarcis, can you tell me from your ng2 learning and usage the significant as well as noticeable difference in ng2 vs ng1 and not related to syntax
+nishu-tryinghard: like we have to bootstrap our modules using NgModule as such
+None
+Snugglebash: Hi, can someone tell me what would be the ngMaterial equivalent of bootstrap &quot;col-lg-6&quot;
+smiche: yup
+Elarcis: nishu-tryinghard: you can google that, I'm not an ng2 expert at that point, and I believe there are already plenty of articles explaining that
+bd-: nishu-tryinghard: not really that much different. typescript, some different syntaxes, otherwise mostly the same
+nishu-tryinghard: Elarcis, already read them. wanted to know more
+Elarcis: nishu-tryinghard: I can't tell you more than what you already read
+nishu-tryinghard: I think the noticeable difference for the people coming from ng1 to ng2 will be systemjs/webpack
+bd-: yea you can't just throw a cdn link to ng2 on a page and go
+bd-: you have to spend way too much time messing with build systems and other shit
+nishu-tryinghard: Yes iam more interested in this, sorry i didnt make it clear
+nishu-tryinghard: not just the difference in framework but also the think like package manager etc which change when using ng2
+bd-: do you have some specific questions about it?
+nishu-tryinghard: i used to use gulp in ng1 so that is that replaced with when using ng2
+nishu-tryinghard: what is*
+None
+bd-: depends, there's probably some ng2 build systems that use gulp. the 'official' angular-cli one is webpack
+Elarcis: nishu-tryinghard: gulp is not a build system, it's just a task manager. that's why in most recent setups, there's no more gulp: all build-related tasks have been moved to a dedicated build tool, which often renders gulp useless
+elsevero: I have a custom directive which translates a datestring into a custom format (using ngModel.$formatters &amp; ngModel.$parsers)
+Elarcis: nishu-tryinghard: although you can still have gulp installed for various stuff, I believe it's a good thing to not use it to build the app anymore. a dedicated tool provides more adapted features, while often depending on the same packages than gulp
+elsevero: It works only for editable fields
+elsevero: how do I make it work for span: / div: ?
+bd-: gulp is part of a build system
+Elarcis: elsevero: there's the angularjs datetime filter for that
+Elarcis: elsevero: *date filter
+bd-: elsevero: shouldn't you be using a filter for that?
+bd-: oh but if you're using $parsers it's for form fields
+bd-: hmm
+nishu-tryinghard: bd-, Elarcis ty this discussion cleared some doubts as well as wrong perception about gulp
+Elarcis: elsevero: You should extract the format string used by your directive to an angularjs constant, then inject that constant wherever you want to format your date
+Elarcis: elsevero: (with the date filter, that is)
+nikitabanthiya14: hi how to create browser notification ??
+nikitabanthiya14: any leads will be helpful
+bd-: nikitabanthiya14: html5 notification api
+nikitabanthiya14: its gcm related?
+bd-: gcm?
+Elarcis: nikitabanthiya14: angular1 or 2?
+nikitabanthiya14: ya gcm will give message andto show
+bd-: wtf is gcm
+Elarcis: google cloud messaging?
+nikitabanthiya14: @elarcis angular 1
+Elarcis: Guaranteed Communication Mantra?
+nikitabanthiya14: yaa like that  hi how to create browser notification ??
+Elarcis: Guacamole Curated with Mango?
+nikitabanthiya14: oops
+Pyrrhus666: garbage collection something ?
+elsevero: Elarcis: &quot;You should extract the format string used by your directive to an angularjs constant, then inject that constant wherever you want to format your date&quot;. not sure how you'd inject that constant
+None
+None
+Elarcis: nikitabanthiya14: seems old tho
+bd-: elsevero: you can just stick the format string in the html template as the date filter parameter
+nikitabanthiya14: @elarcis noo
+None
+None
+None
+nikitabanthiya14: @elarcis .. i checked already before link .. not like that .. they dont have option for gcm
+icebox: Snugglebash: material uses flexbox
+Elarcis: nishu-tryinghard: aaaah, so you want push notifs
+nishu-tryinghard: Elarcis, no i dont want to push anything :p
+Elarcis: gfd;gjh,frlkgif&ugrave;
+icebox: smiche: see docs about layout
+nishu-tryinghard: Elarcis, hold reset for 30 sec then pull power code and hold it for another 30 sec and plug in power cord and hold for another 30 sec
+nishu-tryinghard: now do you feel good?
+nikitabanthiya14: @elearcis didu get my point?
+nishu-tryinghard: Elarcis program crashed
+nikitabanthiya14: @elearcis did u get my point?
+Elarcis: nikitabanthiya14: not at all T_t
+nikitabanthiya14: @elarcis i want to implement the browser notification but notification will come from gcm .. i wont call any api .. i will take it from gcm
+Elarcis: nikitabanthiya14: sooo, even if the site is offline or not?
+rand0m: afternoon people :)
+Elarcis: nikitabanthiya14: are you on mobile or desktop?
+nikitabanthiya14: now on desktop
+nishu-tryinghard: evening rand0m
+rand0m: hello hello
+soee: any example how would look directive that will check if authed user is object owner and keep or remove some template part based on the result ?
+Elarcis: nikitabanthiya14: because I haven't the slightest idea of how GCM works
+nikitabanthiya14: @elarcis  if offline .. i guess notification will come when u online ..
+nikitabanthiya14: @elarcis same here man :/
+Pyrrhus666: seems gcm is deprecated in favor of fcm though.
+Pyrrhus666: (yay for acronyms)
+kblin: if I want to handle an error in a $resource, how would I do that?
+senayar: after the success case kblin
+Elarcis: Pyrrhus666: Fuck Communication, Man
+Pyrrhus666: Elarcis: got it in one ;)
+senayar: $resource('....').then(function(success) { console.log(success) }, function (error) { console.log(error) });
+kblin: senayar: hmm, but the error looks different from what I expect
+Elarcis: senayar: ffs use a catch() block instead, please
+nishu-tryinghard: FCM fuck callback man
+nishu-tryinghard: GCM get catch man
+smiche: icebox: layout for ui-router?
+None
+icebox: smiche: what?
+None
+smiche: 14:56 icebox: smiche: see docs about layout
+Elarcis: kblin: use a catch() block instead, as a second callback doesn't catch any error thrown inside of the first then() callback
+senayar: you need to use $promise to use .catch on $resource
+Elarcis: kblin: it only catches errors thrown in previous then() blocks, which makes it equal to a catch() block, only more explicit and less bonkers
+Elarcis: senayar: what.
+Elarcis: senayar: really?
+senayar: never used it in real case but
+None
+Elarcis: holy guacamole
+Elarcis: oh well
+icebox: smiche: mistell... it was for Snugglebash
+nishu-tryinghard: what is the use case for compile in a directive?
+icebox: nishu-tryinghard: dynamic template?
+nishu-tryinghard: icebox, the whole point of Directive is to make our template dynamic then what more does compile adds?
+Elarcis: nishu-tryinghard: dynamic, non-hardcoded templates
+nishu-tryinghard: Elarcis, iam finding it hard to imagine how i can build a dynamic template, can you elaborate on this?
+nishu-tryinghard: like using transclude?
+Elarcis: nishu-tryinghard: fetching it from a distant url, building it from strings, or determining the template path via code rather than ng-switch
+bd-: i have a directive that repeats elements that builds template dynamically based on the contents of the original element
+bd-: and i use compile for that
+falkkk: Hey Guys
+nishu-tryinghard: bd-, can i get access to that code?
+nishu-tryinghard: Elarcis, building it from strings?
+bd-: not really, internal company stuff
+Elarcis: nishu-tryinghard: your webapp has an admin panel where the admin can customize the angular template of some widgets
+Elarcis: nishu-tryinghard: the template is stored into a string fetched from the server, you have to use compile to use it
+falkkk: does someone know, if there is something simliar to &quot;e.dataTransfer.setData('Text', this.id)&quot; in an eventListener, but for an touch event?
+Snugglebash: icebox: yeah for ui-router
+nishu-tryinghard: Elarcis, ah! ty now it makes sense but i read that compile is called only once during initialization
+soee: how can i pass object to directive used as attribute only ?
+bd-: compiling can be useful for performance stuff to, if say you need to switch elements based on data type or whatever, rather than have a ton of ng-if or ng-switch you can use compile to generate the right one once then databind the generated html
+Elarcis: nishu-tryinghard: initialization of your directive, yes.
+icebox: Snugglebash: ?
+Elarcis: soee: add a binding to your directive and pass the object via it
+icebox: Elarcis: it seems I am out of sync like in Fringe :)
+nishu-tryinghard: bd-, ty i just had a though of such use case for the project iam working on maybe ill use this. I have a modal which has 2 templates
+Elarcis: icebox: try not to disintegrate
+nishu-tryinghard: thought*
+Elarcis: icebox: or worse, erase yourself from existence
+nishu-tryinghard: Elarcis, bd- ty
+nishu-tryinghard: one last thing lets say i have a initial html and  a success and failure, previously i used to use ng-if or ng-show to show the result of the actions in the initial page so from the above discussion i dont have to do that now as this can be done via compile?
+Elarcis: ah, I can't wait for TS to implement this stuff: let mergedObject = {...object1, ...object2}
+None
+Elarcis: looks like they're struggling to determine the type of mergedObject, though
+None
+Elarcis: icebox: doesn't look very pretty yet
+icebox: Elarcis: indeed... it is ts :P
+Elarcis: icebox: HEY
+Elarcis: icebox: that's just not true
+smiche: $timeout 0 seems to be the only thing to cure this
+Snugglebash: icebox: i am looking for an angular alternative for bootstrap &quot;col-lg-6&quot; using ui-router
+Laynee: hi folx.. is it possible to injext 3rd party js library into angular app (controller) ?
+Elarcis: icebox: since TS can't remove from standardized JS syntax
+Elarcis: smiche: in that case you can even remove the 0
+smiche: oh
+Snugglebash: icebox: sorry got it now
+Snugglebash: icebox: sorry it didnt ping for me to see your response. thanks
+icebox: Laynee: yes, it is
+nishu-tryinghard: Laynee, you can create a directive and use that library in the link block of it. that one way i know how to us eit
+Laynee: icebox different method than nishu-tryinghard mentioned ?
+icebox: Laynee: as usual
+Laynee: icebox so just add it to inject part of app and inject it in controller /
+nishu-tryinghard: Laynee, you should create a plunkr and try it out. In this way you can share that plunkr here to get more insight. Thats how i learnt it and you can too
+None
+nishu-tryinghard: icebox, that link was very useful
+icebox: nishu-tryinghard: there is also a quick and dirty way, but I cannot find the resource :P
+nishu-tryinghard: icebox, i think i used that quick and dirtyway, i just used script tag to load my library i directly used it in my link block
+icebox: nishu-tryinghard: there is another one :)
+nishu-tryinghard: And the url which you posted i used to avoid this dirty case(thinking that it will be magically available globally)
+nishu-tryinghard: oh didnt know there are more than 2 ways to do it
+nishu-tryinghard: is*
+Laynee: i wanna use quick and dirty way D:
+smiche: I don't get it, width of div is 1300 and $timeout0 later it's 1070
+smiche: and 1070 is the proper one
+None
+kblin: sakustar, Elarcis: Sorry, had to dash off quickly, I'll give using catch a try
+nishu-tryinghard: icebox, is this one you were talking about?
+geoid: I'm trying to wrap my head around promises... I don't understand why $http.get() and var d = $q.defer(); return d; don't return the same thing?
+geoid: the former seems to return resolved data whereas the latter seems to return a promise object that I don't know what to do with.
+kblin: ok, it looks like my transformResponse function is futzing with my error data :/
+geoid: I thought they both return a promise but doesn't seem to work in practise.
+Elarcis: geoid: 1. you should not use defer() as it's most often useless, and 2. defer() returns a deferred object, which has a promise property, whereas get() just returns a promise
+zathras: Hi. Any chance I can find Matt Lewis here?
+icebox: zathras: the actor?
+Elarcis: Hi zathras, yes it's me
+zathras: cool
+zathras: can I get in PM?
+Elarcis: no, sorry
+Elarcis: also jk, I'm not Matt Lewis
+None
+Elarcis: I don't think celebrity impersonation is well appreciated in the code of conduct
+Elarcis: maybe we should add a clause to it
+Elarcis: geoid: what icebox said
+geoid: ok tx
+None
+zathras: icebox, thanks, I am aware of that page, but was hoping for a quick chat
+angrybacon: Trying to replicate my issue to better debug it, I have come across another issue. My child directive doesn't seem to be able to find the required parent:
+None
+icebox: zathras: any issue we may provide help?
+zx_bud: hello, I'm trying to figure how configure karma in my angular project, anyone can help? I'm starting from the testing page of angular doc :(
+zathras: I am new to nodejs/angular. I am trying to install one of his projects using npm. That fails due to E404s on standard packages and a direct reference to github which needs, I assume, an account with cached credentials.
+zathras: I would like to stay on the package provided by Debian Jessie and not commence in manual installs/compilations
+zathras: my goal is to run: npm install --save angular2-calendar
+zathras: but even building a local npm index fails with memory errors although I have over 16 GB free memory left
+zathras: (not sure if that index would be helpfull though)
+zathras: any pointers appreciated
+geoid: sometimes when I edit my plunker, the code shown in the inspector doesn't match the actual code. Any clues as to why?
+zathras: (mem error is out of memory which sounds plain wrong to me)
+geoid: angrybacon could it be because your labelMany directive does not have a controller?... the require property looks for a controller.
+nat_: hi, I would like to know if change something in angular
+angrybacon: geoid Good catch
+angrybacon: So now I get to my original issue, that is: my required controller is empty:
+None
+geoid: angrybacon that's because you've made it an empty function?
+angrybacon: geoid Shouldn't I see the attribute that I feed to the scope?
+angrybacon: Or directive's scope is a different thing from controller's?
+geoid: directive scope is defs different to controller yes.
+geoid: which attribute?
+Pyrrhus666: zathras: I think staying on debian packages won&acute;t really work for node/npm. debian is too slow to keep those up to date.
+angrybacon: geoid I need to push things in labelMany's model
+angrybacon: From labelInput
+geoid: what you probably want in your controller is this.property = $scope.property... then you should have access to labelManyController.property
+Pyrrhus666: zathras: just install a fresh node/npm and take it from there.
+angrybacon: geoid $scope.property is always undefined
+angrybacon: (here $scope.model)
+zathras: Pyrrhus666, they are also not maintained (for that reason I presume). So I am fine by npm-ing local packages, but I would like npm itself to be as it is
+nishu-tryinghard: Pyrrhus666, shouldnt we use nvm to get the node package?
+geoid: are you sure you shouldn't be requiring ngModel instead of labelMany?
+Pyrrhus666: zathras: what version does jessie provide ? if it&acute;s in the 4.x range, forget it.
+Pyrrhus666: nishu-tryinghard: also an option.
+angrybacon: geoid But how would they communicate then?
+angrybacon: (the 2 directives)
+geoid: not sure I'm probably not the best person to be answering this 0.o I've never managed to get 2 directives communicating except via $broadcast and $emit.
+angrybacon: :-/
+geoid: but I thought that was the point of ngModel as a directive... is creating a shared scope
+smiche: use a service/factory
+zathras: Pyrrhus666, how do I check that? nodejs --version says v0.10.29 where as npm --version says 1.4.21
+angrybacon: smiche How? There will be nemerous &quot;labelInput&quot; in my page
+angrybacon: Right
+Pyrrhus666: zathras: those are ancient.
+zathras: yes. That is quite common on Debian
+Pyrrhus666: zathras: uninstall those and add new ones. use a ppa or just download.
+Pyrrhus666: zathras: there is a ppa that does debian/ubuntu packages, google for it.
+nishu-tryinghard: Pyrrhus666, why not install nvm and just use that?
+zathras: ppa == ubuntu != debian / manual installation == unmaintainable system : there is a reason Debian is reluctant to install the latest of the latest
+Pyrrhus666: nishu-tryinghard: also an option. personally I don&acute;t bother, I have just one version
+nishu-tryinghard: i have using nvm and it is good to install any version and set them as default on the fly
+Pyrrhus666: zathras: I know, I use debain for over a decade ;)
+Pyrrhus666: also , a ppa is just a repository. you can use them fine
+zathras: imho a ppa is an untested repository. Untested in that sense that it might be tested on Ubuntu version X but very unlikely on Debian
+Pyrrhus666: otherwise, don&acute;t do nodejs, waiting for debian to catch up will take 5 years.
+Pyrrhus666: zathras: not if the repo has dedicated jessie packages. and they have.
+zathras: Pyrrhus666, do you have an url? btw: a hard freeze of Debian is around the corner which will mean a major jump in versions
+None
+icebox: zathras: generally speaking, there is a channel for nodejs stuff
+zathras: yep, I know, they made the suggestion to see if I could contact the author here, so hence my visit
+zathras: thanks for all the pointers though
+Pyrrhus666: zathras: that will mean debian will include 4.x. which is still too old ;) I love debian, but node.js&acute;s ecosystem is so volatile they&acute;ll never catch up ;)
+None
+Elarcis: geoid: ngModel is just a directive to implement two-way databindings on form fields
+zathras: that doc btw references Wheezy which is way older than Jessie, so based on that text I assume I am already on node.js : 4.x
+zx_bud: icebox: thankyou! +1
+Pyrrhus666: zathras: your version is 0.10. that&acute;s way older.
+zathras: ah. ok
+Pyrrhus666: zathras: also, most projects suggest 5.x or even 6.x.
+Pyrrhus666: (should be in the requirement).
+zathras: did not notice it. Got to run now. Sorry. Thanks
+None
+angrybacon: Thanks for the pointers
+Ownix: why use angular.isArray over Array.isArray?
+Elarcis: Ownix: they're exactly the same
+zomg: Ownix: angular.isArray probably works for browsers which don't implement Array.isArray
+geoid: angrybacon well done! I think you may be able to just require ngModel in your second directive instead to achieve a similar effect... ngModel then becomes a shared scope for both without needing to require labelManyController scope as an intermediary.
+None
+Elarcis: zomg: in angular's source, isArray = Array.isArray
+zomg: wtf
+zomg: why would you even have that then... that's stupid
+zomg: huh, isArray works even in IE9...
+angrybacon: geoid You mean require ^ngModel?
+zomg: interesting
+Elarcis: zomg: dunno, I guess if someday they add some logic, it'll be useful
+geoid: angrybacon ya
+bd-: didn't ng1 support ie8 though?
+bd-: i thought that's why angular.isArray existed
+angrybacon: geoid What if there's something in between then
+zomg: Elarcis: well any logic that they'd add would break existing behavior then so it seems like a bad idea :D
+Pyrrhus666: dboskovic: it did.
+Elarcis: bd-: they dropped support recently, didn't they?
+zomg: ahh
+zomg: maybe that's why the implementation is no longer different
+Elarcis: zomg: not necessarily
+zomg: perhaps it was before?
+Elarcis: zomg: perhaps, yes
+bd-: yea, it did used to be different
+geoid: angrybacon not sure what you mean but if you only need ngModel, then require &quot;^ngModel&quot; should give it to you without needing the intermediary... if however you need access to other properties from the labelManyController, then makes sense the way you did it.
+bd-: return toString.apply(value) == '[object Array]';
+angrybacon: geoid I meant, what id there
+angrybacon: 's a third directive between the 2
+geoid: huh?
+None
+angrybacon: Child of labelMany, parent of labelInput
+Elarcis: Ownix: ^
+geoid: still lost, try it :)
+angrybacon: With its own ngModel
+Pyrrhus666: Elarcis: nice implementation :)
+geoid: I don't think there is such a thing as &quot;it's own ngModel&quot;... I think ngModel is ngModel... all directives are singletons.
+Elarcis: zomg, Ownix: they dropped support for IE8 since 1.3 iirc, so that's probably the reason why they're now the same
+geoid: but I could be wrong.
+Elarcis: geoid: no, you're mistaking a directive's instance with its declaration
+None
+Ownix: Elarcis: ahh
+angrybacon: geoid Yes, to the existant codepen, add another directive between the 2 (parent of one, child of the other). Give that directive a ng-model attribute. Then requiring ^ngModel isn't enough anymore
+None
+geoid: I could also be mistaking a directive's instance with just about anything else at my level 0.o
+Elarcis: icebox: how did you find the commit? just curious
+None
+Elarcis: icebox: ah, git blame
+icebox: Elarcis: yep
+Elarcis: WELL THANKS IGOR
+Elarcis: YOU DICODICO
+Pyrrhus666: YETH MATHTER. THANK YOU MATHTER
+Elarcis: IL VA RANGER SA BRIOCHE LE MATHTER
+Ownix: git blame is pretty powerful...
+zomg: inb4 Foxandxss shows up
+zomg: lol
+Pyrrhus666: sorry, I only read the english version :)
+Ownix: I wish TFS had that
+Elarcis: Ownix: my ex-PM used it whenever someone did something stupid with the code
+zomg: or actually he won't, he's playing codblops
+Elarcis: Ownix: it often fell back on me ;u;
+zomg: :P
+Elarcis: Ownix: it actually does
+Elarcis: Ownix: right click on your file, there should be an option to show who edited each line last
+None
+Ownix: Elarcis: that works!
+Ownix: I thought that option was for leaving comments or something...
+None
+Elarcis: icebox: eeeeeeyup
+Elarcis: icebox: that hurts
+None
+Elarcis: icebox: predecessor used a complicated set of functions, Object.Create() and other stuff because he used merge everywhere and it removed half the code
+icebox: Elarcis: not easy choices
+Elarcis: icebox: I don't get it
+icebox: Elarcis: for a full and solid merge implementation, angular should use an external lib (lodash, for instance)... and for the router, if angular2 one is not back ported, the only choice is ui router
+Elarcis: ah
+Elarcis: icebox: isn't ng-router a good choice anymore?
+Elarcis: icebox: also, I haven't learned how to use angular 2's router yet, is it any good?
+icebox: Elarcis: it is like ui router
+Elarcis: icebox: I don't get it, I thout ui-router was better
+icebox: Elarcis: sure... but not in the angular family
+Elarcis: icebox: ah
+Elarcis: icebox: I thought ng-router was angular-made o_o
+icebox: Elarcis: link for ng-router?
+icebox: Elarcis: ngRoute, you mean?
+Elarcis: icebox: wait, they're not the same?
+Elarcis: XDD
+Elarcis: holy hell I thought they were for two year
+Elarcis: *years
+icebox: Elarcis: :) ngRoute doesn't support nested and multiple views
+None
+Elarcis: icebox: me neither
+Pyrrhus666: it&acute;s a demo. uses angular&acute;s own router (v3.0.0)
+Pyrrhus666: yay for naming things
+Elarcis: life is pain, welcome to hell
+Elarcis: sorry, got a brief flash of lucidity
+kblin: I've got a webapp that can trigger a download based on user interaction. I'm building whatever is downloaded based on the user request, so at the time the user submits the request, I have no clue how large the request is
+kblin: on the server side, I can guesstimate the size after a second or two, and would like to abort the download if it's over a certain size
+Pyrrhus666: &uml;liberate me ex infernis&uml;
+Pyrrhus666: sorry, event horizon flashback :)
+Bent0: I need to easily be able to access the Code and Value properties of the Fields array. How can I do so? The array isnt keyed and the numbering is always different. So I cannot just do front.Fields[0].Value to get the firstname.
+Elarcis: Pyrrhus666: is it ag
+Elarcis: Pyrrhus666: ood movie?
+icebox: kblin: that is a server side affair, isn't it?
+Pyrrhus666: Elarcis: I love it. good combo of sf, suspense and gore.
+Bent0: Preferably I would like it to be an object. So I can do: front.Fields.2102 and it will get the Value
+kblin: icebox: yes, that part I can figure out. but I'd like to show a nice error message in my app if the download is aborted
+None
+Elarcis: Bent0: front.Fields.find((field) =: field.name === 'firstname').Value
+icebox: kblin: and what is the issue?
+Elarcis: Bent0: ah. then front.Fields.find((field) =: field.Value === 'FirstName').Code;
+Bent0: lets see
+kblin: icebox: I can't figure out how to catch that an error happened in my angular app
+Elarcis: Bent0: could do a function where 'FirstName' is replaced by your parameter
+Bent0: I was hoping there to be some JS/Angular function to convert the whole shitty thing to named objects :P
+Elarcis: Bent0: there isn't
+Elarcis: Bent0: that's JS
+kblin: at least not in the right place, where my $resource transformResponse hasn't mangled the response yet
+icebox: kblin: that depends on the api
+icebox: kblin: ah... you are using $resource
+Elarcis: Bent0: maybe using the map() function, but the code depends on what you want
+icebox: kblin: no error handler?
+Elarcis: Bent0: probably a forEach since you want an object and not an array
+kblin: icebox: that was the example I found for using the FileSaver.js stuff with angular
+Bent0: Elarcis: This doesnt work: console.log(front.Fields.find((field) =: field.Value === 'Firstname').Code);
+Bent0: app.js:90 Uncaught TypeError: Cannot read property 'Code' of undefined
+None
+kblin: icebox: so the thing is that in the success case, my ContentType is text/csv or the like, in the error case it's application/json. And it seems like I'm always getting text/csv in the error handler
+Bent0: lemme see
+Elarcis: Bent0: you forgot capital N
+Bent0: That did not work so I changed to to lowercase as Firstname is lowercase in the Array
+Elarcis: Bent0: also I'm not your code-mom, you're grown up enough to check for errors in code :3
+Bent0: yeye :)
+icebox: kblin: no idea how the api is implemented
+icebox: kblin: in terms of headers
+icebox: kblin: to catch an error you need to use an error handler
+kblin: icebox: headers look fine if I curl a too big request manually, let me pastebin
+Bent0: Elarcis: That last function works flawlessly. Thanks for that
+None
+icebox: kblin: :) and what?
+kblin: so that's how the API responds
+icebox: kblin: you need to catch a 400 response
+icebox: kblin: that is the point
+kblin: icebox: on the $resource?
+icebox: kblin: google it for a few hints
+Elarcis: icebox: I googled it and only found info for an horror movie :c
+None
+Pyrrhus666: with a clown by any chance ?
+kblin: icebox: yeah, sure, I also tried .catch() on my promise
+kblin: icebox: but at that point my data object is always mangled by my transformResponse function
+icebox: kblin: I am afraid if you don't provide a minimal working plunker reproducing the issue, I cannot follow you
+Elarcis: Pyrrhus666: never saw that movie, dunno if I should
+Pyrrhus666: Elarcis: me neither. the book was good though.
+Elarcis: Pyrrhus666: last horror movie I saw was The Descent, and it made me wake-up in the middle of the night screaming like a possessed man
+icebox: kblin: it is not about .catch of a promise... it is the error handle of $resource call
+icebox: kblin: *handler
+kblin: icebox: sure, but Resource.query().$promise.then(..., function (error) {console.log(error)}) gives me error object that's been modified by the transformResponse function I set on the Resource's query action
+Pyrrhus666: Elarcis: hehe. guess horror isn&acute;t your thing then. I only had problems after  wathing ringu and ringu2 in one sitting :)
+SaltyCatFish: Does anyone use Docker in their typical workflow?
+Elarcis: Pyrrhus666: (although I didn't find it that frightening, just unnerving and overly gore)
+icebox: kblin: ok... and what is the error? a text, a stringified json?
+Pyrrhus666: Elarcis: gore is always a plus, for me :)
+icebox: kblin: what is the issue with that error?
+Elarcis: Pyrrhus666: I mean we get it, she gets biten in the jugular, she bleeds out to death, no need to make everyone take a bath of blood every two minutes
+kblin: icebox: the error should be an object with an &quot;error&quot; member that contains my error message
+Pyrrhus666: Elarcis: try some rob zombie movies. the master of slasher horror :)
+icebox: kblin: but? what is the content?
+kblin: icebox: but it's an arraybuffer instead, because that's what I defined on the resource action
+sakustar: Pyrrhus666: rob zombie has made a decent movie?
+icebox: kblin: I am afraid I am missing something
+icebox: kblin: sorry
+kblin: so I guess basically if I can figure out how to go from arraybuffer to json, I'd be all set
+icebox: kblin: I am not sure you should do that
+Elarcis: Pyrrhus666: I don't know. I mean I liked The Shining a lot. That's the kind of fear I liked: uncanny and stressful.
+icebox: kblin: from the docs &quot;By default, transformResponse will contain one function that checks if the response looks like a JSON string and deserializes it using angular.fromJson.&quot;
+kblin: icebox: yeah, and I'm using it to return a Blob object instead so I can then use Blob.saveAs() from FileSaver.js
+icebox: kblin: ah.. you are using FileSaver... an hidden detail :)
+Pyrrhus666: Elarcis: personal preference I guess. I don&acute;t really care for the shining. oh well :)
+icebox: kblin: anyway I am lost without a plunker to debug :)
+kblin: icebox: ah, sorry, I mentioned that before, but it might have been obfuscated enough to miss it
+icebox: kblin: sure you mentioned it &quot;that was the example I found for using the FileSaver.js stuff with angular&quot;
+kblin: icebox: thanks for the help so far
+icebox: kblin: but usually we need to separate stuff for an effective troubleshooting :)
+kblin: I've not had much luck getting anything to work with angular and plunker, unfortunately
+aperyon: hi guys! im having concurency and/or fileconflict issues with karma, can anyone help please?
+icebox: kblin: I see
+icebox: aperyon: is this karma channel?
+aperyon: nope but karma is by angular, and karma channel is basically empty
+aperyon: and i assume you test your code :)
+icebox: aperyon: karma is not by angular :)
+kblin: icebox: I'll try again, but anything beyond the most simple hello world thing I've not managed to get to work in plunker
+None
+icebox: aperyon: sure... it is used by angular... but it is not by angular
+aperyon: ok so i cant ask about testing here right?
+icebox: aperyon: sure... I said that only to warn you maybe you don't get an answer
+nishu-tryinghard: anyone know how to make the uib-navbar toggle work at lower resolution?
+aperyon: i think i can get more answers here than in #karma with 5 roommates
+Elarcis: aperyon: haha
+icebox: aperyon: ah ok... it seems it is better looking for the lost keys close to a light, instead of close to the place where the keys are :)
+aperyon: pretty spot on terminology :)
+icebox: aperyon: anyway I didn't catch those kind of errors with karma
+icebox: aperyon: any error?
+icebox: aperyon: meaning, any message error?
+aperyon: the problem is, that you pass everything into the files section in your karma config
+aperyon: now if i focus only on describe, then tests will break as other imported files (in karma config) will break
+aperyon: but this could be circumvented, if i comment those out as well
+aperyon: the big problem is
+aperyon: i can run my set of tests 16 times and on the 17th it will break
+aperyon: not a specific test, but phantom js throws an error
+aperyon: no failed tests, just an error
+icebox: aperyon: I understand...
+icebox: aperyon: there is an async call failing
+aperyon: its fullcalendar related, if you ever used it
+Elarcis: aaand, I'm off, bye!
+aperyon: yes, i assumed its something with async
+icebox: Elarcis: ciao
+Elarcis: aperyon: used it on an old project, but not in an angular way
+Elarcis: aperyon: and even less in a unit testing way x)
+aperyon: my problem is about fullcalendar but it could be anything tomorrow
+icebox: aperyon: I am afraid you need to provide a minimal working plunker, reproducing the issue, because that could be a nasty problem to identify without any code
+icebox: and really I need to go
+icebox: off... bye
+aperyon: bye
+quangl: is gopher dead?
+quangl: hi
+zomg: quangl: since 1996?
+zomg: :P
+quangl: ok
+quangl: do u think university of minisota felt like they lost?
+geoid: aperyon this is a problem with phantomjs in general... it's hard to debug. It should provide some information with the error though.. like file name and line number.
+geoid: quangl gopher has gone underground :D
+AxldenieD: Hello :)
+tombee: Does anyone have any suggestions on how I could $http POST the contents of a file (via an input[type=&quot;file&quot;] field) that is potentially large (not using multipart).  I'm finding that FileReader on a 190mb file just crashes the browser.
+None
+shyman: Hi guys
+amergin: that is, by using ng-file-upload
+zomg: tombee: I don't know if that would work via $http since it doesn't support FormData iirc
+shyman: I'm using Angular 2, but I'm getting Error 401: the request applied lacks valid authentication credential
+shyman: That when consuming a GET Backend Service
+zomg: tombee: you can try sending it manually via XMLHttpRequest and FormData
+shyman: The thing is that I've been testing it with Postman and this GET service works.
+tombee: amergin, zomg: thanks..
+shyman: I'm passing the headers as an instance of RequestOptions
+tombee: I've been testing out ng-file-upload already, but I couldn't get it to stop using multipart form data.
+shyman: and it's a valid authentication Token.
+tombee: amergin: going to try out the suggestion in that issue
+shyman: Any suggestion?
+jpstone: I have an input with a button attached with unique formatting that i want to reuse. so i want to create a component. but, we need custom validators on the reused components, which is a directive on the input. how can i attach those custom validators dynamically using the component-style?
+zomg: jpstone: you could probably have an attribute on the component for defining that?
+jpstone: right, but all of my validators are in directives right now
+zomg: or even with a directive if you just expose some api from the component's controller that can then be used in the directive to add those validators
+jpstone: which are attributes directly on the input element
+zomg: ok, so the directive does something with the ngModel to add the validator or..?
+jpstone: yeah, i would likely have to expose the methods inside the directive
+jpstone: ctrl.$validators.whatever = whatever
+zomg: yeah something like that would be doable
+jpstone: i would have to expose whatever
+jpstone: hmm ok
+zomg: ctrl.addValidator(stuff) too if you don't want to have all the details directly like that
+jpstone: sounds like a sane solution
+jpstone: a bit of refactoring to expose them
+jpstone: but no big deal
+zomg: it might be possible to make the component look like it's an input with an ngModel too
+None
+zomg: so you can just plug a directive that would work on a normal input into it
+jpstone: and then i could have a directive on the component...&quot;addValidators&quot; and loop through the binding and add them like that
+dentalfloss: Hey guys, I'm just looking for some advice on architecture for an angular2 app (relative newbie). Anyone have a moment?
+dentalfloss: I have a login page that needs to have a different template than the main pages (behind the login page). i.e. it doesn't have a navbar or anything like that. It's not clear to me how to structure this because I'd like to have the main app template living in app.component.html, but how can I override that for one particular route?
+falkkk: some one worked with ng-touch here?
+Satenik: Hi
+Satenik: glad to join
+GreenJello: hi Satenik :-)
+None
+marc_v92: I know this isn't directly an AngularJS, but hoping someone here might have some insight. I'm using the Angular-Material framework, but when I click an md-menu: item, it breaks my page layout, because it sets the body: tag to a fixed position with a -232px top position, so every other fixed position element on my page also gets shifted by -232px and it looks broken. Has anyone here experienced this?
+marc_v92: isn't directly an AngularJS question*
+wrkrcoop: do you recommend localstorage or $cookies?
+zomg: wrkrcoop: if you only need browser access, localStorage
+zomg: since it's only accessible in the browser
+wrkrcoop: zomg: what other kind of access is there?
+zomg: cookies could be accessed from the server since the browser sends them on each request
+wrkrcoop: oh &hellip;.
+wrkrcoop: zomg: do u know what the standard way is for sending session id to the user from the backend?
+zomg: cookies :)
+wrkrcoop: zomg: and do cookies get sent in the body or headers?
+zomg: headers
+wrkrcoop: hm ok
+None
+wrkrcoop: so i import $http in many controllers &hellip;
+wrkrcoop: does that mean i have to set up config in all those places?
+wrkrcoop: this.http = $http({withCredentials: true})
+wrkrcoop: sorry not import, inject
+None
+jr3: also if I wrap vm.verificationEnd in {{}} it complete breaks
+None
+wrkrcoop: when i call this method it doesnt seemt to call my backend, i just get net::ERR_EMPTY_RESPONSE
+wrkrcoop: current hunch is its a preflight thing
+jr3: It seens that having a directive in a dynamic modal creates some interesting databinding side effects
+jr3: I think the link function is executing before the scope is ready or the data on the scope is redy
+bzitzow: Hi
+bzitzow: We have a directive that uses ng-repeat in it&rsquo;s template and the ng-repeat is rendering a collection of 10k items
+bzitzow: I&rsquo;d like to do the initial rendering of the template outside of ng-repeat
+bzitzow: and then allow ng-repeat to use it
+bzitzow: I&rsquo;m hoping someone else has come across this or can help me fill in the blanks in how I might go about this
+bzitzow: Is there a way I can extend/override ng-repeat or should I be looking at writing my own directive?
+bzitzow: Should I be decorating ng-repeat and override the compile function?
+CanyonMan: OMG I think it's running      16/10/03 16:12:56 INFO mapreduce.Job:  map 1% reduce 0%
+CanyonMan: Error: org.apache.hadoop.hdfs.BlockMissingException: Could not obtain block: BP-1320112430-10.240.2.250-1475337472052:blk_1073777890_37116 file=/tmp/hadoop-yarn/staging/hadoop/.staging/job_1475525376574_0001/job.split
+CanyonMan: wrong channel, sorry
+CanyonMan: :(
+Ami_: Hello
+Ami_: I have question about angular logic
+Ami_: how to get the HTML TABLE Particullar Cell Value using angular js file
+Ami_: i have javascript code
+Ami_: script language=&quot;javascript&quot;:          var tbl = document.getElementById(&quot;tblMain&quot;);         if (tbl != null) {             for (var i = 0; i  tbl.rows.length; i++) {                 for (var j = 0; j  tbl.rows[i].cells.length; j++)                     tbl.rows[i].cells[j].onmouseover = function () { getval(this); };             }         }          function getval(cel) {             alert(cel.innerHTML);         }     /script:
+Ami_: But i don't know how to do it in angular this is my first time to doing it
+aiglesias: hi
+Ami_: hello
+Ami_: Are you helper?
+aiglesias: i can help for sure
+aiglesias: will stay around
+Ami_: okay so I have a question in angular this is my first time using so i need help
+aiglesias: question: can i add ui-router to handle just one state?
+Ami_: how to get the HTML TABLE Particullar Cell Value using angular js file
+aiglesias: Ami_: have you read an Angular tutorial before?
+Ami_: yeh
+aiglesias: Ami_: you may want to check directives
+aiglesias: if you want to play with the DOM
+Ami_: I actually using a DOm
+Ami_: here is my javascript code
+Ami_: script language=&quot;javascript&quot;:          var tbl = document.getElementById(&quot;tblMain&quot;);         if (tbl != null) {             for (var i = 0; i  tbl.rows.length; i++) {                 for (var j = 0; j  tbl.rows[i].cells.length; j++)                     tbl.rows[i].cells[j].onmouseover = function () { getval(this); };             }         }          function getval(cel) {             alert(cel.innerHTML);         }     /script:
+Ami_: Can you translate this code in angular for me?
+magellanicloud: You are missing basic stuff. I would recommend reading a tutorial.
+NTrash: is angular 1 now deprecated?
+Ami_: okay thanks
+Mr_Grim: what's a good tool to compile Ecma script 6 to Ecma script 5?
+Mr_Grim: I want to do my next angular project using 2.0
+aiglesias: Mr_Grim: you may want to check TypeScript
+aiglesias: you could also use Babel to transpile ES6 into ES5, but since the community is moving towards TypeScript, you may better check that
+None
+jr3: line 1 reads it just fine
+NTrash: Do people here know angular 2?
+Mr_Grim: ok
+Mr_Grim: TypeScript it is
+Snugglebash: Hey, I have 5 custom directives in separate .js files. I want to keep them in separate js files. is there a way to add them to my index.html with a single line?
+Mr_Grim: Im learning Angular 2.0
+Mr_Grim: And TypeScript
+Mr_Grim: Im reading like crazy and going through GitHub and looking at code
+ries: When using $state.go (&hellip;.) and you stay on the same state, but the params change, does angular still fire event&rsquo;s when reloadOnSearch is set to false?
+dentalfloss: I have a login page that needs to have a different template than the main pages (behind the login page). i.e. it doesn't have a navbar or anything like that. It's not clear to me how to structure this because I'd like to have the main app template living in app.component.html, but how can I override that for one particular route?

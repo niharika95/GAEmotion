@@ -1,0 +1,984 @@
+effjeess: hey guys, I'm looking at spinners for $http, does it have an auto time out though where it will eventually fail if no response?
+effjeess: something set by default, just so it resoles to something eventually
+None
+effjeess: COOL thanks i really didnt want to add $timeout
+effjeess: i'm using angular and bootstrap, I'm pretty sure I've seen it where you set it up to make a short alert popup but it is only TEMPORARY, is the timer based on an angular timeout to close a display or is there some auto magic way to hide the alert
+effjeess: like hide &quot;success&quot; message after 5 seconds
+effjeess: i guess its called a Flash message and it seems I need to add a timeout to revert from success to fail
+wafflejock: effjeess, depends on the directive you use for showing those messages most of em I've seen allow you to specify a timeout on the provider during config or per message you show
+wafflejock: effjeess, check out angular toast or angular growl v2
+effjeess: I'm really new to angular so just trying to stay vanilla
+effjeess: but with bootstrap
+wafflejock: effjeess, yeah you can do it yourself but might as well check out the code that's out there for ideas on how to organize things
+effjeess: is a directive like a module?
+effjeess: for node
+theblang: is the one-way binding syntax only available for components, or can I use it in declaring isolateScope for directives?
+wafflejock: a directive allows you to specify some code that will run when something is found in the markup, it's the way you should do any sort of DOM manipulation or add behaviors to elements
+wafflejock: effjeess, like when you see ng-if or ng-class or ng-click all those things are directives, just ones that are built into the framework because they're common cases
+effjeess: ok, look like i should study that up a bit righ tnow
+effjeess: i learned react before this, and I see where angular can be so much easier if I have simple forms and not really worrie about dynamic displays
+None
+wafflejock: Think if you get that and the dependency injection and guess the $digest cycle then you'll have a pretty good grasp on a lot of the under workings of angular, can also hit the view source on directives in the reference to see how they work
+Null_: hey, am I able to import export controllers, or do I have to use the include them on my html page, and this is without using some babel like transformer
+theshadowmonkey: Hey, can we use a string to pass to ng-pattern and use new RegExp ?
+zomg: theshadowmonkey: try it and see.. iirc it just takes an expression, thus as long as it looks like a regex it oughta work
+theshadowmonkey: zomg, I tried using a string and converting it and it doesn't work. For e.g.; new RegExp('/^\d{10}/') doesn't work but assigning /^\d{10}/ directly works
+wrkrcoop: if i make a post request and get a 200 response, i want to load another page &hellip; should i be redirecting the user? is the best pratice to use state.go?
+theshadowmonkey: wrkrcoop, You can use state.go if you are having states. And save the post response or data state in a service
+zomg: theshadowmonkey: odd
+zomg: theshadowmonkey: perhaps try regex.toString() where regex is from new RegExp?
+theshadowmonkey: wrkrcoop, Thats the best pattern I have seen everywhere. using $location is another way, but state.go might be better
+wrkrcoop: theshadowmonkey: well i have using $stateProvider &hellip; im guessing that means im using state right?
+wrkrcoop: ok ill use state.go
+zomg: wrkrcoop: the answer depends on how your app works
+zomg: if your app is already using states, and there's a state which represents the result of this request, then yeah state.go
+wrkrcoop: hm ok
+wrkrcoop: thanks
+theshadowmonkey: zomg, But the ng-pattern expects a regular expression on the scope and not a string
+wrkrcoop: and i imagine i need to inject $state in my controller yeah?
+zomg: theshadowmonkey: if it does then new RegExp should work, ie. $scope.foo = new RegExp(stuff)
+theshadowmonkey: Yeah I am using $scope.foo = new RegExp('/^\d{10}/') doesn't work as expected
+theshadowmonkey: zomg, btw Im using this inside of a directive
+zomg: what's the problem with that?
+bisch: theshadowmonkey, = new RegExp('foo'); seems to work just like = /foo/; and just using plain string: = 'foo'; seems to be the same as = /^foo$/;
+bisch: theshadowmonkey, but, you probably meant to do new RegExp('^\d{10}'); which doesn't seem to work either but new RegExp('^[0-9]{10}'); does - for me at least..
+scssquatch: Hey all, when you're using &quot;controllerAs&quot; how do you decide what to name that? Trying to balance clarity and brevity.
+scssquatch: like.. indexCtrl? resourceName:Ctrl?
+scssquatch: in this instance my resource name is far too long to be repeated all over my markup
+bisch: scssquatch, vm
+scssquatch: but then what if you have nested controllers?
+rand0m: Null_
+rand0m: you still here/?
+Null_: yup
+Null_: i realize browser can't do import
+bisch: you rand0m
+rand0m: hey you bisch
+theshadowmonkey: bisch, thanks. I'll try a different one and see
+rand0m: Null_, I suggest you look into yeoman generators for angular
+rand0m: they usually have a project set up with controller exporting, etc
+Null_: yeah, i'm trying to stick pretty simple, I come from node so i though it might be easy to do, but after some research just gonna include into html with script tags
+scssquatch: does everyone use 'vm'?
+Null_: oh how do I print out scope, like i have lots of variables in scope, i can do {{form | json}} for my form variables, but is there anyway to output everything set in scope
+scssquatch: so like.. 'vm' is the _main_ view model controller but if you need a nested controller give it a name?
+m0ltar: Can't wrap my head around this. Q about ng1. I'm using router ui and need to define a section on the page that is shared by the entire application (e.g. status messages or nav). I was successful doing that. However, when I call $stage.go('^.list') from &quot;.add&quot; stage and I add a message to the service I created that is supposed to be displayed in the message view (&quot;successfully created...&quot;) the message is not displayed. Seems like during state change
+m0ltar:  the whole service gets reset...
+scssquatch: could you add a $stateChangeSuccess watcher and inject the flash message service and post there assuming there's a message?
+kinabalu: I'm looking to consume an API that has hypermedia links instead of PK's everywhere.  I've been using Restangular normally, how would I go about consuming this API so that I can grab the URI from the API and use it?
+Null_: how do you i know when I can just do .controller('MovieController', function($scope, $http){ or I need to use the array format with ['$scope', '$http', function?
+martin_langhoff: tap tap tap - is this thing working?
+Null_: YES HELP ME !
+martin_langhoff: heh :-)
+martin_langhoff: I'm on Angular 1.2 + ui-router, and having a v odd situation, can't spot any docs that'd help
+Null_: HOW DOES THAT HELP ME?
+martin_langhoff: in summary: I have a service that manages a complex directive (angular-ui-calendar, wraps fc-calendar)...
+martin_langhoff: when calling $state.go() the new scope gets setup before the old scope gets torn down.
+martin_langhoff: even if I say {reload: true }
+martin_langhoff: in $state.go()
+martin_langhoff: my complex service does good cleanup / gc, but it depends on $scope.destroy events firing before the new scope is brought up
+mst: Null_: the prototype parsing is fine in development but minification wants the array format so it can squish the function parameters
+mst: Null_: so you can do it fine for the moment, but please go clean it up before you go live (I do that for experimentation all the time btw)
+Null_: OOHHH ok, you some kind of rocket scientist
+Null_: very smart man
+Null_: swimming in sea of women no doubt
+Null_: hey is there a difference between .catch and .error when using $http?
+wafflejock: mst, you can use a plugin to add the annotations for you before the minification step this way can't mess up the order of the strings compared to the arguments and less code to look at and type
+ClaraRockbelll: hi there
+None
+fjeekssslaa: guys i'm using GET to update my field's data on button push, to update my existing $scope data, is lodash the best method to update the object easily?
+None
+None
+wafflejock: GhostChilli, you probably want ng-src
+wafflejock: GhostChilli, but also you should try to avoid doing DOM manipulation anywhere except in directive code and just use directives like ng-if ng-show or ng-hide to toggle if something is displayed or with ng-if removed from the DOM conditionally
+GhostChilli: Yeah, it's a bit of a hack job between jquery and angular. I'll see if I can work that into the project.
+wafflejock: GhostChilli, meaning places you do $(id).show() or other jQuery stuff that is &quot;reading&quot; the view from the controller and setting properties, rather set a property in the model referenced by the scope (or on the item js objects themselves) then use directives in the view referencing the data
+wafflejock: cool
+feejss: i have a strange problem, at the top of my controller I call a function  getCompany() which is supposed to pull data, and I have function getCompany() {} defined in the same controller, but it seems like its not being hoisted properly, any suggestions?
+feejss: oh i figured it out, it was hoisting, but I put it too high so a variable I needed asn't getting set
+nishu-tryinghard: why the filter parameter are not updated when the param in changed, this only happens when the param is an object and the one of its key is changed. created a plunkr v
+None
+jabowa: Hello, has anyone tried using the angular2 (with the ng cli) alongside an express server?
+wafflejock: nishu-tryinghard, when you do this active: $scope.filter_options it is copying the value of 1 not the reference to the original number
+nishu-tryinghard: wafflejock, i was thinking that as the filterObj changed it should reflect that in the filter.
+wafflejock: nishu-tryinghard, right but filterObj isn't being changed only filter_options is
+wafflejock: nishu-tryinghard, that change doesn't get reflected in the part that set the active properties value because that happened earlier and it isn't updated and it had just copied the value not a reference
+nishu-tryinghard: wafflejock, i got an idea let me try something and will get back ty for the hint
+wafflejock: jabowa, I haven't what's the issue though?
+nishu-tryinghard: wafflejock, but as per js if i initialize the value it is reference that is applied instead of copying the value.
+wafflejock: nishu-tryinghard, nope even if it has a value it's still just copying that value, if you had an object then you could have two references to that same object and when you change a property of the object then it would be reflected by both references, but with ints or strings that's not the case
+None
+wafflejock: nishu-tryinghard, even in the case of an object though we are making a copy of the reference not using the original reference so if we point one at a new object or value it wouldn't change the other pointer and object
+wafflejock: but you change a property of the object and it's reflected from both references to that object
+nishu-tryinghard: wafflejock, ty for the explanation that was helpful and clear
+wafflejock: no problem glad you were able to decipher that :)
+Elarcis: hi
+wafflejock: o/
+nishu-tryinghard: wafflejock, ah, that was just so dumb of me.
+wafflejock: nishu-tryinghard, it's okay you were probably just trying to hard :)
+wafflejock: too*
+nishu-tryinghard: wafflejock, i have already worked on a whole website and couldnt catch that one eheeh, yes it would have been if i just started
+wafflejock: nishu-tryinghard, if you were writing C it would have been the right thing to do, just slap a &amp; on there and call it a memory leak
+nishu-tryinghard: yes i worked on c and C++ before started working on javascript and still code on some online Judge to solve problems
+ngWalrus: you can write C for the web
+wafflejock: ah nice yeah just blame it on the background :) I occasionally dip into C++ stuff playing with things like OpenFrameworks for getting data out of a kinect or messing with their other APIs lots of cool stuff in there
+None
+nishu-tryinghard: wafflejock, no blame i just mess up things badly and have to tryhard to recollect things
+nishu-tryinghard: wafflejock, in the plnkr the li doesnt have the click event set as llink function is executed even before the ng-repeat is done
+wafflejock: nishu-tryinghard, hmm yeah probably easiest way is to just have the directive applied directly to the li's instead of using the ul as a way to find the ones inside of there
+wafflejock: nishu-tryinghard, the post link for the ng-repeat should run before the parent's post link I'm pretty sure but in a real scenario probably accounts is async but even in this case seems it doesn't have the li's stamped out by the time your directive runs
+wafflejock: only other way I could see is to have your directive watch the accounts as well so it just updates sometime shortly after the accounts is populated, but directly on the li seems easiest
+nishu-tryinghard: yes i thought of different ways, but this case can be a good way to learn more about directive life cycle and how nested directives work
+None
+wafflejock: I just had the &quot;talkative&quot; directive put stuff into the log and into an array to show as each part of the directive definition gets called
+wafflejock: but in this case think it has something to do with the fact that ng-repeat is watching the accounts and actually making the elements on changes to that array
+nishu-tryinghard: wafflejock, so we need to make use of postLink to achieve this?
+wafflejock: nishu-tryinghard, well the regular link you're using is post link actually so what you're doing is &quot;right&quot; it's just not later than when the ng-repeat is doing it's work, would need to dig into the ng-repeat source here to know for sure, but running out for a few
+nishu-tryinghard: wafflejock, will get back to after a while if i have any progress
+wafflejock: cool gonna let my headphones charge for 5 then gonna run out for like 20 min probably
+nishu-tryinghard: wafflejock, whats the time there?
+wafflejock: going on 1AM for me near Chicago
+nishu-tryinghard: and you are going for a run at that time!?
+wafflejock: I always get on these weird sleep schedules though so gonna go cruise on the e-skateboard while the roads are open :)
+wafflejock: haha
+nishu-tryinghard: cool have fun
+GhostChilli: after creating a series of elements using ng-repeat, I need to register event handlers on them. Any idea how?
+zomg: GhostChilli: to do what?
+zomg: in general you can use ng-click or such
+GhostChilli: It's using the jquery UI draggable function. So I dynamically load and paginate images, but each image needs the 'draggable' event applied to it
+zomg: so it's something like $(element).draggable(stuff) ?
+GhostChilli: Yeah, after the ng-repeat has finished creating the dynamic elements, I need to do $('#draggable).draggable({params...});
+None
+zomg: if not, then the best way to do it would probably be to create a custom directive for it
+zomg: so you can then do something like div my-draggable: ...
+zomg: where my-draggable is the directive, which can then acccess the ele as it's created and can do whatever with it
+ngWalrus: GhostChilli  if you have not looked in to Dragula you should
+ngWalrus: if you can change your drag and drop
+ngWalrus: lib thing
+GhostChilli: Any library is fine, I just need to drag images from a gallery to a favourites panel (and neatly stack them)
+ngWalrus: well even if you can't it's worth looking at for future projects that might need drag and drop
+None
+GhostChilli: That looks very nice
+mbarra: hi guys, I'm looking for a good tutorial for beginners, someone?
+ngWalrus: angular docs are a pretty good place to start
+GhostChilli: I think I'll give that a shot instead of what I'm working with. Cheers
+mbarra: I mean, a course about AngularJS, something like that
+wafflejock: nishu-tryinghard,  back how's it going?
+None
+None
+Elarcis: hi icebox
+icebox: Elarcis: hey
+ngWalrus: oh man
+None
+nishu-tryinghard: wafflejock, hey was having bath and just now had breakfast. brb in 5min
+parimal: hi
+parimal: can someone explain how angular js is fatser than pure javascript
+ngWalrus: uh what
+icebox: parimal: well... if it is true, that is good :P
+ngWalrus: faster to develop with maybe?
+None
+Pyrrhus666: read that last night. although it sounds cool, I couldn&acute;t help thinking how &acute;facebook&acute; is rapidly becoming an ecosystem in and of itself.
+icebox: Pyrrhus666: agreed
+ngWalrus: wait
+ngWalrus: does this mean I don't have to use the steaming pile of excrement that is npm
+Pyrrhus666: ngWalrus: the client, yes. the registry, no.
+ngWalrus: the client is the biggest problem
+Pyrrhus666: I know, but just to be clear :)
+ngWalrus: soon I won't have to use any non-facebook technologies
+ngWalrus: :^)
+Pyrrhus666: ngWalrus: switch to react and flow today !
+ngWalrus: but since they pretty consistently seem to release good shit I don't see a problem
+Pyrrhus666: ngWalrus: that&acute;s how they lull you into it ;)
+Pyrrhus666: although you are right in the sense that until now it&acute;s all been good.
+ngWalrus: well the popular stuff at least
+Pyrrhus666: from HN about npm being shitty : &uml;You're not a package manager if you're not managing packages!! You're a glorified wget.&uml;
+icebox: Fragmentation is a bit evil... I don't understand because people doesn't contribute
+Pyrrhus666: icebox: I don&acute;t really understand the last part of your statement ;)
+icebox: Pyrrhus666: forking vs. contributing
+icebox: Pyrrhus666: same illness in js frameworks :)
+Pyrrhus666: icebox: it&acute;s everywhere in open source.
+None
+ngbot: angular.js/master 4f44e01 mohamed amr: fix($parse): treat falsy values as defined in assignment expressions...
+icebox: Pyrrhus666: especially in js realm
+wafflejock: meh think it's good for things to get forked a bit so people can try other things and if something works better can be the new mainline or can have it's bits that are good pulled in
+icebox: Pyrrhus666: I don't see a lot of Boost C++ libraries clones
+wafflejock: think fragmentation sucks when it's within some platform you're trying to deploy to like in the case with Android
+icebox: wafflejock: agreed... a bit fragmentation is good for innovation
+wafflejock: ya dunno about the yarn thing either though, buddy dropped me the link yesterday, performance improvements look mostly good on paper but thought npm 4 is meant to do a much better job by reading all the package.json files up front
+wafflejock: unfortunately no idea when that will be released
+wafflejock: seemed weird to me that they say yarn does a checksum but if it uses the npm registry not sure why the registry would provide the checksum and npm install wouldn't use it
+Pyrrhus666: they seem to proxy npm (for now) through their own registry (regisrty.yarnpkg.com). maybe they added the checksums there ?
+Pyrrhus666: could it be the old &uml;embrace, extend, extinguish&uml; ?
+harsha: hello sir
+harsha: i am trying to install angularjs1* version
+None
+wafflejock: icebox, oh nice... I was on that page but stopped reading after 3.10
+wafflejock: hah
+icebox: harsha: cool
+wafflejock: Pyrrhus666, yah could be sucks having another point of failure for all the packages
+harsha: but i am facing difficulty with downloading
+Pyrrhus666: wafflejock: in a couple of years you&acute;ll be just programming in &acute;facebook&acute; ;)
+icebox: wafflejock: I suppose npm 4 will be released with nodejs 7
+icebox: harsha: well... we cannot fix your networking issues :)
+harsha: I mean I am getting error while in the installation process
+wafflejock: Pyrrhus666, yup have an occulus on hacking time on the facernet
+icebox: harsha: installation process?
+icebox: harsha: what are you doing?
+wafflejock: harsha, can use pastebin or the like to show what commands you're using and what error you're getting for some context
+None
+wafflejock: icebox, yeah seems reasonable, the original article my buddy sent me was from one of the developers of Yarn talking about why he decided to get involved with it
+icebox: wafflejock: yep... I read both...&quot;It also solves a number of problems that Facebook was encountering using npm at their unique global scale.&quot; it is a polite sentence to justify the fork
+None
+wafflejock: heh
+icebox: wafflejock: for me it is always NIH syndrome... and nowadays there is a war about the ecosystem... I don't know if it is good or bad on long term
+None
+Pyrrhus666: corporations like facebook (or google or apple or microsoft or ...) rarely seem to act benevolently (if ever), they have their own agenda. so in the long run it&acute;ll probably be bad, unless the corporation itself is superseded by another and the cycle repeats.
+ngWalrus: and that is why typescript is evil
+Pyrrhus666: no more or less so than react, angular and flow.
+Pyrrhus666: at least when programming angular in ts using vscode and yarn you serve the trifecta of evil :)
+ngWalrus: except microsoft is overrepresnted
+None
+Pyrrhus666: ngWalrus: so use vim.
+icebox: ngWalrus: maybe I am too old and my changing adversion is too high :)
+Pyrrhus666: icebox: it&acute;s not an age thing. I love TS :)
+icebox: Pyrrhus666: nowadays there is no editor fulfilling of all the needs a modern workflow pretend... also Vim doesn't suit perfectly to those challenges
+icebox: Pyrrhus666: it is always a matter of 80/20 :)
+Pyrrhus666: icebox: hehe, true :)
+Pyrrhus666: also : I tend to use eclipse, vscode and vim alongside eachother. sometimes even on the same project. my needs are filled, in a way :)
+NiravRaval: hi
+NiravRaval: can someone tell me, if I can use AngularJS 2 for Business purpose (Client Login and all these stuff)
+NiravRaval: or it is only for Static pages ?
+Pyrrhus666: NiravRaval: yes
+Pyrrhus666: NiravRaval: no, it&acute;s meant to be dynamic, mostly for single page applications.
+NiravRaval: ok
+None
+anli_: Will $http.get ensure that the scope is applied?
+NiravRaval: thank you for the link :)
+NiravRaval: i m learning with &quot;angular2-quickstart&quot;
+icebox: NiravRaval: (usually angularjs is angular 1... angularjs 2 is abit confusing, angular 2 is better as reference... or ng1 and ng2)
+NiravRaval: but it shows me live update of the page, which is very good for static page or SPA
+icebox: NiravRaval: SPA is the main use case
+NiravRaval: but when it comes to enterprise level, I have to manage each client seperately
+NiravRaval: because each client has separate data,
+icebox: NiravRaval: sure... are we talking ng1 or ng2?
+NiravRaval: ng2
+None
+None
+icebox: NiravRaval: ng2 is MV*, a framework to build apps using that pattern... you need to use develop your security or session layer... or using a thirdyparty lib
+icebox: *you need to develop
+NiravRaval: ok
+NiravRaval: let me check the link you provided.
+NiravRaval: thank you for your help and guidance :)
+icebox: NiravRaval: you are welcome
+smiche: is there a way to make the one-time binding wait for the object to be initialized?
+smiche: before evaluating
+icebox: smiche: don't fight the framework
+icebox: smiche: if your view needs to wait any resource, use &quot;resolve&quot; feature of the router
+piepl: Hey guys, concerning ng-hide. How to hide a div when javascript is out, but show when js is up
+None
+piepl: thanks ice, will read up with that
+rand0m: morning icebox
+icebox: rand0m: hey
+Ankit: Hey
+Ankit: I want to access an some api in app.config()
+Ankit: How?
+baako: morning guys, Pyrrhus666 can you sent me a snippet of your code? just the bit that shows how you handle error in restangular. Thanks
+Pyrrhus666: baako: generally, I just call a method, like restangularObject:.put().then(success,error); I mean, it&acute;s just promises.
+Pyrrhus666: in my cases, the error handler generally just displays an alert to tell the user something went wrong, the errors are in no way &acute;user servicable&acute; anyway.
+baako: dont you log the error in some file or sent it to the web service to be investigated by someone?
+Pyrrhus666: baako: the orignal error was caused server side, and logged there.
+baako: hmmm
+Pyrrhus666: client side errors are a possibility (the server being unreachable for instance), but aren&acute;t caught separately
+icebox: Pyrrhus666: never recommend .then(success, error) :) ... always .then.catch :)
+Pyrrhus666: you could of course use a third party logger.
+Pyrrhus666: icebox: you&acute;re right, this is code from angular 1.2 days still in use ;)
+icebox: Pyrrhus666: sigh for &quot;still&quot; :)
+runtyrobot: I'm looking for recommendations on how to make an ng-model, which filters between two dates. I have the input fields.
+Pyrrhus666: icebox: if it ain&acute;t broke.... ;)
+runtyrobot: Do I have to make a custom filter of sorts?
+icebox: Pyrrhus666: agreed :P
+Pyrrhus666: runtyrobot: chain 2 filters ? first a simple less than oldest, second greater than newest, the range is left ?
+runtyrobot: Pyrrhus666: Still new to angular, I'll have to read up on chaining filters. Thanks :)
+Pyrrhus666: runtyrobot: just pipe them together with | :)
+Pyrrhus666: (or chain .filter().filter() in code, I guess)
+runtyrobot: Pyrrhus666: I'm looking around trying to find some proper info on it. Could I trouble you for an example? (the date is dd/MM/yyyy, if that makes any difference)
+Pyrrhus666: runtyrobot: ah dates, always fun. I only focussed on the &acute;range&acute; bit of your question at first :)
+runtyrobot: Exactly :P
+runtyrobot: but I would like how the range thing works, either way
+Pyrrhus666: well, you&acute;ll need to get it into a Date object to do comparison first.
+bd-: which you can use a filter to do, filters into filters into filters into filters
+runtyrobot: Alrighty - I'll get on it
+Pyrrhus666: runtyrobot: in this case I&acute;d probably do one custom filter, accepting input, mindate and maxdate. the function returns true/false based on whether input falls in the range.
+runtyrobot: I'll get on it -- see what I can figure out :)
+runtyrobot: thank you!
+Pyrrhus666: runtyrobot: new Date(dateString) should suffice to parse. use Date.getTime() to do comparison
+icebox: Pyrrhus666: comparison works automagically between date objects
+bd-: momentjs also has a nice .isBetween function
+Pyrrhus666: icebox: ah yes. silly me :)
+Pyrrhus666: somehow when doing date stuff I always go to seconds-since-epoch first.
+soee_: is it possible to use query strings n url without breaking angular ? like foo/bar?baz=zet ?
+runtyrobot: I prefer unix timestamp aswell, but it's not as human readable - apparently.
+Pyrrhus666: soee_: yes.
+None
+Pyrrhus666: icebox: you beat me to it :)
+icebox: Pyrrhus666: :P
+None
+soee_: Pyrrhus666, icebox if i use it with html5 mode angular throws: Uncaught Error: [$rootScope:infdig] 10 $digest() iterations reached. Aborting!
+icebox: soee_: it is not directly related to html5 mode... you are changing the model during the digest cycle
+icebox: soee_: maybe your routing is working in an unexpected way, when you apply that change
+icebox: soee_: double check the code and try to narrow the issue... otherwise you may provide a minimal working plunker and we may give a look at it
+Pyrrhus666: juro: what&acute;s the issue ?
+juro: Pyrrhus666, I'm expecting the option: &quot;Application Developer&quot; to be preselected.
+fdsf: hi
+juro: also, I don't understand why Number(83) is null ....
+fdsf: T&uuml;rk&ccedil;e konuşan kimse varmı burda
+None
+Pyrrhus666: juro: don&acute;t you need Number.parseInt() ?
+mralex: Is there a reason why doing $scope.myArray = [] wouldn't clear the array?
+None
+Pyrrhus666: juro: also : Number probably doesn&acute;t work in an angular expression.
+Pyrrhus666: (you can only use a limited subset of js in an expression)
+juro: Pyrrhus666, yes, that would make sense
+None
+None
+juro: icebox, I have added a select using that but don't know how to relate the selected role to the array of roles.
+Pyrrhus666: juro: try inspecting the values of selectedRole (just use {{selectedRole}} in your template. see what happens if you use either the first two select boxes, or the last one.
+Pyrrhus666: the results will enlighten you ;)
+mrbirkov: seems that the npm version needed by angular-cli is different?
+soee_: icebox: its pretty hard to provide small plunker as the app has 5 modules and is a bit complicated
+soee_: i try to find the problem and report back
+mrbirkov: tried to cache clean but not working
+juro: Pyrrhus666, not sure what should enlighten me ....
+Pyrrhus666: juro: in the first two cases, the model value is the name of the role. in the third one the whole array-entry [ &acute;id&acute;, &acute;name&acute; ]. hence your preselection by setting an id doesn&acute;t work.
+juro: Pyrrhus666, I just did it the right way (as per icebox's contribution) and also figured out that I need to provide the same structure. Thank you for your help!
+soee_: icebox: ok seems to be problem with my conditions to set base tag value
+Snugglebash: Hi, I have 3/4 mutually exclusive sub-views, i was thinking of using ng-if to show each. Is there a better way?
+antiPoP: I have this: {{'search.type' | translate}} was compiling fin until a few minutes ago updated te dependencies, now I'm getting errors like &quot;search.ngfactory.ts:1036:41: Property 'type' does not exist on type 'Search'.&quot; . What is happening?
+Pyrrhus666: Snugglebash: routing ?
+Snugglebash: is there routing to subviews?
+Snugglebash: Pyrrhus666: do you have an example? I am newbie
+Pyrrhus666: Snugglebash: I missed the &acute;sub&acute; reference, but yes, with ui-router you can target subviews
+Snugglebash: Pyrrhus666: thanks i use ui-router will check the docs
+None
+Pyrrhus666: Snugglebash: although if you&acute;re really a beginner this might be quite a step up. ng-if&acute;s will work of course, but are not as nice.
+Snugglebash: Pyrrhus666: I been going for a little over a month, almost completely new to html, js, css angular etc...
+antiPoP: any idea? seems something is interpreting a literal as a class
+Pyrrhus666: antiPoP: no idea, sounds like a type definition (Search) is broken.
+antiPoP: Pyrrhus666, how can I check that?
+Pyrrhus666: do you have a Search class/type ? does it have a property called type ?
+temhaa: hello
+temhaa: Can I find certification program for angularjs
+temhaa: Actually I am looking for good certificate program that is supported by angular community
+None
+Elarcis: back
+Elarcis: antiPoP: there's no type property in your Search class
+Pyrrhus666: antiPoP: &acute;types&acute; vs. &acute;type&acute; ? the first exists, the second doesn&acute;t (like Elarcis said)
+antiPoP: re please, seems the conection was lost and I didn't saw Elarcis messages
+Pyrrhus666: Elarcis: antiPoP: there's no type property in your Search class
+Elarcis: antiPoP: there's no type property in your Search class
+antiPoP: Elarcis, Pyrrhus666 check that these errors come from the template, where 'search.type' is a literal, not an object
+antiPoP: and it's intended to be piped to ng2-translate:  {{'search.type' | translate}}
+Elarcis: antiPoP: no, it comes from your typescript file
+Pyrrhus666: antiPoP: the error is not coming from the html.
+Elarcis: antiPoP: what editor are you using? It should show you a big red error where the problem is
+soee_: $location.search() is the best way to grab query string ?
+antiPoP: Elarcis, yes, I see it, the issue seems with   &quot;searchObj: any = {   version: &quot;0&quot;  };&quot; , but iit works with an older version of the modules
+antiPoP: do I need to defined it other way? maybe in the construtor?
+Pyrrhus666: soee_: that&acute;s what it&acute;s for, so yes :)
+Elarcis: antiPoP: holy hell
+antiPoP: Elarcis ?
+Elarcis: antiPoP: I don't know what you're talking about, I don't know what's that search object in your template, I don't know my name anymore
+Wallcraft: Hi
+Wallcraft: someone can debug my page?
+Wallcraft: i don't know why it's not working, in another page the script i wrote works properly
+Wallcraft: in that page not
+uru: Wallcraft: We won't fix your code for you but you can ask questions about specific issues you are having.
+Wallcraft: i got &quot;angular not defined&quot; i check if i missed some ng-app or controller, but not.
+uru: Sounds like you don't have angular's JS included on your page
+Wallcraft: Ah
+Wallcraft: shiet
+Wallcraft: ok
+Wallcraft: that's the problem ahah
+Wallcraft: Thanks ahah .
+uru: No worries
+DelphiWorld: Yo everyone!
+DelphiWorld: who was helping me with my rss reader?
+icebox: DelphiWorld: don't ask to ask
+icebox: just ask
+DelphiWorld: icebox: i am not asking to ask...
+DelphiWorld: i just wanted to give him something back
+icebox: DelphiWorld: nice try... but no questions, no answers
+DelphiWorld: icebox: also it's so cold here, no much ice :P
+None
+Pyrrhus666: like earlier, the Search class has no property called purpose. since there&acute;s only a couple of places you even reference something.purpose it should be easy to find the culprit.
+Pyrrhus666: somehow, that something is seen as an instance of a Search object.
+DelphiWorld: how could i parce this json object:
+None
+Pyrrhus666: DelphiWorld: angular.fromJSON(yourstring:);
+DelphiWorld: Pyrrhus666: i want to create a rss reader but i have no clue..
+Pyrrhus666: well, you can parse the json object like I said. then you have a nice javascript object with content that you can use to do whatever you want. maybe you should start with an easier one, this one looks complicated.
+Pyrrhus666: and if it&acute;s a real rss feed, read up on the rss specifications to see what such an object might contain.
+None
+antiPoP: Pyrrhus666, that error comes from like 86 of the ts file, however In line 77 I'm defining an SearchObj as {} , but the issue is that it seems being interpreted as a Search  object (sorry, I'm new to ts/ng2)
+Pyrrhus666: DelphiWorld: my advise still stands ;)
+Ukats: Unable to decrypt Angularjs Crypto values in laravel 5.
+Pyrrhus666: antiPoP: sounds like the line numbers are screwed up. maybe line 84 ? this.searchObj.purpose = purposeId;
+antiPoP: Pyrrhus666, right
+Pyrrhus666: if you simply comment it out, does it compile ?
+None
+Ukats: Hello
+Elarcis: using reflection is pretty magic when you can use it to simplify and strenghten your code :D
+antiPoP: Pyrrhus666, no , but If I define a purpose property in te Search class it does
+smiche: should I wrap controllers/directives/components with (function(){}();)
+icebox: smiche: as usual in ES5
+icebox: smiche: global is evil
+Pyrrhus666: antiPoP: I&acute;d comment out all the suspect .purpose references until it compiles and see where that gets you
+icebox: smiche: and that is called iife
+smiche: isn't the controller function isolating the variables?
+icebox: smiche: no
+smiche: okay x.x
+None
+icebox: smiche: var app = angular.module(...)... app.controller(...)... app is global
+smiche: I'm always using angular
+smiche: 		.module('app').controller or .directive
+bd-: mrbirkov: update your npm i guess
+mrbirkov: bd-, already did. also cache clean didnt fix it
+Pyrrhus666: mrbirkov: you have npm 3.x and it wants to download 2.x ? something
+Pyrrhus666:  is screwed
+bd-: ok, ng2 router how can i make it scroll to an anchor fragment on a page?
+icebox: smiche: .module('app').controller(myController); ... myController.$inject = [...]; function myController() {...}... myController is globall
+icebox: smiche: no way... better using iife
+icebox: smiche: with ES5
+smiche: I see it in the global scope but I kinda don't get it why it is so, any ways I'll use it everywhere then :d
+icebox: smiche: that is js
+icebox: mrbirkov: no error here with node v6.7.0
+icebox: mrbirkov: shasum check failed... npm-2.14.21.tgz ???
+mrbirkov: yeah
+icebox: mrbirkov: double check your setup :)
+mrbirkov: icebox, not sure whats wrong here
+mrbirkov: I installed from nodejs website
+icebox: mrbirkov: clean all, reinstall node 6.7.0
+mrbirkov: have tried to reinstalled
+icebox: mrbirkov: be sure to clean roaming and local directories
+mrbirkov: any command to clean roaming and local dir?
+icebox: mrbirkov: explorer, manually
+bd-: what's the equivelent of $apply in ng2?
+bd-: or $timeout,0
+icebox: bd-: $timeout = setTimeout for digest cycle
+icebox: bd-: is there a digest cycle in angualr 2? :)
+bd-: well, i'm not sure
+bd-: i need some shit to run after it's changedetection does it's thing
+None
+None
+icebox: bd-: there... &quot;Who notifies Angular?&quot;
+icebox: bd-: but I think that stuff is outdated
+icebox: bd-: ApplicationRef.tick() and ChangeDetectorRef.detectChanges() are still present in 2.0.0 final
+bd-: yea i've read that a few times
+bd-: but it read more like 'you don't need to worry about it because magic'
+icebox: bd-: :P
+bd-: rather than telling where to put stuff to run after ng2 has updated dom post-change detection
+icebox: too magic maybe :)
+geoid: Can I nest a $watch inside a $watch listener function? (angularJS 1.x)
+soee: guys do you use babel to compile your code ?
+None
+icebox: bd-: you can get the change detector reference... constructor(private ref: ChangeDetectorRef) { this.ref = ref; } ... somewhere this.ref.detectChanges();
+bd-: i don't want to alter the change detection though, or have to force it manually etc
+icebox: bd-: ah ok... I see... post change detection
+bd-: yea, bascially what $timeout(() =: { stuff; }, 0) was in ng1
+bd-: let angular do it's shit then run dis code pls
+icebox: bd-: ngAfterViewChecked?
+bd-: that's what i'm looking at right now
+None
+bd-: but that seems to run too often
+None
+bd-: i think that runs before dom updated
+icebox: bd-: maybe Foxandxss may help you
+icebox: Foxandxss: ^
+antiPoP: [(ngModel)]=&quot;purpose&quot; - do I need to initialize models in the controller (I mean, the ts file)?
+bd-: all i want to do is scroll to an anchor on the page :(
+icebox: bd-: ah ok... :) you can't :)
+icebox: dboskovic: (joking) :)
+bd-: but router won't scroll it as dom target doesn't exist when it's loaded
+icebox: bd-: (joking) :)
+icebox: soee: no
+icebox: geoid: do you use in js nested listeners? I don't think so :)
+Pyrrhus666: runtyrobot: you&acute;re welcome !
+icebox: geoid: generally speaking, you should not use watchers, unless you are watching  the attributes of a directive
+geoid: Let me rephrase then :) Can I nest a $watch inside a $watch listener function while watching the attributes of a directive? (angularJS 1.x)
+geoid: So I guess the answer is no
+icebox: geoid: indeed it is no
+geoid: ok tx
+mrbirkov: icebox, re-installed node and npm and still got the same error
+icebox: mrbirkov: sigh... something in your setup... better help if you ask it in nodejs channel
+icebox: mrbirkov: can you paste this latest error, even if it is the same?
+soee: if you have on the application 2 a bit different structured search results than would you pass more parameters to the single search results component and use conditions in template or create 2 separate components for it ?
+antiPoP: in   input #searchBox id=&quot;search-box&quot; (keyup)=&quot;search(searchBox.value)&quot; /:  ow does #searchBox work?
+icebox: soee: please, shall you rephrase it?
+antiPoP: *how
+mrbirkov: @icebox, sure
+None
+smiche: any1 knows if you can update the model from link in formly-forms?
+None
+icebox: mrbirkov: is this the latest one?
+mrbirkov: yeah
+soee: icebox: i have quick search component that shows limited number of search results, with less data etc. and i have separate page for global search where again i have search component but. I could use in both places the same stateless component to render search results but than i would need to use more parameters and conditions to structure it a bit different in both places. Second option is to have 2 different stateless components t
+soee: render search results for the quick search component and the global one. I wonder what would be better
+Pyrrhus666: antiPoP: wow, that syntax is both ugly and non-compliant. oh well, that isn&acute;t important anymore, it seems :)
+icebox: mrbirkov: I don't understand... there is something wrong in the path or in the installation... the message says node v4.6.0... did you try with 6.7.0, the latest one?
+antiPoP: Pyrrhus666, this is taken from the heroes tutorial :)
+Pyrrhus666: antiPoP: I know :) I just never noticed the # reference thing.
+antiPoP: see /app/hero-search.component.html
+mrbirkov: havent tried the latest one. will try
+Pyrrhus666: antiPoP: like an id or name attribute wouldn&acute;t be clear enough, lets invent something else :)
+None
+icebox: mrbirkov: better
+Pyrrhus666: icebox: yes, read it. my opinion hasn&acute;t changed though ;)
+icebox: mrbirkov: I tried here on windows box with the latest one and it works
+icebox: Pyrrhus666: ah
+antiPoP: Pyrrhus666, angular2 seems overcomplex compared to angular1, there is a lot of stuff, and add ts2 and es6
+Pyrrhus666: icebox: (although ref- is slightly better, but hey, lets confuse the world by having 2 non-compliant things that do the same :))
+mrbirkov: icebox, whats the best way to clean uninstall node and npm?
+Pyrrhus666: antiPoP: ts and es aren&acute;t ng2 specific though. but the crappy html that comes with ng2 gives me hives, ugh. even though I like the framework.
+icebox: antiPoP: that is an opinionated topic... experts say it is coherent
+icebox: mrbirkov: uninstall from programs and features and check roaming and local (hidden) folders
+antiPoP: icebox, just saying that the learning curve is hard... and I already know ng1
+Pyrrhus666: icebox: &uml;experts&uml;... ha ! like those that claim the world is flat ;)
+bd-: soee: personally i went with the two separate component option in an app i was doing
+None
+icebox: Pyrrhus666: :P
+icebox: soee: I second bd-'s approach
+grizzm0: Pyrrhus666, That's 100% valid HTML according to the spec tho. ;)
+soee: bd-, icebox: ok thanks
+icebox: Pyrrhus666: for experts, I mean, devs in angular 2 team
+Pyrrhus666: grizzm0: html5 probably ? the spec that broke everything :)
+bd-: i do prefer the ng1 syntax, but i also prefer ng2 syntax to jsx
+icebox: bd-: agreed... anyway the point about jsx is not the syntax... the point is if it is legit html in js; I suppose it is equals to if it is legit js in html. :)
+Pyrrhus666: grizzm0: I tried, but both #ref and (click) and [var] and [(stuff)] seem impossible to pass validation.
+icebox: bd-: mithril.js, vue.js, react and others have that approach... angular, knockout and others have another approach
+Pyrrhus666: icebox: being js experts makes them not html experts though ;)
+icebox: bd-: I don't know if it is a matter of tastes or if there is some rationale to prefer this or that
+Pyrrhus666: and yes, I prefer ng2 over jsx. but ng1 over both (as far as html syntax goes)
+bd-: just seems wrong to be dumping html templates in a js file
+bd-: makes it a pain to work with others on projects
+bd-: i don't want the designer fucking around with javascript files
+icebox: Pyrrhus666: agreed... but it seems the rest of the world prefer the other path :)
+Pyrrhus666: icebox: I know. it makes me sort of sad, but I&acute;ll live :)
+bd-: on the other hand with ng1/2 type templates it lets designer make logical presentation changes pretty easily
+icebox: bd-: agreed... but I was wondering because the rest of the world prefers the alternate solution
+Wallcraft: Hi al again!
+bd-: the rest of the world prefers what? jsx?
+icebox: bd-: jsx or ng2 :)
+icebox: bd-: or better... jsx and ng2
+bd-: i'm not convinced that's the case
+mst: I thought both ng1 and ng2 could do script name=&quot;...&quot; to get a bag-of-small-templates-in-a-file
+icebox: bd-: it is a fact... we cannot stay with ng1 forever when we have six months cycle in the next angular releases
+Wallcraft: I have a problem accessing to a json array like this [{&quot;balance&quot; : &quot;48&quot;, &quot;name&quot; : &quot;Pippo&quot;}] it is from a servlet response
+bd-: what's ng2 got to do with jsx?
+bd-: i think we're on different pages
+Wallcraft: i tried using {{message.Balance}} {{message.Name}} but it wont work
+icebox: bd-: ok... recap... we like ng1, not ng2 or jsx :)
+None
+bd-: i'm saying i prefer html in html templates, not html in javascript files
+bd-: like i prefer css in css files and not in style attributes
+icebox: bd-: agreed
+bd-: and separately... i prefer ng1 syntax to ng2
+icebox: bd-: what I am saying is at the moment the future is jsx or ngs syntaxes
+icebox: bd-: *ng2 syntaxes
+bd-: why ng2 syntax specifically?
+bd-: vuejs's syntax is more like ng1
+Pyrrhus666: Wallcraft: have you parsed it into an actual array ? or is it a string ? what does {{message}} give you ?
+icebox: bd-: because at the end of 2017 we will have angular 4... we cannot play with ng1 forever
+Wallcraft: Pyrrhus666: i have a string
+antiPoP: icebox,  thansk looking at it
+bd-: that's nout to do with syntax
+bd-: plus they'll have complete changed it 5 times by the time ng4 is out :)
+Wallcraft: Pyrrhus666: {{message}} gives me te whole json string
+icebox: bd-: ah ok... your hope is ng5 with ng1 syntax :)
+Pyrrhus666: Wallcraft: then you should do someting like var array = angular.fromJSON(string);
+bd-: anyway ng1 and ng2 syntax are pretty much the same
+bd-: or, they same 'class' of syntax i should say
+Pyrrhus666: bd-: except for all the html bits that make it invalid html.
+icebox: bd-: yes... same family
+Wallcraft: Pyrrhus666: so in my script i should write something like $scope.message = response.data?
+icebox: Pyrrhus666: that is by design... any html decoration approach is outlaw :)
+Pyrrhus666: icebox: I guess. I still don&acute;t like it :)
+icebox: Pyrrhus666: agreed.. that was my point... tertium non datur
+Pyrrhus666: Wallcraft: if you console.log(message), does it tell you it&acute;s an array, or a string ? if it&acute;s a string, you first need to parse it.
+bd-: i thought ng2 syntax was html valid
+Wallcraft: Pyrrhus666 it's an array
+Pyrrhus666: icebox: I don&acute;t really get the rationale though. they could&acute;ve stayed within the specs...
+icebox: Pyrrhus666: really no idea
+Pyrrhus666: Wallcraft: an array of objects ? can you do {{message[0].balance}} ?
+None
+icebox: bd-: ^
+Wallcraft: wtf
+Wallcraft: it's solved alone LEL
+Wallcraft: i fixed it using track by $index
+bd-: that doesn't address the validity
+grizzm0: &quot;Attribute names must consist of one or more characters other than the space characters, U+0000 NULL, &quot;&quot;&quot;, &quot;'&quot;, &quot;:&quot;, &quot;/&quot;, &quot;=&quot;, the control characters, and any characters that are not defined by Unicode.&quot;
+grizzm0: Perfectly valid. ;)
+bd-: yep
+Pyrrhus666: grizzm0: which spec are you reading ?
+grizzm0: HTML5
+Pyrrhus666: so howcome the validator says no ?
+Pyrrhus666: hmm..
+macstriker: hi ng-guys!
+icebox: bd-: I suppose it is matter to be used or not... if we used only ng2 syntax, maybe it would be less alien than we are saying now
+macstriker: how can i pass callback to component?
+macstriker: products-search onSelect=&quot;addProduct&quot;:/products-search:
+macstriker: not working
+grizzm0: Pyrrhus666, Becuase it doesn't know about the attributes.
+macstriker: bindings: {  'onSelect': '&amp;' },
+grizzm0: If you're checking against a div for example... The div doens't allow those attributes.
+Pyrrhus666: grizzm0: which means button #ref (click)=&uml;stuff&uml;: is invalid, right ?
+mrbirkov: icebox, weird still get the same error after installing node 6.7.0
+None
+icebox: macstriker: angular 1 or angular 2?
+macstriker: 1
+icebox: macstriker: weirdly
+icebox: macstriker: did you clean also tmp folder?
+icebox: macstriker: sorry mistell
+icebox: mrbirkov: weirdly
+icebox: mrbirkov: did you clean also tmp folder?
+icebox: macstriker: if angular 1... naming needs to be normalized
+None
+grizzm0: Pyrrhus666, It'sjust sugar.
+icebox: macstriker: and usually &quot;it doesn't work&quot; doesn't mean anything.:)
+nishu-tryinghard: hey icebox, wanted to talk can i pm you not related to angular
+Pyrrhus666: grizzm0: that&acute;s one way to put it ;) I&acute;d say it&acute;s invalid markup.
+icebox: nishu-tryinghard: ok
+macstriker: console.log(this.onSelect); gives me function (b){return u(a,b)}
+macstriker: so some function was passed
+grizzm0: Pyrrhus666, You're free to write valid markup if you'd like with the template: element
+macstriker: it seems callback must be well-formed
+icebox: macstriker: looking for &quot;Next, we want to add buttons to this dialog box, and allow someone using the directive to bind their own behavior to it.&quot; in the doc suggested
+macstriker: icebox: no problem if this doc for directive
+macstriker: and i have component
+macstriker: ?
+icebox: macstriker: it is the same
+macstriker: ok, i will read , thanks
+icebox: macstriker: a few hints...
+icebox: macstriker: in that example... $scope.hideDialog...  'close': '&amp;onClose'... my-dialog ng-hide=&quot;dialogIsHidden&quot; on-close=&quot;hideDialog(message)&quot;:
+icebox: macstriker: see the diff in your code?
+macstriker: yeah
+icebox: macstriker: nice catch :)
+Elarcis: and I'm late in my work... yet again.
+macstriker: working now
+macstriker: thanks
+icebox: macstriker: you are welcome
+macstriker: self.onSelect({ 'product': product });
+macstriker: angular get string on-select=&quot;addProduct(product)&quot; ?
+Pyrrhus666: grizzm0: which kind of proves my point that they could&acute;ve stayed within the spec ;) I&acute;ll live with it, but having lived through spec-hell in  the great browser wars of the late 20th century, I&acute;m sad to see people don&acute;t seem to care anymore. call me old and grumpy ;)
+macstriker: and replace arguments by hash?
+macstriker: that's how it works, right?
+icebox: mrbirkov: however the error is on another package... are you sure it is not a networking problem?
+icebox: mrbirkov: check C:\Users\ahayaza\AppData\Local\Temp\npm-10740-7 993f480\registry.npmjs.org\typescript\-\typescript-2.0.0.tgz
+icebox: mrbirkov: I bet that package is not downloaded correctly
+smiche: time to head home, ty everybody
+icebox: smiche: bye
+mrbirkov: its not
+mrbirkov: @icebox, its not
+mrbirkov: yeah its different package
+anli_: I seem to need separation of my ng app into multiple apps, is AngularJS designed for that?
+Pyrrhus666: anli_: no.
+anli_: ok
+anli_: What would be problematic doing that?
+icebox: mrbirkov: nodejs channel is always valid... here I run out of ideas
+Pyrrhus666: there can only be one app. you can switch over the browser to another url/app of course. but you&acute;ll lose the app&acute;s state.
+mrbirkov: icebox, thanks but its invitation only?
+icebox: mrbirkov: no
+icebox: off in two minutes :)
+Pyrrhus666: bye icebox !
+mrbirkov: * Cannot join #nodejs (Channel is invite only)
+mrbirkov: @icebox,
+anli_: I have a webshop with a cart, that cart should be visible on many pages, but the logic for product listings do not need to be on every page
+icebox: mrbirkov: because your nick is not registered, I think
+mrbirkov: it is :)
+Pyrrhus666: anli_: the whole webshop should be an SPA to have angular work it&acute;s best.
+icebox: mrbirkov: well I joined now and there is not an invitation problem, and my nick is registered
+anli_: spa?
+anli_: smart phone assistant?
+mrbirkov: weird
+Pyrrhus666: single page application.
+anli_: aha
+anli_: coolt idea
+icebox: mrbirkov: it is not your day :)
+mrbirkov: lol
+anli_: cool idea
+Pyrrhus666: anli_: it makes little sense to build a cart in angular and bolt that onto a non-angular website.
+anli_: I do not talk about other websites
+anli_: But other pages
+None
+icebox: off... bye
+Pyrrhus666: semantics. your other pages are outside of angular&acute;s scope, it seems
+nishu-tryinghard: mrbirkov, no its no invite only are you talking about #Node.js ?
+mrbirkov: ha tried #nodejs
+mrbirkov: thanks nishu-tryinghard
+nishu-tryinghard: mrbirkov, you just have to be registered with freenode
+mrbirkov: registered. it was the #nodejs that is invite only
+mrbirkov: thanks
+nishu-tryinghard: mrbirkov, but the channel is not as active as angualr tho
+ranguo: Hello guys
+ranguo: Is there anyway I could decouple a little bit this plunker to let the customModal have its own ngModule?
+None
+baako: icebox
+martin_langhoff: I have a complex directive (ui-calendar) which I drive with more complex code (in a service). I am getting in trouble when changing scopes.
+martin_langhoff: (using ui-router), the old scope is torn down _after_ the new scope is initialized
+martin_langhoff: if both scopes use the directive, it all goes to shit.
+martin_langhoff: I've written my services with the assumption there'd be only one instance of the directive in use :-(
+martin_langhoff: any hints wrt waiting for a scope to finish destruction before initializing the new one?
+antiPoP: should I use  es6-shim or @types/es6-shim ? both seems to work
+yagendra: hello team
+yagendra: i m trying to upload files using angular 2 and node
+yagendra: but gtting error
+yagendra: can any one please tell which package is used to upload files
+yagendra: in anglar 2
+yagendra: or share some github link
+yagendra: m waiting for someone reply
+bd-: hrm, i thought with es6 classes `this` always referred to the class
+antiPoP: what does angular/platform-server ?
+lacrymology: I have a div with an ngIf, which changes during runtime, so the div is created and destroyed during the application's runtime, not only on initialization, and I'd like some code to run when it's created
+lacrymology: I'm using ngInit but it seems like it doesn't always run when I want it to
+tangorri: bd this may refers to object aka class instance instead
+bd-: nah it doesn't refer to class instance
+bd-: maybe this is some webpack converting to es5 nonsense
+tangorri: you mean babel/traceur
+bd-: tsc
+Shujat: HI
+mrbirkov: why is it really hard to learn angularjs :(  is there any tutorial for really beginner :(
+mst: I already knew basic javascript and learned from the main tutorials and documentation
+andygmb: what am I doing terribly wrong here? Restangular.one('events', eventId).all('allocated-sections').all(sourceId).get(index) doesn't add the /index/ at the end
+andygmb: where index == 1
+andygmb: the end url should be like: /events/9b4c010f-7636-4e40-9755-065d22d823f8/allocated-price-charts/fe0bb77b-2394-4a0d-95a6-a6c75363957c/1/
+andygmb: err, allocated-sections*
+andygmb: im obviously missing something here but the restangular docs aren't entirely clear to me atm
+mrbirkov: @mst yeah I wonder why is it really difficult to learn ng compared to other non js
+mst: mrbirkov: I don't know what problems you're having
+mrbirkov: understanding how angular works is difficult and it seems no beginner like me can understand
+mrbirkov: any reallly good tutorials for beginners?
+mst: I asked which part you were having trouble with. repeating 'any really good tutorials' won't help us work out what you need.
+mrbirkov: understanding the building blocks and concept at first, and build up the more technical coding stuff
+mst: I read all of the reference docs to understand services, directrives etc.
+mst: then re-read the tutorial
+mst: then experimented
+mst: then repeated
+nishu-tryinghard: mrbirkov, do you know how javascript actually works to make the website interactive and dynamic? if the answer is no i would recommend you to first head to freecodecamp and learn that stuff first and after that you can start with building blocks like mst mentioned. And then you can just take some example site and start creating those stuff in angular. This will be fun to do as you are designing something rather than following some guide and
+nishu-tryinghard: replicating it blindly.
+mrbirkov: make sense nishu-tryinghard
+mrbirkov: I know javascript but not that good
+mrbirkov: just wondering if there is a complete beginner tutorials of angular
+mrbirkov: btw does angular2 support SEO now?
+nishu-tryinghard: mrbirkov, freecodecamp is a website which has beginner programms, guides and sample example to learn backend and frontend. I found it helpful as i was in the same boat as you with no knowledge what soever about javascript or angular. So goto over there and start the frontend program they have to get the understanding of how frontend is developed. IMO you have to first understand how a frontend is build using javascrip and jquery. After that
+nishu-tryinghard: you will find it easy to learn angular thats what i feel
+nishu-tryinghard: And you want to learn angular 2?
+andygmb: this works but feels wrong - am I doing this wrong?
+andygmb: Restangular.all('events').all(eventId).all('allocated-sections').all(sourceId).get(index);
+nishu-tryinghard: If you want to skip all that then you can follow ng book 2
+andygmb: for producing a URL like: /events/9b4c010f-7636-4e40-9755-065d22d823f8/allocated-sections/fe0bb77b-2394-4a0d-95a6-a6c75363957c/1/
+dopry: anyone with experience with ng-file-upload and S3 with signedPutUrls?
+mrbirkov: thanks nishu-tryinghard
+dopry: need help on a 1.5.x project using those... I could really use another set of experienced hands on the project.
+dopry: pm me if you're at all interested.
+rand0m: hey is anyone here
+andygmb: i would imagine so
+dopry: rand0m, no, absolutely noone.
+rand0m: wtf i keep hearing voices..
+rand0m: who is there?
+andygmb: is it solipsistic in here or is it just me?
+rand0m: hang on ghostman
+rand0m: you might have phd in english, but go easy on us peasants
+rand0m: wb dopry
+dopry: rand0m, did I miss out on the philosophy discussion?
+rand0m: maybe
+dopry: Well I'll try not to open the box eliminate a possibility, after all two is better than 1.
+rand0m: yes, I agree with you
+rand0m: unless you're speaking about angular versions
+rand0m: something funny's happening with my code
+rand0m: it works fine on my local
+dopry: I do like 2...
+rand0m: but once I upload it to plnkr it goes into infinite loop
+dopry: rand0m, oh no... what does it do? link to the plunkr?
+None
+rand0m: normally it should display searchbar where I type in stuff
+rand0m: but I think its loading up controller automatically
+dopry: rand0m, looking at it now..
+rand0m: thanks mate
+rand0m: excuse the inclusion of fonts thats something I thought would work
+None
+ngbot: angular.js/master 369fb7f Michał Gołębiowski: feat(jqLite): implement jqLite(f) as alias to jqLite(document).ready(f)...
+ngbot: angular.js/master 8e82bf5 Michał Gołębiowski: refactor(jqLite): deprecate jqLite#ready...
+ngbot: angular.js/master e008df6 Michał Gołębiowski: docs(jqLite): remove the removal plan info for bind/unbind...
+dopry: @rand0m, I get this error in plunkr, Unknown provider: githubFactoryProvider - githubFactory - githubSearchController
+rand0m: thats strange
+rand0m: I get VM1717 angular.min.js:114 RangeError: Maximum call stack size exceeded
+dopry: rand0m, my bad...
+dopry: rand0m, commented some stuff out.
+dopry: @rand0m, how is the data supposed to flow in your app here?
+rand0m: the UI will have a text input and when you type in something the ui gets updated
+rand0m: f this, I will restart the plnk
+dopry: rand0m, one thing I see is you're completely replacing $scope.data.. I normally don't replace things directly attached to scope...
+Dev0n: hey, is it better to consume from your http services on ngOnInit or within the constructor?
+Dev0n: angular2
+dopry: rand0m, doesn't seem to be the controllers. I commented out the bodies and I still got the limit issues.. maybe your view hierarchy has a circular dependency?
+rand0m: it works on my local though
+rand0m: give me a moment please
+dopry: Dev0n, I like to use I like to do stuff in $onInit and reserve my constructor for binding dependencies to my controller.
+Dev0n: gotha, thats how I've been doing it but came across some code that seem to stick it all in the constructor
+Dev0n: make sense to leave that for dependency binding tbh
+dopry: although the only things I've found I have to delay to $onInit is when I'm interacting with forms declared in the templates...
+dopry: or other dom elements.
+None
+rand0m: its working :)
+rand0m: let me add in css and see if that breaks
+rand0m: turns out that the fonts are causing issue
+None
+rand0m: minus the fonts
+dopry: rand0m, very nice...
+dopry: silly fonts...
+rand0m: I forgot what I wanted to ask
+dopry: rand0m, I like that you're using the event bindings to propogate your data...
+dopry: rand0m, have you looked at ngrx/store?
+rand0m: no
+rand0m: whats that
+rand0m: ok, don't know whats rx, or redux or ngrx or rxjs
+rand0m: still not at that level
+dopry: we'll you're already working with the primitive concepts in your code.
+dopry: the idea is you have one object storing all the state in your app... when it is updated, events are fired and things can respond... it's a little more complex than that...
+dopry: but would be worth you looking into, if this is how you are thinking about moving data around your app...
+rand0m: like knockoutjs
+rand0m: oh yeah! I remembered
+rand0m: say when I type in some stuff, and an error occurs, I don't show any errors at the moment. I just throw them
+rand0m: I would like to show a inject html where the results are, and the html would contain a button which would call the same search function on i#ts click
+rand0m: just like search again#
+rand0m: so my question was, do I include the HTML as part of search-results template and use ng hide/show to display contents?
+rand0m: or is there another way
+dopry: if it works it's a good way...
+dopry: You could also setup the results as a child of the search bar..
+dopry: I normally wouldn't use views like this...
+dopry: I'd normally use a component for a search bar, and search results and build a component that put them both together...
+dopry: so I'd end up with say a searchbox component with children searchInput, searchResults, and searchButton... they would all have their data or click handlers bound to parent searchbox...
+dopry: controller...
+dopry: rand0m, ^^
+dopry: or you could put move all the shared code, functions, and global state into a service and the have disparate controllers that don't need to be in any sort of specific tree.
+rand0m: ye, I understand, so that it would only be 1 component
+dopry: or your could use $rootScope or some other vehicle for carrying around the searchText to all the child components.
+dopry: you get different levels of coupling for each approach... what is best is often times dependent on how you envision the user interface working...
+rand0m: i didn't want to use rootscope at all, but I figured out that this is the only way to transfer data from directives controller to second controller
+dopry: rand0m, rootScope, dedicatedService w/event, or ngrx/store type of thing are all good vehicles.
+dopry: or binding to a parent component and controller.
+dopry: $rootScope isn't bad to use in small applications or for data that should truly be global.
+dopry: it can become a problem when building large apps since it leaks a lot of data and can lead to architectural laziness that will make maintenance difficult..
+rand0m: thanks mate
+rand0m: brb
+j6s: Hello everyone - we are currently looking to have 2 router outlets react to the same route - as far as I am aware this is not really possible.
+j6s: Background: we are trying to have a main area of our app as well as a sidebar. Every content component has a different sidebar - we have looked into multiple solutions but did not really find anything helpful
+j6s: there was a potential solution using DynamicComponentLoader which looked promising until we discovered that it was deprecated
+j6s: the question here is: is such a thing even possible in ng2?
+zomg: I actually randomly saw some article discussing this just today... I wonder what the URL was
+None
+zomg: actually I'm not sure if that's exactly what you're asking about, but similar maybe?
+zomg: at least assuming I understood your question correctly, with angular 1 ui-router you needed ui-router-extras with named views for this
+j6s: no, those is not really what we are looking for: those are 2 independent router outlets - what we want are 2 synchronized router outlets
+j6s:  is there a way to link 2 router outlets to one URL?
+None
+zomg: j6s: yeah what I mean is the way you did that with ng1 at least was you had one route which just rendered into two named views
+zomg: j6s: in this sense they were &quot;synchronized&quot; but separate
+Axel_: Oh got it, never mind
+genu: hey, in ng1, how can I pass an $event from an ng-click via the outlet to the parent component? I can't find any examples of this... :(
+j6s: zomg: we did not think this would be this big of a problem, since it worked quite well in ng1 - but seems like this is not easy at all in ng2 :(
+zomg: no idea I'm afraid since I've not used ng2
+zomg: but yeah it seems it's still a bit of a work in progress for many commonly used features like this
+Nasp: j6s What is it you need again
+Nasp: 2 synchronized router outlets?
+Nasp: So they jsut show the same?
+j6s: synchronized in the way that they react to the same route
+j6s: so on '/edit/' on outlet would show the 'EditMainComponent' and the other one the 'EditSidebarComponent'
+Nasp: And the editsidebar is defined in the maincomponent?
+Nasp: So it always shows editsidebar when on edit?
+j6s: I basically want to have one component for the &quot;main area&quot; of the app that always has the same sidebar
+None
+grizzm0: Perhaps auxroutes?
+None
+j6s: everything using auxiliary routes that I have seen so far has 2 outlets that behave independently from each other - that would not be our usecase
+yagendra: can any one please tell me how to upload files using angular 2 + express
+yagendra: i have tried many different packages
+yagendra: but didnt get success
+rand0m: hmmm
+yagendra: ??
+rand0m: my UI generates from controller B and has some buttons in it which need to call controller A functions
+rand0m: how do I achieve this?
+wafflejock: rand0m, usually better solution is to have the functionality wrapped up in a provider of some sort (factory/service) and then you are just triggering various functions of the service from the controllers and storing the data that is effected by both controllers in one place
+rand0m: thats what someone else told me earlier and I didn't think that I would need it
+rand0m: now I Need it :(
+wafflejock: rand0m, yeah there are other ways but that's the least likely to break
+wafflejock: it's not a huge deal really
+wafflejock: you just want to define a new object that you put the shared parts into (some cut and paste work) the wrapper is just something like .service('MyService', function(){ var service = {}; return service});
+wafflejock: in the service {} you would have all the data and methods you want to operate on that data, then you inject MyService into the controller just as you would any angular service
+rand0m: yup following some examples online
+mustmodify: I'm doing something stupid and I can't figure it out.
+mustmodify: I have img ng-src='{{waypoint.icon_path}}' ng-show=&quot;waypoint' /: and I keep getting a 404 /%7B%7Bwaypoint.icon_path%7D%7D
+mustmodify: WHY WHY WHY
+wafflejock: mustmodify, any errors in the console? sounds like the parse failed, in what you wrote there you have a &quot; and a ' on the ng-show just a typo?
+rand0m: wafflejock, I've seem to be lost
+None
+None
+rand0m: not sure what to do next :/
+rand0m: some examples ask me to create array and start pushing in contents
+mustmodify: wafflejock: yeah that was just a typo. Sorry. I figured it out. Seems like another place was using img src=&quot;{{waypoint.icon_path}}&quot;:
+None
+rand0m: i've updated till here
+None
+None
+rand0m: wafflejock, I've seen the same behaviour in egghead video a couple of minutes back
+None
+rand0m: but I can't figure out how can this fit into my code
+wafflejock: rand0m, eh yeah they made a generic messaging service I'm not sure I'm a huge fan of that
+rand0m: here's my project
+None
+rand0m: if you see in githubSearchController
+rand0m: line 15 im using $rootscope.$broadcast
+dogmatic69: thanks wafflejock
+rand0m: and am recieving in githubSearchResultController
+rand0m: which is bound to UI
+wafflejock: dogmatic69, np
+wafflejock: rand0m, yeah so you already have your github factory here do you just want to know if it was success/failure? if so can you just store that info in the github factory that handles the request?
+sixsixsix: how can i use ng-mousedown for the left mouse button instead?
+wafflejock: rand0m, also overall very well organized it seems, but yeah the broadcast/emit/on way of doing things will work when controller have a parent child relationship but breaks down once you modify that relationship (can also use $rootScope to emit events but goes through all the scopes and will be &quot;noisy with events)
+rand0m: i've used rootscope broadcast and im already feeling a bit messy
+rand0m: what should I do after saving error flag in githubfactory
+sixsixsix: how can i use ng-mousedown for the left mouse button instead?
+wafflejock: sixsixsix, think you mean right click? but can take a look at the source this is basically the directive definition make a new one my-rightclick or something paste in the code and change the event to what you want and add logic to check the button from the event before triggering the callback
+None
+sixsixsix: thanks
+wafflejock: rand0m, well if you have the flag in there then you can have a reference to the factory from the scope and through that reference in the view you can show/use that value see the little sample I pasted in plnkr for how I'm referencing the imgsrc through the factory
+rand0m: wait wait
+rand0m: check this link again wafflejock
+None
+rand0m: type in jquery/angular or anything else in the field
+rand0m: the 2 buttons which says retry or cancel have to act on githubSearchController, but are initiated by githubSearchResultController
+wafflejock: rand0m, k gimme like 10 min gonna re-up on my tea and find something to snack on :)
+Sasa: I would need some help with the angular-ui router
+wafflejock: rand0m, hmm yeah seems like just moving all this into the factory would probably make sense, like just having an &quot;errorState&quot; property in there that stores the last error or gets set to null if there was no error for the last request
+Sasa: Is this the right place to ask such a question? :)
+wafflejock: rand0m, is there any thing you can think of that would be lost in doing it that way?
+wafflejock: Sasa, angular 1 or 2?
+Sasa: 1
+wafflejock: yeah here is the right place then
+rand0m: I understand that the example you've mentioned is useful for shared data. but I need to call function in controller a from controller b
+rand0m: the only way I can do it using rootScope broadcasts
+wafflejock: rand0m, well if the function is in the factory then you can call it from either place
+wafflejock: rand0m, also you could have the controller &quot;register&quot; with another service (that's basically what the message factory one accomplished) where when you call a function in the service it triggers any &quot;registered&quot; handlers but that's a bit abstract and overkill in most cases I think
+rand0m: wouldnt make sense to place the function which initiates factory service call in controller to move it inside factory :s
+Sasa: Got to the answer on my own while writing out the question
+rand0m: nice one sasa
+rand0m: that's what I've been facing . thats my dilemma wafflejock :(
+rand0m: anything i write is overkill, anything i don't write is kind of hack
+wafflejock: rand0m, well what I'm saying is why do you need that extra layer of functions in the controller you can just trigger the one in the service directly and have the data about what happened with that call in the factory
+rand0m: currently the flow is like
+rand0m: controller a -: call service method -: get data back to controller a -: broadcast data from controller a -: recieve data in controller b -: use data in controller b
+wafflejock: yeah what I'm saying is controller a -: inject service -: call service -: service data changes, controller b -: inject service -: reference data from service
+None
+rand0m: ?
+wafflejock: is retryQuery() or cancelQuery defined anywhere yet?
+Sasa: i usually end up either doing what wafflejock says or moving things to a parent scope
+Sasa: in such situations
+wafflejock: rand0m, yeah will give it a go here saw a message about IRC going down for a few minutes here, but will try back as soon as I have something to look at
+rand0m: sure

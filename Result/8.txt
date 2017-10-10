@@ -1,0 +1,261 @@
+Foreshadowing: Found the bug and fixed it, thanks for the help.
+Ghost_Chilli: Hey guys, I'm just starting out with angular and having a lot of problems with paginating results. I've tried a few examples I found on the net, but they don't seem to work
+Carbon_Monoxide: Hi! I'm facing a noob problem. With angular routing, i.e. it routes to a page &quot;mystie.com/firstpage&quot;. However, at my web framework, there is not such a routed page call &quot;/firstpage&quot;. When user reload, the browser tries to load &quot;mystie.com/firstpage&quot;. Then it got 404.
+Carbon_Monoxide: How do I fix this with the backend or frontend controller?
+here4thegear: I have a weird one. I have an array of arrays of objects. I'm pulling data from an API and as I'm building a new array of objects, I need to see if that array of objects already exists in the main array.
+here4thegear: Is there a trick to this other than iterating through the main array to compair?
+here4thegear: Either that or, I could go about it a different way but still advice. At the end of the day (more simply) I have an array of arrays and I need to put a count on each non-unique array.
+here4thegear: [[{'key': 'val1'}, {'key': 'val2'}], [{'key': 'val1'}, {'key': 'val2'}]] from here I want to be able to know that [{'key': 'val1'}, {'key': 'val2'}] appears 2 times. and other repeating items appear x times... etc.
+ezio: i just went through the quickstart
+ezio: i'm an angular 1.0 vet
+ezio: i'm just wondering ... are all these requests going to be made for js files in production?
+ezio: 32 requests
+antiPoP: which router should I use in v2? angular/router or ui-router?
+mrbirkov: helllo
+mrbirkov: iam confused with js frameworks. nodejs, angularks, react, meteor.. and hundreds more. Any good comparison tutorial?
+None
+mrbirkov: thanks heartburn
+heartburn: mrbirkov: if you're aiming for web/frontend stuff, just toss a coin and pick either ng1 or react.
+mrbirkov: noted
+mrbirkov: I am trying to build an simple ecommerce, and recently impressed with http//shop.shop.polymer-project.org
+mrbirkov: you think its possible to just use ng1/react to develop this ecommerce like app?
+mrbirkov: progressive web app based on js
+heartburn: assuming you already have the backend, yes.
+mrbirkov: no backend. but there are some options like reactioncommerce
+mrbirkov: for the ecommerce backend
+mrbirkov: any other js based ecommerce backend / API?
+mrbirkov: I know there is schema, moltin
+mrbirkov: sorry not js based
+None
+Scubadude: has anyone tried to do the angularjs tutorial with vagrant on windows?
+rand0m: wtf is happening
+rand0m: google just issued me a challenge??? wtf?
+nishu-tryinghard: rand0m, like what?
+rand0m: some java program
+nishu-tryinghard: yes, did you signup for any challenge?
+rand0m: not sure
+nishu-tryinghard: good luck solving it. Must be related to algorithm and data structure?
+rand0m: ye
+nishu-tryinghard: rand0m, dm me the question if you can
+AxldenieD: hello :)
+YoussF: Does anyone use electron ?
+heartburn: Пппппппппппппппппппп.
+thevishy: .A
+DelphiWorld: hello
+DelphiWorld: any tutorial on building a rss reader using angular2?
+zomg: that's such a specific thing that if googling that doesn't get any results, I'm 99% sure one doesn't exist =)
+anubGok: @DelphiWorld interesting i just built a super simple one for reading the SEC's rss
+DelphiWorld: anubGok: mind sharing if it's not private?
+anubGok: one sec
+DelphiWorld: anubGok: the one i'm using isn't native, i'm following a angular2 tutorial
+anubGok: isn't native?
+DelphiWorld: angular2 is not native, is hibrid
+anubGok: native to what?
+DelphiWorld: java code is native
+DelphiWorld: but javascript is hibrid
+DelphiWorld: it mean can be mobile and web
+anubGok: ah i have never heard it defined that way but i kinda understand what you mean
+DelphiWorld: ;)
+anubGok: i mean js can be run in any webview and java requires an actual jvm
+anubGok: anyway
+anubGok: the site is here
+None
+None
+jr3: $scope.vm.verificationDuration = verificationDuration is in my controller and is DEFINED. However in a directive isolate scope where I pass vm.verificationDuration it's coming in as undefined
+jr3: any ideas?
+DelphiWorld: cloning
+anubGok: @jr3 would have to see code
+None
+anubGok: that's running behind an nginx instance
+anubGok: oh wait it's private one sec
+anubGok: ok it's public now
+DelphiWorld: hey anubGok your repo isn't open
+DelphiWorld: it require auth
+ishion: as a newbie , angular 1 or 2 ?
+anubGok: i just opened it
+anubGok: the gogetit one
+anubGok: which one delpiworld
+None
+ishion: as a newbie , angular 1 or 2 ?
+anubGok: ok that's open now DelphiWorld
+DelphiWorld: ishion: no 1 and not 2. go to ionic
+DelphiWorld: ;)
+ishion: ionic?
+DelphiWorld: yes IONIC
+DelphiWorld: a framework that itself use angular
+None
+DelphiWorld: anubGok: ah, that's a angular project. awesome
+jr3: note that if I do {{vm.verificationDuration}} any where else in the view, its read successfully
+jr3: its something to do with the isolate scope either looking too soon at vm.verificationDuration?
+ishion: learn ionic ,study angular ?
+jr3: Im logging it in the directive it prints undefined
+ishion: ionic 1.3 or v2?
+DelphiWorld: ishion: start with ionic1
+ishion: tks
+DelphiWorld: ishion: welcome
+DelphiWorld: anubGok: where's the rss feed defined?
+anubGok: jr3 how is timer defining its isolate scope
+jr3: one sec
+anubGok: are you sure countdown is a '='
+jr3: yes
+jr3: actually its  a little weird, its a oss library
+None
+anubGok: DelphiWorld i consume the rss using the secrsservice
+DelphiWorld: anubGok: yes but where to find the feed url
+anubGok: an important part though is that on the server i use the feedme package to convert rss XML to a JSON format
+anubGok: ah so
+DelphiWorld: so it require a server side
+anubGok: yea
+None
+None
+anubGok: this one requires it but you may be able to use something else to consume the xml directly
+DelphiWorld: anubGok: so where's the server side code?
+None
+DelphiWorld: anubGok: node right
+anubGok: ya
+anubGok: jr3 i don't see countdown
+anubGok: just countdownattr
+anubGok: ah wait
+anubGok: i see
+jr3: anubGok, if I hardcode a number it works fine
+DelphiWorld: i'm installing it
+jr3: IM missing something, this is a modal controller that's injecting $scope
+anubGok: it's weird that other values work though
+anubGok: you can pass in the cancel function fine?
+jr3: yea, Im very confused
+jr3: yep it works
+DelphiWorld: anubGok: ok, so your two rss feeds are defined in config/url.js
+anubGok: ya
+anubGok: and i just realized crap my service stopped working
+anubGok: looks like the cert is failing whhyy
+DelphiWorld: my cert is up to date :P
+jay_: hey
+DelphiWorld: hey jay_
+jay_: i want to know about factory
+anubGok: jr3 i feel like there must be just a spelling error or something lol
+anubGok: jr3 do you use ng-inspect?
+jr3: nope, not sure what  that is.
+jay_: no never. what is that?
+jr3: :O
+anubGok: just an extension for debugging
+anubGok: it shows the scope vars on a side panel
+anubGok: it's for chrome, pretty good
+jay_: what is services.
+DelphiWorld: ng g interface model/feed-info
+DelphiWorld: Invalid path: &quot;E:\projects\tmdev\rss\src\app\model&quot;&quot; is not a valid path.
+DelphiWorld: why?
+anubGok: hm not sure if you can pass a path into the name
+DelphiWorld: i created the folder
+anubGok: i would go into it and just use feed-info
+None
+DelphiWorld: the code is here:
+anubGok: i think windows handles the path differently
+None
+anubGok: try other slash
+DelphiWorld: yes i will
+LIERO: apparently I can&acute;t use html5 autofocus in Angular
+None
+LIERO: but it breaks my ng-animation between loading states
+LIERO: anyone had similar problems?
+DelphiWorld: ng serve failing
+DelphiWorld: how do i capture the entire error log
+DelphiWorld: can't find module process-nextick-args
+LIERO: hm
+LIERO: it works when I add a delay
+anubGok_: ng serve failing hm
+anubGok_: npm install worked without a hitch?
+DelphiWorld: anubGok_: yes...
+DelphiWorld: anubGok_: process-nextick-args
+DelphiWorld: this module is not found
+DelphiWorld: so source look crapy
+anubGok_: ah what version of node you on?
+anubGok_: node -v
+DelphiWorld: v5.12
+anubGok_: might hve to get up to 6
+DelphiWorld: you think this is a node issue?
+anubGok_: yea npm actually
+anubGok_: npm -v?
+anubGok_: try npm install -g npm
+anubGok_: then another npm install
+DelphiWorld: 3.8.6
+anubGok_: hm
+DelphiWorld: strangest
+anubGok_: actually maybe not then
+anubGok_: this other guy installed it globally
+anubGok_: but the weird thing is that process worked immediately on my 6.6 node server
+DelphiWorld: what code you tryed?
+anubGok_: but another did npm install -g --save process-netick-args
+anubGok_: oh ng serve i forgot i never tried that on another machine
+anubGok_: actually yes i did at work
+DelphiWorld: let me try -g --save process-netick-args
+DelphiWorld: npm install -g --save process-netick-args give 404
+anubGok_: but another did npm install -g --save process-nextick-args
+anubGok_: i mispelled it the first time
+DelphiWorld: LOL
+DelphiWorld: worked
+DelphiWorld: anubGok_: lol, the reader is not returning any feed ;)
+DelphiWorld: not your actualy but the tutorial one
+tona: hello everyone
+None
+tona: how can check where is the code or who is handling this part, i havent created this page , i am trying to debug button style=&quot;margin-left:50px;&quot; type=&quot;button&quot; class=&quot;btn btn-default&quot; ng-model=&quot;DisplayPillar&quot; ng-click=&quot;DisplayPillar = !DisplayPillar&quot; ng-hide=&quot;DisplayPillar&quot;:           div:Show Cartera/div:/button:
+tona: i dont know what this mean ng-click=&quot;DisplayPillar = !DisplayPillar&quot;
+tona: ng-click=&quot;DisplayPillar = !DisplayPillar&quot; i can not find it in into the controller or someplace but it working , i am trying to debug it
+heartburn: tona: it's a boolean flip.
+heartburn: true = !false
+heartburn: false = !true
+heartburn: every click DisplayPillar switches between true and false
+tona: ok thanks
+heartburn: you can access it from the controller via this.DisplayPillare
+heartburn: or $scope.DisplayPillar
+heartburn: probably the letter
+heartburn: atter*
+tona: but for any reason it is reaching one window , how could i know what window is or who is calling the code, i am trying to debug using firefox
+tona: heartburn
+heartburn: i don't know what window you're talking about m8
+tona: ok i will try to explain , when i click on ng-click i mean into the button it display one window, if this is a boolean value , how could i know or watch what code is executing this window, when the user click on button
+heartburn: ng-click='toggleWindow()'
+heartburn: $scope.toggleWindow = function () { $scope.DisplayPillar = !$scope.DisplayPillar; }
+heartburn: put a breakpoint somewhere in there --^
+tona: ok thanks again
+Vasa: hello, lets say I want to load data from my server using $http.get (...).then(...)  , all goes well and i get a response, but what if while waiting, the server partially responds to tell me the current % of the loading, how would I do that? thank you
+Kanthu: How can I send the data to another page?
+Kanthu: I have a page with submit button and a table.  I want to send the table data to another page when I click on the submit button.
+anubGok: DelphiWorld thanks
+Salman: Hi
+Salman: Someone is there
+Salman: Hi
+Salman: Hi
+drej: nope
+drej: nobody here
+Salman: Well
+Salman: Do you know abt angular
+Salman: Can I use java as backend with angular js
+heartburn: naah.
+Salman: Why
+Salman: Answer please
+Salman: Tell me
+heartburn: if you have to ask such a question, you should read up on the matter m8.
+heartburn: angular has nothing to do with backend.
+heartburn: use whatever you want.
+ezio: is the intent of angular2 to only use nodejs ... or is there some way to use php?
+GreenJello: ezio, you can use any backend you like, but you use node for developer tooling
+ezio: developer tooling?
+ezio: converting ts to js?
+None
+ngbot: angular.js/master 39a3b58 Frank Stepanski: docs(README.md): expand the &quot;Interconnection with HTML&quot; section...
+None
+ngbot: angular.js/v1.5.x 1b91d30 Frank Stepanski: docs(README.md): expand the &quot;Interconnection with HTML&quot; section...
+AxldenieD: hello :)
+kegster: yeah angular is pretty sexy
+kegster: especially when done properly
+adityadewz: please help me
+adityadewz: i am extracting keywords from the url using routeparams
+adityadewz: and i want to use them to reference to my object file
+adityadewz: for eg:
+adityadewz: url:repo/sem1/cs
+adityadewz: i want a sub array to be extracted from the file using array.sem1.cs
+adityadewz: but sem1 and cs as extracted from route are strings
+adityadewz: and array.sem1.cs is an array object
+adityadewz: please help me
+adityadewz: how shall i convert(&quot;array.sem1.cs&quot;) to real array object
+adityadewz: please help me

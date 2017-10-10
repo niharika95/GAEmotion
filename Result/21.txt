@@ -1,0 +1,754 @@
+None
+mario_: Thanks!
+tonio555: Hi, i'm new to learning web programming and wondering whether it is wiser to learn angular 1 or 2?
+GreenJello: tonio555, angular 2 is much better than angular 1, but if you're looking to get a job soon, there are more angular 1 positions
+verax5_: hi
+verax5_: man any good beginners tutorials acount
+verax5: hey
+verax5: whatsup yall?
+tonio555: thanks GreenJello
+glyph_: If I call .next(value) on an observable on one component, will the value be updated in another component that is subscribed to the same observable? Using RxJS
+lebster: is there an easy to to cancel all http promises if there is a statechange. I am having an issue where promises come back and the user is on another page so there are scope issues
+Null_: hey, quick question, so when you use factory and dependency injector, is there a copy per each component/each time its used, or just one version?
+Null_: like, a local variable would be the same in all the places you use it
+Elarcis: Hi!
+shoaib: Hello shoaib my name is shoaib
+shoaib: i want to learn angularjs
+Sindhu_: I have a doubt. I am a newbie to angular. Is it better to have one controller for many views or each view with their own controller
+shoaib: can any body help me please
+Sindhu_: Shoaib : There is a course in coursera
+Sindhu_: Its really
+Sindhu_: goog
+icebox: Sindhu_: one view / one controller... you may read code style guides by John Papa or Todd Motto
+Sindhu_: *good
+Sindhu_: Try that
+shoaib: where sindhu
+None
+shoaib: can you please mention the link
+shoaib: thanks
+Sindhu_: Icebox: Thank you so much
+icebox: Sindhu_: you are welcome
+None
+Sindhu_: Check this out
+shoaib: hi sindhu
+kakashiAL: icebox: hey icebox, did some react experiments and some angular redux/saga experiements :)
+kakashiAL: icebox: what do you think about the &quot;one file per function&quot; philosophy?
+icebox: kakashiAL: nice.. I didn't :)
+icebox: kakashiAL: I didn't like... one file per function... too extreme
+None
+None
+None
+None
+icebox: soee: is it angular 2 or angular 1?
+soee: icebox: angular 2
+icebox: soee: is the syntax correct? what is the link for ngswitch doc?
+None
+icebox: soee: it seems ok... any plunker reproducing your use case?
+soee: it is part of  @angular/common and CommonModule is imported to my module so should work :|
+smiche: another trivial thing that just doesn't work out of the box with angular2?
+JJH_: Hello everyone
+icebox: soee: I understand you have an issue with the evaluation, not with the import
+icebox: smiche: so you need to check the expression (website.status), and if you think it is ok.. please, provide a plunker reproducing the issue
+icebox: smiche: mistell, sorry
+icebox: soee: so you need to check the expression (website.status), and if you think it is ok.. please, provide a plunker reproducing the issue
+smiche: I was on it any ways :d
+soee: icebox: ok `fixed` it ... as status is string i had to put values in case into ''
+icebox: soee: nice
+icebox: JJH_: hey
+JJH_: i have a question maybe someone can help me
+JJH_: I want to know if it is possible to unit test the UI
+icebox: JJH_: don't ask to ask... just ask :)
+JJH_: without having a server with selenium
+icebox: JJH_: it is called end to end tests (e2e), not unit tests... yes, you can
+JJH_: without server?
+None
+JJH_: it is possible?
+icebox: JJH_: yes, you can... without selenium
+JJH_: @icebox so with karma i can test the existence of a button?
+icebox: JJH_: karma is a test runner
+icebox: JJH_: take your time to read and to understand the setup
+icebox: JJH_: spamming questions doesn't help you to improve your knowledge
+smiche: what is wrong with protractor JJH_ ?
+smiche: I fell in love with it, too bad the server can't seem to run google-chrome even with X virtual frame buffer -.-
+JJH_: in E2E test it said that i need to run a special web server
+JJH_: that why i was asking like unit test
+smiche: it's all done automatically to the point where all you do is $protractor config.js and tests are ran
+icebox: smiche: this is a no-go for us: &quot;You will need to have the Java Development Kit (JDK) installed to run the standalone Selenium Server.&quot;
+smiche: oh, alright
+smiche: there was some testing environment without selenium that had an emulated browser
+JJH_: my goal is to test like UT with something like gulp test the UI
+JJH_: without having a server running
+icebox: JJH_: sure... read the post suggested
+JJH_: i read it oO
+JJH_: maybe i dont get it
+icebox: JJH_: it seems so
+JJH_: but in the E2E part there is written Requires its own special web server
+icebox: JJH_: no
+icebox: JJH_: if you mean, you would want e2e tests without a browser, that is not possible :)
+icebox: JJH_: you need a browser running, at least headless
+smiche: icebox: out of curiosity, why would installing JDK be a problem?
+JJH_: yeah i know
+JJH_: i'm using phatomjs atm
+icebox: JJH_: ok... so what is the concern?
+JJH_: but i dont want to have a webserver running
+Anita_: what are promises used for??
+icebox: JJH_: you don't need that
+icebox: JJH_: but it is useful
+icebox: Anita_: for async workflow
+Anita_: is there any relation between $q and digest cycle??
+icebox: smiche: then what? I need to install a mainframe OS/390 with PL1, Cobol and whatever to test our financial backend? :) I don't think so
+icebox: Anita_: $q is the angular implementation... no with digest cycle... please read the docs
+None
+smiche: hey jdk8 is somewhat fresh :p
+icebox: smiche: the point is chaintool needs to be short... more complexity, more troubles
+JJH_: is grunt the same as gulp?
+icebox: JJH_: alter ego
+icebox: JJH_: it aims the same problem with different approach
+smiche: yeh that makes sense, though if you're familiar with the java environment it's like visiting home :p
+smiche: is there a reason why in angular2 systemjs is suggested and not webpack?
+smiche: in angular2 quickstart/tutorial
+icebox: smiche: it is not a matter of familiarity (I have been programming in Java for ten years)... it is adding abstraction layers or tools with different realms... they add complexity, maintanance costs and so on
+icebox: smiche: I suppose systejs is for educational purpose...
+JJH_: okok thanks
+Elarcis: hi icebox
+Elarcis: wow, very similar shapes indeed
+icebox: smiche: (notice, not jre, but jdk)
+icebox: Elarcis: hey
+icebox: Elarcis: that is good :)
+smiche: it is true that complexity rises(my tests still don't want to run headless on deployment server)
+Elarcis: smiche: systemjs is closer to what vanilla JS is heading toward I guess, webpack is cooler but has a peculiar logic
+JJH_: everywhere it's written that I need a web server to execute E2E test
+icebox: JJH_: I don't think so... but maybe we are not on the same page :)
+smiche: thanks Elarcis, I had a more pleasant experience with webpack but I guess I should give systemjs another try
+Elarcis: *shivers*
+JJH_: icebox when i get to the example on the git it's written Single Run Tests  Start the server to run e2e tests grunt server
+None
+icebox: JJH_: again.. there is no need for that
+icebox: JJH_: do you think those tests don't run in a CI environment?
+Elarcis: JJH_: this is an internal server that just temporarily hosts the app so the tool can run tests
+icebox: JJH_: that is useful if you need graphical results of the tests or to debug the tests
+Elarcis: JJH_: you don't need to install and configure a 'real' web server
+JJH_: yeah but there is a server
+smiche: what is wrong with that?
+icebox: JJH_: ok... I give up... good luck :)
+smiche: it's a local one, 0 configuration required
+JJH_: yeah i know
+JJH_: But i dont want
+JJH_: even a local
+smiche: why?
+JJH_: that why i was asking
+JJH_: like Unit test
+JJH_: environement restriction
+smiche: you don't even need a testing environment to unit test, require some of your js files, mockup input and expect output?
+Kendricke: Hello, guys. May I ask how can you override components when unit testing angular 2?
+icebox: Kendricke: do you mean mocking?
+Kendricke: Yes.
+icebox: Kendricke: no docs for that?
+Kendricke: There is no documentation actually for mocking a component.
+Kendricke: There are usually documents for mocking services.
+None
+Kendricke: The examples there do no involve mocking components.
+klex22: hi, im using angular2 cli (webpack version) with ng2-bootstrap and have alert ...:/alert: in app.component.html (i import AlertsModule in app.module.ts). When i do 'ng test' i get 'alert' is not a known element. why is that?
+Kendricke: klex22, you need to add the AlertsModule in the TestBed.configureTestingModule
+helllojesus12: Hi, I was hoping if someone could help me with a multi select
+None
+helllojesus12: This is my code so far
+runtyrobot: Is it possible to use angular routing and redirect to an entire new page? My issue is, that I have a login page - but it's currently running in ng-view. So parts of the menu structure is visible. Preferably I'd like to have an entirely different view for it.
+Pyrrhus666: helllojesus12: that&acute;s an empty plunk. did you save it ?
+None
+helllojesus12: sorry
+helllojesus12: I just saved it
+helllojesus12: What I want to be able to do was have a multiselect option but when I tried to add module for multi select it gets an error. I also tried ng-repeat and I am not sure what I am doing wrong.
+Elarcis: runtyrobot: nested view, but that'd be using uiRouter
+angularjs128: lol
+Pyrrhus666: helllojesus12: so far this is a table with sort and filter option, but no select, right ?
+helllojesus12: yes
+helllojesus12: What I wanted to achieve was something like this have a select option where I can select multiple select things
+icebox: there a whole section testing components in those docs... bah... I don't understand
+runtyrobot: Elarcis: Currently not using uiRouter - maybe I should though.
+Elarcis: runtyrobot: I don't think angular router manages nested views
+icebox: runtyrobot: ngroute doesn't support multiple and nested views
+Pyrrhus666: helllojesus12: that would be the select in the &acute;name&acute; column ?
+helllojesus12: Yes, I wanted to multiselect the names
+None
+helllojesus12: I tried looking at that example but
+helllojesus12: I am not sure I understood it correctly...
+Pyrrhus666: helllojesus12: are you sure this pattern is useful here ? wouldn&acute;t it be easier to add a column with checkboxes to select rows ?
+helllojesus12: well, what I wanted to try to do was be able filter the table and be able to guide by the names
+Pyrrhus666: helllojesus12: so the multiselect would be a filter ? that makes more sense :)
+helllojesus12: yea
+helllojesus12: sorry :(
+Pyrrhus666: helllojesus12: np ;) thing is, a multiselect is a big thing (like in the example). it&acute;s _not_ a dropdown like a single select.
+helllojesus12: oh
+helllojesus12: well, I looked at a plugin but it used two output models and I did not want that
+helllojesus12: I am writing a small script right now for unix based system where it will go through give me all the configurations and all. I wanted to put all that data in here
+Pyrrhus666: helllojesus12: if you&acute;re going to use the filter the way you intend, that means that the dropdown shows the exact same items already visible in the paged table. suppose that&acute;s 50 items, the select box would be huge...
+helllojesus12: well usually
+helllojesus12: it should be maximum of 8 unique items
+helllojesus12: I only want the unique items in it
+Pyrrhus666: helllojesus12: ah, like in this case &acute;lola
+Pyrrhus666: &acute; and &acute;kevin&acute;
+helllojesus12: yep
+Pyrrhus666: helllojesus12: that should be doable, but a multiselect still would be a large(ish) ugly thing in the header cell.
+helllojesus12: can you please guide me towards a resource? This is just for learning purposes for now so it should be ok if its ugly for now
+helllojesus12: @Pyrrhus666, also, can you please tell me why I cannot add more modules?
+Pyrrhus666: helllojesus12: you had the good documentation in an earlier link. now it&acute;s just a case of getting it to work :)
+helllojesus12: whenever I tried adding extra modules I always get an error
+Pyrrhus666: helllojesus12: what do you mean by extra modules ?
+helllojesus12: var app = angular.module('MyForm', ['ui.bootstrap', 'ngResource'])
+arlekin: hi guys
+arlekin: weird question: does anyone else has issues with youtube in chrome 54 ??
+helllojesus12: when I tried adding ngmultiselect in there and it would give me an error
+arlekin: #muchwow #suchofftopic
+angularjs128: @helllojesus12 you are stupid :) You should stop coding lol
+Pyrrhus666: arlekin: I&acute;m on 55, but no problems
+smiche: I'm on 53, how to get to 54? @arlekin
+arlekin: Pyrrhus666: huh... weird...
+helllojesus12: thanks @angularjs128
+smiche: if you have the CORS plugin on it causes issues sometimes
+arlekin: smiche: well, im on ubuntu so i just did apt-get update &amp;&amp; apt-get dist-upgrade
+Pyrrhus666: arlekin: 54 on ubuntu. no problems.
+smiche: I'm afraid of that, updates always end up melting my pc
+Pyrrhus666: helllojesus12: that&acute;s probably a problem with that specific plugin...
+Pyrrhus666: helllojesus12: please keep it in the channel per favore.
+arlekin: smiche: well, i first noticed the issue, then in good faith i did check for updates and did one
+smiche: did you check if you have CORS plugin on or postman interceptor? I've had issues with those on yt
+arlekin: smiche: is it possible to have them without knowing ? cuz im pretty sure that i never did install them
+smiche: you can check your extensions, if you have them on one chrome and login with your account to another it can sync up your extensions
+arlekin: smiche: well, i did just check and im pretty sure there is nothing offending in my extensions (few of them as i have)
+smiche: no idea then
+arlekin: *btw that feeling when instead of ) you type () as a reflex* :P
+arlekin: smiche: still thanks for your initiative
+None
+helllojesus12: @Pyrrhus666, can you tell me what I am doing wrong?
+None
+Elarcis: oh
+Pyrrhus666: helllojesus12: that should get you started I think. it doesn&acute;t filter yet, but the multiselect works
+helllojesus12: @Pyrrhus666, thanks!
+helllojesus12: I will update you
+Pyrrhus666: helllojesus12: np. you only had some mistakes in the repeat that builds the select.
+runtyrobot: If I use the same ng-controller two places on the same page - do these function as seperate entities, or should they be linked in some way shape or form?
+Elarcis: runtyrobot: yes, they're independent
+Elarcis: runtyrobot: only services are common to the whole app
+runtyrobot: and directives ?
+antiPoP: nobody? running the timesync standalone demo worked fine
+runtyrobot: or am I misunderstanding them?
+ngWalrus: they are scoped independently
+ngWalrus: as Elarcis said, only services are singletons
+runtyrobot: Roger
+torbjorn: can I force re-instantiate a service?
+icebox: torbjorn: Angular services are singletons
+torbjorn: and singletons should/can not be destroyed?
+icebox: torbjorn: no
+icebox: torbjorn: if you need instances of your objects... there are a few resources in SO
+torbjorn: i dont need multipel, i dont care actually, i just wanted to recreat it
+torbjorn: *multiple
+icebox: torbjorn: add a method to the service/factory to reset the state
+torbjorn: my service holds some 8-10 data arrays that it has fetched, and i need to re-fetch all these, so instead of going in and getting each one again, just re-instantiating it might be simpler
+icebox: torbjorn: I think you need a refactoring there... if you put fetching phase in a &quot;init&quot; method... you can &quot;re-instate&quot; data on demand
+torbjorn: yes
+torbjorn: shouldnt be a problem
+smiche: what is going on :o, resolve sometimes keeps reference to original object and sometimes not
+hemangpatel: Hello, Can i use webpack with lazy loading route ?
+smiche: oh nvm, my bad
+hemangpatel: I'm using webpack 2.1.0-beta.25 to build bundle. Now i want to use lazy loading feature
+None
+hemangpatel: icebox, this is diffrent but looking good
+icebox: hemangpatel: different? that is lazy loading in angular 2 :) see also &quot;Learn More&quot; section at the bottom
+hemangpatel: icebox, What about load module when user hit that module route and chunking in different file
+icebox: hemangpatel: that post says &quot;Now the router can preload lazy-loadable modules in the background while the user is interacting with our application.&quot;
+icebox: hemangpatel: is it different your use case?
+Elarcis: hi Foxandxss!
+Foxandxss: yo
+Elarcis: lo
+Elarcis: HURR DURR
+antiPoP: how can I make a component wait to initialize until a service is completely loaded?
+Pyrrhus666: antiPoP: by initing the service in a resolve on the route ?
+antiPoP: Pyrrhus666, I dont' have routes in this app
+Pyrrhus666: antiPoP: then you probably make some. using the resolve feature is the easiest way to do this, afail.
+antiPoP: it's just a single screen updating values via socket.io
+Pyrrhus666: s/afail/afaik/
+Uttam: how can i add progress bar during loading angular application?
+icebox: antiPoP: routing doesn't mean you have multiple pages (or views)... routing is a finite state machine
+Uttam:  how can i add progress bar during loading angular application? which can shows how many percent the application loaded?
+None
+None
+None
+Uttam: it just start and stop progress bar
+runtyrobot: Is there some smart way to reload the page/controller when changing page? This being after a login. I can think up a few solutions, but they ain't pretty.
+klex22: hi what is a test fixture when youre making tests in angular2?
+None
+antiPoP: see line 26
+zomg: have you tried using an arrow function?
+zomg: they use `this` from the containing scope
+Pyrrhus666: shouldn&acute;t you be using an =: func
+zomg: instead of call-time `this`
+Pyrrhus666: dammit zomg ;)
+None
+ngbot: angular.js/master a6118df Georgios Kalpakas: chore(ng-closure-runner): upgrade to version 0.2.4...
+zomg: Pyrrhus666: rekt!
+antiPoP: i'll rewrite as an arrow function...
+None
+ngbot: angular.js/v1.5.x cce1a73 Georgios Kalpakas: chore(ng-closure-runner): upgrade to version 0.2.4...
+Pyrrhus666: zomg: ☑ rekt
+zomg: lol
+Pyrrhus666: for completeness and future reference : ☐ not rekt ☑ rekt
+antiPoP: zomg, Pyrrhus666 that worked, thanks, also fixed the initialization issue :)
+Pyrrhus666: antiPoP: things like var self = this (or vm = this) should not be used anymore. imho they should  never have existed.
+antiPoP: Pyrrhus666, right, just there is a lot of new stuff to learn with ng2, ts and es6
+Elarcis: antiPoP: granted
+JJH_: @icebox are you still here?
+None
+antiPoP: (although this specific issue was a core js issue , but I messed up)
+icebox: map is a reduce returning an array... filter is a conditional map... and so on :)
+JJH_: I maybe misspoke earlier my request was to know if you can do E2E test without running your app
+icebox: JJH_: hey
+JJH_: @icebox hey again
+icebox: JJH_: I don't think so
+JJH_: @icebox that what i wanted to say by running a server x)
+icebox: JJH_: e2e tests are not unit tests... for e2e you need to run your app.
+icebox: JJH_: ah ok... well explained now... thanks for the details
+JJH_: @icebox that why i asked if a unit test version of E2E existed
+JJH_: @icebox but it seems not x/
+icebox: JJH_: it depends... if you are testing a controller or a service.. the answer is yes...
+icebox: JJH_: but if you test a color of a button, the answer is no
+JJH_: @icebox nope it's about testing UI
+JJH_: if a button exist etc etc
+icebox: JJH_: so the answer is no
+JJH_: @icebox ok thanks for the answer and I apologize for the mispoke this morning
+JJH_: earlier* cuz maybe it's not the morning for all of us :)
+icebox: JJH_: ah well... no problem... my fault :)
+JJH_: So thanks everybody and have a nice day ! :)
+icebox: JJH_: you too
+JJH_: ty
+Elarcis: holy shit there was a slide on a screen with a big-ass mistake, and I pointed it out at my colleague... the person who had wrote the slide was right behind me
+icebox: Elarcis: it happens :)
+jor: starting to dislike typescript.. I'm now starting to double cast any in my code..... ;)
+grizzm0: :o
+soee: if the app should have interface for registered users and also admins that should be able to manage users and their data, would you  implement it in single app or create separate one for admins ?
+None
+jor: soee: I prefer seperate admin applications. mainly so the user app can be scaled up seperatly.
+soee: jor: i was the same way thinking but needed some confirmation that others also prefer it :)
+Null_: hey guys, why can't a form name equal the name of the form's data object?
+Null_: like, name=&quot;form&quot; and then data is form.data
+alibelhaj: hi
+overlord_tm: Is it possible to use angular2 just for parts of webpage? Most of it would be server-side rendered (JSF), but I would like to use angular on few places (without converting everything into single page app)?
+icebox: overlord_tm: generally speaking, yes
+icebox: overlord_tm: but &quot;parts&quot; are not &quot;apps&quot;
+icebox: overlord_tm: so your mileage in terms of dev experience may vary
+overlord_tm: icebox, but if I wrap server generated template withing my-app (bootstrap component), it replaces all inner HTML with own template :)
+overlord_tm: if i do not include my-app in server template, angular complains about missing it :)
+smiche: angular is a framework to build an app, I don't think there's a benefit of having server rendered several small angular apps if that's your idea?
+overlord_tm: i would like to have single angular app, that controls just parts of page, not whole
+icebox: overlord_tm: you can still use angular in server side rendered environment (jsp, jsf, etc.)
+ngWalrus: React or similar would probably be a better fit for just parts of an app
+ngWalrus: Angular is pretty monolithic
+icebox: ngWalrus: no... it is the same &quot;problem&quot; conceptually&quot;
+ngWalrus: but it really isn't
+ngWalrus: react is just a view library
+icebox: ngWalrus: the point is not the framework... the point is spa vs. server-side rendered
+ngWalrus: you could totally render some stuff server side and other things client side
+icebox: ngWalrus: exactly :)
+ngWalrus: so react would totally be a match here
+icebox: ngWalrus: totally no... it is an option... like angular
+ngWalrus: angular is a pretty shit option tbh for something like that
+icebox: ngWalrus: there is not any advantage with a server side approach
+ngWalrus: you're getting a lot of gunk and bloat with angular compared to if you just make some components with react
+icebox: ngWalrus: agreed... but still the architettural pattern doesn't fit with a server side rendering
+piepl: Good afternoon, any idea where I can find the Router for Angular2 that fits my version ( is it in the core?)
+icebox: ngWalrus: my point is... mvc frameworks are for spa :)
+ngWalrus: and that' why React would be better
+ngWalrus: since it's not a framework
+icebox: ngWalrus: frameworks, libs... it is a minor detail
+icebox: ngWalrus: from the point of view of the dev there is not a full experience due to the server side rendereing
+icebox: ngWalrus: agreed with you with react it would be less pain
+icebox: ngWalrus: but it doesn't change the game
+icebox: piepl: in the core
+piepl: Yup thanks icebox !
+icebox: piepl: I mean in the scope @angular
+icebox: piepl: @angular/router
+soee: in angular 2 what would be the best place to store and share across modules some global settings/constants ?
+icebox: soee: pojo
+soee: icebox: pojo ?
+piepl: Mmm yea, I was looking for @angular/router before. but the version of the package on npm as way newer!
+paul___: hi all, if this chat room ok for angularjs 2 questions?
+icebox: paul___: yes it is
+paul___: icebox: super
+icebox: piepl: the versions are different
+icebox: paul___: angular 2.1.0... router 3.1.1
+None
+paul___:  Error: Template parse errors:
+paul___: Can't bind to 'routerLink' since it isn't a known property of 'a'.
+paul___: so my problem is that I am trying to use the routerLink in a child component (a custom tab component) however i get an error;
+paul___:  Error: Template parse errors:
+paul___: Can't bind to 'routerLink' since it isn't a known property of 'a'.
+None
+klex22: what does fixture.detectChanges do?
+None
+icebox: piepl: got it?
+icebox: paul___: resolved?
+paul___: icebox: ???? no i get an error Can't bind to 'routerLink' since it isn't a known property of 'a'.
+icebox: paul___: see the difference with the tutorial or docs... it seems it is missing something
+paul___: icebox: the tab component is child of another component the main child component works ok but I want to have a custom nav within it to route
+icebox: paul___: where do you code the component can use the directive routerLink? :)
+icebox: paul___: I see only the import
+icebox: paul___: and are you sure the syntax is correct?
+icebox: paul___: [routerLink]=&quot;['overview']&quot;:Overview/a: ?
+icebox: paul___: maybe... directives: [RouterLink] ?
+None
+icebox: paul___: sorry... pastebin is boring... :) plunker is better
+icebox: paul___: I cannot debug pastebin :)
+paul___: icebox: sorry not used plunker :-(
+icebox: paul___: sorry... but with pastebin we can only guess the solutions... spending a lot of time iterating
+paul___: icebox: cant get onto plunker is it down? just thought might be something really obvious :-(
+None
+icebox: Pyrrhus666: did you see my two day histograms? :)
+icebox: Pyrrhus666: a whole business unit is started to provide timeout-bot report :)
+Pyrrhus666: icebox: nope, missed it when switching from dsl to fibre I guess :)
+Pyrrhus666: icebox: haha ! cool :)
+None
+Pyrrhus666: pretty comparable so far. I guess the weekend will show a much different picture :)
+icebox: Pyrrhus666: there is almost no activity during the weekend
+Pyrrhus666: icebox: has the business unit already figured out what distribution this is ? I realized later poission is more for intervals between events, not lenghts....
+icebox: Pyrrhus666: no idea :) yesterday we plotted the density function alongside the probabilities...
+icebox: Pyrrhus666: a few quants of mine said me: no paycheck, no distribution :)
+icebox: Pyrrhus666: fair enough :)
+Pyrrhus666: haha, yeah, that kinda figures :)
+Elarcis: 188 commits difference between two branches
+Elarcis: outch
+icebox: merge nightmare arriving :)
+Pyrrhus666: Elarcis: 2 hours left in the week. you can do it !
+Elarcis: Pyrrhus666: we're not merging today
+Elarcis: Pyrrhus666: even less on a friday afternoon
+Elarcis: Pyrrhus666: also, I'm gone in 45min
+Elarcis: :D
+Pyrrhus666: Elarcis: we had some releases on a friday in the past. WORST.... IDEA.... EVER.... !!!
+icebox: Pyrrhus666: agreed... never releasing during the week or the weekend... :P
+Pyrrhus666: icebox: hmm, not during the week, not during the weekend... so, never ? sounds doable ;)
+icebox: Pyrrhus666: :P
+icebox: Pyrrhus666: npm, github... continuous release
+Sindhu_: Hi, is it good to create models as service or factory ?
+Sindhu_: Anyone ?
+Pyrrhus666: icebox: so, continuous problems ;)
+icebox: Pyrrhus666: :P
+icebox: Sindhu_: it is ok
+Preuk: Pyrrhus666: used to work for a bank... release were to be done friday after 5PM &quot;not to disturb business&quot;
+Preuk: of course they wouldn't pay for week-end delivery
+Sindhu_: @ice_box: Thank you. Posting a question with a hope that would get answer from you :P
+None
+ngbot: angular.js/master eeb9ef0 Peter Bacon Darwin: chore(gruntfile): check the node version before starting...
+senayar: give us plnkr.co back
+icebox: Sindhu_: you are welcome
+Pyrrhus666: Preuk: I tend to fight for my weekends. mostly, succesfully :)
+Pyrrhus666: then again, we&acute;re not in the financial business, luckily
+Preuk: Pyrrhus666: we usualy didn't (too expensive for client) but in the end monday morning was usualy all scream and tears
+Pyrrhus666: Preuk: and of course them tears were all &uml;your fault&uml;...
+Preuk: Pyrrhus666: obviously, it was in now way related to their stupid internal regulations inherited from a computerless time
+Pyrrhus666: haha, it&acute;s never _their_ fault. the universal rule of IT.
+icebox: the point is not the timing of the deploy... but the architecture not supporting hot deploy :)
+Preuk: yep, that's the whole point of using contractors instead of internal keyboard mashers: you can blame them :)
+icebox: Preuk: of course, working for a bank, here it is the same :P
+Pyrrhus666: icebox: in my experience no such thing exists. it&acute;s a mythical beast ;)
+icebox: Pyrrhus666: github, npm are companies release every minute ;)
+icebox: Pyrrhus666: it is not a myth
+Preuk: icebox: well; when you depend on &quot;over-optimized by internal specilists&quot; batch jobs that run for 20 hours a day, that's pretty damn diffucult to do hot deploy :p
+icebox: Preuk: sadly agreed
+Pyrrhus666: icebox: that&acute;s why I said &acute;in my experience&acute; ;)
+Preuk: seen worse: 30h daily batch
+Preuk: end up with a 4h batch to clone live prod, then run offline, then try to recile with previous day batch
+Preuk: conflit hell
+Preuk: conflict
+Preuk: (and it was once again in no way related to the fact that their batch was doing a full scan over 10M entries for each line processed, 'cause it was in-house dev, you see?)
+None
+Elarcis: hahaf
+verax5: I wish anguar would throw useful errors :(
+icebox: verax5: angular 1 or angular 2?
+verax5: how do i check that icebox?
+verax5: : (
+verax5: seems like 1.5.8
+None
+icebox: verax5: well... in many cases the message and its link are enough to understand the issue
+verax5: well im getting a bigass non readable error
+icebox: verax5: any detail?
+verax5: something like this:
+None
+icebox: verax5: perfect... :)
+verax5: how do i even  debug it it,s like 10 lines long..
+icebox: verax5: no need... follow the link :)
+None
+icebox: verax5: it is due to myMod module...
+verax5: icebox
+verax5: but why doesnt it show like properly formatted manner
+verax5: it shows error on console, obv i cant even click links
+verax5: is it because of minified version?
+suyash: hi
+icebox: verax5: no idea... usually we follow the link
+icebox: senayar: hey
+icebox: senayar: sigh... mistell (suyash quit) :)
+icebox: in a few minutes... off :)
+senayar: fix plnkr icebox, I know you can do it
+senayar: :P
+icebox: senayar: :P
+verax5: ice it shows the error in console right?
+verax5: or echoes on page?
+icebox: verax5: in the console
+verax5: one last questions where can i find non minified version?
+icebox: verax5: same url? without .min
+klex22: why do i get 'UserService' not provided even if i do 'providers: [{provide: UserService, useValue: userServiceStub }]' in TestBed.configureTestingModule?
+cuppy: Hi, all. Both #express and #rest are quiet. Apologies for cross-channeling into a more general chan. How difficult would it be to configure a REST endpoint to respond on a different port depending on the URI? For instance, a call to /services/one responds to the IP on port 8081, and a call to /services/two responds on port 8082
+icebox: cuppy: apologies accepted... :) but that is a backend question rather than frontend one :)
+None
+Mavericks: cuppy: icebox  true
+keithbrown: good morning is anyone available
+Ryan___: Hi guys, anyone here? Im new here
+None
+Mavericks: keithbrown: hello
+Mavericks: Ryan___: ok
+keithbrown: Mavericks: hi
+None
+keithbrown: Mavericks: im having a scope issue with nested directives, can you take a look?
+Ryan___: I just want to ask a question about modules, because right now our platform having a bottleneck on our main module which is app.js,
+None
+Mavericks: icebox:  I tried it with 1.5.8 but doesn't seem to pick the selected value .could it be an issue with if it's wrapped in a ng-switch
+Mavericks: keithbrown: will try
+Ryan___: Former developers build the architecture of our platform and they import all css, states, modules in app.js
+icebox: cuppy: at last, if I am not wrong, you have a server per port listening
+Ryan___: now in our live server app.js or our main module loads at 9s
+icebox: Mavericks: no idea... that post you suggested is ver worthy reading about select widget
+icebox: *very
+Ryan___: is there anyway that we can optimize the speed of our platform?
+Mavericks: icebox: yes it was awesome. thanks so much
+cuppy: icebox, Mavericks thanks. Does anyone know if it would violate a policy if a call was consumed on a different port than the endpoint's response? For instance: :80/service responds to [origin's IP]:8081
+Mavericks: Ryan___: tried checking the performance tab when it loads them all ?
+None
+Mavericks: Ryan___: in the developer console for ff
+icebox: cuppy: CORS
+cuppy: icebox, yep. Okay. And I know there are ways around that.
+cuppy: Alright thx
+icebox: cuppy: you are welcome
+keithbrown: cuppy: open your CORS - there is a plugin for testing in Chrome.
+Ryan___: @Mavericks, yah i think it loads them all, we use webpack for building the application
+icebox: cuppy: next time... #node.js is better :)
+cuppy: noted
+keithbrown: Mavericks: This is the first time I tried to call a Directive in the template of another Directive...I would like to use the update functionality elsewhere in the app; simply by passing in a notification. should I just add the update methods to Notification? ( i just wanted to change the template of the update button)
+viran: Hey, does my nodejs backend (endpoints) and angular2 frontend should be places in a single project or two different ones?
+viran: not sure how to create the proper file/directory structure in that case
+baako: icebox
+icebox: viran: up to you
+icebox: viran: project/src/server, project/src/client or project1/src, project2/src depends on the size of the layers, dev workflow, team size and so on
+icebox: viran: for the client side you may read code style guides by John Papa or Todd Motto
+viran: icebox: is there a skeleton project I can look at and see how they configed the build process .. ? something like npm run server which would result in 'compiling' the client so it would be served from the server
+icebox: viran: angular-seed
+viran: thanks a lot
+None
+None
+icebox: keithbrown: what is the question?
+keithbrown: icebox: I have a notification directive with &quot;update-notification&quot; directive in the &quot;notification&quot; template. The &quot;update-notification&quot; directive's methods dont get called, just &quot;notification&quot; directive's.
+keithbrown: icebox: both &quot;notification&quot; and &quot;update-notification&quot; have a controller defined.
+icebox: keithbrown: really you should narrow your use case in a few lines of code and provide a plunker reproducing that context... otherwise we stay here for hours guessing and trying virtual solution without any concrete help... furthermore I am off in minutes
+None
+keithbrown: icebox: honestly im not sure how to do that
+icebox: keithbrown: imagine our work... we should copy and paste that source locally... setup a working environment, reproduce the issue... and eventually debug the app
+keithbrown: icebox: imagine a box with a button in it. the box has a controller and the button has a controller - the buttons controller is trumped by the box.
+keithbrown: icebox: ok
+icebox: keithbrown: I can imagine many things... and all work here :)
+icebox: off... bye
+Mavericks: keithbrown: did you try in the slack channel for ionic by chance ?
+keithbrown: no
+Mavericks: keithbrown: so the controller
+keithbrown: Mavericks: I have slack....
+keithbrown: Mavericks: ill give it a try
+None
+keithbrown: Mavericks: thanks
+keithbrown: Mavericks: (were you able to take a look at it?)
+Mavericks: keithbrown: i'm not that proficient yet.  will take a look at it in a bit and see if I come across something
+dodobrain: is there a way to have a dynamic name for the model?
+Mavericks: keithbrown:  yes i took a look at it. what you mentioned here was easy to understand
+Mavericks: keithbrown: about button and the box controller as the issue
+dodobrain: something like ng-model=&quot;selectedUser+[[userType]]&quot;  ?
+keithbrown: Mavericks: great!
+keithbrown: dodobrain: selectedUser+{{userType}} provided userType is defined in the controller...(the whole string should be defined in the controller) var ctrl = string(selectedUser + UserType);
+keithbrown: dodobrain: $scope.ctrl
+keithbrown: dodobrain: ng-model = &quot;ctrl&quot;
+dodobrain: ah so setup the concatenation in the controller and just interpolate that value as the name
+keithbrown: dodobrain: yeah sorry I was all over the place
+keithbrown: dodobrain: but the call in the html would be ng-controller = &quot;ctrl&quot;
+dodobrain: keithbrown, what do you mean by the call in the html will be ng-controller=&quot;ctrl&quot; ?
+dodobrain: i don;t have anything in the template snippet about ng-controller
+dodobrain: its just defined in the directive
+dodobrain: keiok i'm having a problem because the template is actually for a directive and the controller for it is defined inline
+tangorri: seems that angular-cli npm pack still use deprecated packges ...
+tangorri: why don't they udpate dependencies ?
+dodobrain: can someone help me out with dynamically naming a simple ngmodel ?
+None
+dodobrain: if you open up the console you'll see there a strange error
+tangorri: dodobrain, remove {{ }} (not sure as I don't code ng2 allready)
+dodobrain: this is not ng2
+dodobrain: it is ng1.5
+tangorri: so remove
+None
+tangorri: oops
+dodobrain: tangorri, maybe i didn;lt explain clearly
+dodobrain: i want the name of the model to be dynamic
+dodobrain: i.e. in this case selectedUserviewer shoul dbe the name of the model variable
+tangorri: hmmm
+tangorri: weird
+tangorri: do a container maybe $scope.object[varnameyouwant]
+tangorri: not sure ng-model directive can interpolate
+tangorri: ho you want to specify the model name trough input ok
+tangorri: dangerous
+tangorri: eval
+dodobrain: not from input..
+dodobrain: from the directive attr
+dodobrain: essentially the reason i wanted to keep a dynamic name was because the same directive will be used multiple time son the same page
+dodobrain: so i cannot have the same model name throughout the page
+tangorri: ok
+None
+tangorri: (use link)
+tangorri: sorry you need attr
+tangorri: why ng-model ?
+tangorri: you can observe a attr then do model = $scope.[attrd['model']]; somehting like that
+dodobrain: i'm not understanding your example
+None
+waterfoul: I'm trying to get an angular2 app running and have everything loading via angular-universal. Unfortunately whenever I change routes using a [rounterLink] directive on a link it sends the link to the browser instead of having the router move the page without a reload. I have a base href=&quot;/&quot;: tag in my header. Are there any other things I need for the router to work correctly?
+waterfoul: I also have angular-universal loaded and that does load the routes correctly, making it appear that everything is working. Unfortunately the browser is reloading everything on each route change instead of just transitioning from route to route
+keithbrown: hey is anyone available?
+zomg: keithbrown: if you have a question it's best to just ask it. If I knew the answer to it, I could answer that now instead of asking you for details :)
+keithbrown: zomg: I have a nested directive that i seem to be having a scope issue: The edit notification option (slide the list item to the left) does not call the update-notification directive's function on ng-click
+None
+nishu-tryinghard: keithbrown, iam getting syntax errors
+keithbrown: where
+nishu-tryinghard: you can check it in your console
+keithbrown: nishu-tryinghard: its because sass isnt installed
+nishu-tryinghard: one is in directives.js and another in services.js and both are missing '}'
+nishu-tryinghard: Those error are syntax errors it is nothing to do with sass.
+keithbrown: nishu-tryinghard: im not using services.js in the plunkr - looking at the directives
+nishu-tryinghard: keithbrown, in my browser the app is not running as there are some syntax errors .
+keithbrown: all '}' are accounted for
+keithbrown: nishu-tryinghard: are you using chrome?
+keithbrown: nishu-tryinghard: try it
+nishu-tryinghard: in a min
+keithbrown: nishu-tryinghard: its working for me
+nishu-tryinghard: post the url again
+None
+nishu-tryinghard: okay now it works
+verax5: hey anyone here uses angular with laravel?
+nishu-tryinghard: but it crashed again due to syntax error
+keithbrown: nishu-tryinghard: chrome is magical...lol
+keithbrown: nishu-tryinghard: im not seeing anything
+None
+nishu-tryinghard: and it works in chrome now
+keithbrown: nishu-tryinghard: im not sure.
+nishu-tryinghard: keithbrown, also in updateNotification directive $localStorage is causing error check that once. and what is that you are trying to do?
+keithbrown: nishu-tryinghard: get the &quot;update-notification&quot; directive working...you can remove $localStorage - -its not used here
+nishu-tryinghard: now coming to your issue can you tell us more about whats the actual issue?
+soee: verax5: yes
+keithbrown: nishu-tryinghard: $scope.showUpdateNotification in the &quot;update-notification&quot; is not being called, but if i define it in &quot;notifiaction&quot; it is - I'm having a scope issue.
+verax5: how do ya find it soee?
+verax5: is it gool
+verax5: good*
+keithbrown: nishu-tryinghard: I think its because i calling a directive in the template of another directive - but i need to do that in this case...
+soee: verax5: i think it doesn't matter
+soee: angualr is for frontend while laravel for backend
+keithbrown: nishu-tryinghard: I want to use the update- notification directive in another part of the app and simply pass it a notification obj
+verax5: I know soee
+soee: but i prefere lately to put frontends as a separate angular app and use Lumen as API
+verax5: I? meant like interaction with backend
+verax5: I used jquery and it was pain displaying dynamic html and data lol
+verax5: So I thought I'd try angular
+verax5: never used two way data binding but seems like a coo concept
+soee: well it was pretty bad concept on large apps in the end
+soee: that is way in angular 2 it is handled a bit different
+verax5: : O
+verax5: well hope I'm in going in a right direction lol
+verax5: I just started learning it
+keithbrown: nishu-tryinghard: do you see what im trying to do?
+soee: it is worth larning it
+nishu-tryinghard: yes i can, and made some changes to code just now so hard to follow one way to avoid such issues is to use controllerAs or follow john papa style guide to know more on that. Let me see the code i didnt understand the issue
+nishu-tryinghard: and you made*
+keithbrown: nishu-tryinghard: sorry i didnt follow all of that
+keithbrown: nishu-tryinghard: are you asking something
+keithbrown: nishu-tryinghard: I was going to go back and do ControllerAs - (I've been working on this for 1 year) back in the beginning I didn't know of ControllerAs
+nishu-tryinghard: keithbrown, sry iam unable to understand. can you tell me which route we are in which is causing this issue? i just need to route
+nishu-tryinghard: the route*
+keithbrown: nishu-tryinghard:  sorry, the route?
+nishu-tryinghard: state, in which state it causes the issue i can see there are four routes(states)  in your app.js config block
+keithbrown: nishu-tryinghard: tab-dash
+keithbrown: nishu-tryinghard: only using tab-dash
+keithbrown: nishu-tryinghard: DashCtrl
+keithbrown: nishu-tryinghard: and the directives
+keithbrown: nishu-tryinghard: did that answer your question?
+nishu-tryinghard: keithbrown, yes iam trying to find out why its not able to access the scope but when i inspect the scope in console its not there. \
+keithbrown: nishu-tryinghard: ok great, thanks! Glad we are now on the same page ;)
+nishu-tryinghard: keithbrown, i the directive link function is not at all rendered,. sry i dont know whats the causing the issue
+keithbrown: nishu-tryinghard: should be because the template shows
+keithbrown: nishu-tryinghard: and its getting the html from an attribute evaluated in the link function
+keithbrown: nishu-tryinghard: thankyou for trying to help.
+None
+None
+keithbrown: seem to be having a scope issue
+SecureVirus: Hi
+waterfoul: In angular2 is there a way to determine what module has a specific class?
+None
+captn_ho_: Anyone able to help me understand why I'm unable to use a @types definition within my angular app? It just keeps saying @types/foundation/index.d.ts is not a module.
+superpws: Any good sample project in AngularJS2 (on github) that has the home page?
+superpws: Basically a project that can be used as a basis for designing/developing  a simple front/home page.
+verax5: keep getting module not defined for some weird reason..
+None
+verax5: any idea guys?
+rand0m: try angular.module
+rand0m: @ verax5
+verax5: oohh fkkk
+verax5: where the heck did i bring new from lo
+verax5: thanks
+rand0m: np
+verax5: so how do i loop through this using ng-repeat loop?
+verax5:  {&quot;id&quot;:[109,110,111,112,113,114,115,116,122,123,124,131,132,}]
+rand0m: hmm tricky
+rand0m: not tricky
+rand0m: cant do it in my mind
+rand0m: will code in a moment
+rand0m: here:
+None
+rand0m: or you could loop through items in items.id
+rand0m: if you only need those
+rand0m: depends on your options
+verax5: thanks alot man
+verax5: appreciate it
+rand0m: np
+verax5: guys how do invoke controller when user clicks a button?
+verax5: i mean my controller doesnt have a particular method
+rand0m: then you should have a method no?
+verax5: random just put a normal method there and put my logic in and call using ng-click right:?
+rand0m: yes
+rand0m: you should define it like
+rand0m: $scope.mymethod = function() { alert(&quot;hi&quot;) };
+rand0m: and use
+rand0m: ng-click=&quot;mymethod()&quot;
+verax5: ohh now i see why it wasn't working lol
+verax5: forgot to bind it to $scope
+lebster: is there an easy to to cancel all http promises if there is a statechange. I am having an issue where promises come back and the user is on another page so there are scope issues
+verax5: rand0m
+verax5: is there any method like -:paginate(10) in angular?
+verax5: to create pagination
+YottaByte: what does the angular thingy majigger? that takes directives like ng-controller and maps them to the javascript files and transforms the {{ }}, etc? is that a node server? or can it be any server? I'm working on a spring boot java web app that uses angular and I'm just curious. I don't think there's a node server running in the background doing that stuff in parallel
+rand0m: what do you want to paginae
+rand0m: paginate
+rand0m: YottaByte, ui-router
+verax5: random i have lots of users
+verax5: i dont wanna show looong list on same page
+rand0m: and how do you have the data coming?
+rand0m: in chunks or all at once
+verax5: well all ones for now
+YottaByte: ui-router works with java? or is that no part of the equation?
+rand0m: no it doesnt YottaByte
+rand0m: ui router maps controllers with pages
+rand0m: pages in the sense files?
+None
+rand0m: ty that?
+rand0m: tr
+None
+rand0m: YottaByte, are you talking about a headless browser? :s
+YottaByte: not sure what a headless browser is.. I
+verax5: hmm leme see
+rand0m: headless browser is a browser that runs in memory

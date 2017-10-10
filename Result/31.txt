@@ -1,0 +1,345 @@
+bean: I'm seeing strange behavior in ng2 where my array of Objects is populated by an http response but immediately after a console.log() claims it is undefined.  in the template the array prints without issue so it can't really be undefined ...
+j4f-shredder: I have 3 files in the controllers folder, and one file to combine these 3 into one file to include in the index file, how do I do to unify it? I use require('./campaignController'); require('./sponsorsController'); require('./dashboardController');  but it doesn'twork
+j4f-shredder: app.controller('dashboardCtrl', function($scope,$http){      $scope.dashboard=&quot;Dashboard Placeholder&quot;;  });
+j4f-shredder: the 3 controllers has the same code
+vicatcu: hey all, using angular2, i set up a 2-way data binding on a select menu, and bound a handle rto the (change) event on that select menu
+vicatcu: but when my handler gets called, it's like i get the value before the change reported in my handler
+vicatcu: what's the deal? how do i get the value the menu was changed-to delivered to my handler
+vicatcu: ?
+vicatcu: my select template looks like this: select (change)=&quot;updateValue($event)&quot; [(ngModel)]=&quot;selectedValue&quot;:
+vicatcu: and i need the change handler because when the selection changes, i need to update other aspects of my component
+vicatcu: google is getting me nowhere with this
+nisseni: I've got a case where the client want's a web app to control Customers, and their Employees that have gone through a certain Education and gotten a Certificate. I'm thinking that it might be a good opportunity to learn something like Angular. Is it recommended to build a &quot;base&quot; with Laravel and then make some components using Angular. What's the best approach?
+zomg: nisseni: the &quot;ideal&quot; architecture would probably be to have an API which produces JSON, which you can then consume from Angular
+zomg: If you like Laravel, you can certainly use it for this purpose
+nisseni: zomg: sounds cool. So laravel in the background for saving. Maybe instead of using Laravel, should I use something like Firebase? For storage.
+zomg: That's entirely up to you
+nisseni: zomg: But that's an option?
+zomg: Sure, anything that you can access via HTTP works
+nisseni: zomg: And speed wise, is it ok to use some kind of API or is it preferable to use something else like a nosql-solution?
+zomg: In general even if you use a nosql DB, you would still want to wrap it with an API to ensure correct access privileges and ensure the data that goes in is valid etc.
+nisseni: zomg: ok, thanks
+anli_: Can multiple elements use the same controller?
+anli_: Oh, they get different scopes
+daedeloth: any tips on how to get an app to work on IE9?
+daedeloth: I'
+daedeloth: I'm getting this now: Unable to get value of the property 'remove': object is null or undefined
+daedeloth: I think it's related to classnames
+daedeloth: but I have the shim file loaded
+laurensvanpoucke: What's the best way to evaluate a nested object expression? Like {{ account.plan.type }} . If account is an async object?
+Satenik: Hi
+Satenik: i want to use angular material grid system. But there isn't working it.
+None
+daedeloth: alright almost there *yay*
+daedeloth: now just need to fix my routing
+None
+daedeloth: the webapp part is wrong there :) any tips?
+icebox: daedeloth: do we need to guess what is wrong?
+icebox: daedeloth: if it is the hashtag, use html5 mode
+None
+None
+ngbot: angular.js/master e77f717 Martin Staffa: docs(guide/Conceptual Overview): fix external api example...
+daedeloth: icebox, I think this is the fallback for ie9
+daedeloth: but it doesn't seem to work as expected
+None
+ngbot: angular.js/master 79d2b9a Jason Bedard: refactor($parse): remove unused expression arguments...
+icebox: daedeloth: ok, I see... and how shall we help you? :)
+icebox: daedeloth: IE9 :)
+icebox: daedeloth: what is that?
+daedeloth: well perhaps somebody has experience with that?
+icebox: daedeloth: about what?
+daedeloth: history.js I guess?
+daedeloth: I am not really following your logic
+testx: how are you supposed to change the view from inside a directive?
+icebox: daedeloth: me too... really
+daedeloth: well I'm guessing the angular2 router and history.js don't play very well together and maybe someone has got it working
+icebox: daedeloth: what is the description of the concern? any code detail?
+icebox: daedeloth: only now you are saying it is angular 2... sigh... thinking it was angular 1
+icebox: daedeloth: and what is history.js?
+icebox: daedeloth: we don't know your setup... it seems you give it for granted
+daedeloth: sorry history.js was wrong
+daedeloth: this is just the &quot;getting started&quot; app bootstrapping our application
+testx: trying to use routing, i have a ng-view, it loads a template that uses a custom directive, the custom directive then loads a template that contains the content, the content consists of a div made to look like a button with ng-click=&quot;$location.path=&quot;#!newurl&quot;
+daedeloth: so I figured, since everything is configured as it is in the online manual, I could skip those parts
+testx: is that how you are supposed to use ng-views and do routing?
+icebox: testx: generally speaking, if you need multiple and nested views, you need to use ui router, because ng-ruote doesn't support those features
+None
+testx: icebox: well not nested views
+testx: what do you mean it doesn't support multiple views? displayed at the same time?
+testx: i just have a single div data-ng-view:/div:
+testx: need to switch out the main page with other pages when the user clicks a link
+testx: or clicks a div made to look like a button
+testx: how do i do this? div data-ng-click = &quot;$location.path='#!newurl'&quot;:/div:?
+testx: and inject $location into the directive?
+testx: do i need to specify $location as a dependency of the module containing this directive?
+testx: anyone?
+Pyrrhus666: testx: for links, just use regular hrefs. for clickable things, I use $location.path(newUrl);
+Pyrrhus666: path is a method (getter/setter), not a property
+testx: Pyrrhus666: do i need to specify location as a dependency of the module?
+Pyrrhus666: beware: if you don't use html5mode, you probably need $location.hash();
+Pyrrhus666: testx: yes. and it needs to be injected into the controller..
+testx: like this? var subModule = angular.module(&quot;subModule&quot;, [$location]); subModule.directive(&quot;custDirective&quot;, [&quot;$location&quot;, function($location){}]);   ?
+testx: Pyrrhus666: ^
+Pyrrhus666: the first injection isn't needed, I think. the second one looks good.
+testx: so i don't need to inject into the subModule?
+Pyrrhus666: no.
+testx: so what do i do with the $location inside the directive?
+Pyrrhus666: call $loction.path(somewherelse); when a user clicks something. that was the point, wasn't it ?
+testx: Pyrrhus666: can i do that from ng-click?
+testx: div data-ng-click=&quot;$location.path('#!newurl');&quot;:/div:
+Pyrrhus666: testx: probably, if $location is in scope. but I'd go with a handler that does that.
+None
+testx: Pyrrhus666: how do i create a handler for the directive?
+testx: subModule.directive(&quot;custDirective&quot;, [&quot;$location&quot;, function($location){ return {templateUrl:&quot;url&quot;, handler:function(path){$location.path(path);}}]);   ?
+testx: or do i need to inject $scope into the directive as well and do $scope.handler = function(path){$location.path(path);};    ?
+testx: Pyrrhus666: ^
+testx: anyone?
+Pyrrhus666: testx: you need to defined a handler in the directive's 'link' function, which you can use in a ng-click attribute.
+testx: this is getting very complicated, i feel like i am almost certainly doing something wrong
+Pyrrhus666: testx: have you read the dev-guide on directives ?
+testx: Pyrrhus666: yes but...
+testx: i just need to implement basic routing, change the view when a button is clicked
+testx: i feel like the way i am doing it maybe over the top
+testx: do i even need directives?
+None
+testx: i am getting a syntax error on   line5   :
+None
+testx: whats the syntax error on line 5 ?   it says the error is on the  :
+Pyrrhus666: I was just about to ask why you were focussed on a directive. can't you just start with an a href: and take it from there ?
+testx: Pyrrhus666: no i can't use a:/a: need to use the div
+testx: but that not what the directive is
+Preuk: onclick -: setLocation ?
+Pyrrhus666: testx: so what _is_ the directive ?
+testx:       when(&quot;/Forum&quot;, {template: &quot;div data-forum-list:/div:&quot;}).
+testx: forumList is the directive
+testx: angular.module(&quot;forum&quot;).directive(&quot;forumList&quot;, [&quot;$location&quot;, function($location){
+None
+testx: it loads a template that displays the forum list
+testx: inside it theres a button( a div made to look like a button )
+testx: and when you click the div i need to go to another page
+testx: basically another view
+testx: i am using directive here as custom web components
+Pyrrhus666: sounds okay. and your code looks okay. so, you get an error or something ?
+testx: well its not working
+testx: it doesn't do anything
+Pyrrhus666: no errors on console ?
+testx: i put a console.log in go(){console.log(&quot;Test&quot;;} and its not printing anything
+testx: and no errors
+testx: the go function isn't getting called
+testx: changed this.go to scope.go and still no lucj
+testx: luck*
+testx: is this the proper way to make local functions in a directive?
+Pyrrhus666: dunno if it's the proper way, it's the way I did it :)
+testx: gtg
+testx: do i need to inject $scope into the directive as well?
+Pyrrhus666: ah, yes. you should, totally missed that one :)
+testx: got dced
+None
+testx: Pyrrhus666: still not working
+testx: doesn't print test
+Pyrrhus666: don't inject it in the module, do it in the link function
+veeru: i want to add custom field(&quot;subDomain&quot;) in every http request. and i am using interceptors to pass the value.but i am unable to see the field i added.
+testx: Pyrrhus666: ?
+veeru: how to add custom field in headers
+testx: link: [&quot;$scope&quot;, function(scope){}] ?
+Pyrrhus666: testx: oops, my bad. but you should have scope  _and_ $location injected.
+Pyrrhus666: veeru: look at $http interceptors. it's in the docs
+veeru: ok
+testx: i hate this, all i need to do is change the url when a click occurs
+testx: this is a nightmare
+Pyrrhus666: testx: then use a href looking like a button instead of a div ?
+testx: Pyrrhus666: i would if i could
+Pyrrhus666: testx: why can't you ?
+testx: because i can't change that part of the code
+Pyrrhus666: testx: ah, that sucks. you could of course ditch the directive and use an ng-repeat to build the list.
+testx: is there some way to make this work?
+testx: div data-ng-click=&quot;go('#!Forum');&quot; class=&quot;panel-body&quot;:
+testx: this div is inside the templateUrl for the forumList directive
+Pyrrhus666: sure. you're almost there. the 'go' function should have both $scope and $location injected, and take a path as an argument.
+testx: Pyrrhus666: why does it need scope?
+Pyrrhus666: soory, my bad, it doesn't. the directive does :)
+Pyrrhus666: btw : your link function should have $scope injected, not scope, that's not a thing.
+testx: still not working with $scope
+Pyrrhus666: can you build a functioning (as far as possible) plunk of your code ?
+None
+Pyrrhus666: testx: I can't debug that...
+veeru: but it is showing $http.defaults.headers.common is undefined
+testx: Pyrrhus666: do you see anything wrong though?
+Pyrrhus666: testx: no.
+testx: Pyrrhus666: looking at it in batarang i get an event
+testx: go is undefined
+testx: someone please help, this is eating up hours
+Pyrrhus666: wait a minute... why is your directive restricted to attributes ? shouldn't it be 'E' fore element ?
+testx: Pyrrhus666: why does that matter?
+testx: its restricted to attributes because of IE compatibility
+testx: i need to define the handler function go inside the isolate scope of the forumList directive
+testx: oh no
+testx: i just realized my derp
+testx: i need to define the go function in the mainView directive
+testx: was looking at the wrong file all along
+None
+testx: i a getting unknown provider error
+Pyrrhus666: you haven't injected $location
+testx: Pyrrhus666: what yes i have
+testx: you mean into link?
+Pyrrhus666: not in your link function
+None
+testx: i think its because it can't inject scope for some reason
+testx: it says it can't find a scopeProvider
+None
+Pyrrhus666: sory, you were right, it's been a while since I did this stuff.
+Pyrrhus666: I'm trying to build a tiny plunk, hold on.
+testx: Pyrrhus666: well getting rid of scope worked
+None
+testx: when i set location.path it keeps going to the default route
+testx: 								div data-ng-click=&quot;go('#!Forum');&quot; class=&quot;panel-body&quot;:
+testx:       when(&quot;/Forum&quot;, {template: &quot;div data-forum-list:/div:&quot;}).
+testx: why is it going to the default route?
+testx:     $locationProvider.hashPrefix('!');
+Pyrrhus666: I have no experience with hashed urls, I guess it thinks that '/Forum' !== '#!Forum'.
+Pyrrhus666: shouldn't you just use '/Forum' in your path ?
+testx: well this works
+testx: 							li:a class=&quot;navBarBtn&quot; href=&quot;#!Forum&quot;:Forum/a:/li:
+testx: so i thought go('#!Forum'); would work as well
+Pyrrhus666: testx: I don't know if $location expects that.
+testx: yeah you are right /Forum works
+testx: thanks for all the help
+testx: it only took several hours
+testx: XD
+Pyrrhus666: testx: that's somehwat logical : the weird hashed-url stuff should be visible only in the browser, not in angular (apart from the config)
+None
+Pyrrhus666: it is very hard for others to help you debug from random bits of code...
+Guest17486: hi all  I am looking for help
+iksik: good morning ;-)
+Jeroen2: Can someone explain me how to get all controllers in sperated files?
+Jeroen2: I only get them in one file but want them in an individual file.
+Jeroen2: Or is it only possible when including them all in the index file? :/
+ZoderUck: hi
+ZoderUck: can i ask something here?
+uru: ZoderUck: You just did.
+ZoderUck: ow shoot
+uru: :p
+uru: If its angular related then just ask it. No need to ask to ask.
+ZoderUck: uru, ships not angular related but hash password encryption related
+uru: Then here is most likely not the best place to ask :)
+ngWalrus: ngResource makes me sad sometimes :(
+ngWalrus: works great like 95% of the time and then you forget that you can't send a request body with delete and you wonder why your code doesn't work
+Pyrrhus666: funny, I didn't even know the specs allowed a body with a DELETE
+zomg: it doesn't seem to follow typical REST patterns anyway if you send a body with DELETE
+None
+ngWalrus: the root of the problem is that the api needs it
+leonard_: can I make every row in the table clickable and trigger the ng-click function where &quot;x&quot; is the selected row data.id
+zomg: Jeroen2: you can do angular.module('yourmodule').controller('Foo'....) in another file if you want
+zomg: Jeroen2: the other way of doing it would be to use commonjs or es6 modules
+ngWalrus: and the spec of delete is pretty vague
+zomg: leonard_: if you replace x with row.id I think that should work
+Pyrrhus666: ngWalrus: it says it has no semantics and warns it might be ignored, is all it says. that's not much to go on, agreed :)
+leonard_: zomg: thanks
+ngWalrus: I'm actually not sure if even our backend is working
+ngWalrus: for some reason our backend coder doesn't test any of his code
+Pyrrhus666: ah yes, the old 'our users are our testers' idea :)
+Preuk: ngWalrus: testing leads to doubting
+ngWalrus: more like &quot;our frontend guy is the tester and I'll whine and moan whenever there's a bug or feature request&quot;
+Pyrrhus666: Preuk: .. doubting leads to the dark side ?
+Preuk: doubting leads to design by contract
+Preuk: which one is worst ? ;)
+Pyrrhus666: aren't they equivalent in a lot of cases ? ;)
+Preuk: depends on how much spare devs you have
+zomg: automated testing : u
+ngWalrus: I wish our client appreciated automated testing
+ngWalrus: but obviously features are much more marketable than a solid codebase
+zomg: they appreciate your software works and you deliver features quick though
+Jeroen2: I have a ng-route with: .when(&quot;/&quot;, {} but I want to add also &quot;/home&quot; to that, is that possible in the same line?
+zomg: which automated tests contribute towards :P
+Preuk: the problem is business expecting perfect software without investing in the &quot;perfect&quot; part
+ngWalrus: &quot;Specified database entry(entries) no found.&quot;
+ngWalrus: when I search the database for that entry it is found
+Preuk: ngWalrus: wrong datasource?
+ngWalrus: it's a backend bug
+zomg: tbh it just seems plain wrong to have separate people work on backend / frontend
+zomg: if you have a backend issue that's blocking your frontend work, you should be able to go and fix it
+Preuk: amen that
+Pyrrhus666: extrapolating from that a dev should do _everything_ to avoid blocking ;)
+Preuk: at least get fullstack teams/scrums/office/whatever
+ngWalrus: zomg  I agree
+Preuk: btw, any freelance interested in a ng2 project init/jr dev coaching remote job?
+Preuk: if so, when &amp; how much?
+ngWalrus: thing is though that the backend code is interesting to say the least so I don't really want to touch it
+Preuk: ngWalrus: can't touch this? :)
+ngWalrus: don't want to touch this :^)
+zomg: ngWalrus: literally every time you say something about it makes your job sound worse and worse
+zomg: lol
+ngWalrus: the situation is complicated
+ngWalrus: new projects have automated testing and coding standards and stuff
+dman777_alter: in my template I have  {{showCode ? choice.code : choice.description}}.... it results to true and uses choice.code even if showCode is &quot;false&quot;. Why is this?
+Pyrrhus666: because showCode contains the string &quot;false&quot; which is in fact true ?
+Preuk: showCode === true maybe?
+dman777_alter:  ah... I was thinking that
+dman777_alter: showCode is a attribute from the directive... any way to convert it from a boolean to string in the directive?
+Pyrrhus666: showCode!=&quot;false&quot; ?
+Pyrrhus666: so like {{ (showCode!=&quot;false&quot;)?...:...}}
+senayar: .toString()
+senayar: dman777_alter:
+senayar: but you can cheat and pass your boolean as string directly to your attribute directive
+senayar: scope : { boolean : '@' } and your are done
+None
+Jeroen2: I mean how can I access the variable &quot;page&quot; in $routerProvider? I now tried to get it in my $scope, but that doesn't work for some reason.
+Pyrrhus666: Jeroen2: look at the resolve feature to pass stuff from route definition to you controller
+senayar: page does not exist
+None
+Pyrrhus666: search for resolve
+None
+dman777_alter: thanks
+None
+gabykant: Hi
+gabykant: please I am looking for best practices. How to render different CSS in the head tag in the same file
+gabykant: Need to load template login.html with his own css file and after successful login then load page.html with his own CSS
+gabykant: Someone can give a help? Please
+gabykant: Or just direct me a good channel
+coder_2014: how can I bind a variable with an a href=&quot;{{myvariable}}&quot;/: ?
+coder_2014: I don't get it to work
+coder_2014: ??
+zomg: coder_2014: use ng-href=&quot;myVariable&quot;
+senayar: $scope.myvariable = &quot;myvariable&quot;;
+zomg: gabykant: just include them in the head, there is very little benefit of conditionally loading specific CSS files
+coder_2014: zomg: Can't bind to 'ng-href' since it isn't a known property of 'a'
+zomg: oh I wonder what &quot;useful&quot; tool gave that pointless error on ng-href...
+iksik: internet explorer 6 ;-)
+codenbrew: jumping into angular2 for this project. first time for our team. what are some DOs and DON'Ts of Angular 2? GO!
+uru: do read the tutorials, don't as stupid questions ;)
+codenbrew: docs and guide are wonderful, uru
+uru: There's not really that much to it other than general good coding practices. You'll want to use ngModules to break up your codebase and use the offline compiler for deploying code
+uru: I can recomend typescript for it but that's down to your team's skills and needs and stuff
+codenbrew: thanks uru. That's kind of how I feel about it. Actually seems quite easier to jump into than Angular 1.X.
+uru: Not having any ng1 experance I can't say. But I jumped right in to ng2 with minimal issues (YMMV of course)
+codenbrew: cool. being used to typed languages should make typescript pretty easy, too
+uru: Well it's not a proper typed language, it has some quirks still as it still runs on a non-typesafe language
+uru: anyway, home time for me, good luck with your project, codenbrew
+codenbrew: thanks uru. adios
+Danny: hello
+None
+alex88: it gets unchecked on click
+codenbrew: I'm so tired of chasing node package versions
+codenbrew: this system is sort of shit
+sk_: hello\
+sk_: any developers who are interested to work on project?\
+codenbrew: sk_, sure. what kind of project?
+sk_: codenbrew
+sk_: its is a custom development
+sk_: where r u from? which country? i might need to visit your office
+codenbrew: sk_, I don't think I'll disclose that information ;)
+None
+merpnderp: Is this no longer valid angular for an ng-diabled directive? ng-disabled=&quot;!applicationNameIsValid()&quot;
+merpnderp: Can it not be set to a scope function that checks a scope value?
+merpnderp: Here's the validator:           this.scope.applicationNameIsValid = (): boolean =: { return (this.scope.applicationName !== &quot;&quot;) ? true : false; }
+zomg: merpnderp: that should work just fine
+merpnderp: zomg: It was an issue with my template :)
+zomg: btw you can simplify that function by just using return foo !== '' instead of a ternary
+tona: hello everyone
+tona: i have one page html in one alligator.com , why it take a long time to refresh my change done in ftp ?
+tona: i have one page html in one alligator.com , why it take a long time to refresh my change done in ftp ?
+None
+Sazpaimon: obviously the way things are written currently isn't ideal as the DOM is being manipulated with directly. What would be a good way to fix this?
+Sazpaimon: sorry for the mess of code in advance, I'm taking over for a coworker and its the first angular 2 project for the both of us
+oo6: in angular2, say I split up a form into child components.  how can I get the parent component to know if a child's form fields are valid?
+ZoderUck:  TypeError: Cannot read property 'map' of undefined

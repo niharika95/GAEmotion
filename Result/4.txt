@@ -1,0 +1,715 @@
+kavi: hi
+kavi: help needed on angular
+kavi: anyone out there
+ragu: Hello, anyone who knows about angular 2?
+ragu:  or anyone who has experience using Angular 2 Modals.
+None
+ragu: Have anyone used Angular 2 modals before?
+anth0ny: ragu: I have used modals before
+siva: Could anyone pls explain directives
+ragu: anth0ny: Do you have any samples on any repo?
+ragu: which ones did you used?
+ragu: Where they in Angular 2.0?
+hemangpatel: Hello there. Morning
+hemangpatel: I was following tour of heroes tutorial to learn v2
+anth0ny: ragu: Modals are UI components. Angular2 (or Angular1) does not provide UI tooling. What is your current issue? Where are you in the process of using a modal?
+hemangpatel: But i'm stuck at this part while injecting Heroservice in component, got (SystemJS) Can't resolve all parameters for AppComponent: (?)
+anth0ny: ragu: in my usage, a modal maps 1:1 with a Componant. What I did is put the modal componant tag in the app component&rsquo;s HTML. Then, I toggle the visibilty of the modal via a property on the modal component.
+anth0ny: hemangpatel: I was getting some weird stuff regarding that same error. It seemed to be caused by trying to load a component from a barrel file rather than from the actual file in which the component was defined
+None
+axsuul: has anyone tried Ember? Why did you choose Angular2 over Ember?
+ragu: anth0ny: I was actually looking for Material Design dialogs, but since they havent been released yet or tested that much, I decided to pick Angular2-modals
+hemangpatel: Hello, When i add this line, constructor(private heroService: HeroService) { } in component i got error Error: (SystemJS) Can't resolve all parameters for AppComponent: (?)
+None
+hemangpatel: only changes in systemjs.config.js
+hemangpatel: is systemjs.config.js required ?
+Elarcis: hemangpatel: depends for what
+Elarcis: hemangpatel: if you  use systemjs, yes, it's pretty required XD
+hemangpatel: Elarcis, What's the recommended from community and what are the options ?
+Elarcis: hemangpatel: the recommended what?
+hemangpatel: Elarcis, It is good to use it with v2
+hemangpatel: I'm looking for angular seed project for getting started with all configure
+None
+Elarcis: hemangpatel: plus it doesn't use systemJS (which I find to be a real pain for beginners), and uses webpack instead. webpack is a bit tricky to configure without the doc, but it's easier to use when you have an already configured project, you just install your libs and use them without having to touch any config
+hemangpatel: Thanks.
+Elarcis: hi icebox
+icebox: hey
+Elarcis: if (selected) return condition(); else return !condition();
+Elarcis: ...really?
+icebox: Elarcis: ah nice pattern... I saw it a lot of times...
+icebox: Elarcis: first reaction is firing the programmer :)
+Elarcis: icebox: heh
+icebox: Elarcis: webstorm suggests a quick action to fix it automatically
+Elarcis: icebox: that is nice
+Elarcis: icebox: just in case the dev did not see it
+icebox: Elarcis: however often it is the result of a large refactoring... missing just the last step :)
+Elarcis: icebox: agreed. although in my case I'm 99% certain it's not
+Elarcis: icebox: I mean the guy copy pasted almost identical instructions on over 1500 lines in the same file, I wouldn't be surprised at all he didn't grasp boolean logic 101
+icebox: Elarcis: sigh
+Elarcis: icebox: yeah, mfw
+icebox: Elarcis: mfw... as usual Wile E. Coyote ends up falling down a canyon :)
+l3p1: Hi all
+l3p1: Anyone here who could answer a brief question about configuring different environments on application startup in Angular 1.5.x?
+GreenJello: l3p1, just ask your question
+l3p1: I've been searching for ages on this subject, and haven't yet found a solution. What I'm trying to achieve, is to provide application with different environment configurations (like api urls etc) on run time, and without having to manually bootstrap the application. Is this possible?
+l3p1: I'll clear a bit, the configurations should come from some external service
+l3p1: so, I'd need to make a http request to fetch the correct config
+VeeWee: Hello everybody, Does somebody knows a good tool to benchmark an angular 1 application? I want to make performance changes on a slow responding application but want to make sure the changes speed up the application.
+ngWalrus: VeeWee chrome dev tools
+VeeWee: I was hoping to find something more advanced :)
+Elarcis: l3p1: doesn't seem very complicated
+ngWalrus: You want more advanced than getting all the timings of all the functions, a nice fire chart, memory and cpu usage among others
+Elarcis: ^
+ngWalrus: I guess you could use firebug but I'm pretty sure it offers a similar toolset
+l3p1: Elarcis, it shouldn't be, but either I've somehow missing something very basic, or the case indeed needs some hacking to be done?
+VeeWee: ngWalrus: I want to find out what the performance issues are exactly. So I want to dive into the $digest and $watch stuff. Haven't found a good way to do this in the dev tools yet.
+Elarcis: l3p1: there isn't. have a ConfigurationService that has a method that makes the request to fetch the config, then expose that config in the service. in your app's run block, call the method, and make all your service retrieve their urls from your config sservice rather than hardcoded strings
+None
+Elarcis: l3p1: since the run block is asynchronous, you'll want to mark your app as loading (with an ng-if on the root element i.e.) until your config service has retrieved the config
+Elarcis: icebox: their config isn't depending on an envvar
+l3p1: Elarcis....geez that sounds so simple :D...I thought I've tried every possible solutions
+ngWalrus: VeeWee dev tools -: timeline
+ngWalrus: you probably won't find better tools than the chrome ones(except maybe on firefox + firebug but I don't use them for debugging and optimising)
+Elarcis: l3p1: no problem, usually the more time you spend struggling, the easiest the solution turns out to be
+VeeWee: ngWalrus: thanks, I'll try to find a way with the dev tools then :)
+Elarcis: I've been toying with paperplanes.world recently, it's silly and useless, but a really nice experience :D
+gain_: hello to all, I'm trying angular2 but I can't get how to include external libraries, for example lodash...
+gain_: I've found that in the system.config.js in the quickstart project there is some mapping, I've tried to add something for lodash but no success... the package is in the package.json and node_modules dir
+icebox: gain_: loading libs with a loader, or a packer, and integrating libs with angular are different things
+gain_: icebox: I thought that adding a map to system.config.js and import in angular would be enough, but I think I'm missing something...?
+icebox: gain_: no idea what you did
+None
+san37: hello there
+fkm: Moin
+san37: have anyone worked with angularjs and d3 in one project?
+icebox: san37: me
+san37: icebox..could you help me?
+icebox: san37: put your working d3 code in the link method of a directive
+gain_: icebox: thanks for the link, I've already seen it... otherwise I've tried another time to follow up various possibilities described in it but I have the &quot;... at types/lodash/index dot d.ts is not a module&quot; error...
+kaseoga_: hi \o
+san37: ice box i am just setting up the project with node modules and bower components..i have no idea what my folder structures will  be
+san37: give me some suggestions
+kaseoga_: i'm trying to test with karma + mocha + chai, all works fine but when i try to show diff it doesn't work: AssertionError: expected { Object (pene1, pene2, ...) } to equal { Object (pene1, pene2, ...) } (undefined:111)
+kaseoga_: mochaReporter: { showDiff: true }
+kaseoga_: any idea?
+icebox: san37: that is a different question
+icebox: kaseoga_: wrong channel? this is #angularjs
+kaseoga_: yeh i know, i'm working with angular and this is why i'm asking here xD
+icebox: kaseoga_: nice try... but that is not an angular stuff :)
+san37: icebox yes please suggest me
+icebox: kaseoga_: I have been saying this just in case you don't get any answer
+icebox: san37: what is the question?
+san37: how should the folder structures be for angularjs and d3 project?
+Elarcis: kaseoga_: showDiff doesn't change the assertion error, are you sure you're not getting an expected / actual comparison below the error message?
+san37: the best practise i mean
+kaseoga_: Elarcis:   i'm sure xD
+Elarcis: san37: same than for an angularjs project
+Elarcis: san37: d3 is just a third party lib, doesn't impact project structure
+icebox: san37: project layout is not related to d3 or whatever lib...
+icebox: san37: you may read code style guides by Todd Motto or John Papa
+Elarcis: kaseoga_: can you show me your karma.conf.js?
+san37: thank you icebox and elarcis
+None
+san37: :D
+kaseoga_: daily, brb
+Elarcis: kaseoga_: weird
+None
+Elarcis: kaseoga_: my bad, apparently it's only for the html runner
+Elarcis: kaseoga_: I've no idea then
+icebox: kaseoga_: there are a few issues about diff for karma-mocha-reporter
+icebox: kaseoga_: you may give a look there
+san37: icebox can you give me a link for any angularjs and d3.js project?
+None
+Elarcis: san37: seriously, if you're just ignoring what we tell you... there's no magical answer to any conceivable question, you know
+kaseoga_: ok icebox thankyou
+kaseoga_: and Elarcis thankyou too
+kblin: morning folks
+Elarcis: icebox: do you happen to have a project structure for any angularjs project that also uses math.js?
+icebox: Elarcis: nice :)
+Elarcis: but I'm nice ;u;
+Elarcis: (officially)
+icebox: Elarcis: see above :)
+kaseoga_: Elarcis: icebox  this is my test
+kaseoga_: sut.createdConcept((entityResult:Entity) =: {
+kaseoga_:         expect(entityResult).to.eql(entity);
+kaseoga_:         done();
+kaseoga_:       });
+kaseoga_:       sut.create(entity);
+kaseoga_: createdConcept is an event
+Elarcis: kaseoga_: if it's for your showDiff issue, I'm pretty sure the test's code doesn't matter :)
+None
+Elarcis: kaseoga_: you want help to do what 4kochi advises?
+Elarcis: kaseoga_: I'm not sure you can do that with just callbacks sadly
+Elarcis: kaseoga_: oooor, you can create a promise that you return at the end of the test, in the then() block of the promise you do your assertion, and you resolve the promise in your createdConcept callback
+kaseoga_: if i put this in the test: expect(entity).to.eql({}); doesn't show the diff so i think the problem isn't the callback
+Elarcis: kaseoga_: an actual use for $q.defer()
+Elarcis: kaseoga_: ah. then I don't know D:
+kaseoga_: i'm not working with promises
+Elarcis: kaseoga_: you should, it's great
+kaseoga_: i'm using rxjs, is better :P
+Elarcis: kaseoga_: also very supported by angularjs
+kaseoga_: it's*
+Elarcis: kaseoga_: you also can
+smiche: is there some proper way to cache filter results into parent object or something?
+Elarcis: kaseoga_: though iirc you can convert observables into promises
+Elarcis: smiche: yes, call the filter programmatically in the controller rather than in the view
+kaseoga_: i'm converting promises into observables xD
+kaseoga_:     return Observable
+kaseoga_:       .fromPromise(axios.request(config))
+Elarcis: smiche: inject $filter, then do cachedfFilteredList = $filter('yourFilter')(yourList);
+smiche: okay and then cache those results into the object?
+kaseoga_: but anyway, i don't why a simple test doesn't work
+kaseoga_: :'(
+smiche: thanks, I'll give it a go
+Elarcis: smiche: (or cleaner, have the filter function in the service, and inject it both in your controller and your filter)
+Elarcis: smiche: *in a service
+kaseoga_: ok Elarcis
+kaseoga_: the simple test works fine
+kaseoga_: the problem is the intellij window doesn't show diff
+kaseoga_: the problem is in the callback
+san37: hey icebox
+san37: could you please give me link for any angular and d3 project?
+icebox: san37: sure... I gave you a list... did you miss it?
+Elarcis: san37: asking the same question to icebox will probably result in the same answer
+san37: yep i missed it
+None
+san37: elarcis i did not question
+Elarcis: san37: yes you did, at 09:38 UTC: &quot;icebox can you give me a link for any angularjs and d3.js project?&quot;
+san37: haha..elarcis
+icebox: san37: as I said there is not anything magic... put your working d3 code in the link method of a directive
+Elarcis: funny tho, I'm UTC+1 and it's 10:52, but UTC is 08:52
+Elarcis: DST for more insanity
+Elarcis: san37: or use any angularjs d3 directive that already exists to spare you some coding :D
+san37: sure bro
+kblin: I'm stil stuck with figuring out how to get my custom error message from a $resource when I transformResponse my response in order to create a Blob() for FileSaver.js
+None
+kblin: almost, because apparently I can't load data from a remote server, so I don't know how to emulate this on plunker
+kblin: I know I'm getting the right response from the server, but it's a blob at that point, and I'd like to have json data in the error case so I can get at my error message
+smiche: is there a way to modify the $http get cache when set only for a specific report. angular docs say that the url is the key but I get nothing?
+None
+gain_: I'm trying to figure out how to import modules on angular... I've started from the quickstart and I want to add lodash... I've found out that there's a package named systemjs that maps node modules in order to import them in the angular project
+gain_: maps of angular are for *.umd.js files, that stands for Universal Module Definition
+icebox: kblin: and transformResponse signature {function(data, headersGetter, status)|Array.function(data, headersGetter, status):} ... you need to check the status and act accordingly
+GreenJello: gain_, you can probably install it with npm (npm install --save lodash) and then import lodash from 'lodash
+GreenJello: '
+gain_: GreenJello: that's the first try I've done but no success... I'll redo it right now because I don't remember the error...
+gain_: GreenJello: simply not found...
+GreenJello: gain_, what's the exact error?
+kblin: icebox: but then I need to supply a headersGetter. Where do I get that?
+gain_: anyway, I want to understand better how the thigs works... to run an angular2 project in typescript I need to have a &quot;compiler&quot; that compiles typescript in js code... ? Is that the start option in package.json?
+None
+gain_: and if the lodash is in js can I import it in my ts file? I think I need a ts version of lodash or something like that...
+icebox: kblin: I don't think so... that is unused param
+Preuk: hello
+kblin: icebox: ok, so if I check the status and return &quot;data&quot; right away, I get an ArrayBuffer. So I guess I need to convert that ArrayBuffer to JSON to get where I want?
+icebox: kblin: well... if status is an error, you get a string containing the message error... json parse it and return it
+icebox: kblin: in pseudo code... if (status === error) then return JSON.parse(data)
+kblin: can I directly JSON.parse() an ArrayBuffer?
+icebox: kblin: no
+icebox: kblin: yesterdaty I saw your server response... if it is an error, you return a stringified json object with the error message
+_eddy: hi guys the _.find angular e.g.var category = _.find(categories, function(category) i cannot find the  _.find in the angularjs docs
+kblin: icebox: yes
+icebox: _eddy: &quot;_&quot; is lodash, not angular
+_eddy: never mind its from the underscorejs library
+gain_: _eddy: have you added underscorejs in angular2?
+_eddy: gain_, am looking at a project that was done by someone else who unfortunately passed away a few days ago
+kblin: icebox: ok, my google-fu/stackoverflow-fu worked for ArrayBuffer to JSON
+kblin: icebox: thanks a _lot_
+icebox: kblin: cool!
+gain_: _eddy: sry for the lost :(
+Elarcis: _eddy: all grief aside, hope they documented their work, otherwise you're welcome aboard the funboat
+_eddy: gain_, thanks
+Elarcis: wow my body feels like a pile of shit today
+Elarcis: probably because I've been eating nothing but junkfood for three days :D
+_eddy: Elarcis, she didnt do any. she also do it when the project finishes
+Elarcis: _eddy: a&iuml;e
+_eddy: yea. Anyways i was in the process of learning angular
+_eddy: I guess the is no better teacher than actually doing it
+Elarcis: _eddy: that's the spirit!
+_eddy: Elarcis,  $state.go what is this doing please
+_eddy: got it i think
+None
+None
+Pyrrhus666: (his styleguide seems to still suggest the use of those indexes btw)
+GreenJello: Pyrrhus666, the index.js pattern lets you reduce the require/import path length
+GreenJello: e.g. './Foo' instead of './Foo/foo.component.js'
+bd-: i don't think that app is using imports so it doesn't need them
+angrybacon: Hello, I get:
+None
+angrybacon: When I add a templateUrl: 'some.partial.html' property to my directive
+angrybacon: As opposed to template: 'div:/div:' that just works
+angrybacon: Any ideas what could cause this?
+icebox: angrybacon: using a build workflow?
+angrybacon: Yeah but other directives are fine
+icebox: angrybacon: :)
+angrybacon: Even after rm -r build/ only this one directive gives me this issue
+icebox: angrybacon: aliens in the code :)
+icebox: angrybacon: webpack?
+angrybacon: Approaching 60 days of uptime, should probably reboot at some point
+angrybacon: Gulp
+Pyrrhus666: GreenJello: bd-: seems I&acute;m missing something, but how does all that stuff get included in the app then ? I thought the indexes and imports made sure of that ?
+icebox: angrybacon: so I vote for the green men :)
+angrybacon: :C
+Pyrrhus666: todd&acute;s guide itself uses imports / exports, but the sample app doesn&acute;t, yet he claims it&acute;s built following his own styleguide. confusing.
+bd-: included via script: tags probably
+bd-: either manually or more likely some task as part of build system that auto generates them
+bd-: or bundles
+dadasdaddasda: fdsfffffffffffffk
+dadasdaddasda: sfkfdkfs
+dadasdaddasda: fweqwe
+dadasdaddasda: qw
+dadasdaddasda: q
+dadasdaddasda: eeqew
+ngWalrus: okay
+dadasdaddasda: fdfsfd
+Elarcis: holy shit, people can be bored
+icebox: a lot
+Elarcis: sometimes, I get twitter mentions of kids who just insult me and my mother. and I look at their history, they just go and insult random people in the most violent way. 'yeah I am bored', holy shit dude
+Pyrrhus666: bd-: ok, thx. it&acute;s confusing that he does one thing in the guide, and another in the sample app. I have a webpack setup where the only reference to my source is the entry for webpack, I guess everything that is bundled is referenced from there (in my case a boatload of imports)
+Pyrrhus666: the whole toolchain is still a black box to me...
+Snugglebash: Hey, can you use $inject for a factory?
+icebox: Elarcis: really? luckly it didn't happen me
+icebox: Snugglebash: yes
+Snugglebash: icebox: thanks
+_eddy: gain_, thanks and sorry for the late reply
+gain_: _eddy: nopro, you're welcome :)
+Snugglebash: I am using a couple of custom directives and am getting Error: [$injector:unpr]. I am putting the directives directly into my app module. Is that a bad idea?
+icebox: Snugglebash: yes
+Snugglebash: icebox: do you think that causes my error?
+_eddy: gain_, if i have a cities service which basically goes a http call to get a json of list of cities. I dont think this service needs a control or module has it is doesnt have a view, it will be other things in the application which will use it. My question is, do you think i should have a getcities function within the cities service or should i inject the service service anywhere i want to use it in the application then create a function to then get the
+_eddy: cities?
+_eddy: actually i think its better create it in the cities service because i will enter up havent the same code in different places
+gain_: _eddy: I don't get it completely but yes, services are good to write it once and inject where you need
+_eddy: gain_, like in MVC is i extend a parent the child inherits from the parent. Is it the same in angular. if i inject a service does the service i am injected into inherit that service properties?
+_eddy: if not is
+Elarcis: _eddy: you summarized why services are useful
+_eddy: call
+_eddy: cool
+Elarcis: _eddy: I think you're mistaking dependency injection with inheritance though
+Elarcis: _eddy: in angularjs, services are singletons and injecting one just gets you a reference to the same instance of the service.
+icebox: Snugglebash: resolved?
+None
+None
+_eddy: in the index.service.js can i use anything which is inside the cities.service.js
+icebox: _eddy: you don't need @ngInject if you use citiesService.$inject
+Elarcis: _eddy: yes you can
+_eddy: thanks
+_eddy: icebox, thanks
+Elarcis: _eddy: you can use anything that's been publicly exposed by cities.service.js
+Elarcis: _eddy: (your var service = {  })
+Elarcis: _eddy: btw nice syntax, we don't often get code samples that apply Papa's good practices :D
+_eddy: ahaha am still learning :D
+icebox: _eddy: yep... perfect!
+icebox: certified by irc :)
+Elarcis: what's @ngInject though, a comment used by a third-party tool?
+icebox: Elarcis: yep
+Elarcis: ah ok
+Elarcis: I think I'm using the ng-annotate-webpack-plugin, because the $inject is still missing in a lot of places
+None
+Elarcis: dunno if I want to keep using it though, it lightens the code, but it's not very explicit
+icebox: wow... I didn't notice Emacs released a new version in September after one year and changing team leader
+Pyrrhus666: it&acute;s emacs, not vim, so who cares :P
+ngWalrus: people who use emacs?
+icebox: Pyrrhus666: well... it is a piece of history in computer science :)
+Pyrrhus666: icebox: that&acute;s for sure :)
+ngWalrus: SLIME is still something that makes emacs worth using
+ngWalrus: if you write lisp that is
+icebox: ngWalrus: ah yes... it is great
+ngWalrus: and also if you just prefer emacs
+Elarcis: never used emacs, I don't even know what's the difference with vim
+None
+icebox: Elarcis: that is an insult :P
+icebox: Elarcis: I don't know if for vim or emacs :)
+Preuk: icebox: nevermind, use a real IDE :)
+icebox: Preuk: sorry... I am not used to it
+ngWalrus: vim is a real ide
+Preuk: ngWalrus: nope, it's a text editor trying to look like an IDE (as emacs does)
+ngWalrus: yes
+ngWalrus: as you say, a superior experience
+Preuk: tried for a long time to use each one as an IDE, but without a real AST and related tools, options, etc. it's not useful for real programming stuff
+icebox: Preuk: nowadays the best ide is webstorm :)
+Preuk: i just love both (mostly vim) for scripting, note-taking and so on, but i want a smart IDE able to check wether i'm using the correct type in my callback for example
+lugzer: hello
+Preuk: icebox: yup, i've been a long time user of jetbrains tools... far from perfect, but miles ahead of alternatives imho
+icebox: Preuk: agreed
+Clovenhoof: Alright, so this is on angular 1, but I've been trying to figure out this problem with resolving objects through 2 directives. The first directive draws compile and that's all good and well and connects alright. But say if i want to connect an object from the parent scope controller through the compiling directive to the child directive and use it there. At least it won't resolve with the automatic bidirectional connections from
+Clovenhoof: the compile to the child directive.
+Elarcis: 'We know libraries, in fact, we have the best libraries'
+icebox: Pyrrhus666: the end is nice :)
+ngWalrus: has anyone ever written an extension or something to ui-bootstrap that forces the pagination directive to only be on one line
+ngWalrus: or do I just have to bite the bullet and watch for width
+Preuk: icebox: ever tried webstom/intellij/whatever jb stuff with vim input plugin ?
+icebox: Preuk: please... never used vim mode outside vim :)
+Pyrrhus666: icebox: yeah, it was :)
+Preuk: icebox: that was my feeling too :(
+Elarcis: Pyrrhus666: I liked the conclusion of the article
+Elarcis: Pyrrhus666: nice way to put 'okay it's insane, but it's not JS, it's us'
+icebox: Pyrrhus666: I prefer using an idiomatic approach... if I use an ide, I try to use its approach... anyway webstorm shortcuts are quite good
+ngWalrus: JS might be crazy but it's not npm crazy
+icebox: Pyrrhus666: mistell
+icebox: Preuk: I prefer using an idiomatic approach... if I use an ide, I try to use its approach... anyway webstorm shortcuts are quite good
+icebox: Preuk: ctrl-w, the famous expand-region is great
+Preuk: icebox: sure, i rage everytime i try doing something on a coworker's intellij that uses eclipse bindings
+Pyrrhus666: Elarcis: still, many people seam to think stuff like elm or webassembly will make things better. it won&acute;t, of course :)
+Preuk: icebox: beleive me or not, i never sed it :$
+Pyrrhus666: I see what you did there...
+ngWalrus: webassembly will fix things in one way
+ngWalrus: we don't have to write js
+ngWalrus: :)
+Pyrrhus666: we don&acute;t have to now, we have coffeescript, typescript, asm.js, emscripten. choose your poison ;)
+ngWalrus: and webassembly also fixes the problem of just transpiling stuff to js
+Preuk: icebox: thanks, that's my new favorite shortcut (right before ctrl+alt+shift+n)
+ngWalrus: it could be more performant and not be human-readable
+lugzer: hey, so i'm have an angular app up&amp;running, and wanted to access it from my phone. used the phone as modem, and accessed the computer IP:port, but the app is not accessible this way. what am i doing wrong?
+ngWalrus: kind of what asm.js and emscripten do but this a natural next step
+Pyrrhus666: whether transpiling to js or any other vm&acute;s language, all the same to me.
+Pyrrhus666: it&acute;ll break in spectacular unforseen ways anyhow :)
+Preuk: lugzer: is your server adress public? or is it in a private block ?
+icebox: lugzer: no tethering enabled
+lugzer: icebox : i guess i can enable this
+Preuk: lugzer: if using your phone as modem you're not on the same local network as your computer (unless i misunderstood your setup)
+icebox: lugzer: is google page ok?
+lugzer: icebox: when i start a simple Python server, i can access it with no issues.
+icebox: lugzer: windows or linux?
+lugzer: icebox: OSX
+icebox: lugzer: I hope you didn't bind on localhost
+Preuk: lugzer: &quot;the app is not accessible&quot; =: how so? HTTP 404 error? services not available?
+lugzer: icebox: i didn't change anything in the app. i just wanted to access it from the phone.
+icebox: lugzer: bind the python server on public ip
+lugzer: icebox: no, not really
+icebox: lugzer: indeed it is not app fault
+icebox: lugzer: no?
+lugzer: Preuk: server not found. as if it didn't exist
+icebox: lugzer: sure... you need to use the public ip.. not the nat one or local one
+Preuk: lugzer: then i second icebox, your webserver might not be bound to public address
+lugzer: icebox: i simply started the server with &quot;python -m SimpleHTTPServer 8000&quot;. this allows me to type my machine's IP and see directory contents.
+aperyon: Hi guys! ive got a KARMA TESTING related question, if anyone feels like to help, its been a nightmare, so any help would be appreciated
+aperyon: hey icebox, nice to meet you again
+icebox: aperyon: hey
+icebox: lugzer: you know.. you are a bit off topic :)
+lugzer: Preuk: but i am not connecting from outside. my phone is acting as the machine modem. so machine IP is visible for the phone.
+lugzer: icebox: yes, i know ;)
+Preuk: aha
+aperyon: by now ive got  examples if your still interested
+Preuk: ok, i thougt it was the other way around
+lugzer: icebox: Preuk: so.. it's not about Python. the question is, if I can connect to Python's simpleserver (which runs on port 8000), then why I can't connect to the angular app which runs on port 8080.
+icebox: printers and modems are banned
+icebox: lugzer: you may act the usual troubleshooting activity... ping, lookup, netstat... then devtools network tab... and so on
+lugzer: ok. will try that. thanks
+Preuk: i suspect a local proxy already hogging port 8080
+icebox: Preuk: no, I don't think so
+Preuk: icebox: i've met this problem with some clients, they used some &quot;security suite&quot; on their servers that just reserved some semi-standard ports like that for their own needs
+Preuk: or worse : skype hoogging port 80 by default. they deserve to provide win95 backports.
+icebox: lugzer: after network troubleshooting, you may attack dev part... firstly use a static index.html page with foo content
+lugzer: the app is started via grunt. does it make any difference?
+icebox: lugzer: yes and no... if you know whar you are doing :)
+Preuk: lugzer: try &quot;netstat -nabo&quot; without running server, try to find any line matching 8080 (netstat options might vary depending on host OS)
+icebox: lugzer: it seems you are out of control on every layer :)
+lugzer: icebox: yeah, i'm hitting blindly :) i'm not the dev of the app. just trying to make sure it will be accessible on the phone
+icebox: lugzer: the worst case... hitting blindly... good luck. :P
+icebox: lugzer: it is the same when my monster-in-law calls me for a computer problem :)
+lugzer: i remember we've done it few years ago for the purpose of filming the use of the app on iphone. i just need to remember how :)
+Snugglebash: Does anyone know how i can debug this error: Error: $injector:unpr
+Snugglebash: Unknown Provider. All the browser says is it is from an angular module... really hard to find the provider
+None
+icebox: Snugglebash: maybe you are injecting a directive like a dep in the module creation...
+icebox: Snugglebash: or maybe you forgot to load the script
+icebox: Snugglebash: without any code detail, it is very hard to suggest you something helpful
+Snugglebash: icebox: I could give you github link but i dont want to waste much of your time
+icebox: Snugglebash: it is ok
+None
+Snugglebash: icebox: basically hacked together because im new to this stuff.
+icebox: Snugglebash: reading
+icebox: Snugglebash: ok...
+Snugglebash: icebox: it's a mess isnt it
+icebox: Snugglebash: no... nice approach
+icebox: Snugglebash: just an error due to copy and paste :)
+icebox: Snugglebash: if I understood correctly, app is the main module... then you have common.services and common.directives modules
+lugzer: icebox: Preuk: success. it was Grunt config ;) works as a charm
+Snugglebash: icebox: yeah, i used to only have app, but with these 2 directives for the side-nav i added common.services and common.directives
+icebox: Snugglebash: in &quot;app/services/&quot; the services should be in &quot;common.services&quot; module... actually they are in &quot;app&quot; module
+icebox: lugzer: nice catch
+icebox: Snugglebash: I suggest you to use only one module at the beginning.. and only when the app works correectly, you may split it in a few modules, if you want
+Snugglebash: icebox: I was. then i added the directives and i was copying from someone else and they were using 2 other modules
+icebox: Snugglebash: imagine a module like a vendor lib... it is confusing mixing files in the same folder with different modules
+Snugglebash: icebox: ok will put everything in app :D
+icebox: Snugglebash: (and review the root folder) :) &quot;client&quot; under &quot;server&quot;? :)
+icebox: Snugglebash: I understand why you did that... but you can configure (multiple) static folders with express
+Snugglebash: icebox: originally i had server and client as siblings, but well i wasnt sure how to make it so that express referenced client properly so i shoved client in server :)
+icebox: Snugglebash: yep... I know... :)
+soee_: would it be ever possible to have some route that contain dynamic part on first position, like /{user-slug}/foo/bar and make it match for any user name?
+icebox: Snugglebash: app.use(express.static(routes.config.staticFiles)); app.use(&quot;/node_modules&quot;, staticFiles(routes.config.vendorFiles));
+icebox: Snugglebash: something like that
+Snugglebash: icebox: thanks a lot man really appreciate it!
+None
+anli_: I have a date object in a model, now how to I change the display format for an input that uses that model?
+anli_: oh, maybe I should try something before asking
+angrybacon: Hello, I get:
+None
+angrybacon: When I add a templateUrl: 'some.partial.html' property to my directive
+angrybacon: As opposed to template: 'div:/div:' that just works
+angrybacon: Any ideas what could cause this?
+icebox: angrybacon: always the aliens :)
+icebox: angrybacon: they tend to be persisten :)
+angrybacon: They are resilient
+icebox: angrybacon: ok... apart the jokes...
+icebox: angrybacon: any plunker reproducing that?
+angrybacon: Nope
+angrybacon: I can't replicate the issue
+icebox: angrybacon: any code we may give a look at it?
+angrybacon: Oh
+anli_: ng-model=&quot;searchfilter.from | date:yyyy-MM-dd&quot; did not do the trick for me
+angrybacon: icebox I've removed the template's content to have just an empty div and there is no issue
+angrybacon: In that template there was another directive called n times, this child directive has a template herself and transclude: true
+None
+anli_: But can I use | in a ngModule attribute?
+angrybacon: icebox That child directive's templateUrl is a function btx
+angrybacon: btw
+angrybacon: So that
+angrybacon: s definitely the issue
+icebox: anli_: read the docs
+anli_: icebox: I am reading the docs
+icebox: anli_: also formatters and parser in ngmodel?
+None
+None
+Elarcis: baaack
+Elarcis: angrybacon: didn't know templateUrl's callback version accepted arguments
+icebox: angrybacon: did you debug it and it return correctly the string containing the partial?
+angrybacon: icebox The directive works as expected on its own
+anli_: Trying to set both view value and model value, using a string for view value and Date object as model value
+anli_: It seems like AngularJS does not have those concepts however
+icebox: angrybacon: well... we are debugging that function... not the directive :)
+angrybacon: When I nest them I get the error I showed you earlier
+angrybacon: Oh, my bad
+Elarcis: anli_: ng-model is just a basic two-way databinding between an input field and a model
+anli_: yes, but it cannot render a Date object for sure
+angrybacon: icebox Yeah it does return undefined
+anli_: Resulting in a human readable string
+icebox: angrybacon: perfect... you found your bug :)
+Elarcis: anli_: if you're trying to have a formatted date, you have to create a directive that requires ngModel on the same element, then puts a new formatter to format your model to the view, and the opposite parser to 'unformat' your view to the model
+angrybacon: icebox Well it's plain english in the error message so...
+anli_: That formatter will also affect the &quot;real&quot; value?
+angrybacon: icebox I think I may have dun goofed something while trying to be overly smart about the whole thing
+angrybacon: Like forget to provide that &quot;mode&quot; attribute
+sergey123: Why is element.on('mouseover' much slower than ng-mouseover attribute?
+icebox: angrybacon: no problem... it happens... nice catch
+None
+Elarcis: anli_: the &quot;real&quot; value, like you call it, is your model
+anli_: yes
+Elarcis: anli_: there's only the model and the view, if the view is marked as invalid, the model equals undefined
+icebox: sergey123: benchmarks?
+sergey123: icebox, nope, visually.
+Elarcis: anli_: please ignore my return variables, I just took an example from my app and removed code
+anli_: Ah
+angrybacon: icebox Actually I didn't forget it, but the mode attribute's value comes from my directive's scope. And the child directive is initialized sooner than the attribute value is rendered
+icebox: sergey123: how to reproduce visually it?
+Elarcis: anli_: well you have to return something, but it's normal that in my pastebin they're undefined
+angrybacon: How can I make sure parent scope is rendered before the child directive initializes?
+icebox: angrybacon: ask to the aliens :)
+icebox: angrybacon: maybe using &quot;priority&quot; property
+Docmarten: morning all
+icebox: angrybacon: from the docs... When there are multiple directives defined on a single DOM element, sometimes it is necessary to specify the order in which the directives are applied. The priority is used to sort the directives before their compile functions get called. Priority is defined as a number. Directives with greater numerical priority are compiled first.
+angrybacon: Oh, didn't suspect anything like it existed
+angrybacon: Thanks, will look into it
+icebox: angrybacon: but I don't know it it works
+angrybacon: Will try and report
+Docmarten: is it possible for a service/factory to change a controller template element while its processing using document.getElementById('controller_el_ID').value = &quot;blah&quot; ?  Seems I am not able to do this as the service is getting an error &quot;can not set 'controller_el_ID' of undefined, yet the current view has the controller_el_ID on it.
+None
+angrybacon: (priority: 1 on the parent directive did not work)
+icebox: angrybacon: plan B... see link above
+Elarcis: Docmarten: wow, huh, wouaw. where to start.
+Elarcis: Docmarten: ok, first: never edit the DOM like that, even less in a service.
+Elarcis: Docmarten: second: it highly depends on your use case, because doing a .value = 'blah' shouldn't be done using DOM edits but with simple bindings
+Elarcis: Docmarten: third: controllers don't have templates, directives and components do
+Elarcis: Docmarten: fourth: identifying elements by ID is usually to avoid (unless you have a fireproof way of generating and finding truly unique IDs), because they largely reduce reusability of your code
+Docmarten: Elarcis: i tried defineing a $scope.thisValue as the model='thisModel' and as the service updates I tried passing it back the update but the controller isn't getting it.
+Elarcis: Docmarten: what do you mean, model='thisModel'?
+Elarcis: Docmarten: what do you mean, the controller isn't getting it?
+Elarcis: Docmarten: I'm sorry, but you're being extremely vague, both about your code and your issue
+Elarcis: coffee
+anli_: Elarcis: That parse and formatter did the trick for me, the parser never called however, but thats probably when I do foo.$setViewValue (which I never do)?
+LennardW: Hi i was wondering what has happend to resetConfig is this still in function in the angular 2.0.1? because i don't see him back in the api list on angular website
+Docmarten: should I be passing $scope into the service/factory and then update $scope.thisModel (can be anything, lets call it: $scope.model_form_field)
+icebox: LennardW: in the router?
+Bent0: I have a date string formatted like: YYMMDD     how can I neatly display this in the view? The date filter doesnt recognize it as a proper date
+LennardW: icebox: indeed in the router
+LennardW: *Router
+icebox: LennardW: router 3.0.0-rc.1?
+LennardW: i use 3.0.0
+LennardW: thats the newest one right?
+angrybacon: icebox Not sure how the link helps here
+angrybacon: I've tried to my current link function in both postLink and postCompile out of ideas
+angrybacon: place*
+icebox: angrybacon: me too, sorry
+icebox: LennardW: it seems the last one it is 3.0.1
+icebox: LennardW: npm view @angular/router
+None
+icebox: LennardW: and the api is there
+Elarcis: anli_: the parser is only called when you change the input field UI-side I believe.
+anli_: Ah, true, I never let the user do that, of course you are right
+Elarcis: Bent0: you have to create a Date object based on it first
+Elarcis: Bent0: otherwise your string is just a string, not a date
+None
+LennardW: icebox: oh great there it is :) sorry it changes by day on the angular website xD
+anli_: I will keep both handlers then, thanks for the help Elarcis
+Elarcis: Bent0: adding slashes between the year, month and day and doing new Date(yourSlashedString) should do the trick
+Bent0: Elarcis: Ok so I will have to regex it probably
+Elarcis: Docmarten: no you shouldn't
+Elarcis: Bent0: no
+Preuk: Bent0: then you'll have 2 problems
+angrybacon: I have a priority issue on 2 directives. The parent should pass one attribute to the child, and the child uses this attribute in the templateUrl function. Except at this point the attributes are not yet &quot;filled&quot;.
+None
+Elarcis: Bent0: well yes you can actually use regexes, but here's the thing you want. yourString.match(/\d{2}/g).join('/')
+Bent0: Elarcis: Thanks will try that
+Elarcis: Bent0: validate your string before, if not it will most likely crash
+kaseoga_: Elarcis:  impossible to show diff with the callback
+kaseoga_: i don't know why but i'm done
+kaseoga_: xd
+Elarcis: kaseoga_: it's fine, you just lost a day
+kaseoga_: not all day but a lot of time yep xD
+kaseoga_: Elarcis: function log(item:any) {  console.log(JSON.stringify(item)); }
+kaseoga_: XD
+Docmarten: ok...so I need to take a step back, realizing there are more than a few things I have been misunderstanding and doing wrong.
+Pyrrhus666: so, I have a prototype app following toddmotto&acute;s .component guide. it&acute;s based on the preboot webpack starter. all controllers have a correct $inject[] thingy. but, I&acute;m having trouble getting the production build running, it complains about unknow providers :( is there, beside the $inject thingy, something else I should be aware of to get a minified build to work ?
+Pyrrhus666: the dev server works fine btw, no problems there.
+Pyrrhus666: per an issue I added an &uml;ngInject&uml; to the config block, but still no go :(
+None
+Pyrrhus666: could&acute;ve been written by theo de raadt (although he&acute;d be more explicit)
+icebox: Pyrrhus666: well... the real comment was done in 2012.
+Pyrrhus666: theo would still have been more explicit ;)
+Pyrrhus666: so, trying ng-annotate to solve my issue, but that just throws a parse error (import/export may only appear with sourceType: module) on all my files. nice. isn&acute;t that an eslint thing ?
+icebox: off... bye
+Pyrrhus666: hmm, ng-annotate seems to be in transit between maintainers. nice...
+Snugglebash: This line of code gives me an unknown provider error: service.sections = [{name: 'HOME', state: 'home' ,type: 'link'}];
+Snugglebash: any idea why?
+Snugglebash: just shoved it in a service
+kaseoga_: any option to map an entity class to a formgroup ?
+kaseoga_: instead of doing manually  ?
+Docmarten: i have a select ng-model=&quot;selected&quot; ng-change=&quot;doSomething(selected)&quot;: and it works fine.  However, there are few cases where the controller is processing info and needs to override what is currently select (and this is working fine) but how do I get the controller to update what is actually selected in the drop down.  controller is using option A, but drop down still shows option B.   ???
+kaseoga_: (reactive forms)
+Docmarten: ...and, do I need to worry about the controller changing the select: causing the ng-change to fire again?
+LennardW: Hello, i'm trying to figure out a way to get a parameter through the router object to the component for example: [{&quot;path&quot;:&quot;test123&quot;,&quot;component&quot;:&quot;EntityNode&quot;,&quot;parameters&quot;:{&quot;node&quot;:&quot;2&quot;}}] I want to retrieve node in my EntityNode component. Do any one know a way to do that?
+LennardW: Hmmz though the ActivatedRoute route.routeConfig i see but nicer would be: this.route.params
+iateadonut: i have an input checkbox: that ng-click='optionSelected()' ; how do i refer to that input box within the method optionSelected()?
+Docmarten: iateadonut: I think what you are asking for is this: input type=&quot;checkbox&quot; ng-model=&quot;thisCheckbox&quot; ng-click=&quot;optionSelected(thisCheckbox)&quot;
+kaseoga_: it's possible to map an entity to a formgroup ? i'm trying but it doesn't seems to work and i think they have the same keys
+kaseoga_: using directly setValue to the form
+iateadonut: Docmarten, thanks.  i'm actually wondering space in the DOM of the checkbox element.  i would like to disable and re-enable it.
+Docmarten: huh?
+Docmarten: wondering space?
+iateadonut: how i access the element in the DOM
+smiche: form.$invalid randomly stopped working x.x
+eago: hi... in some computers I need to use $apply() for the views to update but if I do some computers give me a process already running error
+eago: how can I solve this?
+smiche: a cheap hack is to wrap what u're doing with $timeout
+gain_: do you use typescript? do you feel comfortable?
+Docmarten: iatedonut: you could from the controller based on element id, but no need to if you have the ng-model set.
+Docmarten: iateadonut: and besides, as I found out today, setting/getting dom elements from controller is highly frowned upon.  thus use the ng-model...tis what angularjs is all about.
+w0rp: Has anyone ever experienced having to change a .component to a .directive when you want some form validation.
+iateadonut: well, i just want to make the element itself disappear and be replaced with a graphical spinner.
+iateadonut: until the ajax request is returned
+w0rp: I have a colleague who added some components into a form for containing various things, and later realised that he wants ngModelController like validation for each component.
+iateadonut: so i think that would be an appropriate use.
+w0rp: The easiest way to do that was to change each component to a directive instead, and then require ngModel for each.
+uru: iateadonut: you can use ng-show (I think, for v1) for that
+None
+iateadonut: yes, but i've got to know what checkbox i'm clicking
+iateadonut: because it has to be hidden at the beginning of the ajax request and shown again when it returns.
+uru: Easy enough to do with a simple boolean flag
+iateadonut: so i guess i could just make the model null, during the ajax request, and that would be the signal that it should be shown or hidden.
+uru: Only issue with that is handling the failure of the ajax request
+iateadonut: i'll put up a message calling the user a &quot;lardo&quot;
+iateadonut: in a bootstrap message box
+iateadonut: $scope.message_text = &quot;Ajax request failed, probably because you're a lardo.&quot;;
+smiche: anyone using angular-formly?
+w0rp: Does anyone know if there is a way to detect changes for any ngModelController value at the level of an ngFormController?
+w0rp: What I want to do is to add validation for the entire ngFormController, which re-evaluates whenever any of the controls inside of the ngFormController change.
+iateadonut: uru, docmarten, i added this: ng-click=&quot;optionSelected(options.login)&quot; and ng-hide=&quot;options.login=a&quot; to the input: element.  problem is, options.login = true/false; how within the method optionSelected() can i change options.login=a?
+uru: iateadonut: Set the value? I'm not really that fimilar with ng1
+Docmarten: are you wanting to set the value or compare the value?
+iateadonut: set the value
+iateadonut: so within the method, &quot;$scope.options.login = a;&quot;
+tona: hello :) everyone
+tona: i have one page done in angular but for any reason it is uploading the images twice times , i dont know why, any adivce will be welcome :)
+tona: it was watched into developer, netowkr in firefox
+Docmarten: iatedonut: if i understand yo correct, then yes,  optionSelected(options.login) is returning to true/false to the function optionSelected, then within that function you based on true or false value, you would then reset $scope.options.login = 'a' or whatever.  The problem with that is that 'options.login' is expecting to be a true/false value within your input:, so when you change it to
+Docmarten: 'a' things prob won't work the same way.
+karthik: hi
+Docmarten: iatedonut: prob best to use $scope.options = {} ; as an object, then store all your login parameters within it and pass the one you need per function.  ie: input type=&quot;checkbox&quot; ng-model=&quot;options.login&quot; ng-click=&quot;optionSelected(options.login):...$scope.optionSelected = function(value) {  if (value == true) { $scope.options.otherValue = 'a' ;}
+rangu: Hi guys
+rangu: I'm trying to set the modal container text to White
+NTrash: Just completed the quickstart guide guys! whoo!
+rangu: Why doesn't it changes to white when I set color: #fff
+rangu: ?
+None
+rangu: This is my plunker
+rangu: I hope you can see it
+rangu: I want the body text-foreground to change to white
+rangu: by body I am referring to custom-modal-container
+rangu: can you guys see it?
+Darken-: what is the origin of the name 'rangu'
+rangu: lol Darken- , nothing special
+Darken-: makes you sound like a camel jockey
+rangu: Lol
+Darken-: 'in 3rd place is rangu on the pure bred african camel'
+rangu: Darken-: Are you able to see my Plunkr?
+Darken-: don't care to see it
+rangu: Thanks.
+Darken-: yw
+angularjs722: hi pals
+angularjs722: is it possible to generate dynamic filters for a service before using find method?
+angularjs722: for example to fetch things with filterin I use a syntax like find({filter:{where:{a :5,b:4}})
+angularjs722: so what I want to understand is can I convert where part to an object so that I can add/remove necessary fields based on some logic
+zomg: angularjs722: var w = { }; w.a = 12345; find({ filter: { where: w } })
+zomg: it's just plain JS objects
+angularjs722: hmm tried that but let me try it again
+Docmarten: ugh
+angularjs722: it worked! thank you zomg. Seems like I had to convert whole where values to JS object instead of trying to convert only the 2nd param :P
+kegster: I am using ng-repeat for a menu, and I have it either displaying a separator or a link item with a ui-sref -- however i've tried ng-if/show/hide to display either or --- but i get an error because the separator is still using ui-sref on the &quot;hidden link&quot;
+bzitzow: Can I access a component&rsquo;s template within it&rsquo;s controller?
+bzitzow: I know this is generally not recommended but due to ng-repeat performance issue&rsquo;s we have decided to write the rendering of a collection ourselves with vanilla javascript document fragments
+bzitzow: So I&rsquo;m trying to test rendering it and attaching it to the component within the onChanges lifecycle hook
+Docmarten:  select ng-model=&quot;filter&quot;:div ng-repeat=&quot;item in items&quot;:, and in my controller I have [$scope.items,$scope.filter] = getItems.all() ;  when the service returns the data to the controller, the AngularView updates the list of div: items, but the select: is not updating with the passed back filter method....the select: just shows an empty option as selected.
+Docmarten: i have a hard list of options select ng=&quot;filter&quot;:, based on specific criteria passed back from the service, how can I get the controller to auto-select the appropriate select: option?
+Docmarten: I am doing $scope.filter = returnedValue ; but not seeing the option being selected, its blank with an undefined '?' value.
+None
+None
+stschi: Hey guys. What's a good way of telling Angular 2 to store numbers, not strings when using input type=&quot;number&quot; [(ngModel)]=&quot;foobar&quot;:?
+None
+cagomez: what's the latest version of jquery that 1.5.8 supports?
+tona: hello guys
+tona: how could i use ng-repeat only for one  loop :)  i have (ng-repeat=&quot;item in items&quot;)  i only need to run one time
+yetitwo: tona: what do you mean by that?
+tona: i mean to run 1 times, i want to break it only one times
+yetitwo: but you're only iterating over a single item?
+yetitwo: question on directives: I've got a directive that i'd like to be able to make its own API calls and have its own logic depending on what's passed into it
+yetitwo: but i'm having trouble wrapping my head around the way that controllers and directives talk to each other
+None
+jwb1911: with c# webapi and angular, I am trying to figure out the best way to return the correct error when a user is unauthorized.. I have ADAL enabled so it thinks the token is invalid and tries to reauthenticate if i use throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, &quot;User does not have permissions to authorize system&quot;));
+NTrash: Any angular 2 masters in here?
+None
+scssquatch: Basically when I set loadingReport to be true, the DOM isn't reflecting that change because my app seems to be tied up in that function
+scssquatch: but it certainly takes long enough to show it as loading
+scssquatch: although it's performing a truly incredible amount of operations (inserting potentially hundreds of html nodes), so it just might be too much for my app to handle?
+yetitwo: NTrash: there's a separate channel for Angular2 iirc
+NTrash: oh ok xD
+bzitzow: yetitwo: what&rsquo;s the channel? Not #angular2 angularjs2
+ok91: bzitzow: #angularjs
+ok91: There&rsquo;s no channel for angular 2 yet I think :)
+None
+yetitwo: yeah... never mind
+yetitwo: i could have sworn i got help from an angular2 channel at one point
+yetitwo: but i might be thinking of something else
+ok91: yetitwo: wasn&rsquo;t it just #angularjs maybe? :)
+ok91: There&rsquo;s a channel for Angular 2 in Gitter though
+None
+None
+yetitwo: yup. it was totally gitter. i'd forgotten that site existed...
+ok91: yetitwo: lol
+ok91: Gitter is actually okay.. :)
+yetitwo: yeah, i agree
+yetitwo: it was really helpful at the time
+yetitwo: i just haven't had reason to use it for six months
+None
+_eddy: because when i remove it nothing renders and when i add it thens render
+None

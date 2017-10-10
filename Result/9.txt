@@ -1,0 +1,339 @@
+Batmancin: hi guys anyone know how is the right way to bootstraping a ng2 app ?
+grizzm0: Batmancin, Take a look at angular2-seed
+draconusdesigns: Hello. I am having an issue with angular ui bootstrap. I implement the tooltips like it says in their docs, but on hover of the items with the tooltip, it loads the whole page into the tooltip, as if it is injecting all the html, and likewise, throws an error that angular is included twice.
+draconusdesigns: I have no clue how to begin debugging this issue, and it kind of kills my ability to use bootstrap. :/
+draconusdesigns: Any suggestions to begin narrowing this down or squashing this bug would be appreciated.
+draconusdesigns: I am using 1.5.8 and angular ui bootstrap 2.1.4
+draconusdesigns: Is this channel active?
+draconusdesigns: There seems to be no talking here.
+draconusdesigns: hello?
+draconusdesigns: :/
+draconusdesigns: Is this channel just bots or are there people here?
+draconusdesigns: I just see people coming anf going with no conversation. Seems silly to join a chatroom quietly and not talk.
+grizzm0: :o
+draconusdesigns: Ok.
+draconusdesigns: I feel better.
+draconusdesigns: I will now sit quietly and wait my turn for assistance.
+draconusdesigns: i just needed to know that there were people :D
+grizzm0: It's in the middle of the night (in europe) on a saturday. ;)
+draconusdesigns: Oh. These things are both true.
+grizzm0: The channel is pretty dead at these times.
+draconusdesigns: So the channel is primarily European. *nod*
+draconusdesigns: Would you be willing to help me with this bug?
+grizzm0: Nah. but it's still saturday in the US. ;)
+grizzm0: I haven't used angular1 in a long time
+grizzm0: Just came back for angular2.
+draconusdesigns: It is, but this is the time I have to work on this side project. I have to work during the week. :)
+draconusdesigns: Which work is mostly PHP stuff, so... :)
+draconusdesigns: Gotcha.
+draconusdesigns: Angular 1.5 with Bootstrap... Anyone have experience?
+draconusdesigns: I fixed it.
+draconusdesigns: :)
+draconusdesigns: night
+wunoinc: I hover in here cause i am working on my first Angular 2 project. Never know when you might need help. In other words I am not a bot!
+snurfery: sup yall
+snurfery: hey I'm trying to write some tests
+snurfery: using $compile('some-directive:/some-directive:')(scope)
+snurfery: then in the result I need to find some html
+snurfery: all the examples I see do simple finds like
+snurfery: expect(element.find('span')).....
+snurfery: what if I want to look up something more complicated than just &quot;span&quot;?
+snurfery: is that possible with .find()?
+snurfery: like element.find(&quot;span.someClass&quot;)
+happycodeworkout: whats the keyword for $elem?  ex: input ng-click=&quot;foo( $elem.value )&quot;:
+heartburn: snurfery: you should totally cut on that jquery mentality bro.
+heartburn: there are native dom api for that stuff, use them
+snurfery: but did you read my question tho.
+snurfery: lol
+heartburn: no, it's not possible with .find()
+heartburn: but guess what.
+snurfery: that's an answer, awesome
+heartburn: theres .querySelector
+snurfery: can you point me in the right direction?
+snurfery: ok thanks
+None
+happycodeworkout: whats the keyword for $elem?  ex: input ng-click=&quot;foo( $elem.value )&quot;:
+heartburn: snurfery: if you gonna update the dom by hand, you'll probably need to $scope.$apply(), so ng catches up with your updates.
+snurfery: yeah, I'm not doing any jquery stuff, just trying to test my directives which create html
+snurfery: but thx
+snurfery: I've done a load of angular dev but I'm just now learning how to test =(
+nishu-tryinghard: iam applying for jobs and i dont have a good memory to recall things so i would to prepare a bit. Can anyone just ask some questions ?
+nishu-tryinghard: like to*
+heartburn: snurfery: alright. it's just that very often i see people run into angular.element() limitations and think 'oh well, i guess im gonna need jquery for that'
+nishu-tryinghard: heartburn, ^ any help with this?
+None
+None
+nishu-tryinghard: what all things i can try to improve the loading time of my angular app. I just used minify or lazy loading to do that. I know it also depends on the network and host. But iam only talking about the stuff which can be done via angular.
+nishu-tryinghard: ty heartburn
+snurfery: ah I found the issue.
+snurfery: angular's $compile(foo)(scope) was returning an array-like object that didn't have all the normal DOM manipulation methods on it
+snurfery: I had to do something like foo[0].querySelector('div.someClass')
+snurfery: shazam. Thx for the help heartburn
+happycodeworkout: nishu-tryinghard: they asked me what a service was, what a directive is, when you use a directive, etc
+happycodeworkout: gl :d
+nishu-tryinghard: happycodeworkout, iam okay with the angular framework related things as i have already worked on a complete web app. I am expecting questions related to more on the real world application like the one i mentioned abobve.
+nishu-tryinghard: like performance and memory leak etc
+heartburn: nishu-tryinghard: in real world maintainability comes first, then performance m8.
+nishu-tryinghard: yes i am following papajohns style guide and try to make the code as readable as possible
+heartburn: stupid, dumb, predictable code is what matters.
+heartburn: nishu-tryinghard: also instead of questions, ask for a test assignment.
+heartburn: not some quiz from the internet, but something from the inner kitchen.
+heartburn: something that is hanging in their project management system for a long time, and nobody wants to deal with it.
+heartburn: questions you can memorize, so it doesn't tell anything about your qualification.
+heartburn: a test assignment, on the other hand...
+heartburn: it'll show them what you are worth,
+heartburn: and it'll show you what you're getting into.
+heartburn: meaning if it's an unholy mess, you can evade the trap.
+nishu-tryinghard: heartburn, exactly once we work on project we know how dumb and useless the quiz will be
+nishu-tryinghard: heartburn, i did ask one of them to give me a assignment.
+fuguxu_: heool
+fuguxu_: anyone?
+fuguxu_: anyone?
+rand0m: bbk
+robin_: dsafdsf
+robin_: hello overybody
+robin_: as
+robin_: df
+robin_: as
+robin_: f
+robin_: das
+robin_: faseg
+robin_: a
+robin_: s
+robin_: asd
+robin_: f
+robin_: das
+robin_: f
+robin_: as
+robin_: df
+robin_: as
+robin_: f
+None
+bjornkri: I undestood that resolve would take care of providing `books`. I&rsquo;m sure I&rsquo;m overlooking something basic, but can&rsquo;t figure it out
+Anand: is ionic 2 stable ?
+Anand: no body here to chat ??
+anand: ?
+masudhossain: Hi
+masudhossain: Is anyone actually here? (first time here)
+jiggerypokery: Hello, decided to give angular2/typescript a look. Do you guys version map/js files too or do you compile on production?
+jiggerypokery: assuming cloud deployments
+liefer: jiggerypokery, i believe there is a chapter in the docs about deploying to production
+liefer: would like to know what people *actually* do though =)
+jiggerypokery: yeah, the angular1 docs were so far removed from reality i'm taking it all with a pinch of salt haha
+jiggerypokery: I'm not sold on typescript at all yet better syntax is great but having the option to, ya know, debug the actual code you are running in the browser useing the browser tools : all
+jiggerypokery: the plain JS docs for angular2 are seriously thin
+Nasp: Are you implying you can't debug with typescript?
+Nasp: Or if you should output the map files or not in production?
+jiggerypokery: no, I'm implying the browser runs javascript, the extra moving part that is the compile step I'm not sold on being worth the advantages of typescript yet.
+jiggerypokery: Nasp: my question was if you are depolying to AWS or whatever do you compile on the production servers or do you version the compiled files?
+Nasp: Then don't use it thoughtthere are lots of advantages
+Nasp: Also just see it as ecmascript
+Nasp: I compile and version the files with a checksum or version number
+liefer: I definitely share your concern. Every time you add another tool to your build chain you add another layer of complexity - a layer of complexity that you *will* have to spend time having issues with down the line
+liefer: that being said, JS is just so so bad. It really have very little place in a professional environment. The price you pay for typescript is IMHO well worth it
+jiggerypokery: Yeah, maybe. At the end of the day you are still running javascript though. Swept under the rug at best
+ExpertSystem: Hi
+ExpertSystem: Is anyone here?
+raj_: hi
+raj_: ??
+moop: does angular initialize a controller if it's bound to a hidden element? [angular 1]
+heartburn: yes
+moop: thanks heartburn
+heartburn: ie, if it's present in the dom, it will be initialised.
+moop: can you programatically add controllers to the dom?
+moop: tho yeah obviously it should be fine
+heartburn: ng-if might do it for you. not sure why would you want that though.
+moop: oh i wouldn't
+heartburn: basically ng-show/ng-hide just add display: none to the element, whereas ng-if completely removes and puts it back if true.
+heartburn: meaning if you have some component and display it with ng-if, it'll reinitialize every time the ng-if condition is true.
+None
+None
+ironicaldiction: Is there a built-in way to add hashes to files in angular, or is this a job for webpack, grunt, etc.?
+ironicaldiction: version hashes *
+maui: hello
+maui: how are you
+maui: may I ask about Angular Google Maps library?
+nishu-tryinghard: maui, yes just ask, i used that library so maybe i can be  of help
+maui: great
+maui: I need to show an infowindow with dynamic content
+maui: so far all i have is a static one
+maui: let me post my code
+None
+maui: this is my controller and my html
+maui: the infowindow is displayed but of course it only shows test for every marker
+maui: how can i show some dynamic content there?
+nishu-tryinghard: maui, i think you can store a object which contains all the data relating to that data point and add each of these objects to their respective place in the models array.
+nishu-tryinghard: let me check the library once
+None
+mgolisch: how do i properly initialize values before the view is rendered? i want to fill an array with values from a http service, but it seems that by the time the template of the component is evaluated the variable is not filled yet
+nishu-tryinghard: mgolisch, you can use resolve but this will not render anything untill the data is received.
+mgolisch: so what is the correct way of doing this?
+SET001: does any one still use $resource in angular 1?
+mgolisch: like it doesnt seem like ngfor detects the changes to that array
+mgolisch: so nothing is ever rendered in the view
+mgolisch: guess iam doing something wrong
+nishu-tryinghard: mgolisch, it should populate the view with he api data as soon as it is received. maybe some typo or something
+nishu-tryinghard: the api*
+None
+ngbot: angular.js/master faf0c3e BobChao87: refactor(ngModelSpec): use valueFn over curry...
+None
+ngbot: angular.js/v1.5.x fcffa0d BobChao87: refactor(ngModelSpec): use valueFn over curry...
+rangu: Hi guys
+rangu: What is an async pipe for?
+rangu: When should I use one?
+mgolisch: did you read its description?
+mgolisch: The async pipe subscribes to an Observable or Promise and returns the latest value it has emitted. When a new value is emitted, the async pipe marks the component to be checked for changes. When the component gets destroyed, the async pipe unsubscribes automatically to avoid potential memory leaks.
+ExpertSystem: SET001: Why wouldn't one use $resource?
+rangu: mgolisch: Thanks for the explanation
+rangu: mgolisch:  I was consuming an API without using Async Pipes
+rangu: I guess the best practice would be to almost always use Async Pipes when consuming an API
+rangu: I was using obervables.
+rangu: just that and a typical call to the service.
+SET001: ExpertSystem, because it's not clear how to use it with ES6 classes. For now I solved it with something like
+SET001: this.resource = $resource('api/map/:id')
+SET001: in model's constructor
+SET001: now I'm trying to understand how I can share my models within client and server
+SET001: server wants mongoose model, client wants $resource...
+ExpertSystem: SET001: Not everything has to be a class :)
+SET001: ExpertSystem, few years ago, maybe, But not when we have classes we should thing how we can use it
+\\\\\\\\\: SET001: read up on factories m8.
+\\\\\\\\\: SET001: also, there are still no classes in js
+\\\\\\\\\: the class keyword is just sugar
+SET001: cool sugar
+\\\\\\\\\: no, it is not
+\\\\\\\\\: because it is the reason you're having this weird issue now
+\\\\\\\\\: read up on factory pattern, seriously
+ExpertSystem: SET001: Cool or not, classes does not mean everything else disappeared.
+mst: I like the class keyword, but it does not save you from needing to understand prototype chaining
+mst: if you don't understand prototype chaining, you're never going to be able to properly enjoy writing javascript
+ExpertSystem: We also got arrow functions, but you don't have to use them everywhere (only where it makes sense).
+\\\\\\\\\: mst: you should read up on factories too
+SET001: well, I know about factories, I'm just tryuing to understand if I can use classes
+mst: \\\\\\\\\: wat
+\\\\\\\\\: you can write perfectly normal and very straight forward js without classes, prototypes, new and this.
+\\\\\\\\\: in fact, it's even more straight forward comparing to classes/prototypes
+ExpertSystem: SET001: For `$resource` specifically, it doesn't make any sense. `$resource` is a factory that will return a &quot;class&quot;.
+mst: um. you do realise that all of javascript's scoping is based around prototype chaining, right?
+\\\\\\\\\: no, it's not.
+mst: knowing how to use a factory will not magically change the underlying prototype chaining model
+SET001: wll, why then angular2 use classes and all those modern stuff?
+\\\\\\\\\: in js you have closures for scoping.
+mst: SET001: what?
+SET001: well, ok, it uses typescript with classes, sorry
+\\\\\\\\\: SET001: because ng2 is a convoluted mess.
+mst: \\\\\\\\\: go read up on what 'var' is and how it works.
+ExpertSystem: SET001: It uses classes only where it makes sense.
+\\\\\\\\\: oooh, you mad bro?
+SET001: ExpertSystem, are there any rules to understand where it does make sense to use classes?
+\\\\\\\\\: SET001: in js, almost never.
+mst: \\\\\\\\\: merely confused why you think 'using factories' will make 'var' behave differently
+\\\\\\\\\: it will not, but it save you from a lot of other stuff, like this.
+SET001: \\\\\\\\\, why it is so bad, do you have any arguments?
+ExpertSystem: SET001: When you want something that you can create instances of, you can use a class.
+SET001: but I can put a class to angular.factory
+SET001: like so .factory('Map', require('./core/map'))
+SET001: and then module.exports = class {}
+ExpertSystem: Just because you can, it doesn't mean you should
+None
+\\\\\\\\\: with factories you don't have to deal with this at all --^
+mst: SET001: I would have the factory then call 'new MyClass' explicitly
+SET001: yeah, so I'm confused and trying to understand where to use what
+mst: SET001: if you're going to use a class at all
+\\\\\\\\\: there was a nice video explaining the factory thing, can't find it tho
+ExpertSystem: A simple rule for ng1: You can use Class with `.service()`; don't use it with `.factory()`.
+None
+ExpertSystem: \\\\\\\\\: There are a lots of nice videos explaining all sorts of things and while I may (or may not) agree with you, it sounds a little bit off-topic :D
+SET001: ExpertSystem, what is wrong with using classes in factories?
+SET001: factories are to create objects
+SET001: classes are to create objects
+SET001: so almost same, not?
+ExpertSystem: Class are supposed to be &quot;new-ed&quot; up (i.e. called with the `new` operator to create new instances blah blah blah).
+ExpertSystem: In ng1, `.factory()` will not instantiate (i.e. use `new`) the class you pass to it. It will invoke it (call it).
+mst: ExpertSystem: right, .factory('foo', function(...) { return new SomeClass(...); }); is how I'd use ES6 classes with .factory, if at all
+mst: whether it's then actually worth it is a different question
+None
+SET001: but I can make something like.factory('Foo', class{}) and then I can inject it and use like `new Foo()`
+SET001: so I mean it is also newable
+ExpertSystem: mst is right (although in that case, you would probably use `.service()` instead. But in case of `$resource()` - that was the original question - you would use something like: `.factory('Thing', function ($resource) { return $resource('/api/thing/:id'); })`
+ExpertSystem: SET001: No, if you want to pass the Class itself as an injectable value, then use `.value('Foo', class {})`
+SET001: ExpertSystem, in the your example above, what if I want to extend that Thing factory with some properties and methods?
+ExpertSystem: `.factory()` will try to call `class{}` and then give you the returned value.
+ExpertSystem: You can extend it's prototype.
+ExpertSystem: E.g. `.factory('Thing', function ($resource) { var Thing = $resource('...'); Thing.prototype.doCoolStuff = ...; return Thing; })`
+mgolisch: oh god
+mgolisch: i missed the * infront of ngFor :(
+mgolisch: thats why it didnt work
+SET001: ExpertSystem, and now, maybe I can make it's prototype to be a class? like  class Blah{} ... Thing.prototype = Blah
+SET001: will it work?
+ExpertSystem: You are really determined to use a class, aren't you?
+SET001: )
+SET001: I just want to understd what I can do with all this modern stuff
+ExpertSystem: No, it won't. Because Thing does already have stuff on it's prototype (stuff it relies on for working correctly).
+\\\\\\\\\: you can for one use it when it makes sense.
+\\\\\\\\\: and not use it where it doesn't
+ExpertSystem: Yeah, trying to use it just because it is modern won't help you a bit (nor will it make your code better).
+\\\\\\\\\: as of your current situation it seems like you just want it because it's a new shiny.
+SET001: I'm just experimenting
+SET001: trying to understand pros and cons
+ExpertSystem: Don't
+SET001: I'm not going to use any of this on production
+ExpertSystem: You are not there yet.
+ExpertSystem: In order to understand pros and cons, you need to understand more basic things first.
+ExpertSystem: Using shiny stuff just because it is modern, won't help you.
+ExpertSystem: As others mentioned before, class is nothing more than syntactice sugar over other constructs (e.g. prototypes).
+ExpertSystem: Try to use and understand the basics first.
+\\\\\\\\\: ng services are classes. if you really wanna, use them.
+ExpertSystem: You could also use a provider if you really need to use a class with `$resource` :D
+ExpertSystem: (Just kidding - you could, but don't)
+SET001: )
+SET001: ok, thank you
+ExpertSystem: Any time :)
+dogmatic69: I can't seem to make a *ngFor work with an array of objects, its doing the for loop but the &quot;objects&quot; its returning are not objects
+ExpertSystem: dogmatic69: What are they?
+dogmatic69: any ideas what is going on, its simple code tr *ngFor=&quot;let satellite of gps.satellites.satellites&quot;:
+ExpertSystem: What is `gps.satellites.satellites`?
+dogmatic69: if I do {{ gps.satellites.satellites }} I see something like [object Object, object Object ...] and If I console.log it in the component the data is correct
+None
+ExpertSystem: What does the template look like (inside the tr:)?
+dogmatic69: ExpertSystem: see there, each of the lines on the left is a TR
+None
+dogmatic69: gah
+dogmatic69: just seen its a typo
+ExpertSystem: :)
+dogmatic69: is {{ $index }} not a thing anymore?
+dogmatic69: ive tried $index, index. cant seem to get the index of the loop
+ExpertSystem: You have to bind it to a local variable first.
+None
+greenfriday: Hey, I am trying angular2. And I keep getting &quot;cannot find module...&quot; on this line.
+greenfriday: import { AddShowsComponent } from 'app/add-shows.component';
+greenfriday: Any ideas why that might be?That DEFINITELY exists.
+greenfriday: God, Angular dev is such a shitshow
+zomg: greenfriday: nothing to do with angular
+zomg: greenfriday: es6 and commonjs module paths need to be relative, that's an absolute path.
+greenfriday: zomg: This example I am following is totally wrong.. In so many ways
+greenfriday: I am literally trying to add a textbox to a page. :s
+zomg: no idea which one that would be.. but if you use ./app/foo (assuming from current file, path to file is ./app/foo) then it oughta work
+greenfriday: Aye got it.. I mean, it's still not working but I have a new problem
+mgolisch: id suggest reading through the quickstart and tutorial, that helped me alot, and explained allmost all stuff i needed for my app
+greenfriday: And sorry, I just find JS dev so stressful. Nothing is ever clear, and it's all so obfuscated.
+None
+greenfriday: God this channel is shockingly inactive considering it's angular..
+grizzm0: It's weekend.
+grizzm0: greenfriday, Can you try adding ./ to the import path?
+grizzm0: Ah, sorry
+grizzm0: zomg already pointed out that
+greenfriday: grizzm0: Yeah.. That's a new issue
+greenfriday: I've adde the error below as well
+grizzm0: greenfriday, directives was dropped in RC5 or RC6 if I recal correct.
+grizzm0: In favour of modules.
+grizzm0: Keep in mind that angular2 is a baby. Lots of tutorials was written during alpha, beta and RC which are going to create a lot of BC breaks.
+greenfriday: Yeah this is what I am finding
+greenfriday: grizzm0: Thank god! Got something wroking
+greenfriday: Ok, will just slowly bring it up from there..
+grizzm0: Great. :)
+greenfriday: All up from here..
+mgolisch: yeah i noticed that
+mgolisch: the stuff from alot of tutorial didnt work
+mgolisch: but i found the tutorial on the angular website to realy helpfull, it covers alot of basic stuff and has links to the coresponding api pages for more indepth information
+mgolisch: i would realy start there
+mgolisch: thx guys, got my startpage/linklist app working

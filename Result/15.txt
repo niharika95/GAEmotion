@@ -1,0 +1,223 @@
+Germanaz0: yeah rand0m something like that
+Germanaz0: is cool
+None
+None
+ngbot: angular.js/master 406c1b0 Georgii Dolzhykov: docs($rootScope.Scope): grammar...
+None
+ngbot: angular.js/v1.5.x 70076ba Georgii Dolzhykov: docs($rootScope.Scope): grammar...
+wrkrcoop: hi
+wrkrcoop: i need to wait until stripe.js loads to run a function &hellip; anyone know how to do tihs?
+zomg: wrkrcoop: put it in a script tag on top of your page
+mehmet: hi everybody
+mehmet: anybody
+mehmet: can yoou hear me?
+mehmet: helooo
+subone: Does anyone know if it's possible to create another instance of a ui.router? I want to match API URIs against ui states or other action. It looks like I can use $urlMatcherFactory, but I'd like to have a matcher collection, with routing
+subone: I suppose I would be satisfied if I could simply invoke the appropriate matcher or 'when' handler with a specific URL, without having to actual change to that URL (haven't tried setting the location yet)
+sajith_: hi
+sajith_: hello
+sajith_: ashka
+Mavericks: in app.js i've $(&quot;#test-data&quot;).append(&quot;div class=&quot;panel-heading&quot; ng-click=&quot;testData()&quot;:Test Data 1/div:&quot;);
+Mavericks: how to make the testData clickable ?
+Mavericks: what's wrong the above code ?
+Mavericks: or executable rather ?
+AlecTaylor: hi
+Mavericks: AlecTaylor: hi
+AlecTaylor: I'm confused, just started following that AngularJS 2 tutorial but it's scaffold is completely different from `ng` (the official CLI), and it doesn't use `ng` at all.
+AlecTaylor: What is the official style &amp; scaffold?
+AlecTaylor: *its
+None
+sittu: #freenode
+sittu: how to get channel lists for #java
+None
+Mavericks: ?
+Mavericks: *Entries
+AlecTaylor: Mavericks: Just did a quick browse of that. Anyway will post a question on stackoverflow
+None
+None
+None
+Mavericks: AlecTaylor:  yeah good idea
+None
+AlecTaylor: Mmm don't want to overly spam, but I'll share the link in Reddit at least
+None
+AlecTaylor: Mavericks: Hmm that Google+ link doesn't look so active, there's no post sharing/discussing/announcing Angular 2 full release!
+Mavericks: AlecTaylor: i see
+None
+AxldenieD: Hello :)
+Mavericks: AxldenieD: hello
+qwerty: join
+qwerty: help
+siddharth: is there any way to use google analytics in angular?
+siddharth: i want link tracking also
+siddharth: can you guys help me out
+drus: I have a problem with angular2
+drej: maybe angular has a problem with you, ever think of that?
+drus: I have many components that extends from a base class
+drus: i want to inject a service in the base class
+drus: but i get this
+drus: zone.js?fad3:140Uncaught Error: Can't resolve all parameters for Base: (?).
+drus: yes .. maybe is me :D
+drus: any help :)
+drej: you might have to wait until the east coast wakes up
+drus: :(
+rand0m: morning all
+antiPoP: what should I use for websockets in angular2? socket.io?
+zomg: socket.io is easy to use so go for it
+rand0m: ye I agree with zomg
+priyatham: hey hii
+priyatham: can i start learning angular js after learning some basics of java script
+Nasp: Yes?
+Nasp: Why not
+rand0m: he left a hour back Nasp
+Nasp: Aha
+Nasp: I have joins and parts hidden
+Nasp: I should really make it remove people who just join and leaves
+rand0m: anyways.. is imgur.com down?
+rand0m: I keep seeing blank page
+rand0m: nvm its back up
+None
+rand0m: antiPoP what are you trying to do
+antiPoP: rand0m, using socket.io with the ngechev seed
+rand0m: not sure what that is
+rand0m: ah, ng2
+None
+antiPoP: yes, ng2
+rand0m: maybe this will help
+None
+rand0m: ?
+None
+None
+antiPoP: rand0m,  after importing socket io as import * as io from &quot;socket.io-client&quot;;
+antiPoP: I can upload the code to gh if you want to take a look
+rand0m: I have no clue about ng2 so I can't actually help you with this. I'm sorry.
+rand0m: what is the add extenal link you posted?
+rand0m: it just says how to include file
+antiPoP: rand0m,  is the seed wiki
+antiPoP: np, thansk
+rand0m: I see that the project uses gulp
+rand0m: why not use gulp socket.io client
+rand0m: when you build your dev server, fire up this socketio client from a task and listen to specific port
+rand0m: and when your dev http server runs, use angular to connect to said socket.io port and get data?
+antiPoP: random angular 2 is different
+antiPoP: I finnaly solved it :)
+antiPoP: rand0m, thx anyway
+learnme_: In ng-1.5.8 is should ngResource call $query() after calling $save(), I currently have a race condition being caused by this :P
+learnme_: When I call myNgResource.$save(), I get two requests, because I pass in my object (which was an myNgResource.$get()) and this causes a race condition... What should I do to prevent this?
+rand0m: I have no idea :|
+rand0m: wait
+rand0m: could you use promises learnme_
+None
+rand0m: like this ^?
+learnme_: that's basically what I'm doing
+None
+learnme_: But, when I send my post request... it's calling something similar to... myNgResource.$save(myNgResource.$get())
+learnme_: Which is causing a really wierd race condition.
+rand0m: why :S ?
+learnme_: I don't think I'm supposed to call it like that
+rand0m: why not get first and save the data later?
+learnme_: That's what I'm trying to do...
+learnme_: I do something like...
+learnme_: var myVar = Resource.get();
+rand0m: like myNgResource.get().then(function(){ myNgResource.save() });
+learnme_: and then I do something like Resource.save(myVar);
+rand0m: no
+rand0m: when you do var myVar = Resource.get();
+rand0m: and  Resource.save(myVar);
+learnme_: I'm supposed to pass in myResource.save(copyOfObjectThatsNotTheResource);
+rand0m: how can you be sure that myVar in Resource.save(myVar) has the content you want
+rand0m: you should do something like
+learnme_: Resource bindings?
+learnme_: Like, all the &quot;resources&quot; in my app are bound to Api endpoints
+learnme_: But, I'm just messing up the js, lol
+learnme_: &quot;messing up&quot; meaning royally fucking up, lol
+rand0m: can you create a plnk?
+rand0m: ar plnkr.co
+None
+None
+learnme_: Check the script.js
+learnme_: Basically, in my template, I bind lots of stuff to the resource with ng-model
+learnme_: And I was hoping I could just call this.resource.$save() to save the updated resource
+learnme_: But, it turns out that when I do that, I actually get two requests, one a post, one's a get.
+learnme_: And it causes a weird race condition depending on which one returns first
+rand0m: is that component a directive
+learnme_: Yeah, it's a 1.5.8 component
+rand0m: aaahhh
+rand0m: idk wtf is that
+learnme_: But, it's essentially the same as a directive
+rand0m: i only know 1.5
+rand0m: let me check
+learnme_: I use it in my template files like... resource:/resource:
+rand0m: make sense
+learnme_: But, I don't think it should really matter if it's a directive or not.
+learnme_: I'm mostly confused by the ngresource
+learnme_: I feel like what I'm doing makes sense, but just slightly wrong
+learnme_: like, if I call $ctrl.saveResource anywhere
+learnme_: I get the same damn two requests, because of the method chaining
+tmuwa: I am trying to learn angular2. Any hints for good tutorials?
+rand0m: hay
+rand0m: learnme
+rand0m: learnme_,
+rand0m: you still here
+learnme_: yep
+learnme_: I figured it out
+None
+learnme_: I was being all sorts of dumb, lol
+rand0m: this is how you should be doing it I think
+learnme_: Yeah
+learnme_: That's how I did it
+learnme_: I had a freaking ng-href=&quot;&quot;
+learnme_: that was reloading the damn page
+learnme_: every single time I submitted my post request
+learnme_: Thus, post followed by get...
+learnme_: leading to a reload of all my data, lol
+rand0m: hmm
+rand0m: nice one :)
+learnme_: #ihateworkingonsaturdays
+rand0m: its worth it man :)
+supperman2k: is there an angular2 channel?
+rand0m: there is supperman2k but I don't know sorry :(
+rand0m: i mean the link
+Felishia: how do I select the scope of an element?
+Felishia: I'm trying angular.element($0).scope() but with some elements it doesn't work
+rand0m: angular.element(document.getElementById('yourElementId')).scope()
+rand0m: ?
+rand0m: or angular.element('[ng-controller=ctrl]').scope()
+rand0m: or if you have jquery
+rand0m: $('#elementId').scope();
+rand0m: $('#elementId').data().scope();
+rand0m: these are the only ways I know :s
+Felishia: how do I get the name of the parent controller?
+Felishia: actually
+Felishia: my $scope has an attribute named teacher
+Felishia: I cannot see anything that is setting the value for that
+Felishia: yet it's populated
+Felishia: how do I get who is setting that
+Felishia: that's the problem
+rand0m: no idea how to check that
+None
+Felishia: pls T_T
+Felishia: I don't understand how the url is /:teacherId and the next one is /profile
+Felishia: when my real url to get there is /:teacherId/profile
+Felishia: are the .x.y somehow stacking the controllers?
+rand0m: eh
+rand0m: what dont you understand about /:teacherId
+rand0m: and /profile?
+Felishia: like the path is teacher/:teacherId/profile
+Felishia: to get to the controller profile controller
+Felishia: so I suppose the are stacking somehow
+rand0m: doesnt it say
+rand0m:  $urlRouterProvider.when('/teachers/:teacherId ... $state.transitionTo('teachers.detail.profile', $match);
+rand0m: and
+rand0m: .state('teachers.detail.profile', { goes to  url: '/profile',  controller: 'TeacherProfile.Controller',
+rand0m: ?
+rand0m: when :teacherId is present it goes to state detail.profile with id
+rand0m: which I believe can be used in TeacherProfile.Controller
+rand0m: brb in 20
+Felishia: so why does it use teacher controller, detail controller and porifle controller
+rand0m: not sure Felishia
+rand0m: maybe TeachersController fetches a list of all teachers ?
+rand0m: and TeacherDetails gets details of particular teacher
+rand0m: and Profile controller is a generic profile controller (similar to TeacherDetails, but with less data)?
+None
+fnx: It's working as intended, although if you look at the console, there is some infdig-errors going on
+fnx: Is there any way to get rid of it? The source of the infdigs is the filter

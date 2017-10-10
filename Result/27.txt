@@ -1,0 +1,929 @@
+hazem: test
+Archaen: Hi, I am new to angular bootstrap UI and was having difficulty getting a slider to work.  Is there anyone that could help?
+Archaen: Sorry, that is a carousel, I was using materialize before and it was called a slider there.
+san37: hello..
+san37: what is the difference between function(res){$scope.myData=res;} and function(res){$scope.myData=res.data;}
+cosmo1t: what is res.
+None
+san37: hello cosmolt...are you there
+zomg: san37: isn't the difference between those two fairly obvious? One assigns res into it, the other res.data
+san37: zomg: sometimes i can get data from $scope.myData=res bt....in maximum cases i dont get it.so I have to use $scope.myDat=res.data..
+zomg: yes, it depends on what format the data is in
+san37: zomg: so if I have an array of objects.. I get data using $scope.myData=res.data?
+wafflejock: san37, if you are getting an object from $http in response to a request then the response object has a data property
+None
+wafflejock: san37, the default transformation for the data property is to parse the response body string into an object which will be an object or array depending on what kind of JSON is in the response body
+san37_: connection check...
+None
+testx: the index.html includes the main modules before the sub modules
+testx: is that ok?
+None
+testx: oops thats the wrong one
+None
+testx: thats the right index.html
+testx: all the modules the main module declares as dependencies are added after the main module
+san37: ooo pragun
+pragun: ssup? :D
+san37: haha..
+san37: hello guys...I cannot refresh my page other than in my index page..What I ve done is used $locationProvider and html5 mode aand set my base url in index page..
+san37: why is tht and how can I fix that?
+wafflejock: san37, you need to do server side config to redirect any missed file attempts back to the index.html
+wafflejock: san37, which web server are you running?
+san37: xampp..server
+san37: wafflejock: did you understand my problem?
+None
+wafflejock: san37, just need to be sure you have rewrite mod installed/enabled in apache
+E1arcis: Hi!
+san37: wafflejock: it says write .htaccess on the root of shared apache server..where does this point at windows xampp
+Elarcis: oh wait
+san37: hello elarcis
+Elarcis: Hi!
+wafflejock: san37, would be the same place your index.html is at
+wafflejock: san37, with apache you'll have one or more .conf files for the server itself that have the document root for where to serve stuff from you could have this Rewrite config in that file instead of the .htaccess
+Elarcis: san37: xam
+wafflejock: san37, the .htaccess is limited based on the settings in those .conf files for apache as well, not sure about the location of them with xampp though usually just use the apache2 package on ubuntu
+Elarcis: san37: xampp is using apache.
+wafflejock: san37, is the server you're deploying this to in the end under your control or is it shared hosting of some kind?
+san37: Elarcis I didnot get you..
+san37: wafflejock: I am using localhost
+wafflejock: san37, right I realize this is local for now was just asking about when you plan to deploy things but no worries can figure that out when the time comes
+wafflejock: san37, Elarcis was saying Apache is the program in the XAMPP set of programs that is the web server though and is what I'm telling you needs to be configured so it can handle the incoming request from the browser properly
+wafflejock: san37, ordinarily it's just configured to look from some folder/directory on your computer and pick up files from the disk and send them out to whoever requested, but in this case need to take the path check if it's a file/directory and if not redirect to index.html so angular can handle the URL
+san37: wafflejock: Oooo...crystal clear
+wafflejock: san37, the link there says how to do that in apache config using the Rewrite module
+None
+None
+icebox: Elarcis: hey
+wafflejock: icebox, cool
+icebox: a bit late with respect to past chat
+anli_: I want to popup an alert, but not when the scope is applying, is it possible to have one running afterwards?
+anli_: Ah, scope.$watch
+icebox: anli_: using $watch is a bad practice... the only use case is listening changes of directive attrs
+icebox: anli_: please, read code style guides by Todd Motto or John Papa
+anli_: I have not used it yet
+anli_: The problem is that when I am popping up an alert, the changes made by the scope has not came into effect yet, so the dom is not updated
+anli_: There should be an $alert function :)
+anli_: I refused to set a timeout for this
+anli_: refuse
+anli_: Maybe I need to do it anyway
+icebox: anli_: also $timeout is a bad practice
+anli_: But I do not want a scope to be applied in the timeout handler, the opposite of what $timeout provides
+anli_: All timeouts are a bad practice, I think
+icebox: anli_: timoeut, generally speaking, is a bad practice
+anli_: yes
+anli_: Maybe I can end the scope and then popup the alert?
+icebox: better
+anli_: That also seems to be a bad practice actually, but I can live with it
+anli_: So how do I end it before the ng-click handler has finished?
+icebox: anli_: inserting the popup call at the end of the click handler?
+anli_: But then the scope has not came into effect
+anli_: Which is my whole problem explained in one sentence
+anli_: It cant be that I have to change to an onclick handler and the do apply myself
+None
+None
+anli_: I think I have just done it wrong
+None
+anli_: Illustrates the problem
+anli_: I must have mentioned &quot;alert&quot; some times now ;)
+anli_: Sorry for my rude attitude :)
+icebox: alert doesn't make sense :)
+Elarcis: hi icebox
+icebox: hey
+Elarcis: oh, angular universal got 'final'ed? :D
+anli_: Why does not alert make sense?
+anli_: How can a messagebox that is adapted to each platform be produced in a simplier way?
+icebox: anli_: do you use &quot;alert&quot; in production? I fire you :)
+anli_: I disagree, it looks good on every platform I have seen it on
+anli_: If you on the other hand popup a dialog decorated with singing angels, the fire button should be pushed
+icebox: anli_: good to know... up to you
+anli_: hehe
+Elarcis: anli_: alert is blocking the UI, it's good for critical messages that couldn't be avoided, but it's usually best to prefer non-intrusive or more elegant methods when conveying a casual alert, like a modal
+anli_: I feel that my point of view did not go through, but ok
+Elarcis: it's basically like showing result in cli vs. in a graphical UI
+anli_: When I use it, I want to block interaction
+anli_: I do not use it for other things
+icebox: anli_: blocking interaction is a ui bad practice
+anli_: Not when the user needs to be notified with something
+Elarcis: anli_: also, users can check a box to prevent your page to show more popups, and you're screwed :D
+anli_: That checkbox is a good thing
+anli_: But then they signed up for it
+icebox: anli_: it is bad practice. point. the app need to be smart to get a safe state after notifying the issue to the user
+anli_: There is no point if two persons disagree, point
+icebox: anli_: good to know... up to you
+Elarcis: now I know who icebox would fire if this channel was a company :D
+Elarcis: inb4 me as well
+icebox: Elarcis: :)
+icebox: Elarcis: why inb4?
+Elarcis: icebox: there was a 75% prob. you would say that :D
+Elarcis: damn VSCode is awesome, but boy do their tab management system suck
+icebox: Elarcis: I thought it was a nick, not an acronym :)
+anli_: If this channel was a company or if unicorns were for real
+Elarcis: &quot;in before&quot;
+Elarcis: anli_: I am a unicorn.
+anli_: We can say that
+Elarcis: please respect my right to exist
+anli_: Yes, we all do
+Elarcis: that's fine, because I don't respect yours.
+anli_: lol
+Elarcis: icebox: I had to implement some exception catching UI side, while doing so I anihilated the huge copy-times I spoke about the other day :D
+soee: any of you is using angular-cli with i18n ?
+Elarcis: soee: sorry no
+Elarcis: soee: not a single one of us
+Elarcis: soee: ever
+Elarcis: soee: move on
+icebox: Elarcis: I don't remember the context
+Elarcis: icebox: designed a recursive computation system, but the angular bindings just made angular copy the whole objetcs on each $digest
+Elarcis: icebox: leading to 1.5secs long freezes
+icebox: Elarcis: ah yes... I remember it
+icebox: Elarcis: I thought you fixed that
+Elarcis: icebox: I did work around it, but I definitely fixed it
+Elarcis: *now I fixed it
+icebox: Elarcis: cool!
+icebox: Elarcis: however it is not my day... I understood &quot;huge copy-times&quot; as you copied&amp;pasted many code lines... bah, my brain is out of order
+icebox: Elarcis: maybe because tomorrow we move to another headquarter :)
+Elarcis: icebox: wow
+Elarcis: icebox: lemme guess: under a bridge!
+icebox: :P
+None
+ngbot: angular.js/master 9e4d42c Peter Bacon Darwin: chore(version-info): use branchPattern to check tag...
+icebox: Elarcis: of course, tomorrow my presence in the channel is not guaranteed due to moving task :)
+Elarcis: icebox: np, I understand
+Elarcis: wait, who am I kidding, I do not understand
+Elarcis: THIS IS UNACCEPTABLE
+icebox: :P
+icebox: Fire me :)
+cyberbrai: hi
+None
+cyberbrai: i am getting array json in string format
+cyberbrai: how can i convert to array json format
+cyberbrai: angular.fromJson( result.replace( /\'/g, &quot;\&quot;&quot;));   trying this one but
+cyberbrai: no gain
+cyberbrai: any help appreciated
+daedeloth: in the new module concept, do I really need to declare every single component I use?
+icebox: cyberbrai: var myArray = JSON.parse(yourString);
+icebox: cyberbrai: and this is js, not angular :)
+Ben_1: hi
+Ben_1: I'm using eclipse to develop angularJS2
+None
+Ben_1: alls is working without problems except a small issue in my index.html
+icebox: Ben_1: angularjs2 is an ossymore :)
+Ben_1: icebox: sorry I'm no native speaker, what is an ossymore :P?
+Elarcis: icebox, cyberbrai: actually, better use angular.toJson(yourString)
+arkin: what would be the best way to share a model function with 2 controllers?
+Elarcis: arkin: services
+blitz-_: Anyone got experience with the WooCommerce rest api wrapper?
+arkin: good shout
+arkin: tanks
+arkin: one of those mornings
+Elarcis: blitz-_: I got the experience of a user here having issues with it
+soee: in angular2 if you write components that are related to each other and makes sens only when used together (like table, row, cell) than you place their definitions in single .ts file ?
+Elarcis: blitz-_: does that count?
+Elarcis: soee: yes
+Elarcis: soee: if by single you mean &quot;one ts file per component&quot;
+icebox: Ben_1: angularjs is for angular 1... angular 2 is enough :)
+icebox: Elarcis: no way
+Elarcis: *oxymoron
+Ben_1: icebox: ah ok thx :p
+soee: Elarcis: i was thinking about putting all code in single .ts file (so all 3 are difined in the same file)
+Ben_1: so I have a problem with angular2
+cyberbrai: ice box tried
+icebox: Ben_1: ok :)
+cyberbrai: angular.toJson(result);
+Ben_1: In my index.html header I have &quot;script src=&quot;node_modules/es6-shim/es6-shim.min.js&quot;:/script:&quot;
+cyberbrai: any other suggestion
+Elarcis: cyberbrai: did it work?
+icebox: cyberbrai: I didn't suggest that
+Elarcis: cyberbrai: I did
+Ben_1: but eclipse says Undefined JavaScript file (&quot;node_modules/es6-shim/es6-shim.min.js&quot;).
+cyberbrai: sorry Icebox
+cyberbrai: Elarcis:  it's not work
+icebox: cyberbrai: better you paste somewhere your string :)
+Elarcis: Ben_1: how are you showing your page in your browser?
+Elarcis: cyberbrai: not in the chat please
+cyberbrai: Elarcis: i kno
+cyberbrai: Elarcis: i know
+Elarcis: cyberbrai: just in case :D
+None
+Ben_1: Elarcis: with npm start (so I think its the light server)
+Ben_1: The directory is defently there
+icebox: Elarcis: they said the-words-you-cannot-say
+Ben_1: but for any reason the eclipse angular2 plugin can't find it
+None
+daedeloth: icebox, was reading up, so I asked too fast :) but I guess the short answer is &quot;yes&quot;
+Elarcis: soee: I don't like this way of doing things, they even merged the module in the same file
+icebox: daedeloth: it seems so
+Elarcis: Ben_1: what do yo mean the eclipse plugin?
+Elarcis: cyberbrai: what if it's a virus
+cyberbrai: Elarcis: Why i am sending you a virus
+Elarcis: cyberbrai: that's not JSON, that's a JS object literal
+Ben_1: Elarcis: there is an eclipse plugin for angular2 which provides syntax highlighting and parsing for angular in eclipse. It's named &quot;Angular JS Eclipse 1.2.0&quot;
+Elarcis: cyberbrai: JSON expects keys to be quoted, like so {&quot;key&quot;: &quot;value&quot;}
+Elarcis: cyberbrai: hence, the JSON parsing failed because this is not valid JSON
+icebox: cyberbrai: SyntaxError: Unexpected token { in JSON at position 1
+cyberbrai: Elarcis: ok
+Elarcis: cyberbrai: correction: it's not even a JS object literal, some values are downright non-existant. IDR, ILP, etc.
+icebox: Elarcis: thanks... &quot;oxymoron&quot; is better
+Elarcis: cyberbrai: I don't know what your thing is, but it's not a normalized web format
+alexander25: hi everyone what would be the best way to send a POST with json data true angular2?
+icebox: alexander25: with http.post?
+None
+None
+icebox: alexander25: well... &quot;creds&quot; is not an object
+icebox: alexander25: that code is correct for 'application/x-www-form-urlencoded'
+icebox: alexander25: did you write it?
+alexander25: thank you icebox  im reading up on the http post the code ive posted is from a blog post cred is an object holding username and password
+icebox: alexander25: ah ok... reading the docs should be enough
+Dhananjay_: Hi
+Dhananjay_: I want to start with Angular js
+Elarcis: hi!
+None
+alexander25: icebox the only problem is my example uses promise and other format to make the post could i just pass a data object instead of the creds object and populate the data object with username,password, etc?
+icebox: alexander25: ok
+daedeloth: so component directives are pointless now, right?
+soee: in angular 2 - anyone has an idea what would be the way to have class added to body tag when route /foo or /bar is activated ?
+None
+icebox: daedeloth: correct
+piepl: My Model is getting manipulated all the time inside a factory, what's a good way to mark it as &quot;needs to be refreshed&quot; in my view?
+daedeloth: alright got it, thanks :)
+Elarcis: cyberbrai: even the numbers?
+cyberbrai: Elarcis: everything
+daedeloth: and there is no way to replace then? Like a module that I don't want to expose any &quot;child components&quot; from?
+icebox: piepl: no need... changes are automagically propagated :)
+Elarcis: cyberbrai: I mean, are you sure you wanted to quote the numbers?
+geoid: I have an issue where a button with ng-click works fine on Chrome / FF but on Safari it only works if you click and hold and then release... so a fast click doesn't work... although if you have a track-pad with tap-click enabled it works fine.
+None
+Elarcis: icebox, piepl: well as long as the model referenced in the view is the same than the one manipulated
+geoid: Any ideas as to what's going on?
+Elarcis: geoid: safari is what is going on
+piepl: I understand, might be something wrong with the model then
+Elarcis: geoid: more seriously, no idea D:
+None
+icebox: geoid: on mobile?
+cyberbrai: remove double quotes from start and end
+geoid: no.. on macbook pro icebox
+icebox: geoid: ok... are there any other libs or is it a simple example with a click?
+Elarcis: cyberbrai: yes, well at this point it's a valid JSON
+None
+geoid: icebox &ndash;&nbsp;there's the ripple effect from google materials as well as ng-click which calls a method in the controller.
+prasanna: hello icebox
+cyberbrai: Elarcis: ok but how can i remove double quotes from start and end of json
+Elarcis: cyberbrai: wait, why do you have quotes around it if it's a JSO- I don't understand, how are you fetching this data?
+icebox: geoid: I am afraid you need to narrow the issue with a minimal test case reproducing that, before investigating if it is bug somewhere
+prasanna: cyberbrai,  string.replace(/\&quot;/g, &quot;&quot;) ?
+Elarcis: prasanna: definitely not
+prasanna: why not
+prasanna: oh
+prasanna: dang
+Elarcis: prasanna: indeed
+prasanna: its global
+Elarcis: prasanna: also no need for a regex.
+None
+cyberbrai: Elarcis: backend send this json.
+Elarcis: cyberbrai: ok, make the backend remove the quotes itself then, because there shouldn't be
+geoid: icebox well spotted... it works fine without the angular-ripple attribute :-/
+icebox: geoid: cool!
+geoid: icebox although what's the point of angular-ripple then? It's intended for buttons but breaks them!!??
+icebox: geoid: that kind of issues are nasty
+Elarcis: cyberbrai: a JSON is not a string. it's a file format, usually starting with {data: and ending by }, with your actual data inbetween (as per security convention, since returning [] is unsafe)
+icebox: geoid: the point is click, tap and so on need to be cross browser
+cyberbrai: Elarcis: is there any way to change in frontend
+cyberbrai: Elarcis: noe in backend.
+prasanna: anyways, Im having a problem with angular select
+None
+geoid: icebox yes, which makes angular-ripple lib pointless (unless I'm misunderstanding you)
+prasanna: I have a select element, which I'm hardcoding a string and value
+None
+icebox: geoid: correct
+prasanna: i've looked at it icebox
+prasanna: it does not tell anything about disabled items?
+icebox: geoid: indeed last commit was about &quot;Changed touchend to touchstart, mouseup to mousedown&quot;
+icebox: geoid: if you need that lib, you best bet is filling an issue
+geoid: icebox: ok tx
+Elarcis: cyberbrai: yourString.substring(1, yourString.length-1)
+Elarcis: cyberbrai: although it's terribly ugly because as I said, the backend shouldn't be returning that in first place
+icebox: prasanna: step by step... without disabled does the snippet work correctly?
+prasanna: my snippet? works fine :)
+icebox: cyberbrai: and really we are off topic about strings from backend :)
+prasanna: im having hard time making one of the option disabled
+cyberbrai: icebox: sorry for that
+icebox: prasanna: perfect
+None
+cyberbrai: Elarcis: I am not able to remove the quotes from backend so i have to do in frontend.
+cyberbrai: Elarcis: yourString.substring(1, yourString.length-1) not working
+prasanna: yeah seen that too..
+prasanna: looks like thats the only option available :(
+icebox: prasanna: nice
+prasanna: however, there is a comment which says
+prasanna: select ng-options=&quot;c.name disable when c.shade == 'dark' group by c.shade for c in colors&quot;:
+icebox: prasanna: if you provide a minimal (!) working plunker, we may give a look at it
+cyberbrai: Elarcis: ok done
+cyberbrai: Elarcis: icebox  thanks for help
+icebox: cyberbrai: credits to Elarcis
+cyberbrai: Elarcis: yeah thanks Elarcis
+icebox: prasanna: I don't know if it simplifies or as workaround... removing (not disabling) the option from the model?
+prasanna: one moment icebox, I am building a plnk :)
+icebox: prasanna: ok... in ten minutes... a break :)
+akkonrad: I've installed angular2 with angular-cli on my server
+Elarcis: akkonrad: that's nice o/
+Elarcis: akkonrad: wait, on your server?
+icebox: Elarcis: intending &quot;locally&quot;
+Elarcis: ah
+akkonrad: when running 'npm start' locally it works, but when trying on server it seems correct (no errors  during starting server) but site is not accessible
+Elarcis: akkonrad: what http error are you getting?
+icebox: akkonrad: windows or linux?
+akkonrad: linux server, ubuntu 14
+akkonrad: This site can&rsquo;t be reached, refused to connect
+icebox: akkonrad: wrong binding
+icebox: akkonrad: be aware binding to the public interface
+None
+akkonrad: but it's not accessible
+icebox: akkonrad: localhost? :)
+icebox: akkonrad: expected :)
+akkonrad: do I need to specify server name?
+akkonrad: of course I have to
+akkonrad: icebox, thx for hints :) &quot;be aware binding to the public interface&quot; what you ment here? not sure if I understand you correctly.
+Pyrrhus666: weechat on bash on ubuntu on windows. am I 'with it' now ?
+icebox: akkonrad: if you bind the app to 127.0.0.1 and the public ip is 8.7.6.5, you should bind the app to &quot;8...&quot;
+icebox: akkonrad: or 0.0.0.0 if linux
+akkonrad: icebox, can I bind it by host name?
+None
+icebox: akkonrad: ng serve --host 0.0.0.0
+icebox: off in one minute for a break :)
+None
+prasanna: :)
+icebox: prasanna: too late for me... see you later
+prasanna: :(
+prasanna: ok
+antiPoP: I have a component which uses two way binding with parameters from a service. I added a console.log('init') on NgOnInint, and I'm seeing that each time the ws parameters change, NgOnInit is called. Why this?
+senayar: antiPoP: do you call ngoninit on ngonchanges antiPoP ?
+antiPoP: senayar, no
+senayar: show your code then antiPoP
+None
+Ghost_Chilli: .controller(&quot;userController&quot;, function($scope, $http){
+None
+None
+icebox: akkonrad: resolved?
+akkonrad: icebox, yes, thank you
+icebox: prasanna: that plunker doesn't work... see devtools console for the error
+icebox: akkonrad: you are welcome
+senayar: why dos your class KnobOptions is inside ngoninit antiPoP ?
+senayar: *does
+icebox: prasanna: indeed... what is &quot;disable when value == 0 ...&quot;? :)
+antiPoP: senayar, I need to refactor it , but i still don't know how to place that properly... it's my first ng2/ts2 project
+icebox: prasanna: I see... about &quot; disable when&quot;... really never used
+prasanna: ive fixed it
+None
+prasanna: i've tried disable when
+prasanna: it doesnt work :(
+icebox: prasanna: ok... now it is without error... good start :)
+icebox: prasanna: now... what is your aim? what do you expect with that code?
+prasanna: I would like the select a player to be selected by default
+prasanna: and when the player tries to make change, then he/she cannot select the default one again
+prasanna: like select:option value=&quot;0&quot; disabled selected:Please Select/option:option value=&quot;1&quot;:1/option:/select:
+prasanna: user has no choice but to select 1 from the dropdown  in this case ^^^
+icebox: prasanna: so if I understood correctly, you have a list (a, b, c)... if the user selects &quot;a&quot;, then the user can select only &quot;b&quot; or &quot;c&quot;?
+prasanna: user wil not select a
+prasanna: a will be selected by default
+icebox: prasanna: ok... &quot;a&quot; is selected by default... next step for the user?
+None
+prasanna: i've added a plain HTML select option
+prasanna: so you can understand how it works
+icebox: prasanna: I don't understand what is the user interaction... (for the default value see the post I suggested)
+prasanna: I can set the default value, I need to make sure that the default value cannot be selected by the user once he/she decides to change
+icebox: prasanna: like in the second select?
+Ghost_Chilli: Anyone able to help me with this error? pagination directive: the itemsPerPage id argument (id: __default) does not match a registered pagination-id.
+prasanna: YES YES
+icebox: prasanna: ok
+prasanna: phew
+icebox: prasanna: but I have not the answer :) I only understood what you ask :)
+prasanna: its ok
+icebox: prasanna: first step it is adding the default value
+prasanna: which I 've done
+icebox: prasanna: i see &quot;Select a player&quot;
+prasanna: yeah
+prasanna: now I need to make that option disabled
+prasanna: so it behaves just like the one shown below
+icebox: prasanna: ok... &quot;Select a player&quot; is correctly the default option...
+prasanna: yes
+None
+icebox: prasanna: did you read it?
+icebox: prasanna: see &quot;Color grouped by shade, with some disabled: &quot;
+icebox: prasanna: I suppose we need the correct &quot;when&quot; expression
+prasanna: yeah
+Elarcis: back
+angularjs653: Hi
+san37: Elarcis..what do you do?
+Elarcis: prasanna: you know that if you don't put any 'please select' option and your model doesn't have any value at start, the user will have an empty select option that'll disappear once they select something?
+prasanna: i've used ng-options=&quot;key as value disable when value == 0 for (key,value) in selector track by value&quot;
+Ghost_Chilli: Having trouble with this error message Pagination directive: the pagination controls cannot be used without the corresponding pagination directive, which was not found at link time.
+prasanna: I don't want an empty option, instead I need a string
+angularjs653: I have a scenario where I want to show something based on an API response. The question is that it's not modifying the DOM, but its using the DOM by calling angular.element, so where should this functionality live? Service or Directive?
+None
+Elarcis: prasanna: ah
+Elarcis: angularjs653: the DOM editing logic should be put in a directive, and the API request in a service
+Elarcis: angularjs653: ofc, it highly depends on what DOM element is edited
+Elarcis: angularjs653: if you can, try making an attribute directive that you put on the edited element and instead of using angular.element(...), use the element parameter of the link function: it'll directly point to the directive's element
+Elarcis: angularjs653: also, make sure DOM editing is required, sometimes people do it when there is no real need for it :D
+icebox: prasanna: the final result is the list with &quot;Select a player...&quot; disabled?
+prasanna: yes
+daedeloth: I need to run some code before my router initializes
+daedeloth: is there a place for that?
+Ghost_Chilli: I can't seem to get this pagination to show. The thing is, I only need to load it after the page has rendered
+prasanna: Ghost_Chilli, I pasted a link above
+prasanna: did you read that?
+Ghost_Chilli: Yep, looked through it
+Ghost_Chilli: I've added a dir-pagination-controls ng-if=&quot;pagination&quot; ...
+Ghost_Chilli: So it should only display once I've set $scope.pagination = true, I thought
+icebox: prasanna: it seems       ng-disabled=&quot;selector.0 == 'Select a player...'&quot;
+icebox: prasanna: almost       ng-options=&quot;key as value disable when key == '0' for (key,value) in selector track by value&quot;
+icebox: prasanna: well the expression is right, but if the option is disabled, that option cannot be the default option... you see the same behaviour in ngoptions doc example... plan b is using ng-repeat and options
+prasanna: :(
+prasanna: yeah
+Elarcis: YOU'RE FACE
+Elarcis: TO FACE
+Elarcis: WITH THE MAN WHO SOLD THE WORLD
+Elarcis: ...sorry. got excited
+prasanna: WHATS HAPPENING?
+Pyrrhus666: I KILL YOU
+prasanna: U KILL ME?
+prasanna: I KILL YOU
+Pyrrhus666: oh sorry, got carried away
+None
+None
+icebox: daedeloth: wrong link
+Pyrrhus666: I bet it's achmed the dead terrorist ;)
+None
+Pyrrhus666: ... and it was :)
+ngWalrus: hey guys
+ngWalrus: calm down
+prasanna: yes it is
+daedeloth: checkAccessToken returns a promise now
+daedeloth: but I guess it should return an observable
+daedeloth: and then the http observable needs to get piped to the new observable?
+icebox: daedeloth: yes
+daedeloth: any tips on how to do that? or what to google? :)
+Ben_1: hi
+icebox: daedeloth: maybe &quot;angular 2 http return an observable&quot;
+Ben_1: I wrote a own directive but the light server says  404 GET /node_modules/systemjs/dist/auto-grow.directive.js.map
+Ben_1: someone an idea why?
+icebox: Ben_1: do you need maps?
+Ben_1: icebox: not at the moment I think
+icebox: Ben_1: if not, you can ignore that error
+None
+icebox: Ben_1: but I suppose the app is not working and you get that error.. :)
+icebox: Ben_1: I am afraid something in the setup is configured wrongly
+Pyrrhus666: inlined youtube, gists and stuff.
+Ben_1: icebox: but for any reason that directive does not work. I just want an input to shrink if it is focues but my onFocus is not called. I thought maybe these errors are responsible for that.
+icebox: Ben_1: maybe it is unrelated
+Ben_1: mh ok
+icebox: Ben_1: generally speaking, they are not related to that
+Ben_1: But I'm wondering why angular is searching the map of my own directive in node_modules
+None
+icebox: Ben_1: it is not angular :)
+icebox: Ben_1: maybe option in devtools
+icebox: daedeloth: maybe, but blah :)
+daedeloth: so you wouldnt do it like that? :D
+icebox: daedeloth: no
+icebox: daedeloth: I don't know the answer... really I should give a try to help you
+None
+icebox: vader699: see &quot;Enable source maps&quot;
+icebox: Ben:1: see &quot;Enable source maps&quot;
+icebox: vader699: sorry mistell
+Ben_1: icebox: it seems there is a problem in my directive using &quot;this.renderer.setElementStyle(this.el, 'width', '200')&quot; in its constructor
+icebox: Ben_1: nice catch
+Ben_1: icebox: is there something wrong :3?
+icebox: Ben_1: no idea... debug it :)
+piepl: Ice I took a look at your &quot;sharing data between controllers&quot; plunker, when I make the set function in the service go async that doesn't quite work the same anymore, as I did
+piepl: Very basic, Service returns default values, service fetches updates async, service get's lonely, underappriciated and depressed because noone is listening anymore
+Ben_1: icebox: how? the only error message I get is &quot;EXCEPTION: Error during instantiation of AutoGrowDirective!.&quot;
+Jeroen2: I have a directive, and in it's return I want to define some scope variable like companyName, how can I do this? scope: { companyName = &quot;foo&quot; } doens't seem to work.
+icebox: piepl: sigh
+piepl: Sorry man, that's okay, time ll teach
+icebox: Ben_1: breakpoint in the constructor?
+icebox: Jeroen2: directive don't return anything... do you mean two way bindings?
+Jeroen2: I just have a directive which loads a template in (templateUrl: '...').
+Jeroen2: But in that template I've got a variable {{companyName}}
+Jeroen2: and want to set it.
+icebox: Jeroen2: ah ok... well... docs cover quite well that topic... also with examples
+Jeroen2: Yeah, but I only find bindings
+Jeroen2: but I just want to set a variable companyName which is always the same.
+wafflejock: Jeroen2, if it's always the same value why have a binding?
+Jeroen2: As it's a template and I would like to change it on the way.
+Jeroen2: and just to learn something about AngularJS :)
+None
+Jeroen2: yes that what I currenlty have, but I would like to define it in the directive. :/
+Jeroen2: I sthat not possible?
+Jeroen2: return { scope: { ..here.. } }
+icebox: Jeroen2: sure
+icebox: Jeroen2: it is possible
+Jeroen2: But you don't want it there right? :p
+icebox: Jeroen2: if you work it out alone, you get more than my suggestion
+icebox: Jeroen2: take your time, if you are in stuck, call me :)
+prasanna: icebox
+prasanna: remember yesterday I was asking for a non angular question
+Jeroen2: Rofl
+Jeroen2: I had it already
+prasanna: was it you or Pyrrhus666 ? p_p ?
+Jeroen2: link: function(scope) { }
+Jeroen2: Thanks anyway :)
+Pyrrhus666: prasanna: dunno, what was the question ? (I missed some stuff, I was disconnected for a bit)
+prasanna: yesterday I was bent on writing ajax function
+prasanna: I was here asking for help
+prasanna: maybe it was you and icebox who were here
+prasanna: and were discussing about fetch and how good it is to use native js
+icebox: Jeroen2: nice catch :)
+icebox: prasanna: I remember it
+prasanna: I've improved on it
+prasanna: here's an implementation
+None
+prasanna: for simple get
+durin_: heyho guys :D
+durin_: i have a question, if i have service-fn thats are call more that promise, the promise will be first done complete and than execute a second one. but thats not needed. its a way, without a var_state, not make ne promises how long the (?) instance are working?
+None
+icebox: prasanna: nice
+None
+durin_: @icebox i have read them a lot times
+icebox: durin_: perfect
+icebox: durin_: that post is very worthy
+icebox: durin_: coming back to your question... I didn't understand it... please, can you rephrase it?
+durin_: sure :D
+icebox: Elarcis: are you refactoring the world? :P
+durin_: i have lister that start promisechain in my service, perhaps 2 times, so after ending the first run, the second promise will be execute, but hats not nessery, i could make a state_var to check if a seconde promise should be create or not so long the first promise not finally done. is there a speziell way to do this?
+Elarcis: icebox: I probably could
+Elarcis: icebox: the system I'm coding can be adapted to simulate any property of any kind of mix
+icebox: durin_: if I understood correctly you have a few promises and they need to be executed sequentially?
+icebox: Elarcis: :P
+Elarcis: icebox: mix of gasses, mix of chemicals, mix of cake ingredients... ask for it, with enough time I can configure it
+icebox: Elarcis: it is an holographic approximation :)
+durin_: executed sequentially is the normal behavior
+icebox: durin_: no... the calls are async... so sequentially is not he default behaviour
+Elarcis: icebox: 2D cakes: now calorie free!
+icebox: Elarcis: :P
+durin_: but it does O.o
+Elarcis: icebox: holographic cake: a 3D flavor, for all the calories of a 2D one!
+durin_: maybe beacouse factory have only on instance?
+umdstu: i&rsquo;d like to integrate a notifications service like that built into google.com services. i&rsquo;m not sure what exactly you&rsquo;d call it, but is there something like that already built for use in angular?
+prasanna: I would certainly like some of that holographic cake please
+None
+icebox: durin_: it doesn't change the game?
+umdstu: Pyrrhus666: I&rsquo;m actually using that. I mean something else though
+Pyrrhus666: umdstu: then 'notifications service
+Pyrrhus666: is too vague for me :)
+icebox: durin_: anyway... go ahead with the details :)
+umdstu: Pyrrhus666: i dont doubt it, hence why i&rsquo;m not sure what to call it hah
+anli_: Does scopy apply also call functions defined in the scope when it checks if the variables has been altered?
+umdstu: so, looking closer, it appears to be the google+ notification icon at the top of google.com services
+anli_: I have a function that I cannot say whats calling
+Pyrrhus666: umdstu: ah, I have no google+, so I can't see what it's about
+umdstu: Pyrrhus666: something that would utilize socket.io
+icebox: anli_: no... but you can watch functions
+umdstu: Pyrrhus666: let me get a screenshot
+anli_: icebox: And get stack traces of each call?
+None
+Pyrrhus666: umdstu: well, the way to get the notification is separate from how it looks in your UI ofc...
+anli_: icebox: Are you one of those guys?
+icebox: anli_: no
+anli_: Ah, ok
+Pyrrhus666: umdstu: you could use sockets for comms and display with toastr ?
+umdstu: Pyrrhus666: correct, just trying to get my intention across somehow
+Pyrrhus666: umdstu: ok :)
+anli_: Maybe you are the guy walking in the area where walking is not permitted then ;)
+durin_: thats it, so long the chain are not finally done, no new chain should be startet, because its obsoultete
+umdstu: Pyrrhus666: I could, but toastr isn&rsquo;t really for persistent messages
+durin_: *shouldnt
+umdstu: Pyrrhus666: at least not how I&rsquo;m using it
+icebox: durin_: ok... do you know &quot;.all&quot;?
+None
+durin_: yes
+icebox: durin_: ok... I suppose you need that
+umdstu: Pyrrhus666: it persists across whereas toasts aren&rsquo;t intended to AFAIK
+Pyrrhus666: umdstu: rekt.
+umdstu: Pyrrhus666: say what?
+None
+Pyrrhus666: umdstu: I acknowledged your last remark ;)
+durin_: no im not :( okey i have check the thing about async in services and yes.. your right
+anli_: hehe
+Pyrrhus666: umdstu: this looks like a fixed UI element with a badge to show unread messages ?
+None
+umdstu: Pyrrhus666: yea, the UI component is exactly that
+durin_: so i could make a var, that onstart the chain its set and finally set back, and if a new promise will be make, it check the var and does only if its not set
+umdstu: hah, yes Pyrrhus666 thats the easy part
+Pyrrhus666: umdstu: I thought that was the question, it's called a badge ;)
+umdstu: Pyrrhus666: and my initial question was/is, is there a service for handling the sending&rsquo;/receiveing/storing of these notices
+icebox: durin_: really I don't understand your use case... but it seems weirdly you need that kind of solution
+anli_: icebox: spy-js seems awesome
+icebox: anli_: tried... and it is :)
+anli_: I want to use it in a c# asp.net application, is that possible?
+anli_: Actually, I do not want to compile the code, but to interpret it
+anli_: In that way, I will not need to set wait for compilers a long time
+icebox: anli_: I think so... our live frontend is implemented with jsp
+anli_: ok
+anli_: I also want to alter the code while it is running
+anli_: And step backwards
+icebox: anli_: yep... you have the history of the stacktrace
+durin_: i have hoped that its possible to make force only one instance of a promise chain.
+anli_: If it adds something to the database with an insert statement, I want a backwards step to run delete from in the db and reset the seed
+icebox: anli_: no... we are talking about a frontend tool :) if the backend state is changed... bye bye
+anli_: ok
+anli_: Cool stuff anyway
+Pyrrhus666: umdstu: comms sounds like a service based on sockets, dunno if there's already something for it...
+icebox: anli_: indeed that dev was hired by JetBrains :)
+anli_: cool
+icebox: durin_: what does it mean &quot;only one instance of a promise chain&quot;?
+icebox: durin_: I cannot get your concern
+umdstu: Pyrrhus666: yea, not sure something exists
+icebox: Elarcis: if your pm is happy, you are ok :)
+durin_: i have make a plunker maybe help?
+None
+Elarcis: icebox: we're super late, but the PM and the chemist we work with are super duper happy with the work realized
+icebox: Elarcis: nice... remember me the domain... lab app?
+icebox: durin_: it should help me :) but maybe my neurons are thinking on  a strike action today :)
+Elarcis: icebox: yes it is
+durin_: hey its cool, your helped me so often, im very grateful
+durin_: and Elarcis too
+Elarcis: oh, okay I guess?
+icebox: Elarcis: great
+Elarcis: (I helped you? XD)
+icebox: Elarcis: in the parallel universe :)
+icebox: durin_: you are welcome
+icebox: durin_: ah... understood...
+icebox: durin_: you don't want &quot;a&quot; and &quot;b&quot; tasks parallel
+durin_: yes, and b should not be some stock and wait, if a running, b should be reject
+icebox: durin_: at least, I understood it :)
+durin_: and i could do this with a statevariable but maybe there is a right way do this
+icebox: durin_: due to async naure of the calls you cannot rely on a state or flag variable... maybe it works in your example, but in a live system race conditions would be behind the corner
+icebox: *the async nature
+durin_: open to suggestions :D
+icebox: durin_: or, at least, not only with a variable...
+icebox: durin_: focus on the interface... what if we can write that code like service.erst2('a', function() { service.erst2('b') }); // and here we have a pyramid of nested calls
+icebox: durin_: maybe better something like service.erst2('a').erst2('b');
+Ben_1: for my rootcomponent should I use @NgModule or @Component?
+durin_: hmm, the erst2 function will fired by n eventlistener, and a/b was only to show what i mean with instances, i could destroy the listener and if the chain finally done, create a new one
+icebox: durin_: this suggests to use .all (in erst2) and to return the &quot;final&quot; promise, which will be chained with the rest of the calls
+icebox: Ben_1: they are two different things: modules and components :)
+icebox: durin_: are you saying erst2 will be called here and there in the code? so not chained opportunity?
+Ben_1: icebox: but it seems I can also use a component as root instead of an module
+arnsa: ng-class=&quot;{'class1 {{ctrl.someClass}}' : (ctrl.something == true)}&quot; - when this expression is true, why only class1 is added to the element?
+Ben_1: what is the preferred way?
+None
+icebox: Ben_1: &quot;Every Angular app has a root module class.&quot;
+icebox: Ben_1: it contains one or more components
+durin_: yes
+durin_: i think so
+icebox: durin_: ok... thinking on it
+icebox: durin_: it might be a good use case for using events
+arnsa: anyone?
+icebox: durin_: you may develop a Queue service, where there is a state &quot;in progress&quot;
+durin_: yes and no, yes state in progress, but it should not stock in a queue, it should expire
+None
+icebox: durin_: I suppose that doesn't fullfil your requirements but it is an idea
+Ranjeet: hi
+Ranjeet: Any one dr
+arnsa: even this doesn't work: ng-class=&quot;{'{{ctrl.someClassName}}' : true}&quot;
+None
+arnsa: icebox, so how should I do this?
+icebox: arnsa: read the docs and you get the answer... no free lunch :)
+Ranjeet: Angula2 child routing noy working when i add children
+Ranjeet: Any idea
+Ranjeet: ??
+icebox: Ranjeet: because the children are kids and don't obey to the parents?
+icebox: :P
+durin_: yes i will read and try to unstand, thanks :D
+icebox: durin_: you are welcome... I suppose there is not anything built-in... I am afraid you need to develop something to handle that use case... it seems an interesting use case for a lib :)
+Ranjeet: icebox...the reply for u is i need ur girlfrnd
+icebox: quit? :P
+icebox: poor children :)
+Elarcis: oh god, oh god, oh god
+icebox: I know :P
+Elarcis: I'm doing the work the 10-years senior was supposed to do, and it's smashing
+icebox: Elarcis: imagine when you will have the same experience... and new kid on the block will be close to you :)
+Elarcis: icebox: holy sh* he'll be such a prick
+ashwinkumar: !help: In an angular cli project. How do I pass a dynamic value to component decorator's templateUrl
+ashwinkumar: templateUrl: &quot;shop&quot; + id + &quot;.html&quot;
+umdstu: i want to auto-login my users when they come to the site. If they navigate directly to a url within the app and they aren&rsquo;t logged in, how would i go about &lsquo;pausing&rsquo; the interface, rendering a &lsquo;logging in&rsquo; notice&rsquo; then allowing them to continue?
+wafflejock: umdstu, just make the loading part its own state
+icebox: umdstu: well... interceptors? but it is not enough... any component should use a sort of &quot;isLogged&quot; util and crete the state accordingly
+icebox: *create the state
+umdstu: wafflejock: hadn&rsquo;t though of giving it its own state
+wafflejock: meh yeah I handled it with interceptors to store what state they're trying to go to and if they try to go to a state that fails it sends them to the login page, but have similar loading only states for other stuff
+umdstu: icebox: yea I do the isLoggedIn() thing now as it is to show/hide different ui components
+umdstu: wafflejock: i do the same thing in an interceptor to redirect
+umdstu: wafflejock: but i wanted to avoid all of that
+icebox: umdstu: you can... but it depends on the app... I have a firebase app and I didn't write one line to handle the &quot;remember me&quot; feature :)
+umdstu: icebox: right, in most cases thats fine. i&rsquo;m required to expire after 24hrs though
+icebox: umdstu: mainly it is a spa and the authentication layer is managed totally by firebase lib (and server)
+umdstu: so they can come all day and be fine, but the next morning, if they leave tab open, or come in to a page they were on, the auth needs to happen again, transparently
+umdstu: icebox: my rails backend handles the authentication
+icebox: umdstu: you need also the collaboratin of the backend... because there is a session there :)
+wafflejock: umdstu, yeah personally did a timeout on the page that corresponds to around about when the server times out
+wafflejock: umdstu, so the front end will kick  you back to the login page with some params that make it show a message you were logged out cause inactivity and again store the state it was at to reload there after login
+umdstu: wafflejock: i have a timeout in there as well just for that, but if they refresh the page, or close it out an come back later, it resets
+umdstu: wafflejock: i also dont want to kick them back, i just want to auto log them back in, do an async call back to the server to get a new token and reauthenticate
+umdstu: so realistically i&rsquo;d reach back to the server every 23:59 hours and authenticate them, and they&rsquo;d never be the wiser
+umdstu: i guess i could use the timestamp on the key i store in localStorage and with each page navigation, check that, if it hts 23:59, ajax their login
+umdstu: wafflejock: it sounds like my *current* setup is just like yours
+umdstu: i&rsquo;m just aiming to streamline it, since i never actually need users to interactively login
+wafflejock: yeah can't say I've done that particular setup but sounds like you generally have a handle on how to do these things :) if you hit a specific wall let us know though
+cuebix: hey peoples
+Elarcis: uhm. Apparently I clusterfucked angular
+cuebix: I am trying to set up some mock data so that my front end dev can work on the UI while I flesh out the actual api endpoint. I'm trying to use ngMock for this so that when we do wire it up to the actual endpoints, everything *should* just work, but I'm not doing something correctly
+icebox: waiting details
+cuebix: Yeh, sorry, was setting up a gist
+cuebix: What i'm trying looks something like this, in addition to loading angular-mocks.js
+None
+cuebix: but I get 'bootstrap-mocks.js:36 Uncaught TypeError: $httpBackend.whenGET is not a function'
+cuebix: When I inspect what $httpBackend actually is there, it looks like a function with this signature function(method, url, post, callback, headers, timeout, withCredentials, responseType, eventHandlers, uploadEventHandlers) {
+cuebix: so I'm not sure how to load it properly
+icebox: cuebix: for instance... $httpBackend.when(&quot;POST&quot;, api)..respond([{ &quot;instrument&quot;: &quot;EUR_USD&quot;, ... }, { ... } ...]);
+ank: hey
+cuebix: It says when is undefined too
+icebox: cuebix: that's all
+ank: what
+ank: ?
+Elarcis: HAHA YES!
+Elarcis: I turned asynchronous calls into pure, synchronous ones
+cuebix: why
+Elarcis: without async/await, without dirty hacks, all clean and abstract
+icebox: cuebix: basically... $httpBackend.when(&quot;POST&quot;, api)..respond(myData); // and your service uses myData when api endpoint is called
+arnsa: does anyone know why ng-class=&quot;{{ctrl.someClass}}&quot; doesn't work?
+cuebix: icebox, that's what the docs say, but $httpBackend seems to be a pure function and i'm not sure why. Maybe I'm not loading it properly?
+icebox: Elarcis: well... 40 years of programming progress to achieve async calls... and... :)
+icebox: cuebix: no idea... but I don't write test code as you wrote it
+arnsa: Elarcis, maybe you have any clue?
+Elarcis: icebox: actually it's excellent news because these guys need to write scientific formulas, some of which request data fetch asynchronously via the web. and we can't expect them to understand the whole $q/promise mess, also any characteristic's value could be switched to an asynchronous one in the future, so we definitely can't expect them to redo the whole code each time nor consider everything as promises
+Elarcis: arnsa: because you're using it wrongly
+cuebix: ah i wasn't declaring it in the list of dependent modules ngMockE2E
+arnsa: Elarcis, how is that wrong? Internet is full of examples like this one
+Elarcis: arnsa: without code, that's the most helpful thing I can tell you
+icebox: arnsa: please, prepare a minimal plunker and we may give a look at it... anyway there is a working example in ng-class doc
+Elarcis: arnsa: right click on your element, inspect, then type in the console angular.element($0).scope().ctrl.someClass
+Elarcis: arnsa: see why it doesn't work
+arnsa: Elarcis, icebox why do you need a code for this? ctrl.someClass is a variable from a controller, let's say &quot;green&quot; and I am trying to use it as a class
+icebox: Elarcis: I see... that makes sense
+cuebix: but damnit, i only wanted to be able to  mock up some endpoints for the time being. looks like when i  load angular-mocks it breaks any other endpoints too
+icebox: arnsa: because here it works :)
+Elarcis: holy hell I feel like the smarted guy right now, so happy
+Elarcis: hndsjkfhdskfhdsf
+cuebix: breaks as in doesn't make the http requests . i guess i have to define mocks for 'em all
+arnsa: Elarcis, this is what I got in console: &quot;gradient-3&quot;
+Elarcis: this plagued everything I've done for six months, and I just solved it &quot;poof&quot; like that
+icebox: cuebix: no... really no idea what you are doing... but you don't need to mock up all the endpoints
+Elarcis: then you're using ng-class wrong
+Elarcis: arnsa: ^
+Elarcis: arnsa: I know you are
+Elarcis: arnsa: if you look at the doc you'll see why
+Elarcis: arnsa: and it can be seen from your question alone
+cuebix: icebox: so, i have an existing app that makes api calls and just want to mock up one of the endpoints so my front end guy can work on it because that api isn't ready yet
+Elarcis: arnsa: and I won't give you the answer because you need to learn to look up for it :D
+arnsa: ng-class=&quot;{{ctrl.someClassName}}&quot; how is that wrong?
+cuebix: so i only have that one endpoint mocked up. i'm getting 'Unexpected request' for others now
+icebox: cuebix: read it again... :) you need something like $httpBackend.whenGET(/^app\/.*\.html$/).respond(200);
+icebox: cuebix: because somewhere you have $httpBackend.verifyNoOutstandingExpectation(); and $httpBackend.verifyNoOutstandingRequest();
+icebox: cuebix: it is explained in the docs
+cuebix: I'll read through the docs more thoroughly. Thanks icebox
+icebox: Elarcis: great feelings when it happens :)
+icebox: Elarcis: meaning &quot;poof&quot;
+dcherman: Elarcis: custom DSL that makes async code look synchronous similar to protractor?
+None
+None
+icebox: arnsa: what?
+arnsa: icebox, where on earth do you see it?..
+icebox: arnsa: what?
+arnsa: icebox, how do I apply variable's value as a class?
+None
+icebox: arnsa: RTFM, please
+arnsa: icebox, I saw it, and it only had examples of ng-show
+icebox: arnsa: big sigh!
+arnsa: jesus fucking christ
+arnsa: it's so hard for you to help me
+icebox: arnsa: reading about interpolation should suggest you are doing something wrong with the syntax... and ngclass doc should help you to correct you
+icebox: arnsa: please, language
+arnsa: icebox, the point is, I am generating random class name, and I can't hardcode it
+arnsa: icebox, only way it worked was class=&quot;{{ctrl.className}}&quot;, but I need to add a condition
+icebox: off... bye
+cuebix: later icebox, thanks for the help!
+icebox: cuebix: you are welcome
+cuebix: i was looking at the unit testing docs, not the e2e docs. I'm much clearer on it now
+Elarcis: got to go too, bye!
+angularjs137: test
+prasanna: bbl
+krish: hi
+krish: i have a questions regarding angular.js rendering to view
+krish: Can anyone help?
+uru: krish: Just ask
+None
+uru: krish: Ask in channel
+dman777_alter: what generator/scaffoling tool do people use now for angular 1?
+cuebix: --- none
+dman777_alter: having issues with fountainjs
+dman777_alter: and sourcemaps
+andygmb: does anyone have Jasmine tests that test Restangular calls they could share?
+dman777_alter: man, I need a gulp angular geneerator really bad right now if anyone knows of one besides fountain js
+None
+ngbot: angular.js/master 74c19f0 Peter Bacon Darwin: chore(version-info): fix `getTaggedVersion`...
+codenbrew:  ELI5: RxJS Observables, please :)
+falk0n: christophe_: you can check &quot;angular seed&quot;, if anyone here can give a better answer I'm all &quot;eyes&quot;
+falk0n: dman777_alter: you can check &quot;angular seed&quot;, if anyone here can give a better answer I'm all &quot;eyes&quot;
+None
+dman777_alter: falk0n: does anglur-seed have a  build chain for produciton deployment?
+jhair: hi, everybody
+theCole: hello jhair
+jhair: im working in ionic and angularjs, i tried to build an app
+jhair: but i need a little help, jeje
+theCole: whats the problem ?
+jhair: im tried to buil a image search for my app
+jhair: i can&acute;t make that this works
+theCole: so whats the problem ?
+jhair: i need build a image search into my app
+falk0n: dman777_alter: I don't think so
+theCole: jhair use the google custom search api
+None
+jhair: thx
+jhair: i tried
+theCole: so create your own api from their web search by crawling the html jhair
+None
+theCole: inspect the requests there and then use the form post response html and jquery to crawl the images out
+theCole: for example:
+None
+theCole: that is an image search for &quot;yes&quot;
+None
+theCole: server side
+theCole: then create your own api
+theCole: :)
+dman777_alter: does fox still come around on here?
+renegadeandy: Hi All
+None
+renegadeandy: the alert works but the document.getElementById is always null and im not sure why
+quangl: is angular dead?
+None
+theCole: quangl not even close
+johnny_|_: no, we at atom dream ventures are using it heavily
+masak: (and preferably what to do about it) :)
+quangl: even versus react it isnt?
+theCole: quangl nope
+None
+quangl: ok thanks
+None
+ngbot: angular.js/master 1cf01d6 Peter Bacon Darwin: chore(version-info): fix `getTaggedVersion`...
+None
+masak: theCole: indeed. that's how I would've done it too, put the 'checked' properties in the options objects.
+theCole: ok, so you want to do it the other way
+masak: if for no other reason than to keep my student's original idea
+theCole: ok
+masak: the $scope.data thing is something that they in their code want to submit as part of a form submit
+masak: so it sort of makes sense, too
+masak: theCole: I had some success starting from my code and turning the $scope.data array into an array of objects instead of booleans. then it works.
+quangl: i heard $scope is dead
+quangl: is that true?
+masak: so maybe this falls under the maxim &quot;don't bind to primitives&quot;
+masak: quangl: you seem a little bit obsessed with death... ;)
+theCole: quangl no, still alive.
+quangl: isnt that the main concern?
+masak: quangl: no, not at this point.
+masak: mostly I'm looking for a rule of thumb that would tell me not to do what I did in the original fiddle, and why not.
+quangl: so scope is still in angular 2?
+masak: quangl: I think I'm starting to see where your confusion comes from :)
+masak: quangl: scope is alive and well, in AngularJS (Angular 1.x)
+theCole: masak the first problem is that choices question=&quot;question&quot; model=&quot;data[$index]&quot;:/choices:
+theCole: index will always be zero
+theCole: because there is only one question
+theCole: second problem, i think passing model in a that level create a new var for model
+quangl: so wait? scope is dead?
+quangl: or not?
+masak: quangl: it's both dead (in ng2) and not dead (in ng1)
+quangl: what the hell are we suppose to do in angular 2 then
+masak: quangl: use ES6 classes.
+masak: theCole: yes, the first problem was apparent to me also. let's ignore that. that's how they coded it. :)
+quangl: ok
+quangl: that sounds better than scope
+theCole: masak ok, im still looking
+quangl: scope was just pointless i thought
+masak: theCole: I'm curious why &quot;passing a model in at that level [would] create a new var&quot; -- that's the central part I don't understand, I think
+masak: quangl: one thing that $scope does nicely is avoid problems with `this` binding in nested functions
+quangl: i thought thats whats arrow functions are for
+masak: quangl: arrow functions (and ES6) did not exist back in 2009. but yes, that's an alternative solution.
+theCole: masak
+None
+theCole: the index needs to be on the bound model passed into the directive
+theCole: make sense ?
+quangl: so angular 1 was to deal with 2009?
+masak: theCole: that also changes the question rather than answering it, unfortunately :)
+theCole: ok
+theCole: then let me explain why these checkboxes don't bind to the elements in $scope.data
+masak: theCole: I got the clear impression that the student was aiming for having many questions, and that their `$index` referred to the index of the particular question
+masak: yay
+None
+captn_hook: Can anyone tell me WHY I'm able to just 'npm install colorbrewer @types/colorbrewer' and then in my components use it with &quot;import * as colorbrewer from 'colorbrewer'&quot;
+None
+theCole: looks like a similar problem
+theCole: i think the short answer is &quot;because hes doing it wrong&quot;
+theCole: it looks like the directive is still creating a localized scope and it is not bound to the original scope
+theCole: i think your student needs to rework his impl :)
+captn_hook: Can anyone tell me WHY I'm able to just 'npm install colorbrewer @types/colorbrewer' and then in my components use it with &quot;import * as colorbrewer from 'colorbrewer'&quot;
+quangl: why not?
+quangl: its called module system
+quangl: whats wrong with that?
+logikos: i have to write BDD tests that interact with angular form elements (such as ui-select) .. but for the life of me i cant figure out how to add a tag to the select .. i do focus(); then set value then do blur() and it just doesnt work
+logikos: anyone know of some good docs on how to BDD test angular forms that use ui-select ?
+dman777_alter: can I reuse a Angular 1 component? like div:foo:/foo:foo:/foo:/div:. Not sure what is meant by multi element
+helichopter: Hey guys, I'm really new to this and have a pretty beginner question: I'd like to populate an ng-repeat list with data from my server. So I get the data by doing a get request in my controller and bind the data once it comes back from the server. However, if I move the get request out to a service, and call the service's get method from my controller, the list comes up empty. I'm assuming this has something to do with the asy

@@ -1,0 +1,974 @@
+Srgjames: anyone able to help:
+None
+lihaibh: does anyone knows how to get my own injector object?
+lihaibh: instead of writing the code: 'ReflectiveInjector.resolveAndCreate([providers])'
+lihaibh: that creates new injector i want to get the application injector and invoke function get
+Elarcis: Hi!
+Elarcis: regex search and replace is such a delight
+Elarcis: even more so with VSCode's global replace preview :D
+karihre: Hello, is there a way to pass a template snippet as an argument to an angular directive (to be later passed to $compile)? In other words, can I avoid @ from evaluating the expression given to it? Thanks.
+Elarcis: karihre: @ shouldn't be evaluated in the first place, so you must be doing something wrong :D
+karihre: Elarcis: well, say I passed attr=&quot;{{ item.key }} {{ item.value }}&quot; this would be seen in the scope of the directive as simply &quot; &quot;
+karihre: Elarcis: But I think I figured out something, actually doing attr='{{ &quot;{{ item.key }\} {{ item.value }\}&quot; }}' seems to work
+karihre: then the directive variable gets &quot;{{ item.key }} {{ item.value }}&quot;
+Elarcis: karihre: this seems convoluted
+None
+Elarcis: karihre: only if you tell me what the endgoal is :D
+icebox: hey
+None
+Elarcis: (thanks ngirc)
+Elarcis: hi icebox!
+Elarcis: !ngirc
+icebox: Elarcis: we need to add it to the bot :)
+Elarcis: icebox: agreed
+Elarcis: icebox: but I can't find the commands list anymore XD
+karihre: Elarcis: hmm yes, the problem is that I have a typeahead directive, it displays results in a drop-down, only depending on the result it gets (a list of js objects), there are different ways to show those in the dropdown menu
+None
+None
+Elarcis: !ngirc
+Elarcis: ah, it's down
+icebox: Elarcis: no... it is up
+karihre: which is why I wanted to be able to pass the template string for the results in the dropdown, that way I can change how the results are printed for different searches, makes sense?
+Elarcis: ah, I suck
+None
+karihre: but I'll be the first to admit I can be approaching this the wrong way
+icebox: !ngirc
+None
+Elarcis: damn
+icebox: :P
+Elarcis: karihre: what typeahead directive are you using? ui-bootstrap's one?
+karihre: no I made my own
+None
+Elarcis: karihre: I see
+Elarcis: karihre: sadly I don't know much about passing angular templates to sub-directives, maybe using transclusion? cc @icebox
+Elarcis: karihre: although transclusion is using the parent scope, so it wouldn't work, you're right
+karihre: hmm yes
+karihre: I sort of don't want to spell out the whole template all the time (the var template = .. in the SE answer) since it really is only the a:{{ item.name }}/a: thing i might want to replace, with eg a:{{item.name}}/a: ({{item.results}}) for searches where that make ssense
+karihre: I think I'm okay with this for now though, just escaping the {{ }} in the attribute, thanks for the help!
+icebox: karihre: why did you develop another typeahead?
+None
+icebox: karihre: material, bootstrap ui, simple input with an adavanced filter, bootstrap 2.x typeahead are all good implementations
+karihre: icebox: mostly I got tired of modifying other to suit me, tried selectize a bit and it didn't behave well, also i am already drowning in dependencies as is
+karihre: okay thanks, I might look into that
+icebox: karihre: the cons of a custom widget is you are alone if there is something wrong
+karihre: icebox: true
+icebox: karihre: and I think building widgets is an hard work
+karihre: I have to admit I am not that current in the js world, so looking for these things is a bit intimidating, I drowned in typeahead solutions that were all sort of bad
+karihre: this material looks already much better than anything I found
+karihre: mostly just found jquery heavy answers
+icebox: karihre: meaning as &quot;hard work&quot;, a task very time consuming
+karihre: icebox: yeah, I know, I am most of the way through I guess, haha, on the flip side it gives me more or less exactly what I want, with some learning experience on top, so I'm not complaining
+Elarcis: karihre: I know I used ui-bootstrap's typeahead component with a custom item template, but I don't recall how I did it
+Elarcis: karihre: heh, experimenting is the best teacher
+Elarcis: hi u0m3
+Elarcis: sorry, meant uru
+Elarcis: too many damn people
+uru: Greetigns :)
+smiche: an attribute is being turned to lower case in the directive and external library can't pick it up any more, any way to keep it camelcase?
+smiche: also other attributes stay the same only the last 2-3 turn to lower case
+Pyrrhus666: smiche: as in attribute names ? html is case insensitive, so your external lib seems sucky...
+smiche: yeh but some parts of it pass as case sensitive x.x
+Pyrrhus666: smiche: the root of the problem being somebody thougt _that_ would be a good idea...
+Elarcis: smiche: there isn't, though you can losslessly convert a dash-case string, to camelCase
+smiche: yeh I already changed it but now the attributes that pass as case sensitive no longer work
+Pyrrhus666: there was a related jQuery issue when they changed their behavior to match the spec (force lower case)
+Pyrrhus666: smiche: create a bugreport with the external lib dev ?
+smiche: I have the src, I'll just fix it myself, just wondering why some attributes pass as case sensitive and some not, it's just a simple directive
+Pyrrhus666: smiche: that&acute;s quite a mystery. maybe some internal angular logic that does that ?
+smiche: it's in the link function,3rd param(attributes) has case sensitive and insensitive object names
+smiche: oh nvm, yep it's what Elarcis said, the dashes are being converted by angular
+Elarcis: smiche: of course they are :)
+Pyrrhus666: smiche: ah, dashes are involved... I steer clear around those when using angular :)
+smiche: by the way all dom manipulations/js components initialization should be done in link?
+Elarcis: smiche: DOM edits yes, in the most ideal case, as the link function is what's called right after the template compilation
+Elarcis: smiche: component initialization should be done in the component's $onInit() function
+Elarcis: smiche: beware that $onInit() is called before link()
+smiche: so js charts/graphs/scrollbars should be initialized in $onInit()?
+Elarcis: smiche: if they reference the DOM: no
+Elarcis: smiche: you initialize your data in $onInit(), and you get a reference to your data in the link() function in order to intialize your chart
+Elarcis: am I right, icebox?
+Elarcis: smiche: there's a major flaw in my speech, let's see if you find it
+smiche: isn't there pre-link and post-link?
+Elarcis: smiche: missed. link() function can be edited for directives, but not for components, and only components have an $onInit()
+Elarcis: smiche: for components, you have $postLink()
+None
+the_coder2016: good morning, anyone can recommend me any guide to create angularjs flowcharts?
+smiche: I use highcharts and wrap them with a simple directive
+Preuk: the_coder2016: tried googling &quot;angularjs flowchart&quot;?
+the_coder2016: I love when people helps saying: google your question:
+the_coder2016: if I ask it's because I've already googled and haven't found anything
+smiche: I meant to say find anything that works in js then just wrap it with a directive?
+Preuk: found both canvas and svg guides on first page, just making sure the obvious part was out of the way, sorry if i hurt your feelings
+kaseoga_: any way to map an array to a  a reactive form formarray ?
+the_coder2016: nothing personal Preuk but instead of answering with an other question, wouldn't it be easier to share the link?
+None
+None
+Pyrrhus666: haha, they finally have a non-flash version :)
+icebox: the_coder2016: generally speaking, you should select your preferred flochart lib; then you may integrate it inside the angular app
+anli_: What is the of the syntax that I can use in a ng-options attribute?
+None
+the_coder2016: thanks guys
+anli_: Can I use ordered and distinct in such expressions?
+None
+Elarcis: anli_: what Pyrrhus666 said :)
+anli_: :)
+Elarcis: icebox: aaah,these charts are so cute!
+Pyrrhus666: don&acute;t you feel all warm and fuzzy ?
+Pyrrhus666: anyone have experience with ng-annotate-loader as a webpack plugin ?
+Pyrrhus666: ok, trying to use this loader with babel in my setup to get rid of the &uml;unknown provider&uml; errors in my uglified build. seems to do exactly nothing.
+Pyrrhus666: the bundle works fine if I disable uglify, but that adds a lot of size...
+Pyrrhus666: I do have all the $inject statements as per toddmotto&acute;s guide, but it&acute;s a no-go...
+Preuk: Pyrrhus666: i remember reading something about a new otpion added to uglify to not rename some stuff ng/ng2 need, ring a bell?
+Pyrrhus666: Preuk: no, but this is my first foray into webpack country :) I&acute;ll try googling for it.
+Elarcis: Pyrrhus666: yes I'm using it
+Preuk: Pyrrhus666: mangle off
+None
+Elarcis: Pyrrhus666: actually, I'm using NgAnnotatePlugin, not loader
+Elarcis: Pyrrhus666: I just added a new NgAnnotatePlugin({add: true}) to my array of plugins in the webpack.config.js file
+Pyrrhus666: Elarcis: with ng1.5 ? I thought you only did ng2 now ?
+anli_: track by foo.id will not make the model be an id, it seems
+Elarcis: Pyrrhus666: sadly no
+None
+Elarcis: Pyrrhus666: the app's wayyy too technically indebted for pure-ng2 to be considered
+Elarcis: anli_: track by is not model-related.
+anli_: ah, ok
+Pyrrhus666: Elarcis: ah, ok. I&acute;ll try switching to the plugin instead of loader. do you use the &uml;ngInject&uml; annotation ? an issue @toddmotto seems to suggest that ?
+Elarcis: Pyrrhus666: no I don't, ngInject can be automatically inferred in most common cases
+Elarcis: Pyrrhus666: when I work on a component, I prefer to set $inject explicitly
+Elarcis: Pyrrhus666: I'm only using this plugin because my predecessor used it and I haven't took the time to put $inject back everywhere yet
+Pyrrhus666: I have $inject with every controller, and still have problems. could it be I just need the mangle off setting ? hmm...
+Elarcis: Pyrrhus666: I don't have anything like that
+Elarcis: Pyrrhus666: this is trange. what syntax are you using?
+Elarcis: Pyrrhus666: for your $inject, I mean
+Pyrrhus666: I have ControllerName.$inject = [&acute;dep1&acute;,&acute;dep2&acute;]; with every controller, just before the export statement.
+zx_bud: good morning! Any hints on how to use material with angular 2?
+Pyrrhus666: it seems that adding { mangle: false } to the webpack.uglifyJSplugin&acute;s init helps (but introduces a weird base href issue
+icebox: zx_bud: use material 2
+None
+icebox: zx_bud: you know... Angular Material 2 is currently in alpha and under active development. During alpha, breaking API and behavior changes will be occurring regularly.
+zx_bud: icebox: I know, but I want to try it ;) is my first time with angular and the developement is exciting, now I want a little of style for my project ;)
+icebox: zx_bud: using alpha stuff is not good for a try
+icebox: zx_bud: use angularjs 1.5 and material 1
+None
+Elarcis: Pyrrhus666: are you doing Typescript?
+zx_bud: icebox: :( I really love angular 2
+zx_bud: icebox: thankyou for the suggestions
+icebox: zx_bud: angular 2 is ok, but material 2 is alpha
+Ukats: Hi icebox:
+Pyrrhus666: Elarcis: no, es2015. but your golden tip with the mangle option fixed it for me 3 :)
+Pyrrhus666: the base href problem was unrelated :)
+Elarcis: Pyrrhus666: I didn't know that mangle existed :D
+Pyrrhus666: oops. Preuk said it...
+Pyrrhus666: Preuk: props to you :)
+Preuk: thx ;)
+masak: I'm curious what it is about the 1.2.x branch that makes people stay on it.
+Pyrrhus666: one side-effect is that it adds to the size though. oh well, I&acute;ll go with it for now :)
+masak: it's presented alongside the newer 1.5.x branch on the website. 1.5.x is &quot;(stable)&quot;, 1.2.x is &quot;(legacy)&quot;
+icebox: masak: I suppose IE support
+masak: oooooh
+masak: also, the fact that it's up to 1.2.30 indicates that it's getting active development/updates and that it has a user base...
+masak: did 1.3.0 drop IE support?
+map_reduce: masak: ng never did drop IE support :D
+masak: ok, then I'm back to being confused ;)
+None
+masak: good idea -- I will
+Elarcis: map_reduce: angular dropped IE8 support since 1.3's release
+map_reduce: Elarcis: yep, but thats not exactly all versions ;)
+map_reduce: Elarcis: and seriously  - IE8 :D
+icebox: map_reduce: pedantry :)
+Elarcis: ^
+Ukats: can we use PivotTablejs in angularjs
+Elarcis: map_reduce: also we got screwed on an old project because we were using angularjs and a commercial just sold the project as IE8 compatible
+masak: &quot;Since the legacy 1.2.x branch is the only version branch that supports IE8...&quot; -- aha
+map_reduce: Ukats: nope, You need written permission from angular team  :)
+icebox: Ukats: why not? :P
+masak: right, of course I should've said &quot;IE8 support&quot; above, not &quot;IE support&quot; :)
+map_reduce: Elarcis: i guess some corpos still use IE8
+icebox: map_reduce: no... it is EOD
+map_reduce: and business app is where using frameworks like angular really makes sense
+icebox: map_reduce: they cannot use EOD software
+Ukats: Because i learn that we need to create directives in angularjs.
+map_reduce: icebox: what do You mean?
+map_reduce: icebox: as far i know MS drop support even for IE10
+Pyrrhus666: bring enough money and MS will support IE8 as well.
+icebox: map_reduce: companies cannot use internally software without support
+icebox: Ukats: and?
+map_reduce: icebox: nice :) - in theory only unfortunately
+Ukats: no idea
+Pyrrhus666: icebox: companies in .nl still use XP with IE8. granted, they&acute;re getting rarer, but still :)
+icebox: map_reduce: no... in practice, otherwise compliance office or auditing one would write a note... and ceo should take actions
+None
+icebox: Pyrrhus666: good to know... I would not like to be the CEO of those companies
+Pyrrhus666: icebox: me neither. but they pay ms for added support, so EOD is not a hard thing ;)
+icebox: Pyrrhus666: there are legal duties not to be sued by employees or customers :)
+map_reduce: icebox: USA?
+Elarcis: Ukats: isn't there a pivottablejs angular library already?
+icebox: map_reduce: especially in USA
+map_reduce: icebox: it would probably be nice to live there :)
+Elarcis: Ukats: there is, it's just terribly outdated D:
+Pyrrhus666: map_reduce: not when donald gets elected ;)
+Elarcis: Ukats: basically you can. you just have to create a directive for that and put the JS init of your lib in the link() function
+map_reduce: im curious for how long will people keep using ng1
+map_reduce: Pyrrhus666: why ? im from Europe
+Elarcis: Pyrrhus666: I'd prefer Uncle Scrooge
+Elarcis: map_reduce: quite a while
+icebox: map_reduce: use case... imagine sensible personal data is stolen due to a security bug in windows xp on company pc... the employee can sue the company
+Pyrrhus666: map_reduce: me too, but I wouldn&acute;t want to live in the USA.
+map_reduce: Elarcis: You think like more than a year?
+map_reduce: Elarcis: i mean for new apps specifically
+Elarcis: map_reduce: think rather at least 5
+Elarcis: map_reduce: ah, I think it'll be still relevant in 2 years
+Ukats: ok
+map_reduce: Elarcis: cause its badly broken framework unfortunately
+map_reduce: im curious if anyone incorporated zones into ng`
+Elarcis: map_reduce: it's perfectly fine framework, easy to setup and with years of improvements and optimization behind it :)
+Elarcis: map_reduce: just because it's not cutting-edge doesn't mean it's bad
+icebox: map_reduce: for a few years... from two to five
+map_reduce: Elarcis: there is certainly far too big API surface
+Elarcis: map_reduce: define 'too big'
+Pyrrhus666: map_reduce: nobody&acute;s forcing you to use it ;)
+map_reduce: Pyrrhus666: yeah :), great insight ;)
+anli_: ng-show=&quot;filter_activity.EventID == 0 || activityDate.EventID == filter_activity.EventID&quot; always gives me invisible items when I changed filter_activity.EventID with a select:
+anli_: Any ideas how that can be?
+anli_: activityDate comes from  data-ng-repeat=&quot;activityDate in contents.dates
+anli_: &quot;
+map_reduce: anli_: why do You create such a monsters?
+anli_: haha
+anli_: Maybe I should call a function, is that what you mean?
+Pyrrhus666: map_reduce: just as great as stating that the API surface is too big without reference or explanation :P
+map_reduce: anli_: but that into function :)
+anli_: hehe
+anli_: But that function will not be called when the filtered_activity changes
+anli_: Which I need
+map_reduce: Pyrrhus666: i mean far too much domain specific stuff, mistake java world made at some point, and why people start to hate it
+map_reduce: Pyrrhus666: and one of many reasony so many people moved to React
+Elarcis: anli_: most likely explanation I can think of is that filter_activity or its EventID property are undefined, this failing the equality
+map_reduce: Pyrrhus666: im not hating on ng1 though
+Elarcis: anli_: if I were you, I'd first try &quot;!filter_activity.EventID || activityDate.EventID == filter_activity.EventID&quot;
+Pyrrhus666: map_reduce: react just shifts the load to other libraries you&acute;ll need anyway. ng1 is more of a total thing than react was ever meant to be.
+Elarcis: angular is a framework, react is a library /pedantry:
+Pyrrhus666: map_reduce: the difference in api surface is probably negligible if you take all that into account
+map_reduce: Pyrrhus666: compare ui-router with router :)
+map_reduce: Pyrrhus666: did You use React?
+Pyrrhus666: ui-router is not core angular
+GreenJello: for most intents and purposes, the most common stacks are part of the framework, just unofficially
+Pyrrhus666: map_reduce: I&acute;ve played with it, my colleague uses it intensively. when comparing notes, we conclude they both suck anyway.
+GreenJello: you can use react without redux/etc like you can use angular 1 without services
+map_reduce: GreenJello: and its actually good option for small app
+map_reduce: GreenJello: thats why react fits where ng1 doesnt
+map_reduce: GreenJello: like C vs C++ ;)
+GreenJello: I don't find fitness for very small apps super important
+arnas: hi
+arnas: when I am sending POST request, I also need to set CSRF token. How can I do it?
+map_reduce: arnas: did You actually search for and answer?
+None
+arnas: map_reduce, yes, I have this peace of code already, but back end still can't see the CSRF I am sending
+map_reduce: arnas: You could aswell do it per request via config object
+Pyrrhus666: map_reduce: angular is also modularized. you can ditch the router if you want. or the animation module or whatever.
+map_reduce: Pyrrhus666: or $digest ?
+arnas: map_reduce, how can I do it per request?
+Pyrrhus666: map_reduce: what&acute;s your actual point other than saying react is better ?
+None
+smiche: I signed my contract, now I'm actually working paid :d
+arnas: map_reduce, thanks!
+Elarcis: map_reduce: comparing C to C++ is indeed exactly like comparing React to Angular: they're not designed for the same use
+Elarcis: map_reduce: much like a car is failing where a bike succeeds
+smiche: you can use react inside angular
+anli_: Elarcis: But filtered_activity changes
+map_reduce: Elarcis: thats why biggest apps are made with React not ng1 :)
+anli_: By the select:
+Elarcis: map_reduce: yeah sure
+anli_: I also avoid to make it null by now
+smiche: map_reduce react was implemented in already big apps that make use of server-side rendering
+Elarcis: map_reduce: biggest apps are made with C rather than .NET, everybody knows that
+Elarcis: (inb4 yes that doesn't make sense)
+map_reduce: Elarcis: i just think its good to use both :) , and move from ng1 to ng2 asap
+map_reduce: thats all
+map_reduce: Elarcis: i learnt a LOT from using React and Co
+anli_: Elarcis: But I tried it exactly as you wrote
+k200: whats the ruby .any? equivalent in angular or js ??
+GreenJello: k200, what does .any do?
+k200: i have array of hashes. and i want to know if any of that hash containsn a &quot;mykey&quot;
+k200: GreenJello: ^
+GreenJello: array.some((x) =: x.foo !== undefined)
+nishu-tryinghard: k200, maybe filter b
+GreenJello: er... array.some(function(foo){ .foo !== undefined})
+GreenJello: er... array.some(function(x){ xfoo !== undefined}); I've apparently forgot how to write es5
+k200: .some is keyword?
+GreenJello: k200, it's a method of arrays
+k200: is thin angular or js?
+GreenJello: js
+GreenJello: array.some(function(x){ return x.foo !== undefined});
+k200: i just need if that key presents or not
+GreenJello: array,some tells you if any of the items match the condition
+k200: ok
+zx_bud: I'm in stuck with the ngc compiler to setup the AoT compilation, anyone can help?
+venky: hi guys
+venky: how to learn angularJS
+venky: am fully interesting to learn angularJS. can anyone share with me how to learn angularJS
+None
+anli_: If I use == in an expression, will that translate to ===?
+Pyrrhus666: anli_: no. == and === are separate operators
+anli_: I know, therefore using the word translate
+anli_: There is after all some reason my comparision does not evaluate to true
+Pyrrhus666: they don&acute;t translate. they are still separate operators, even in an expression.
+anli_: ok
+Pyrrhus666: so 1==true -: true, 1===true -: false
+anli_: I want to debug the expression, however, putting console.log within it did not seem to have any effect
+Pyrrhus666: anli_: console.log _inside_ an angular expression ? that won&acute;t work.
+anli_: Well, I tried it at least
+anli_: So I can also tell it does not work
+Pyrrhus666: the problem is probably with your comparison, not angular. your can simply console.log the comparison from your controller or service.
+Pyrrhus666: and then see whether == and === give differing responses
+anli_: I conluded that the types are actually the same
+Pyrrhus666: so what does a comparison with === give you ?
+icebox: &quot;it does not work&quot; === undefined :P
+Pyrrhus666: icebox: false :P
+icebox: Pyrrhus666: true :P
+Pyrrhus666: icebox: also true :P
+Pyrrhus666: aarrgh :)
+icebox: anli_: no plunker? no party!
+anli_: :)
+icebox: anli_: you see it... one hour guessing your code
+icebox: anli_: with a minimal working plunker, wemay fix it in seconds
+anli_: You are spamming me with the same message
+anli_: :)
+Pyrrhus666: anli_: you keep hiding the code :P
+anli_: But there is one second between icebox:es messages
+icebox: anli_: sorry?
+anli_: Ah, I see how to proceed, if I call a method with activityDate.EventID as parameter, that method will be called evrey time activityDate.EventID is changed, like ng-show=&quot;goo(activityDate.EventID)&quot;
+anli_: Now I can put console.logs in that function
+anli_: icebox: You told me more or less to show the code in 3 subsequent messages :)
+Elarcis: anli_: that method will be called constantly, even if EventID does not change
+icebox: anli_: I disagree... good luck
+anli_: Elarcis: hm, not a good thing
+anli_: But I can at least debug the condition
+Elarcis: anli_: basically how databinding works
+anli_: It would be better if I could call a function every time the value changes, if that is possible
+anli_: I thought putting it as parameter would hint angularjs about which value
+anli_: Ok, here we have it, I was putting the ng-show attribute on the wrong element... :)
+anli_: Typical error
+Snugglebash: Hey, im just looking at using nganimate and some tutorials use css, but when using a slide down animation it needs a height. is it better to use a js animation instead, or is there another solution?
+anli_: Can I filter an array in an expression?
+anli_: To be able to never use functions for complex stuff
+None
+\du: oh, and it only happen for IDN domain
+\du: on the previous version of Edge, it works fine, or also in previous version of angular
+\du: somebody can confirm it? I have the snippets to test, but is necesarry to load and configure an idn domain
+None
+None
+Elarcis: Hi \du, you may want to submit an issue on the repo :)
+\du: yes, I will do it Elarcis
+\du: this code of the jsdiddle if you run it over a IDN domain with the latest version of Edge, angular throw infdig error because an infinity loop
+Elarcis: elsevero: why are you using a provider that returns itself?
+\du: Edge 14.14393 and Angular 1.5.8
+Elarcis: elsevero: (anyway, by injecting your DateSrv like anything else injectable)
+uru: \du: It's most likely an Edge proplem, we've been having a nightmare with it.
+uru: *problem
+Elarcis: \du, I don't have access to Edge
+None
+\du: uru, yes I can image but not so sure about it, maybe it can be avoid
+Elarcis: elsevero: extremely old stuff, I don't see any difference between that use of providers and a basic service
+None
+Elarcis: elsevero: but to answer your question, yes you can inject DateSrv like that
+Elarcis: \du: I'm not part of the ng team, I have other things to do x)
+\du: np :)
+uru: \du: Only thing I can say is to keep your dependencies up to date and report any compatibility issues on the related github repos
+None
+\du: I will submit an issue to the rep and downgrade angular meanwhile if not any user with the latest version of Edge which is uptaded automatically (I think) can't access to the site
+Pyrrhus666: nishu-tryinghard: I posted that yesterday :P fun read, no ?
+elsevero: Elarcis: well, why it doesn&rsquo;t knows it. and I think I didn&rsquo;t mentioned one importat thing that i&rsquo;m using DateFunctionsSrv.js in my .config
+\du: or disable html5mode, but I have to see it.. or replace $location with window.location :/ (I am not routing with ng), will see..
+nishu-tryinghard: Pyrrhus666, totally i even learn things in that same order but that was for angular and had same thoughts about the ES5 -: ES2015/ES6 etc
+nishu-tryinghard: and traspiler and task managers.
+anli_: Hm, getting infinite digest loop because I have function call in two expressions :)
+Pyrrhus666: anli_: don&acute;t do function calls in expressions. use variables.
+anli_: hm
+None
+nishu-tryinghard: Pyrrhus666, what is your present setup for angular including all the module loaders, transpiler etc and other do share your setup
+Pyrrhus666: haha ! &uml;impenetrable&uml; :)
+Pyrrhus666: nishu-tryinghard: my working setup is classic script tags. no loaders &amp; shit.
+anli_: Pyrrhus666: And that will remove infinite looping?
+Pyrrhus666: nishu-tryinghard: I&acute;m testing a webpack setup. it sucks, and doesn&acute;t work like it&acute;s supposed to.
+None
+nishu-tryinghard: Pyrrhus666, you are one of those mens in the message posted by Elarcis
+Pyrrhus666: anli_: probably. but I find it good practice not to call functions in expressions.
+None
+anli_: Seems to make sense
+\du: I read the note yesteday too nishu-tryinghard, nothing new..
+anli_: But what if a variable changes then?
+nishu-tryinghard: \du, what note?
+Pyrrhus666: nishu-tryinghard: sjw:did you just assume my gender ?/sjw:
+\du: nishu-tryinghard: etting infinite digest loop because I have function call in two  expressions :)
+\du: oops, error paste
+None
+Pyrrhus666: Elarcis: wtf are you reading ? ;)
+zomg: \du: that article is stupid :p
+Elarcis: anli_: infinite digest loop comes from functions calls triggering a change in each other
+anli_: Will angularjs keep a copy of a variable to detect whether it changed or not and stop the madness if it did not?
+Elarcis: Pyrrhus666: the comment to the article you linked
+zomg: I mean yeah, that's a common problem.. but blaming the language or the tools is wrong... it's a people problem (because people tell you all that stupid shit, which the article highlights fairly well)
+Pyrrhus666: Elarcis: ah, ok. hadn&acute;t checked those :)
+nishu-tryinghard: Pyrrhus666, really? i though you had a .. forget it
+Elarcis: anli_: that's how digest loop errors are triggered :D
+\du: zomg: it is, i readed before the Cicle one, but is quite true if you want to do the thing in the latest right way
+Elarcis: anli_: up to you to not make vars change each other in infinit eloops
+zomg: &quot;the latest right way&quot; isn't a thing
+anli_: Elarcis: Do data is duplicated by angular?
+Pyrrhus666: nishu-tryinghard: sarcasm :P
+zomg: there is no single, one, true right way to do X
+anli_: Do =: So
+\du: if you are per example, as more of the people going from ng1 to ng2, beside ng2 you need to learn typescript and systemjs, and after it how to work with task runners and systemjs and so on..
+Elarcis: zomg: also, you don't highlight the current state of a tech by listing all the keyword it used in the last several years
+\du: so, just to switch versio of the fw you need to learn lot of new things and different posibilities to do the things too
+\du: so, the article with sarcarm represent it
+Elarcis: anli_: it is not, angular stores the result of every expression in the template, and compares it the next time it is ran. if the value changed, it means there are changes going on, so its schedules another $digest
+Guest47271: hi
+zomg: Newsflash: going from old thing to new thing requires learning new thing
+zomg: :P
+nishu-tryinghard: Elarcis, can you tell your currect setup too?
+Elarcis: anli_: angular determines the app's state is 'stable' once a full $digest has ran without any change
+anli_: cool
+Elarcis: anli_: then, on the next event that flies through the DOM, it starts again.
+Pyrrhus666: zomg: also, that doesn&acute;t guarantee new thing will be better in any way ;)
+anli_: A deep comparision between objects then
+anli_: Not identity comparision, I gather
+\du: zomg: nowadays going from new thing to new things require to learn more new things haha, I am not complaing but I think that is true, the complexity on the web development generated on the latest years
+Elarcis: nishu-tryinghard: I configured a webpack setup with Typescript/angular 1.x
+zomg: anyway, my main problem with articles like that is that everyone is more interested in masturbating over things like that instead of solving those problems
+anli_: hahaha
+zomg: there's so much of useless theoretical debate which mostly serves to alienate people instead on focusing solving practical problems
+anli_: masturbating over XXX is a pattern sadly not used very much
+Elarcis: anli_: no, not a deep comparison.
+anli_: ok
+zomg: anli_: it's not politically correct enough for today's internet
+\du: but well, is the evolution baby, right?, when not going back to techniques of few year ago because finally are better that the one that we have now
+anli_: So I cannot re-create an array with the same data?
+zomg: I'd probably get shouted at for using that phrase on any other JS related channel
+anli_: zomg: It comes
+zomg: :D
+Elarcis: anli_: indeed you can't
+anli_: ok
+anli_: Thanks for the insight Elarcis
+zomg: \du: sure, but if techniques of yesterday are better for solving some problems you use those :)
+zomg: today's techniques are better for solving large scale development
+Pyrrhus666: zomg: the problem is that there&acute;s about a zillion solutions to the problem already. they all suck, and nobody fixes anything, they just build new &acute;solutions&acute;. que xkcd.
+ThiagoArrais: Hello can i use AngularJS in mine Cordova?
+zomg: but people think that jquery is dead, etc., because all they care about are their small circle of large scale development
+zomg: they forget that companies such as advertising agencies exist, who largely build brochure websites for companies, where jquery is perfectly sufficient and anything else would be total overkill
+anli_: jquery should be builtin browsers
+Elarcis: anli_: no it should not.
+anli_: And ng ;)
+\du: zomg: I got your point, but what I mean and per example talking about the article, OOP was the future, now we back to functional programming, per example
+\du: zomg: of course, the tool needed depends on the problem to solve
+zomg: heh
+zomg: yeah I suppose that's somewhat true
+zomg: Functional Programming is just the new hotness
+\du: but, anyway as a developer and to keep updated you need to learn the new things without mattter if you will develop for a large scale app or not, etc
+\du: anyway, brb
+Elarcis: \du it's an opinionated topic, it's like saying 'we don't need cars anymore now that we have bikes'
+zomg: People are just learning more about the problems of *typical* OOP methods
+zomg: (which have been known for a long time in communities where classical OO has been practiced for longer...)
+\du: haskell++ ;p
+Elarcis: Haskell#
+zomg: Haskell is great
+zomg: :P
+zomg: But that doesn't mean OO has nothing to offer, nor that you should dismiss everyone who uses OO as someone who doesn't know anything
+zomg: which unfortunately is what happens if you admit to using classes.. the first thing you're told: lol are you a child, no adults use classes
+zomg: in fact there is no such thing as a class you silly thing, despite the fact there's a class keyword
+zomg: go grow up!
+zomg: (of course nobody uses those words to tell you that, but it's heavily implied)
+Pyrrhus666: zomg: I tend to not care what people think and use the tools I like regardless.
+ngWalrus: everyone loves overengineered piece of shit systems
+ngWalrus: don't they
+ngWalrus: I sure do
+zomg: I should make it clear that my blog / newsletter focuses mostly on practicalities of what you would need to know as a professional working on JS stuff
+zomg: seems like that would be a good point to make for any potential reader
+Pyrrhus666: ngWalrus: don&acute;t forget complicated toolchains. everybody should have one.
+nishu-tryinghard: zomg link to you blog?
+None
+None
+ngbot: angular.js/master e13eeab Georgios Kalpakas: fix($q): treat thrown errors as regular rejections...
+Elarcis: zomg: 'nobody uses classes anymore' I swear I heard that before totally seriously
+zomg: Elarcis: yep...
+anli_: If I add to an array, will angular think the data changed?
+zomg: go on ##javascript
+anli_: (with push)
+zomg: and ask about classes
+zomg: you'll probably be told that
+zomg: :D
+Elarcis: ok I'm gonna try it
+Elarcis: you wanna come?
+zomg: I'm there already
+zomg: it's one of the few channels where I'm semi-active
+Elarcis: nishu-tryinghard: you dense idiot
+nishu-tryinghard: ahahaha
+Elarcis: no, seriously
+Elarcis: couldn't you tell them 'here comes the troll' more directly?
+nishu-tryinghard: Elarcis, ummm.. messed up again, sry
+zomg: just be quiet for a few and think of a question that sounds realistic
+zomg: :D
+pyios: is here talking angularjs1 or angularjs2?
+Pyrrhus666: pyios: both
+pyios: found they are mostly different
+bd-: i'm doing ng1 today. i like how i can save a file and it near instantly reloads instead of having to wait 10 secs for webpack to do whatever the fuck it is webpack does
+zomg: Yeah some of that stuff is a bit annoyingly slow
+zomg: but such is life in most languages other than JS :P
+zomg: makes editor tooling and such more valuable since they save you time from having to wait for rebundles because you had a typo
+heartburn: except for js it doesn't have to be like that.
+zomg: assuming you're not interested in using any of the top of the line functionality I guess so
+heartburn: yeah, i'm fine with my gulp setup.
+heartburn: 0.5-1 sec average build time.
+bd-: i'm happy i'm doing ng1 today but i'm also having to do sql which makes me unhappy
+heartburn: no transpiling, no ts linting.
+heartburn: the slowest part is uglify.
+zomg: well you don't need uglify for dev anyway
+zomg: we only run that for production deployments
+Elarcis: bd-: wow your setup is pretty messed up, got a shitty 3gb laptop and it takes less than two seconds
+zomg: Elarcis: it depends on the amount of files and code you have
+zomg: Babel in particular can be slow as hell
+bd-: my setup is the stock angular-cli
+Elarcis: zomg: the project weighs 50MB, node_modules excluded
+heartburn: 48 of them are graphic assets. :3
+heartburn: it's always graphic assets.
+bd-: : Time: 10239ms
+bd-: to rebuild after saving one file
+anli_: I got rid of the eternal looping by using a variable, thanks for the explanations!
+Pyrrhus666: bd-: is that without uglify ? wow...
+None
+bd-: that's just `ng serve`
+bd-: it doesn't uglify as far as i'm aware
+Pyrrhus666: dunno what that does, I stay away from ng-cli.
+bd-: it's just the dev live reload thing
+Pyrrhus666: I just no npm start, reloads are pretty fast.
+zomg: btw any of you do TDD? Or rather, have you tried TDD and found it difficult?
+bd-: i tried it and found it a waste of time
+Elarcis: zomg: and not that much pictures :D
+bd-: if you can afford a dedicated test engineer to write the tests then sure
+zomg: bd-: why's that?
+None
+zomg: bd-: so you've never changed some code and found out later that something else broke as a result?
+bd-: nope
+icebox: zomg: me... due to a wrong attitude to write the code
+bd-: either something else broke because the test wasn't good enough
+bd-: or the test had to be changed anyways
+zomg: bd-: yes, my point was that if you have tests the whole point is that you can change stuff as much as you like without having to worry about breaking some other code :)
+zomg: What I didn't really get is what exactly it was that you found made it a waste of time
+zomg: icebox: oh, care to elaborate? :)
+bd-: the time cost of writing tests far exceeds the bug fixing cost of stuff without tests
+bd-: in my case anyways
+ngWalrus: I bet this project wouldn't be as much of a fucking clusterfuck if we did tdd
+ngWalrus: but you know what the project manager said
+ngWalrus: &quot;now that the we're done we can write the tests&quot;
+ngWalrus: I don't know hwat kind of fucking drugs that guy is on
+zomg: bd-: interesting, what type of projects do you work on?
+icebox: zomg: tdd should help to design the code correctly (and you have tests for &quot;free&quot;), but usually I prefer to have a prototype to get a better idea about the final product
+bd-: mostly internal systems type apps
+zomg: icebox: ah I see
+icebox: zomg: *a prototype as soon as possible
+zomg: bd-: sounds like they are generally long-lived'ish?
+bd-: yep
+icebox: zomg: but that (a better idea) is only an illusion
+zomg: bd-: interesting, I've always found those are the kind of projects where you get a lot more value from TDD, since you almost always end up with a lot of code and testing everything manually just takes forever :)
+zomg: Hard to guarantee new releases keep everything working unless you do a lot of manual dicking around in the system
+icebox: zomg: it works better, tdd approach, after the first iteration :)
+zomg: icebox: yeah
+bd-: maybe i just write code in a way that's less prone to side effects from changes
+zomg: in some cases, especially if the idea isn't very fleshed out, it might make sense to build a quick proto first I think and yeah then tests are a bit of a waste
+zomg: bd-: entirely possible :)
+bd-: i think the developer writing his own tests is kind of bad anyways
+zomg: That's the only person who should be writing the tests I think
+zomg: since it factors into the overall design too and not just into error-checking
+icebox: I second zomg's statement... interesting dichotomy here
+zomg: and adding tests after the fact into code not designed with tests in mind is a lot harder
+bd-: i think it's too easy for dev to make a mistake in some code then that mistake ends up in the tests as well
+bd-: if someone else does it it cuts down on that
+zomg: I agree if we're talking about functional / end to end tests.. Ie. something like browser automation. In that case, a test engineer can certainly write them
+bd-: kinda like pair programming i guess but less invasive
+zomg: Unit level tests however, no
+zomg: hmm
+icebox: bd-: that is due because we think developer should not have a global vision of the task/feature implemented
+zomg: yeah I can see how that could possibly happen, but the problem is not really tests per se
+zomg: but rather the issue is that if the same error that is in the implementation goes into a test, then the test is probably written incorrectly
+icebox: bd-: but I think a developer should have a complete knowledge, tech and business, of the task
+bd-: zomg: yeah and that's the problem devs write tests incorrectly
+bd-: icebox: yeah i agree
+zomg: I've seen a lot of devs write unit tests very coupled to implementation.. and yes, that's a very easy mistake to make
+zomg: I teach testing so I try to steer people clear from that :)
+bd-: a lot of devs seem to write tests that's bascially ends up just duplicating the same code twice
+icebox: I think we are saying all the same thing... the point is not the tests... it is the developer :)
+zomg: yep :P
+ngWalrus: that's the best
+bd-: tests make more sense if you're in a team too
+zomg: the reason I even asked about TDD is because I'm working on an article which is more on the mindset for writing tests
+bd-: as opposed to sole dev
+ngWalrus: when people argue the same thing but still argue for the sake of it
+ngWalrus: and everyone is arguing the same thing
+zomg: a lot of people struggle with writing good tests because they don't really think of it in the right way
+zomg: so I'm trying to distill the sort of process that you'd go through to write TDD &quot;correctly&quot; into a series of steps
+zomg: from the point of view of the thought process, rather than the coding process.. because you can learn the coding process in 15 minutes
+zomg: the thought process takes more time, and yet, usually nobody talks about it
+icebox: zomg: I would be glad to read that post :)
+Pyrrhus666: zomg: even though I&acute;m a sole dev as bd- puts it (and I don&acute;t do tdd) I&acute;d still be interested in the ideas behind that...
+zomg: icebox: good, I'll ping you when I have the draft in a more finished state so you can tell me what you think :)
+icebox: zomg: sure... thanks
+zomg: Pyrrhus666: I'll ping you as well
+Pyrrhus666: zomg: thx :)
+sakustar: zomg maybe the tought process is too hard to put into words (or too long in blog posts and other random stuff people like producing)
+zomg: sakustar: yeah, things like that are often hard to elaborate
+Elarcis: zomg: like testing that the expected result of sending 'hello' to an uppercase formating function is 'HELLO' and not 'hello'.toUpperCase() ?
+zomg: sakustar: but putting this article together I oughta be at least a bit closer to getting it down to words properly if this one doesn't quite do the trick yet =)
+sakustar: zomg: yes, can i read it too? :3
+zx_bud: I'm trying to include a css from the import of the vendor file, but webpack fails to load the plugin, what can I do?
+zx_bud: I'm trying to add the bootstrap css to the tour of the heroes :(
+zomg: sakustar: sure
+Elarcis: zx_bud: you can start by showing us your code
+None
+Elarcis: zx_bud: that's not your code, that's the reference code
+zx_bud: And every works well, in the vendor.ts file i find the row: &quot;You can import js, ts, css, sass, ...&quot;
+None
+zx_bud: Elarcis: I have changed some classes to start my project, but I don't is relevant for the question
+zx_bud: *i don't think is relevant...
+Elarcis: zx_bud: indeed it's not. what's relevant though, is that your CSS import is not working, and it's exactly what's not written in the vendor.ts of the page you sent me
+Elarcis: zx_bud: it's like telling me your car isn't starting, and instead of bringing it to the garage, just bringing the user manual
+zx_bud: Elarcis: Ok sorry... I wrote: require('../node_modules/bootstrap/dist/css/bootstrap.css');
+zx_bud: But maybe is not the correct way
+runtyrobot: Quick rookie question; can anyone explain why I get an injector:modulerr error when I wrap my module in a (function() {}) ? ... I can't seem to find the answer anywhere.
+Elarcis: zx_bud: import 'bootstrap/dist/css/bootstrap.css' also works and is simpler
+Elarcis: zx_bud: aren't you getting some errors like the module can't be found ?
+zomg: runtyrobot: just that shouldn't cause the problem so the error is somewhere else
+icebox: runtyrobot: it is not related with your error... without any code detail, I guess the error is in definition of the module
+zx_bud: Elarcis: I get this error: &quot;54% 3/4 build modulesModuleNotFoundError: Module not found: Error: Cannot resolve module 'style' in /super/secret/path&quot;
+icebox: runtyrobot: .module(&quot;app&quot;); // gets a module... .module(&quot;app&quot;, []); // creates a module
+None
+runtyrobot: I've JUST started learning - and got halted in this.
+Elarcis: zx_bud: your path is mistyped then
+Elarcis: zx_bud: or super/secret/path doesn't exist
+icebox: runtyrobot: that is not correct... see IIFE
+Elarcis: runtyrobot: your (function) wrapper should end by )();
+pyios: what is .controller(xxx) meaning?
+Elarcis: runtyrobot: it's called an IIFE, that's a function that's ran immediately, and everything in the function stays in it so it doesn't pollute the global scope.
+Elarcis: pyios: it's a controller declaration
+None
+runtyrobot: Works now - god, I've stared myself blind on it.
+pyios: Elarcis: why it has a dot at first?
+runtyrobot: Thanks for the help - I'll get back to the learning part !
+Elarcis: pyios: ...because it's a function of dashboard
+icebox: runtyrobot: you are welcome
+Elarcis: runtyrobot: IIFE aren't obvious when you don't know them
+Elarcis: pyios: wait, are you talking about the pastebin or angular in general?
+pyios: Elarcis: angular
+Elarcis: pyios: if angular in general, it starts by a dot because the previous line did not end with a semicolon, so it's just a clearer way of writing it
+AxldenieD: hello :)
+pyios: Elarcis: clear
+pyios: Elarcis: for example :
+pyios: var app = angular.module('demo', [])
+pyios:   .controller('WelcomeController', function($scope) {
+pyios:       $scope.greeting = 'Welcome!';
+pyios:   });
+runtyrobot: Cheers!
+icebox: pyios: never paste the code in the channel, please
+Elarcis: pyios: yes, but for the sake of clarity I often break the line before .module() as well
+pyios: few lines
+Elarcis: pyios: still
+None
+zx_bud: the folder /home/michele/Progetti/MyProject/src exists
+zx_bud: inside here there are the main, polyfills and vendor ts files
+Elarcis: zx_bud: aaaand, do you have a style file or folder inside your src folder?
+Elarcis: zx_bud: basically you are importing a 'style' module somewhere, which means it either looks for a 'src/style' or 'src/style/index' file (with possibly varying extension)
+zx_bud: Elarcis: no, and I am not importing it... if I delete the row you posted me, the error appear
+zx_bud: Elarcis: I understand what you are telling me, but I have never imported a 'style' module
+Elarcis: zx_bud: no idea then, sorry
+zx_bud: Elarcis: :( thanks anyway
+Elarcis: zx_bud: ah i get it
+Elarcis: zx_bud: the 'style' bundle is specified in the webpack config: it is where all CSS is extracted
+tobias_: hi together. is here some one how has experience with angular and google? we're currently trying to solve an issue why google is not rendering our dynamic angular area.
+zx_bud: Elarcis: So, I have to edit some configs?
+Elarcis: zx_bud: have you read the whole webpack introduction?
+icebox: tobias_: what does &quot;google is not rendering&quot; mean?
+zx_bud: Elarcis: I have used webpack for some projects, maybe I have missed something ^^'
+Elarcis: zx_bud: most likely
+None
+\du: for the ones that could be interested
+icebox: \du: don't hold the breath for that fix
+\du: icebox: yes, I can image it.. we are using $location only to get $location.path() I think that we will use directly window.location
+Pyrrhus666: I knew that idn existed, but I&acute;ve never seen one in the wild...
+ragu: hkjhl
+icebox: \du: anyway great issue... well formed
+jbloggs: hello
+\du: no problem, thanks, it took me like some hours to can debug and find the issue, especially because the version specific thing
+\du: so for now I stopped with it, but I would like to know if the problem could be becuase Edge or Angular, maybe both :-/
+icebox: \du: it would be better using the not minified version of angular.. to get a better stacktrace
+jbloggs: has anyone had any luck using ui-router with ngAnimate?
+\du: icebox: yes, I did it locally :)
+icebox: \du: add it to the issue :)
+\du: okay, but not sure if there is a cdn with the non minify version for the fiddle
+\du: I will update the console error with the non minify version
+icebox: \du: ah yes... I see
+icebox: \du: yep... just the output... not the snippet
+None
+icebox: jbloggs: there are a few resources explaining it
+jbloggs: icebox: Thank you - it was specifically about 'back' and forward animations I was wondering about
+\du: IDN domain are not so well tested, some time ago I had to reported a bug also with IDN on Firefox when using the meta tag referrer, but anyway this one is more specific
+jbloggs: I will look into this a bit more
+\du: icebox: already updated, thanks for the feedback
+icebox: \\\\\\: why? :)
+icebox: \du: I bet for edge bug
+\\\\\\: i've been using irc since 2006 and never thought the \ is allowed.
+\\\\\\: the ultimate holy shit moment.
+\du: \\\\\\: 2006? oh you are quite new on irc :P
+uru: \\\\\\: I was not aware either until I saw \du ;)
+icebox: \\\\\\: ///// ___m_OO_m___ \\\\\\
+\\\\\\\\\\: let's try this
+\du: :D
+Elarcis:  /nick Elarcis'); DROP TABLE channels;--
+Elarcis: didn't work
+Pyrrhus666: little bobby tables....
+None
+Pyrrhus666: Elarcis: neither did &macr;\_(ã&fnof;&bdquo;)_/&macr;
+\\\\\: wait, it actually is registered
+\\\\\\\\: HAAAA
+\: really?
+\: ooooooooh.
+\du: icebox: interesting, as I wrote thing over IDN domain are not so often tested, or it looks like
+rand0m: whats going on in here :|
+icebox: Elarcis: today we have lot of time :)
+coder_2014: what's the best way of displaying hiding components or a totally different set of components depending on what element I've chosen from the drop-down?
+Elarcis: icebox: I don't, but I don't wanna work ;u;
+rand0m: bbl watching the bridge
+\du: coder_2014: ng-show/ng-hide or ng-if, depending on what do you want to change one or other could have better performance
+icebox: coder_2014: routing... or ng-if... or ng-show
+coder_2014: thank you guys
+coder_2014: you gave me a good starting point
+\du: np
+\\\\: ok, i got banned on ##javascript
+\du: \\\\: hahahaa
+coder_2014: icebox: routing would be more appropiate for moving to different URLs and my scenario remains on the same screen all the time
+Preuk: hehe
+coder_2014: icebox: so it'd be changing lets say a div: part of my html dom
+coder_2014: icebox: I'd be hiding/showing the custom compoents inside this div element
+icebox: coder_2014: no... that is a myth... it is not mandatory to change the url... routing is only a finite state machine
+Preuk: ^
+coder_2014: ^^
+Preuk: ^^^
+icebox: ^^^
+Preuk: HA!
+coder_2014: I like machines
+icebox: :) ok I lost :)
+coder_2014: nevermind
+coder_2014: icebox: I'll use ng-if
+coder_2014: sounds easier
+coder_2014: thanks for that definition anyways
+icebox: coder_2014: no problem... you are welcome
+coder_2014: love ya
+Ownix: I have a notification bar that drops down when there are notifications for my users. One issue is that several other pages have &quot;floating&quot; elements which need to be moved down when this bar shows up.
+Ownix: Right now, we attached a class called &quot;adjust-for-status-bar&quot; and when the notification is active, we call $(&quot;.adjust-for-status-bar&quot;).css('margin-top', '+=' + newTop);
+icebox: Ownix: use a toast :)
+None
+None
+ngbot: angular.js/master 9d08b33 Peter Bacon Darwin: test($route): ensure mock $sce delegate is implemented correctly...
+ngbot: angular.js/master 6476af8 Peter Bacon Darwin: feat($http): JSONP requests now require a trusted resource URL...
+ngbot: angular.js/master fb66341 Peter Bacon Darwin: feat($http): JSONP callback must be specified by `jsonpCallbackParam` config...
+None
+Ownix: icebox: Well we have that loaded, the problem is management wants a persistent bar there. And a toast might cover existing elements
+icebox: Ownix: exactly your issue... &quot;One issue is that several other pages have &quot;floating&quot; elements which need to be moved down when this bar shows up.&quot;
+icebox: Ownix: what is the question? a better widget or fixing your issue?
+Ownix: icebox: sometimes you want to put slide out elements and more advanced things on pages its unavoidable. I guess my question is: is it bad to use jQuery in my controller to push down any elements with my special class on it?
+icebox: Ownix: yes it is... generally speaking, angular is data oriented, not dom oriented... dom manipulation not in the controller, please, but in a directive...
+tobias_: a
+icebox: Ownix: I understand you have a sort of stack of messages to display in a sort of status bar...
+Ownix: icebox: which is what I have been told and what I have read. The problem is directives are good for creating new elements and modifying them.
+Ownix: Not targetting anything on the DOM at any given time
+icebox: Ownix: why not a ng-repeat in the status bar container changing the array of messages to display?
+Preuk: Ownix: yes it is, you can use jqlite for that :)
+Ownix: icebox: yes thats what im doing but I still have to push anything with my class down 20px or so.
+Ownix: Preuk so its okay to use jqlite to grab whole classes?
+None
+icebox: Ownix: usually I don't think in terms of classes
+icebox: tobias_: and?
+tobias_: and thats not good. access the site directly by the browser is working.
+None
+icebox: tobias_: I don't see the relevance, sorry
+Pyrrhus666: my original uglyfication problem seems to center on angular.module(...).component(...).config(($stateProvider) =: {}); where it craps out on the injected $stateProvider after uglify has done its thing. how can I avoid that ?
+Pyrrhus666: I can&acute;t use the same $inject[] thing as with controllers, can I ?
+icebox: Pyrrhus666: yes, you can
+Pyrrhus666: icebox: yay ! but when I tried, it didn&acute;t work...
+tobias_: Elarics: thats plan be, we want to solve the issue so that the site is also present within google-cache
+Elarcis: Pyrrhus666: yes you can
+Pyrrhus666: before &uml;export default componentname&uml; I tried ComponentName.$inject, but nothing
+Elarcis: Pyrrhus666: $inject would go on the config function
+icebox: tobias_: I see
+Pyrrhus666: Elarcis: how ? it&acute;s anonymous...
+icebox: tobias_: but I don't see how #angularjs can help you
+Elarcis: Pyrrhus666: name it :D
+Elarcis: tobias_: prerender.io is how to render your app for google's crawlers
+Elarcis: tobias_: thus in google cache
+Pyrrhus666: Elarcis: Idontwanna! srsly though, I&acute;ll try.
+Ownix: icebox: our whole app is one giant ASP.NET MVC app. Each view might have its own little angular app running.
+None
+icebox: tobias_: but of course we cannot control google cache :)
+icebox: Ownix: well... angular is aimed mainly for SPA
+zomg: Ownix: we do that and it works fine
+Ownix: icebox: which is why im struggling :)
+Ownix: zomg: You use jquery inside your Angular?
+zomg: granted main reason we used angular in the first place is for one part of our app which was a bigger bit and it kinda spread to other parts of our app from there :p
+zomg: Ownix: yes, although what I was referring to is having multiple &quot;small apps&quot;
+Ownix: zomg: I might just do that. We have to add a status bar to our _layout.cshtml that will require moving elements down on various more advanced views.
+zomg: yeah
+zomg: we have some common bits which are in their own module
+zomg: but otherwise the bits are mostly self-contained
+Pyrrhus666: Elarcis: any examples of such a thing in a component definition ? I can&acute;t seem to get it to work :(
+Elarcis: Pyrrhus666: why do you focus on the component definition? it's a config block that's causing the issue
+icebox: Pyrrhus666: .config(config); config.$inject = [...]; function config...
+Pyrrhus666: Elarcis: because this part is in an index.js file exporting a component together with some routing.
+None
+JohnDough: AngularJS 1 or 2 for a noob?
+Ownix: JohnDough: Now that 2.0 has officially been released it might be safe to use that. But many companies are still starting on 1 and probably wont cut over for a while. So maybe learn both?
+Snugglebash: i am a n00b tried both and 1 is much easier to understand
+uru: Snugglebash: On the other hand I'm a n00b and found ng2 easier ;)
+Snugglebash: :D
+uru: I think I started 7 weeks ago now and we are going live with our first beta version of the SPA on Monday (all going well)
+None
+Elarcis: Pyrrhus666: $inject = [...
+Pyrrhus666: oh wow...
+icebox: Pyrrhus666: terrible :)
+icebox: Pyrrhus666: you should not write a line for two hours after this :P
+Pyrrhus666: GRRRRRR.
+Elarcis: Pyrrhus666: also, I'd recommend to put your $inject line just before your function
+Elarcis: Pyrrhus666: so it's more obvious that they're related
+Pyrrhus666: all this took me almost a whole day :( but your suggestions worked  (when I did them correctly)
+icebox: hoisting at work :)
+Elarcis: Pyrrhus666: I spent the day displaying air and water in my app
+Pyrrhus666: Elarcis: yeah, I&acute;ll do some reformatting. the whole code is a mess now because of all stuff I disabled to get to the root cause of this...
+JohnDough: Ownix: Also, how much js should I know. Do you recommend any books? My js skills are rusty
+Elarcis: Pyrrhus666: if you're following TOdd Motto's, I suppose the config function should go in a separate file, like the controller
+Elarcis: JohnDough: no idea, I've learned JS by working with it for two years D:
+Pyrrhus666: Elarcis: yeah, I&acute;m following his guide. he&acute;s not explicit about this, but it sounds like you&acute;re right
+Ownix: JohnDough: Im actually in the market for a good JS book too :) id say a basic to moderate understanding of JS is needed for 1 and maybe 2.
+Elarcis: JohnDough: total noob in modern JS? Outch. I'd recommend angular 1.x as it works without any toolchain
+JohnDough: Hmm... which one would be easier to code in? I don't mind biting the bullet now
+Pyrrhus666: looking over the docs, this could&acute;ve been documented better. it only focusses on the controller...
+Elarcis: JohnDough: or, if you feel adventurous, you can buy ng-book 2 that makes you start with Angular 2 from scratch, but it's going to be a bumpy ride
+bd-: and you get actual useful error messages!
+bd-: with line numbers and everything
+None
+Elarcis: bd-: real coders don't have errors!
+baako: hi Elarcis
+None
+Ownix: JohnDough: just do 2. they are very different might as well start on the newer one
+Elarcis: baako: yes, it's the name of a ui-view tag somewhere in your HTML
+JohnDough: Any tutorials/books you recommend for 2?
+Elarcis: Ownix: not necessarily. they might not need it as Angular 2 is quite advanced and not a mandatory replacement for 1
+Elarcis: JohnDough: currently reading ng-book 2
+Elarcis: JohnDough: it's expensive, but if you find out it's not your cup of tea, it's stated in their F.A.Q. that they are 'refund-happy'
+JohnDough: So this 2 vs 1 isn't like the Python3 vs 2 argument, right? I mean, is there any chance that 1 will cease being supported in the near future?
+Elarcis: JohnDough: unlikely
+icebox: interesting comparison
+Ownix: Elarcis: yeah many companies are on 1, and will stay there for a while.
+Elarcis: Ownix: not only that, but as I said, Angular 2 is not a replacement for 1
+baako: Elarcis, i see because the issue i am having is that then i remove the &quot;menuContent&quot; my view does not render with the data from the controller
+Elarcis: Ownix: I take it as a more solid approach to the angular philosophy
+Elarcis: baako: ...yes, because that's the line that tells the ui-view tag to load that controller
+baako: so can you have multipe tags?
+None
+ZeBigDuck: Hi all!
+ZeBigDuck: Ng2 : Is there a way to display component content WITHOUT its selector ?
+uru: ZeBigDuck: You mean load the content of the template in to the parent template?
+ZeBigDuck: I wan to add a component to a tr: that contains several td:
+ZeBigDuck: want*
+icebox: ZeBigDuck: angular 1 or angular 2?
+uru: Or you mean replace the selector tag with the template content?
+ZeBigDuck: for now I have tr:my-component:td:a/td:td:b/td:/my-component:/tr:
+ZeBigDuck: icebox: ng2
+icebox: ZeBigDuck: yes, you can
+ZeBigDuck: I would be awesome to remove my-component tag
+ZeBigDuck: (and more html compliant)
+ZeBigDuck: How can I do pleaaaaaase ? :)
+uru: I would also like to know this :)
+uru: I thought it was not possible as you need the selector tag to attach to
+ZeBigDuck: Tried to play with viewComponentRef with no success (didn't understood a bit about this thing)
+ZeBigDuck: icebox: Might you tell me how could I do please ? :o
+smiche: time to go home, cya :d
+icebox: the answer is in the github issues... I read an issue about that... but at the moment I cannot find it
+icebox: it is a tempting feature :)
+None
+ZeBigDuck: Ok thank you, I'll search this way !
+ZeBigDuck: Oh nice thx
+uru: icebox: Thanks!
+icebox: well.. the last comment is... &quot;The new router makes this obsolete.&quot;
+icebox: good luck :)
+Pyrrhus666: off in a bit. laterz !
+uru: huh, would be nice to know how the new router makes this obsolete, sometimes you can't solve that issue with routing (as in ZeBigDuck's table case)
+ZeBigDuck: Yeah, they do stuff with viewContainerRef and Dynamic component creation
+ZeBigDuck: that's not really easy to understand
+icebox: sorry... no idea... I remembered only there was an issue about that... I didn't check if the solution was feasible
+None
+icebox: off... bye
+uru: icebox: No worries, sstill learnt something new
+uru: icebox: see ya
+ZeBigDuck: thank you anyway icebox
+ZeBigDuck: Have a nice day
+jbloggs: can someone tell me what data-ng-animate=&quot;2&quot; means?
+jbloggs: does anybody know what the data-ng-animate attribute represents or what it does?
+jbloggs: as part of a html tag
+k200: hi
+k200: whats the best way to check if array of hashes, contains a key and that key has a value?
+k200: in any of the hashes.
+None
+heartburn: ^-- // true is at least one element meets the requirements.
+heartburn: if*
+Scooby: Could someone please explain this (help).  I am learning AngularJS 2, and the class had explained that to use input properties you use  @Input() iLike = false; and then when consuming the component you set it via: [iLike]=&quot;tweet.iLike&quot;.  OK I understood that, but then later in another example the author does this @Input() title: string; and then to set that he does  title=&quot;Set title with no [ ]&quot;  One way he uses square brackets to set a proeprty and the
+Scooby: I played around with doing this [title]=&quot;Set title with [ ]&quot; and then it doesn't work.  I don't get it when and when do you use square brackets to set Input properites.
+uru: Scooby: The square bracket way will evauate the content of the &quot;&quot; as 'code' and allows for data binding, without it treates the value as a static string
+uru: `title=&quot;foo&quot;` is the same as `[title]=&quot;'foo'&quot;`
+k200: heartburn: thanks.
+Scooby: uru:  are you saying if you do this [test]=&quot;data.count : 0 ? &quot;true&quot; : &quot;false&quot;&quot;  vs test=&quot;this is a string&quot;
+Scooby: uru:  Thank You I get it now!
+yetitwo: hey everyone! i've got a question about directives. I've got a directive that takes two pieces of information from its parent as input, and I'd like it to make an API call when it's got those two pieces of information. Currently I've got a controller set up to make that API call, but it runs on page load, rather than when it has the API call's para
+yetitwo: meters available, which means it doesn't return anything useful. I suppose I could set up a watcher on those two variables, but that seems kludgy... any thoughts?
+jbloggs: Can anyone explain what the data-ng-animate=&quot;2&quot; attribute is about?
+jbloggs: I see this being applied to the ui-view divs when an animation has been triggered
+None
+ngbot: angular.js/master b54a39e Georgios Kalpakas: feat($http): remove deprecated callback methods: `success()/error()`...
+None
+ngbot: angular.js/v1.5.x 161f5ff Georgios Kalpakas: docs($http): add deprecation notice for `$httpProvider.useLegacyPromiseExtensions()`
+None
+ngbot: angular.js/master fbf30b2 Georgios Kalpakas: refactor(*): use the `toThrowMinErr()` matcher when possible
+ngbot: angular.js/master e8aebb3 Georgios Kalpakas: test(*): introduce the `toEqualMinErr()` custom Jasmine matcher...
+jason____: hi
+jason____: I need help in finding difference between two dates in angularjs controller
+GreenJello: jason____, maybe ask in ##javascript? that doesn't sound angular related
+jason____: I already did it in javascript but i cant get the dates values from datetime picker
+None
+ngbot: angular.js/v1.5.x 88e55a1 Georgios Kalpakas: refactor(*): use the `toThrowMinErr()` matcher when possible
+ngbot: angular.js/v1.5.x b7500d8 Georgios Kalpakas: test(*): introduce the `toEqualMinErr()` custom Jasmine matcher...
+nishu-tryinghard: what is the correct way to load data from backend which will be required in controller or factory/service.
+nishu-tryinghard: This data should be available to be used before a controller or service/factory is initialized.
+nishu-tryinghard: I came across method to create a root dummy parent route which loads all the data and in this way i can initialize the data for factory /service which will be used by its child routes which are the main app routes.
+nishu-tryinghard: And this root dummy parent will have a resolve which assures that data is initialized
+ASUChander: So I have a ui-grid definition (columns, etc.) that is used in a few different views. Is the best way to centralize it to use a factory to return a &quot;basic&quot; grid definition to use, or to just define the definition in a constant and then clone it in each controller that uses the grid definition?
+ASUChander: That is likely more of a style question...just wondering what might be best practice and why...
+uNd0xR: hi guys.. when trying to print a page in my angular application, i can only get it to show the visible content, and not what is present if scrolling further down a page. Not sure if this issue is with Angular in general or UI-Router perhaps
+uNd0xR: hi guys.. when trying to print a page in my angular application, i can only get it to show the visible content, and not what is present if scrolling further down a page. Not sure if this issue is with Angular in general or UI-Router perhaps
+None
+ngbot: angular.js/master 7bc71ad BobChao87: fix(ngModel): treat synchronous validators as boolean always...
+tona: hi everyone
+tona: how could i check if exist one image to set one defaul image in case  i am not able to find the first one, i tried to implement img  width=&quot;176px&quot; height=&quot;100px&quot; ng-src=&quot;{{ '/img/'+item.img+'.png'  || '/img/'+'gts-no-image.png'  }}&quot; :/img:
+GreenJello: tona, I think you need to listen for the error event, and update your controller
+GreenJello: then have the view react to that by changing the src
+GreenJello: maybe store the full url on the item, and then just update that in response to the error
+tona: do you have one exapmple
+tona: how :) ?
+None
+dogmatic69: I have a WS pushing data to my angular2 app, there are various channels it can listen on. Should I be building a service?
+dogmatic69: There would be a 1:1 mapping for  WS channel -: directive I guess, so it would be good to just be able to some how say 'x' directive uses 'y' ws channel
+FlavioZ: Hello all, I have a form that I need to reset after every submit. The form resets the first time, but if I submit again it does not. Does anyone has any advice for this? thanks in advanced
+subone: FlavioZ: how are you resetting it?
+FlavioZ: subone: I set the model input to default value {} and also myform.$setPristine() and myform.$setUntouched()
+subone: that's what I'm  doing
+subone: Must be something odd going on
+subone: Plnkr?
+FlavioZ: subone: Yeah, I thought the same, something odd should be happening, can't figure out what
+subone: Can you verify your &quot;save&quot; routine is being called on the time it isn't clearing the form? (cnsole.log)
+FlavioZ: subone: Sorry, I am not following you :(. how should I do that?
+subone: FlavioZ: I just meant whatever function is reseting the form, make sure it is being called

@@ -1,0 +1,793 @@
+zizzl: Hey guys, in order to get the animation classes (ex. '.ng-enter') on the ui-view element with ui-router, do I just need to include ngAnimate in my dependencies? I'm not getting it to show up
+bob_t: if you need to write code to work around a browser bug, is it best practice to try and detect the browser and only run the code on it, or just let all browsers use the same code
+bob_t: ?
+heartburn: bob_t: if you can come up with a solution that works consistently across all environments, i'd say it's a win.
+heartburn: otherwise, feature detection and edge cases all the way.
+heartburn: what's the bug you're dealing with?
+bob_t: heartburn: international api bug in IE/Edge
+bob_t: heartburn: specifically in Intl.DateTimeFormat.format
+bob_t: when you request mins or seconds alone, it gives you the entire date back
+bob_t: i believe its fixed in latest edge
+ashwinkumar: For angular 2 project. How can I give absolute URL for templateUrl
+Guest76123: hello
+rschoeneberg: hi, I want to make JSON data from a once only api request available to all components, is there any recommended way to do that?
+masak: theCole (who seems to be offline right now): thank you for all your help so far.
+masak: I agree that the student should re-work their approach.
+masak: still, this all leaves me a little bit unsatisfied as to why the binding doesn't work as originally stated.
+masak: at this point I'm hunting for pure understanding, in order to put the question to rest (and to warn future students off treacherous waters in a convincing way)
+None
+masak: I'd love some pointers from someone with an iron grip on AngularJS's rules for what can and can't bind
+masak: I'm familiar with the maxim &quot;don't bind to primitives&quot;, but I didn't take it as applying in this scenario (when passing a '='-style binding into a directive)
+None
+masak: I expect this type of data binding: `isChecked` (in $scope) -: `model` (in the directive) -: the checkbox input:
+masak: where did I take a wrong turn? :)
+None
+masak: remove the ng-repeat from that one, and it works o.O
+masak: am I to conclude that writing `model=&quot;isChecked&quot;` inside an ng-repeat like that binds not to $scope.isChecked, but to a local-scope `isChecked` inside the ng-repeat iteration?
+ngWalrus: masak  try binding it to something other than just scope in the controller
+ngWalrus: for example formOptions.isChecked for example
+masak: sure
+None
+ngWalrus: there's a modified example
+None
+masak: yeah, that works fine
+masak: not sure I grok why one would be fine and the other one not -- though I do acknowledge that's what my eyes are telling me
+None
+masak: anyway, since I've strayed from the original issue a bit, let me reconstruct some of the original code, which did not bind directly to a scalar in $scope
+None
+jalnt: this also works and is cleaner
+None
+masak: &quot;Whenever you have ng-model there&rsquo;s gotta be a dot in there somewhere. If you don&rsquo;t have a dot, you&rsquo;re doing it wrong.&quot; -- this seems to apply strongly. I have an ng-model inside the directive.
+jalnt: yep
+jalnt: it's because then it's an object property
+jalnt: which can be &quot;watched&quot;
+jalnt: or rather
+masak: thank you for sending that blog post my way
+jalnt: an object property is a reference that is always &quot;up-to-date&quot;
+masak: suddenly it feels like I've assembled enough clues -- I just need to process them and turn them into my own understanding now
+jalnt: let me write you something quickly
+masak: much appreciated.
+jalnt: well jsfiddle is crashing my browser lol
+jalnt: piece of shit
+ngWalrus: plunkr is better imo
+None
+icebox: (for Elarcis ^)
+ngWalrus: noice
+daedeloth: I want to run some code before the router kicks in
+daedeloth: what would be the best place for this?
+icebox: daedeloth: no answers yesterday?
+icebox: daedeloth: route or router?
+icebox: daedeloth: see onEnter hook
+Elarcis: Hi, fellow humans!
+None
+uru: Elarcis: Woof... I mean.. good morning.
+arlekin: uru: Good Meaowning
+Elarcis: zomg: r/TotallyNotRobots
+masak: Elarcis: greetings, fellow biological being.
+Elarcis: ok, lemme rephrase it
+Elarcis: Hi, fellow entities made of mostly energy!
+arlekin: Elarcis: we need to go deeper!
+uru: arlekin: Good morning, Neighbour
+Elarcis: ok I'm in good mood today
+arlekin: uru: Are we neighbours ?
+uru: arlekin: In an internet sort of way I supose
+uru: Elarcis: This is not allowed. Go home and think about what you've done.
+Elarcis: we've been switching the model part of the app to a fully OOP design, implemented recursive computations, highly complex object structures, lots of checks, sanitization, data manipulation... but the base app was so shittly developped, we still managed to improve performances
+arlekin: Elarcis: wow, thats like first time i hear that from you in like ever
+arlekin: lag
+arlekin: my boss just &quot;plugged router to another socket, just for a sec&quot;
+ngWalrus: OOP is garbage
+arlekin: and you should feel garbage
+ngWalrus: oop is just one letter away from poop
+Elarcis: ngWalrus: your life is garbage
+Pyrrhus666: humanity is garbage
+ngWalrus: Functional programming literally has the word 'Fun' in it
+Pyrrhus666: and good morning :)
+arlekin: ngWalrus: illuminati confirmed
+ngWalrus: checkmate atheists
+arlekin: Pyrrhus666: good morning
+zomg: ngWalrus: in french OOP is actually POO
+zomg: :D
+Elarcis: ngWalrus: stop doing functional programming propaganda
+ngWalrus: never
+arlekin: zomg: Today I Learned something :D
+Elarcis: am french, can confirm.
+Elarcis: You know what the functional programmer says when they made a mistake?
+Elarcis: &quot;OOPs!&quot;
+ngWalrus: that was terrible
+ngWalrus: I love it
+arlekin: ngWalrus: i was just gonna write &quot;but in a good way&quot;
+icebox: Elarcis: hey... see logs... a link for you :)
+None
+Elarcis: icebox: ho?
+Elarcis: icebox: thanks!
+Elarcis: icebox: ah, yes
+Elarcis: icebox: you know one thing I should have tested: can you await a synchronous function
+Elarcis: icebox: and can you override an async function with a synchronous one
+Elarcis: icebox: anyway, because we're doing highly generic code, async/await wasn't much of a great idea in this case, because we'd have had to put await before every single get call :D
+Elarcis: icebox: but yeah, async/await is definitely sexy, and I can't wait for other browsers to implement it
+icebox: Elarcis: I see
+zomg: I'd imagine awaiting a non-async function would lead to an error
+zomg: well, I guess it depends on specs
+daedeloth: icebox, sorry got distracted, before router launch (so bootstrap basically)
+daedeloth: I need to load some user information before the router kicks in
+zomg: if it gets transpiled by babel or something into promises then it could possibly be problematic for non-async/non-promise-returning functions
+zomg: unless they were to be wrapped in a promise anyway
+daedeloth: I guess it would be cleaner to load user data when needed, but that's not how the app was built right now :)
+zomg: daedeloth: one way to do that would be to have a &quot;loading&quot; route
+daedeloth: how would that work?
+zomg: you just make the default route do loading of data and then redirect to the actual route
+Elarcis: daedeloth: when the promise is resolved, change the route to your actual app
+daedeloth: what if a user goes to the non-loading route straight away? :)
+zomg: (there might be some other way of doing it as well, not a huge expert)
+Pyrrhus666: daedeloth: or use the resolve feature of your router to wait for async loading of user data ?
+daedeloth: oh I don't know that one
+Elarcis: zomg: it's a bit crude, but what I have here is a dimmer on my main view that is only enabled when the function isReady() of a service returns false
+daedeloth: Pyrrhus666, is that CanActivate?
+Elarcis: daedeloth: no, it's resolve
+daedeloth: in angular2?
+Elarcis: daedeloth: ah
+daedeloth: yea sorry one of those hipsters :)
+Elarcis: &quot;Anything you await is passed through Promise.resolve(), so you can safely await non-native promises.&quot;. well, got that cleared up cc zomg, ngWalrus, icebox
+arlekin: guys, on another note, anyone know some piece of software to get this freaking bluetooth working on the god forsaken ubuntu ?
+Pyrrhus666: arlekin: the normal bluetooth isn't doing it for you ?
+arlekin: Pyrrhus666: its messed up piece of shit
+Pyrrhus666: (I think the default on ubuntu is to use the bluez stack, which works for me)
+Preuk_away: arlekin: ...windows? :)
+arlekin: i don't know, maybe i should have carved pentagram in my desk after all
+arlekin: Preuk_away: god forbid, even worse than ubuntu
+Pyrrhus666: it's like scsi in the old days : a chicken or goat needs to be sacrificed...
+Preuk: bluetooth is hit or miss on linux, depend on controller
+Preuk: some work just fine, some others not so much
+Pyrrhus666: Preuk: exactly like in windows :)
+arlekin: Preuk: but whyyyyy, its not like its some hip new tech
+arlekin: how hard could it be
+Preuk: Pyrrhus666: yep, you usualy get the magic crapware CD with whatever trojan you need to make it work
+Preuk: drivers issues
+zomg: Elarcis: ah, yeah figured it might resolve any value
+Elarcis: icebox: shouldn't you be packing things?
+Pyrrhus666: arlekin: you could try bash on ubuntu on windows. it's weirdly funny ;)
+arlekin: remember those days when ubuntu would automagically have all drivers needed for pretty much anything ?
+Elarcis: icebox: or at least stand completely naked in a completely empty office?
+zomg: arlekin: are you from the future?
+zomg: :p
+arlekin: Pyrrhus666: so you are trying to push on me windows 10 ? you ain't no friend
+arlekin: friends dont let friends use win10
+Pyrrhus666: arlekin: I'm beyond the OS wars. I just use them all.
+Preuk: arlekin: yep, it usualy does, except when it doesn't ;)
+zomg: and yeah when even GPU drivers are a total hit or miss on linux
+arlekin: zomg: thats actually philosophically interesting question
+zomg: I would not find it weird at all that some rando bt adapter didn't work
+zomg: :P
+Elarcis: arlekin: I use W10 and I find it pretty enjoyable. except when it nags me to rate the OS or an app I don't even use.
+Elarcis: linux is hit or miss. I sometimes installed a distro just to have it not boot two boots later, without updating anything in between
+Preuk: Elarcis: the only thing that keeps me away from W10 is the damn autoupdate that can't be blocked, limited or whatever
+Preuk: come back from holidays : start PC : wait 2 hours for update to run
+arlekin: Preuk: im just waiting till after first service pack, maybe then will be better
+Elarcis: Preuk: ah, that
+icebox: off... I need to unplug the box... see you later (maybe) :)
+Elarcis: Preuk: how comes your PC takes 2h to update? :D
+icebox: Elarcis: ^
+Pyrrhus666: Preuk: in practice, that's not a very big deal. the only update so far that took real time was the anniversary update,which was more like a complete windows install
+Elarcis: ^
+Preuk: crappy net connection, no SSD, 2 months without starting
+icebox: Elarcis: &quot;I k...&quot; :P
+Pyrrhus666: arlekin: service packs aren't a thing anymore ;)
+zomg: 2 months on holiday?
+zomg: if you're rich enough to afford 2 months holiday
+zomg: you're rich enough to wait 2 hours
+zomg: lol
+Elarcis: Preuk: so you mean you made &quot;stop and update&quot; 2 months ago, then had it update when booting it back :D
+Preuk: not holiday, but a coworker coming back from baby leave had a nasty surprise
+arlekin: fuck it, im restarting
+Elarcis: Preuk: THINK OF THE MAINTENANCE NEEDED BETWEEN ALL THOSE VERSIONS
+zomg: Preuk: so they had an excuse to get paid for fiddling their thumbs for 2 hours
+Preuk: net access overloaded the whole day, update running for a couple hours the next morning
+zomg: sounds like a good time
+zomg: :D
+Elarcis: the firewall is blocking all requests to firefox's website all month but one day, because 1/3rd of the network traffic is Firefox checking its version :D
+zomg: wtf
+zomg: :P
+Elarcis: ^mfw
+Preuk: Elarcis: have to monitor that too, might be a problem for us too
+zomg: how could it possibly take that much bandwidth
+zomg: a 56k modem should be enough for a version check
+zomg: :D
+Preuk: depends on how often you do check
+arlekin: whattayaknow
+arlekin: restart helped
+Preuk: arlekin: wifi/bluetooth/webcam/3d cards have a long history of not being properly awaken when resuming from sleep/hibernation
+Preuk: might be linked?
+arlekin: Preuk: might not, since im dualbooting, therefore im out of cool kids' &quot;im restarting my box once a year&quot; club
+Preuk: laptop?
+arlekin: Preuk: im using one, yes
+Pyrrhus666: arlekin: ubuntu nags at least 2 times a week to restart because of kernel updates.
+Preuk: had quite a few wtf moments myself in the past with &quot;reboot&quot; not being the same as &quot;shut the damn thing off and start again&quot;
+arlekin: anyway i hear there might be no cool kids anymore soon given how apple behaves
+Preuk: was with a crappy viedo card
+Pyrrhus666: arlekin: next year all the cool kids are using a surface 4 ;)
+arlekin: anyway what was it recently, i hear there was a microsoft event and an apple one
+arlekin: was that their yearly keynote or something
+arlekin: ?
+arlekin: i mean, how do you guys even keep up with that stuff ?
+None
+Pyrrhus666: arlekin: yes, to present the surface 4/surface studio (MS) and the new macbook pro (apple)
+Pyrrhus666: arlekin: hackernews, mostly
+arlekin: Pyrrhus666: i stopped reading hackernews when my pocket grew to about 200 articles
+Pyrrhus666: arlekin: don't use pocket, wouldn't know. I just skim the headlines 2 or 3 times a day.
+arlekin: Pyrrhus666: well... on HN there are lot of stuff regarding phisics, biology, neurology, genetics, psychology, psychiatry, ethic, AI, etc
+arlekin: and being obsessivly interested in everything it is hard stop for me
+Preuk: arlekin: what /. used to be 10 years ago?
+Pyrrhus666: arlekin: I can see that happening yes. I'm aware of the fact that I miss a lot, but the bits I get are still interesting
+Pyrrhus666: Preuk: better than slashdot ever was, imho
+Preuk: gotta try that
+Pyrrhus666: Preuk: only nitpick : it's a YC thing, so pretty startup (and sometimes VC) related.
+arlekin: lol
+ngperfex: iam trying to send a object to my get api, when the api receives the data the sub objects which are one level below the root are stringified how i see that i either get the whole object as stringified.
+arlekin: new macbook pro will cost about 11k PLN
+arlekin: last time i checked it was about 8k
+arlekin: so its almost 40% more expensive
+arlekin: thats not even funny anymore
+Pyrrhus666: arlekin: with a 2TB ssd, yes. go for 1TB and it goes down 40% ;)
+arlekin: Pyrrhus666: for 512GB
+Pyrrhus666: arlekin: ah, sorry, nothing said then ;)
+Pyrrhus666: btw : surface 4 is even more expensive ;)
+arlekin: Pyrrhus666: didnt check yet
+arlekin: i dont even know what that is frankly
+Pyrrhus666: my 3 year old lenovo i7 will have to do for another 3 I think :)
+ngperfex: here is the object in  gist
+None
+arlekin: Pyrrhus666: what was the name of that microsoft event ?
+arlekin: Pyrrhus666: nvm
+arlekin: found it
+Pyrrhus666: ngperfex: that json is broken
+arlekin: i see that microsoft goes the apple way with that design
+ngperfex: Pyrrhus666: yes thats the issue. how do i make sure that angular sends them all stringified.
+ngperfex: thats how iam getting the params on my api side
+Pyrrhus666: ngperfex: you want to get an object that has properties which are in turn strings representing json objects ?
+None
+ngperfex: and the previous gist value is what iam getting at my api. So i was expecting that  the api would get the JSON but iam getting the one in the gist posted first. So that how i will get it?
+Pyrrhus666: that last gist is not actually JSON, it's the acual javascript object. so you're saying that when you send that object to your backend, the backend receives the weird json in the first gist ?
+zomg: ngperfex: how are you sending it?
+None
+ngperfex: 7100fae537726f310c077d1
+ngperfex: zomg , Pyrrhus666 ^^
+zomg: Yes I'm more interested in what the $http call looks like at this point :)
+zomg: If you're actually sending it as a GET request then that's probably the issue here
+zomg: because querystring parameters cannot be &quot;nested&quot; in this way and it probably serializes the values as ?x=y&amp;z=foo&amp;etc=whatever
+zomg: so you end up with x=jsonblob&amp;y=jsonblob2&amp;z=jsonblob3 which then would get parsed on the server quite likely to look like what you're getting
+ngperfex: yes, so what is the correct to send the object? or should i use avoid using object. If i do that then it ll be cumbersome at the backend.
+zomg: in general if you want to send more than a handful of values, it might be a better idea to use POST
+zomg: also because querystrings have a length limit
+zomg: (which can vary depending on browser, any proxy involved, any web server involved, etc.)
+ngperfex: there is  a requirement that these params are to be shown as url encoded so i cant use POST. And i that length limit might be an issue
+zomg: Why do they need to show up in the url? o_O
+zomg: Do they realize that some browsers actually hide the querystring by default, or that users don't understand querystrings?
+zomg: :P
+zomg: but if you absolutely cannot change that, then you could try sending it as an actual json blob in the url
+zomg: ie. make it params: { data: JSON.stringify(yourObjectGoesHere) }
+zomg: and then parse it on the server
+zomg: or alternatively, flatten the structure so that there are no nested values
+ngperfex: okay that loooks good let me see. But we are making AJAX reqest so how doesnt the url get appended with the query params?
+ngperfex: does the*
+zomg: What do you mean?
+Pyrrhus666: I'd go back to the person setting that idiotic requirement and slap them.
+zomg: Yeah that sounds like the weirdest requirement I've heard in a while =)
+ngperfex: Pyrrhus666: yes iam not that experiene but i even i thought why they have such requirement for a SPA app.
+zomg: Probably from someone who has absolutely no idea about what they're saying...
+zomg: *especially* when it's an ajax request
+zomg: you can't even see the ajax url in the browser to begin with
+zomg: :D
+ngperfex: yes same here zomg
+Pyrrhus666: url params make sense when you want idempotent urls (or whatever you call them). makes no sense with ajax
+ngperfex: yeah maybe i can just make request to the route with those params but that doesnt make sense to me when using angular and especially when using ajax
+zomg: here's what you should do
+zomg: tell them you implemented it
+zomg: and when they go and test it and they don't see it
+zomg: just tell them their browser hides it
+zomg: that's it
+zomg: :D
+Pyrrhus666: hehe :)
+zomg: I'm like 90% convinced that they'll accept that answer
+ngperfex: ahah ty this was more helpful :D
+Pyrrhus666: and then have them come back when it breaks because the ulrs get too long...
+Pyrrhus666: and then offer to change the scheme so the params are actually a base64 encoded zipped version of the onbject.
+ngperfex: am i correct on this? when trying to implement filter which has lot of values i have to use POST as the GET has limit on characters?
+Pyrrhus666: ngperfex: sort of. then again, sending objects via GET is already way beyond my limit ;)
+zomg: there's a limit of around 200-300
+zomg: that's around the safe zone for GET
+zomg: *technically* there is no limit, but there are cases where browsers truncate it and some servers don't accept very long URLs
+zomg: and there's no way of knowing for sure what the behavior is going to be, so it's safer to not push the limits too much
+ngperfex: so how come websites like amazon have such long url params when using their filter?
+arlekin: what the point of &quot;Im not a robot&quot; Captcha if i can reach it via Tab and mark it via space....
+arlekin: insecurity by accessibility i guess...
+Pyrrhus666: ngperfex: they do that so that if the url gets shared, the result is the same (as expected by users)
+ngperfex: i mean to ask how not why
+zomg: I've never noticed amazon's urls being that long tbh
+zomg: and frankly today's browsers might not really have those limitations anymore anyway
+Pyrrhus666: ngperfex: they have a simple list of params, not objects in the url. in angular terms, before json, their filter is one flat object with some properties
+ngperfex: so i should just avoid using object and i can populate the paramas in the address bar using state provider or $loctation.
+Pyrrhus666: ngperfex: normally, using a router, it would be stateparams, yes
+Elarcis: three words: base64 url parameters
+arlekin: bum
+arlekin: just checking if im alie
+arlekin: *alive
+Pyrrhus666: arlekin: you like the cake
+Elarcis: arlekin: you're dead.
+Pyrrhus666: *you're
+arlekin: Pyrrhus666: ha! punny...
+Pyrrhus666: puns are the juices that keep me flowing
+Elarcis: Pyrrhus666: for me it's another kind of juice
+Elarcis: Pyrrhus666: milk!
+Pyrrhus666: another fantasy dissolved...
+Guest97057: hi everyone
+Guest97057: hi
+Elarcis: hi Guest97057
+arlekin: dammit those Dont Repeat Yourself rules...
+arlekin: Its always like that
+arlekin: i made neat general service to do what i what
+Elarcis: arlekin: yeah?
+arlekin: and now, in one of the 7 things i got covered by that service
+arlekin: i need to do something peculiar
+arlekin: but i dont want to ruin all the rest of things
+Elarcis: arlekin: time to split code :D
+arlekin: its like im building house of cards
+Elarcis: arlekin: and possibly do OOP
+arlekin: and i run out of cards
+arlekin: so im trying to reuse those from the bottom
+arlekin: Elarcis: fuck the OOP
+Elarcis: arlekin: I wonder why people hate OOP here so much :D
+Pyrrhus666: arlekin: a wrapper method doing the peculiar and internally calling the original method ?
+Elarcis: I mean it's not like it's what made my IT studies fun AT ALL
+arlekin: Pyrrhus666: i guess... ehh... too long i ve been away from my homeland
+arlekin: now it all looks different
+arlekin: maybe it changed ?
+arlekin: or maybe i changed and therefore my view
+Pyrrhus666: arlekin: or maybe _you_ have changed ;)
+Pyrrhus666: oh duh. you said it.
+Elarcis: &quot;the code I wrote six months ago is horrible, and I'll say that again in six months.&quot;
+arlekin: ehh... those hands will forever more be the hands of a man who wield node
+Pyrrhus666: Elarcis: yup. the eternal hell of every programmer :P
+arlekin: *wielded
+arlekin: just today i tried to use &quot;ng-for&quot; directive for some reason...
+arlekin: in angular 1.5
+arlekin: ....
+arlekin: boi
+None
+Elarcis: &quot;Ben Nadel. Please make sure you spell the family name right.&quot;
+arlekin: Elarcis: b'sides, its more like &quot;the code i wrote last week is horrible&quot;
+Elarcis: arlekin: then you might have a problem
+Elarcis: arlekin: either you're learning blazingly fast, or you might not think your work through enough :D
+arlekin: Elarcis: or im either doing things abhorrently slowly because im stubborn to do it right, and nobody is happy, or im just &quot;making it work&quot; which i do quite fast, and then the only unhappy person is myself
+None
+Elarcis: arlekin: ah, but that's a process that takes time. I've only been in the job for two years, but I'm slowly learning how to make things the rightest possible, while not spending too much time designing the perfect-absolute-ultimate artistic design
+Pyrrhus666: icebox: read that yesterday. nice one :)
+icebox: Pyrrhus666: agreed
+arlekin: Elarcis: well, then i guess, deep down, i have a soul of art major (without fries tho)
+arlekin: im all about design
+arlekin: its funny though
+arlekin: because if you think about it most of the code its about 80% architecture
+Pyrrhus666: icebox: one of the comments on HN : &quot;I wrote a json parser, I've never had problems with it&quot;. &quot;your parser segfaults on 4 of the tests, hangs on 2 and gives incorrect responses for the rest&quot; :)
+icebox: Pyrrhus666: :P
+arlekin: i mean - the code doing the buisness logic (so called) is usually not that big part of the whole codebase
+Elarcis: arlekin: sometimes, the most elegant solution is not the one that is the most perfectly designed, but the one that's the simplest to use :D
+icebox: Pyrrhus666: usual conversation between programmer and QA folks :)
+arlekin: Elarcis: perfectly designed by definition is simple to use
+Pyrrhus666: icebox: indeed :)
+Elarcis: arlekin: example: our JS expert designed a system with zero code repetition. It was the most awfully complicated thing I ever had to use
+arlekin: Elarcis: the fact that maybe design wasn't separate painful part doesnt make the solution not-perfectly-designed
+arlekin: Elarcis: well, because no repetition isn't good thing
+Elarcis: arlekin: too much negations, you lost me
+Calinou: Elarcis: I like seeing people whine about OOP, while not giving any concrete solutions for eg. game development
+Calinou: &quot;DO IT IN C LOL&quot;
+Calinou: yeah&hellip; that worked in 1999
+Elarcis: Calinou: &quot;BUT FUNCTIONAL PROGRAMMING&quot;
+arlekin: Elarcis: something can be perfectly designed even when there was no conscoius &quot;lets make the perfect design&quot; part in the process
+arlekin: OOP isn't inherently evil
+Preuk: Calinou: you do ng too?
+Calinou: no, but I considered it :)
+Preuk: how many tech do you use? o_O
+Calinou: since I no longer remotely need to work with Ionic I can ditch it probably
+Calinou: &quot;a lot&quot;
+arlekin: its just the design assumptions related to it can fuck you over if you ain't critically thinking enough
+Elarcis: arlekin: usually I do my design in reverse: I code a fake set of lines describing how I'd like my feature to be used, then I ask myself &quot;okay, how am I going to do that&quot;
+Elarcis: arlekin: which led to OOP-friendly truly synchronous async calls yesterday, and yes I'm still very proud of it.
+Elarcis: god, I'm such a prick these days.
+Elarcis: I love myself.
+arlekin: Elarcis: don't worry
+arlekin: Elarcis: you are a prick on all days
+Elarcis: arlekin: aw, you're just being nice
+arlekin: Elarcis: oh you know me so well... :3
+Pyrrhus666: get a room
+arlekin: rotfl
+arlekin: btw im looking at my angular code, and the sheer amount of it makes me doubt whether it was actually me who wrote it
+smiche: someone using protractor on centos?
+Elarcis: smiche: no, get lost!
+smiche: :o
+Elarcis: sorry. arlekin has been /too nice/ today
+smiche: I am already lost any ways
+Elarcis: lunch time!
+arlekin: Elarcis: don't choke on your food!
+arlekin: it would be a shame
+icebox: ng 2 2.1.2 (and router 3.1.2) released
+arlekin: ...
+arlekin: yay...
+arlekin: there should be an emoticon for moderate enthusiasm
+wafflejock: *-:^]-|--
+irfan_: hello all
+wafflejock: o/
+None
+ngbot: angular.js/Narretz-chore-delete-gdocs 619baed Martin Staffa: Delete gdocs.js
+_eddy: hi guys, i will really like to know how to do authenication properly
+_eddy: with angular with a backend application which as C# or PHP
+icebox: _eddy: as usual... angular doesn't change the game
+None
+icebox: arlekin: they didn't merge a PR in the router, so I stuck at 3.0.2... 2.1.2 fixes a few interesting things
+icebox: Elarcis: thanks
+Elarcis: I know, I'm great
+icebox: Elarcis: you got &quot;I k...&quot; ill :)
+Swap: Hello
+icebox: hi
+Swap: what is controller
+None
+Elarcis: very nice people
+icebox: sure
+Elarcis: also they go through the hassle of searching for an angularjs IRC channel before even reading any angular tutorial
+icebox: ah... good point
+Elarcis: I know
+Pyrrhus666: that was for icebox to say, no ? ;)
+icebox: Pyrrhus666: I said it... they got &quot;I k...&quot; ill :)
+Pyrrhus666: ah yes, true :)
+daedeloth: hm now I seem to have 2 instances of my user service
+Elarcis: daedeloth: angular2 ?
+daedeloth: yea
+daedeloth: weird, I was providing the service from both the component as the module
+daedeloth: seems like it created the service twice
+Elarcis: daedeloth: yes
+daedeloth: when I removed the service from the component, it correctly used the module defined one
+Elarcis: daedeloth: that's how it works
+daedeloth: cool
+daedeloth: so you can have &quot;local&quot; and &quot;global&quot; services
+umdstu: is there a clean way to use the minified js file in websocket-rails-js instead of using the .coffee files that need to be compiled ?
+Elarcis: daedeloth: yes
+None
+None
+arlekin: what do we think of i3 window manager
+None
+Pyrrhus666: arlekin: is that the tiling one ?
+arlekin: Pyrrhus666: yup
+Pyrrhus666: I played with it, but couldn't get used to it. I have 4 monitors, and about 5 desktops on my main one. no need for tiling. I think it looks cramped and ugly, but that's me
+sl33k: My directive is not getting escaped. I used a directive on stackoverflow as well as pre:code:. What gives?
+sl33k: This is my directive
+sl33k:             angucomplete-alt id=&quot;ex1&quot; placeholder=&quot;Search countries&quot; pause=&quot;100&quot; selected-object=&quot;selectedCountry&quot; local-data=&quot;countries&quot; search-fields=&quot;name&quot; title-field=&quot;name&quot; minlength=&quot;1&quot; input-class=&quot;form-control form-control-small&quot; /:
+Pyrrhus666: sl33k: &quot;not getting escaped&quot; ?
+sl33k: I want the HTML to show up as it is
+sl33k: like pre: tags
+Pyrrhus666: got plunk ? no real clue what you're getting at here...
+icebox: Pyrrhus666: in markdown ''' my code ''', but in SO
+Pyrrhus666: ah, so this is an SO editor issue ?
+sl33k: icebox thats exactly what I mean
+sl33k: Not SO but my page
+None
+icebox: sl33k: you need to transform the text you put in a code or pre tag, if it is html
+icebox: sl33k: it is not enough how I did in the plunker above
+Pyrrhus666: ah, he expected pre: or code: to do that for him.
+icebox: sl33k: and generally speaking this is an html question :)
+icebox: sl33k: if you refresh the plunker you see what you need to do to display html in code tag
+Elarcis: I'm curious about Dart, though
+icebox: me not
+Elarcis: is it yet another coffeescript, or is it something else?
+None
+Elarcis: icebox: a new coffeescript then, just made by google :D
+aparupa: hi
+icebox: off... boxes gone... see you next week
+Pyrrhus6661: nice weekend icebox
+icebox: thanks... bye
+sl33k_: I want to have the link of ng-view hidden when I click on it and the new page renders. I don't need the usual upper nav where the links or routes are present
+sl33k_: Transition to a new page
+arlekin: can i somehow manage to make transclusion without this pesky ng-transclude tag ?
+arlekin: it fucks up my responsive design
+arlekin: *dont remember when was the last time i had actual angular question, wow!*
+arlekin: maybe if i used it as an attribute...
+baako: Pyrrhus6661, hi
+baako: do you use angular with any server side application?
+baako: if yes how do you handle authentication
+Pyrrhus666: baako: generate JWTs server side and use those in all $http calls.
+Elarcis: ^
+Elarcis: though JWT are only a way to convey the authentication iirc
+Pyrrhus666: Elarcis: they can have payload too. and they can self-expire and all that.
+Elarcis: Pyrrhus666: yeah right
+Elarcis: Pyrrhus666: but the payload is just a token the server can use to see if the user is authenticated right?
+Elarcis: Pyrrhus666: well *can contain
+Elarcis: Pyrrhus666: I know you can put anything in it
+wafflejock: arlekin, you don't have to use ng-transclude you can manage it yourself
+wafflejock: arlekin, when you have something transcluded you can have a transclude function as a param to your link function and can use it to create/insert the transcluded stuff
+arlekin: wafflejock: prolly, anyways i did use it as attribute and it solved my issue
+arlekin: wafflejock: that was response to your first line
+arlekin: to second i need to tell you i was talking about the transclusion directive and NOT about transcluding in custom directive
+wafflejock: arlekin, hmm never used transclusion outside of custom directives didn't realize there was really a use case for it on it's own
+Pyrrhus666: Elarcis: it contains claims that should be trustworthy because they're signed and verifyable. apart from that, it could be anything yes :)
+None
+mwalters: Question, if anyone could spare a moment. Angular2 (TS). Is there a compelling reason to use ngOnInit over a component class constructor if there's no reason I *couldn't* use the constructor?
+wafflejock: er you're own directive.. have to be more specific I guess since there are also components
+Elarcis: Pyrrhus666: so basically only the server can generate a JWT, but everybody can read it and verify the JWT has been emitted by the server?
+Elarcis: god I can't work
+arlekin: wafflejock: i have a hang on things with components and directives, though thanks for concern :D
+Pyrrhus666: Elarcis: in some circumstances, yes (public/private keys). the way I use it (secret on the server) only my server can decode them and verify the claims.
+Elarcis: Pyrrhus666: so you cipher it server-side?
+Pyrrhus666: Elarcis: the token as a whole could be hijacked though. so it's expiration is pretty short.
+Pyrrhus666: Elarcis: yes. but you could also use private keys to sign them, so everybody having the public key could verify them.
+Elarcis: Pyrrhus666: I guess so
+Elarcis: Pyrrhus666: except if a hacker replaces the client's public key with their own and generates a fake JWT with the corresponding private key
+Elarcis: HA!
+Elarcis: except it would be useless
+Elarcis: but HA!
+Pyrrhus666: Elarcis: that's the same with ssl. if your keys are hijacked, you're fucked.
+Pyrrhus666: which is why CA's exist and key-revocation is a thing...
+arlekin: i'll tell y'all - some day we need to do something about the whole security thing, because current status quo is unsustainable
+Pyrrhus666: arlekin: is it ? how so ?
+arlekin: Pyrrhus666: there is planty of things where you need to make an account, right ?
+arlekin: and its a big no-no to use the same password everywhere, right ?
+arlekin: and being hostage to some google or other facebook with access to all the other things isn't such a great situation either
+arlekin: same goes with password managers
+arlekin: the &quot;password notebooks&quot; (like the old, paper ones) are insecure by design and nature pretty much
+arlekin: so the only solution is to remember everincreasing amount of passwords
+Pyrrhus666: arlekin: in a sense, it's always the human that's the weakest link ;)
+arlekin: and not only remember the password itself, but also to which service it relates
+wafflejock: arlekin, use a password manager
+wafflejock: arlekin, I use keepass
+arlekin: therefore we either need to be really good at that, which for some people is plainly impossible, or something needs to change
+arlekin: wafflejock: and it certainly simplifies things, but you know - single point of failure yada yada
+wafflejock: arlekin, yeah only downside I see really with keepass is having to manually sync or trusting some syncing solution or rolling your own... basically not convenient
+arlekin: wafflejock: there you go
+wafflejock: but someone would have to steal my db file steal my key and know my password
+wafflejock: lastpass or onepassword or the like seem decent too
+Pyrrhus666: 2FA for your db
+wafflejock: so long as it does the encrypt/decrypt locally I feel mostly okay about it
+Elarcis: arlekin: use a mnemotechnic you keep to yourself to find any password with any service ;)
+arlekin: well of course it always question of &quot;how paranoid you are today&quot;
+Elarcis: arlekin: even if I don't have an account for a service, I know exactly which will be my email address and my password
+arlekin: because for the most part prolly you couls use one password for everything and be fine with it
+Elarcis: arlekin: and only someone in my head will be able to find it
+arlekin: but you know... if someone would like to approach things really &quot;right way&quot; there is none i guess
+Elarcis: arlekin: (without hacking it, I mean)
+Pyrrhus666: Elarcis: and when your algorithm is hacked or forced from you, you're totally fucked. like with any other means :)
+wafflejock: arlekin, eh I wouldn't do that places lose them all the time, LinkedIn OPM hack Sony hack and on and on
+Elarcis: Pyrrhus666: hacked, there would be very fat chances, forced from you, probably
+wafflejock: arlekin, I have credit monitoring forever at this point with all the letters they send me about systems that have been compromised :)
+arlekin: wafflejock: credit what ??
+wafflejock: arlekin, every time one of these places gets hacked they say you can sign up for free credit monitoring for a year or whatever where a company will let you know if someone is stealing your identity or opening accounts in your name
+wafflejock: arlekin, happened to me with the OPM and I think Adobe before that
+arlekin: wafflejock: lol
+wafflejock: yah super reassuring :)
+wafflejock: arlekin, I'm mostly paranoid about bank accounts or any finance stuff always use keepass for those things
+Elarcis: Pyrrhus666: I wonder if you manage to have a random book, being able to define your password where each letter is picked from a specific page, specific line number and specific index
+Pyrrhus666: Elarcis: that's just a single level of obfuscation. would that really get you any extra security ?
+Elarcis: Pyrrhus666: I mean for finding out my algorithm
+Elarcis: Pyrrhus666: nothing is secure, we're all beings made of energy and the universe is finite
+Elarcis: what's the point of security
+Pyrrhus666: ah ok. that could work :)
+Pyrrhus666: dunno, I don't really care apart from my bank and paypal I use the same pws everywhere.
+Pyrrhus666: most accounts have no or a fake identity. I don't do social media.
+Pyrrhus666: I vpn everywhere. my mobile is anonymous.
+arlekin: Pyrrhus666: there aint no thing as fake account on fb
+Pyrrhus666: arlekin: sure. I have two.
+Pyrrhus666: both in names of dead celebrities
+arlekin: Pyrrhus666: well you gotta know that your personal details like birthdate and name are the least interesing information about you
+Pyrrhus666: fb : &quot;are you sure you are 104 years old ?&quot; me : &quot;sure&quot;
+Preuk: arlekin: the point of a fake account is to be short-lived
+Pyrrhus666: those accounts have no identifiable data whatsoever.
+arlekin: Preuk: didn't no that
+Pyrrhus666: and also that, yes.
+Elarcis: I want to be in week-end
+Elarcis: 4 days, geez
+Pyrrhus666: I'm already there, I feel.
+arlekin: Elarcis: w00t ?
+arlekin: its friday brah
+Elarcis: arlekin: no, we're tuesday
+arlekin: does France have some other weekday system than the rest of the wordl ?
+None
+Preuk: nov 1st is a holiday in some parts
+Elarcis: anyway, my week-end is 4 days long
+Elarcis: not my week
+arlekin: Elarcis: that explains why you are such a prick
+None
+heartbur1: fuck off both you and your filthy es6 lol.
+heartbur1: not related to the previous chat log, just in case.
+Pyrrhus666: heartbur1: angular is touted as an opinionated framework. this confirms it.
+None
+heartbur1: yeah, that's the reason i ditched it.
+heartbur1: the opinions become way too fucking strong.
+arlekin: for a proffession with such great communities we do love our flame wars
+Pyrrhus666: heartbur1: ah, so you're only here to flame, good to know ;)
+heartbur1: well...
+arlekin: Pyrrhus666: aint we all ?
+arlekin: :D :P
+Pyrrhus666: I'm here strictly for the sex.
+arlekin: Pyrrhus666: well, thats most of the traffic here nowadays it'd seem
+Pyrrhus666: arlekin: only innuendo, though.
+arlekin: Pyrrhus666: its enough ain't it ?
+heartbur1: &quot;old Angular was very popular in such shops because of IoC and service factories. Now it requires java-like language on top of javascript, with type system designed primarily for autocomplete in IDE to work&quot;
+Pyrrhus666: arlekin: I suppose. enough for a normal workday :)
+arlekin: heartbur1: it does is true that its hard to imagine writing ng2 in something like vim without tons of plugins
+heartbur1: i did exactly that for about half a year.
+arlekin: heartbur1: no surprise you need to vent then
+heartbur1: not that many plugins (syntastic + some typescript syntax hilighting)
+heartbur1: but i quit mostly beacuse of ts, yeah.
+Preuk: i'm still amazed by the way an awful lot of devs can't make the difference between a text editor and an IDE
+heartbur1: or, to be specific, because of 'over-engineering'
+Pyrrhus666: Preuk: well, when I did Java it was a neccesity : picking a method that exists in like 50 libs would be hard otherwise :)
+Preuk: i can't imagine writing sh scripts in an IDE, but I can't either consider writing OO code without an IDE
+Pyrrhus666: Preuk: he, that about covers it, yes :)
+Preuk: yep, the right tool for the job, no golden hammer
+Preuk: (easy to say, freaking hard to live by)
+heartbur1: right. vim with plugins, and vim without plugins.
+Preuk: heartbur1: i've been looking for a long time for a plugin set that could provide me with Java IDE basics, with a good AST, refactoring, references search, etc.
+Pyrrhus666: heartbur1: I love vim. but it 's never a replacement for an IDE, no matter how many plugins you add.
+Preuk: if you know of one, i'd be happy to try it
+heartbur1: i'm pretty sure you can make vim to behave like a proper ide, there's so much stuff written for it.
+Preuk: heartbur1: problem is useability; nobody could ever give me precise referecnes for a toolset that could help me with my workflow
+heartbur1: although i mainly deal with js so yes, my setup is pretty simplistic.
+Pyrrhus666: heartbur1: you're welcome to try. I won't believe you without proof ;)
+Preuk: i just love vim, really... but i can't speed half of my time working on my pseudo-IDE setup
+arlekin: Preuk: same
+Preuk: otoh i can't stand waiting for an IDE to load, parse, chew and spit back my source file when dealing with a json, sh, wml, or other &quot;simple&quot; file
+GreenJello: I've spent maybe 8 hours configuring vim over the 5 years I've been using it
+GreenJello: it's pretty good out of the box...
+Preuk: yep, but not for OOP, especily with injections
+None
+heartbur1: : 8 hours configuring vim over the 5 years
+GreenJello: I guess it's mostly good for web dev where all of the editors suck :-p
+GreenJello: webstorm is coming along nicely though
+heartbur1: yeah, that's the best part. you configure it once, and don't touch it for years.
+arlekin: okay... im done for today
+arlekin: in every meaning of the word
+arlekin: arleking out
+arlekin: dang it
+arlekin: arlekin out
+Pyrrhus666: byebye
+Preuk: dobra noc
+arlekin: cya guys, have a nice weekend (Preuk showoff :*)
+Pyrrhus666: 90 minutes and counting...
+AlecTaylor: hi
+AlecTaylor: I keep getting &quot;TypeError: this is not a constructor&quot; in my Angular 2 code. How do I debug this, and find which line the issue is from?
+Pyrrhus666: AlecTaylor: are you not seeing a complete trace ?
+AlecTaylor: Not seeing any stack trace, I'm setting the error in an alert bar (ng2-bootstrap)
+Pyrrhus666: what does the console show ?
+AlecTaylor: Nothing relevant
+Pyrrhus666: if it's a dev-build you should see a trace somewhere, afaik. or is this production code ?
+AlecTaylor: dev build, no stack trace, is there some way to trace where the line is?
+Pyrrhus666: AlecTaylor: chrome debugger should work with a dev-build
+AlecTaylor: I tried `console.log(&quot;response.json() =&quot;, response.json())` just before I push it onto the service, but there is no output in my console and the error keeps occurring
+Pyrrhus666: (if you can get as far as setting breakpoint and stepping throught the code)
+Pyrrhus666: that suggests that that code isn't even reached ?
+AlecTaylor: Yeah so it must be somewhere else
+AlecTaylor: But I can't find it
+paul_: hi all
+heartbur1: AlecTaylor: are you using chrome? it should show you stack trace along with the 'TypeError' thingy.
+paul_: I've added a node module into my angular2 app however when trying to reference the js file in the index.html file &quot;node_modules/x/y.js the y.js file is not loaded and redirect to the main app page
+None
+G1eb: suppp
+G1eb: anyone knows how to add manifest.json file using webpack?
+antiPoP: is there a click outside event in ng?
+G1eb: i mean,
+G1eb: ehh, wrong channel
+antiPoP: seems blur
+antiPoP: how can I change a class on blur / change events ?
+Pyrrhus6662: antiPoP: use onFocus/onBlur to set/unset a property like hasFocus and use that in ng-class to control css ?
+antiPoP: Pyrrhus6662, here is my try...       input  class=&quot;title&quot; type=text [(ngModel)]='title' [ngClass=&quot;isTitleEditable ? 'editable' : ''&quot;] (click)=&quot;enableTitleEdit()&quot; (blur)=&quot;saveTitle()&quot;:
+None
+antiPoP: Pyrrhus6662, I finally used [class.style] and worked, I think ngClass is still valid though
+Pyrrhus6662: antiPoP: I think it's a different way to do the same thing ;)
+None
+antiPoP: maybe I will make an external module once I know a bit more about ng2 :)
+Pyrrhus6662: antiPoP: good :)
+antiPoP: how can I bind the input size ?
+poosanth: Hey folks, should I namespace services internally within my module?
+poosanth: I'm curious, if the module name acts like a namespace for the entire component
+poosanth: Or I need to namespace space it :(
+wafflejock: poosanth, angular 1.x
+poosanth: 1.x sorry
+wafflejock: poosanth, no prob just verifying
+wafflejock: poosanth, basically there is one $injector for the running of the app and it has all the services etc so best to namespace somehow
+Guest89561: can someone help me with redirecting to the correct url in html5Mode using ui-router
+poosanth: @wafflejock damnit, okay thanks :(
+poosanth: btw, is this different with @wafflejock
+poosanth: i mean 2.x
+Elarcis: WEEK-END!
+Elarcis: So long, suckers!
+angulardeveloper: hola a todos
+angulardeveloper: tengo un problema con mi primera aplicacion en angular y queria saber si me podiais ayudar
+wafflejock: poosanth, yeah with 2.x there is an injector for each component from what I hear but haven't had much hands on with it
+poosanth: @wafflejock sweet, that makes things a bit more sane.. I'll have to look in to that when I start moving to it
+wafflejock: poosanth, from what I've seen though components directly require what they use for the most part too and things are a bit more isolated in terms of styles applied only per component etc.
+poosanth: I was worried about shared dependencies having the same service names.. and if the parent module wanted to use both from either dependency
+poosanth: :S
+wafflejock: poosanth, yeah can become a mess and unfortunately you don't get much warning if you overwrite some other service or directive
+poosanth: Yeahhh :(   @wafflejock
+tabithag: Confused... if I want my model to have, say, client_id, what do I put in  ng-select? 'client as client_id in clients' doesn't seem to be it.
+poosanth: There's probably some build task I could use to simplify creation..
+tabithag: Oh that's right. I know how to get the client_id but then I still want to be able to access client()... that's why I'm not doing it.
+tabithag: I love that Rails handles that for me on the back end... that I can have client_id and client
+tabithag: I guess I could write a $watch to sync them. Not fantastic, but...
+wafflejock: tabithag, you mean ng-options?
+tabithag: yes, what did I say?
+tabithag: Oh... select
+tabithag: sorry, yes.
+wafflejock: tabithag, client.client_id for client in clients, I think
+wafflejock: well that will show client_id for each client in the select and when you select the model will be the client
+angulardeveloper: nadie habla espa&ntilde;ol ???
+None
+tabithag: wafflejock: thanks
+wafflejock: tabithag, no prob
+antiPoP: I'm building the production version. When I build dev works fine, but when I build prod I get this error: Cannot find module '../../../models'
+andygmb: antiPoP: I would imagine it cant find the module '../../../models'
+andygmb: :D
+antiPoP: andygmb, yes, I move inside the client server and now works
+antiPoP: but the idea was sahring it with the server
+antiPoP: *sharing
+umdstu: trying to use angular-websocket and angular-actioncable, but when I refresh my app I get `TypeError: Cannot set property &lsquo;_websocketControllerActions&rsquo; of undefined`, and i dont see why, and google returns 0 hits if i search on that string
+theCole: masak, did you ever figure that problem out ?
+Ben_1: hi
+theCole: hello
+Ben_1: is it possible to use angular2 with material 1?
+theCole: Angular Material recently released Version 1 which we consider to be stable and ready for production use. Developers should note that Angular Material v1 works only with Angular 1.x.
+Ben_1: theCole: thanks for that info :)
+LeBlaaanc: Anyone care to share thoughts about using RN vs. Angular+Native Script? I'm an R/RN developer just curious about what it's all about.
+cerion: hi. I am doing the official angularjs 2 tutorial. at quickstart I get &quot;Loading...&quot; in my browser and no &quot;First angularjs App&quot;. How do I find out why ?
+LeBlaaanc: cerion your binding is probably just not working based on my short experience reading angular 2 code
+LeBlaaanc: Loading... is just what's in the bootstrap .html template
+LeBlaaanc: (if you didn't already figure that out)
+cerion: I found some error in systemjs.config.js. wrongly copied pasted by me
+tkdaj: Do you have to do anything special in angular 2 when using 3rd party libraries?  Like in angular 1.x you would have to use $apply or $digest to make sure angular knew about your changes in certain situations.  Is there anything like that in angular2 that you have to worry about?
+FrozenDroid: Hello everyone. I'm using ui-router. How do I make sure that a parent state's controller is instantiated *before* the child's?
+None
+tkdaj: ty
+wafflejock: tkdaj, np
+wafflejock: FrozenDroid, hmm think that is always the case, the controller and template are delayed until the resolve properties have completed but otherwise think the controllers are created from parent to child
+FrozenDroid: That's strange because that's not what's happening for me
+wafflejock: FrozenDroid, you may want to move functionality out to a .service as well and inject it to use in resolve to block some controller/template from being loaded until something else is complete
+FrozenDroid: basically what I'm trying to do is load all the important data for the app to work first, have the controller apply some logic to the services, then resolve a promise that says that the controller has loaded
+FrozenDroid: by the controller, I mean the parent controller
+FrozenDroid: as soon as the parent controller has done it's thing, the child state can do it's thing and instantiate
+wafflejock: FrozenDroid, yeah best if you can just get all the logic into the services if you can even if it's services using other services depending on the scope hierarchy is always more difficult IMO
+FrozenDroid: hmm fair enough
+wafflejock: problem is parent controller stuff might end up being async at some point or move something around and things break
+plong0: hey, I&rsquo;ve got a restrict: &lsquo;E&rsquo; directive with isolate scope, and a restrict: &lsquo;A&rsquo; directive that requires the element directive.  What&rsquo;s best way to add to the isolate scope of the E directive?
+wafflejock: plong0, sounds like a standardized test question
+plong0: hah. ya it does&hellip; but in this case it&rsquo;s purely practical
+wafflejock: plong0, basically if you want the two to communicate you do it via the controller function
+plong0: ya&hellip; I usually use a get/set or something on the E-directive&rsquo;s controller
+plong0: I was just wondering if there&rsquo;s like a proper way to access its scope directly&hellip;.  it&rsquo;s this funny thing with isolate scopes and multiple A-directives on it
+wafflejock: plong0, yeah each element can only have one directive that makes a scope on it iirc but it's always been a bit weird to me communicating between directives or doing all sorts of things with directives
+wafflejock: can do a lot but sometimes in very strange ways, still only touched the surface of ng2 but seems components make more sense... at least on the surface
+plong0: ya&hellip; I agree :)  &hellip;  I&rsquo;ve found lots of different ways for different things though
+plong0: I haven&rsquo;t had a chance to dig into ng1 components yet
+plong0: I think it&rsquo;s probably gonna be my next big move once I wrap up this project I&rsquo;ve been on for the past year
+wafflejock: yeah didn't do that either yet, played with multi-slot transclusion but then found out the project was only using 1.3 and that was introduced in 1.5 so we couldn't use it
+wafflejock: still managed to make it work with 1.3 stuff but was more of a hack
+plong0: ah ya eh&hellip; I did jump up to 1.5 and I remember trying multi-slot transclusion
+plong0: so you&rsquo;re stuck on 1.3?  you can&rsquo;t upgrade?   I found the transition was pretty smooth once I finally got over my nerves of doing it on an already fairly large app
+wafflejock: plong0, I'm not working with them on the project anymore we did upgrade to 1.5 eventually and moved pretty fast on things but some of the dependencies got stale with everyone just fixing bugs and working on features and whatnot
+plong0: right ya
+plong0: I haven&rsquo;t updated most of my bower components for a while &hellip; kinda do that on an as-needed basis
+masak: theCole: yes, ngWalrus threw a blog post at me that explained things pretty well.
+plong0: always more bugs and features to whittle away at lol
+masak: theCole: in the end it came down to &quot;if you're going to ng-model something inside a nested scope, make sure the expression has a dot in it&quot;
+wafflejock: plong0, yeah well just depends on features vs possible new bugs and regressions from upgrading, if it's security stuff makes more sense to just upgrade
+None
+masak: wafflejock: yes, that video was linked from the blog post, I believe.
+theCole: ah ha masak, similar to that stack overflow link i sent you
+jr3: anyone have any idea on the complexity/effort it'd take to port a angular app over to electron?
+wafflejock: jr3, I thought electron just wrapped web apps?
+jr3: yea, so theoretically it shouldn't be that complex?? riiiiiight :P
+jr3: wafflejock: im under that impression as well
+wafflejock: jr3, yeah I don't think you have to do anything special but haven't tried it really
+developercolombi: hola
+merpnderp: Anyone have a link on how I would mount an angular module on a new dom element?
+None
+merpnderp: keemyb: That is exactly what I want. Thank you very much :)
+keemyb: merpnderp np
+merpnderp: Why is this wrapped in angular.element?
+None
+plong0: is it valid to have a template id like: script type=&ldquo;text/ng-template&rdquo; id=&ldquo;foo.html#123&rdquo;:  ?  &hellip;wondering about the #123 in there
