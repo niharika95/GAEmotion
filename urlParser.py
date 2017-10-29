@@ -21,7 +21,7 @@ initialUrl = ['1475272800','1477954800','1480546800','1483225200','1485903600','
 extraUrl = []
 url = []
 
-for eachMonth in range(1,2):
+for eachMonth in range(0,11):
     #Putting the extraUrls into the extraUrl list.
     opener = urllib2.build_opener()
     ourUrl = opener.open(baseUrl+initialUrl[eachMonth]).read()
@@ -46,7 +46,7 @@ for eachMonth in range(1,2):
         for i in range(0,3):
             extraUrl.pop(0)
         extraUrl.pop()
-        del extraUrl[31:]
+        del extraUrl[1:] #BUG!!!
         extraUrl.pop()
 
     #Month with 28 days
@@ -64,5 +64,5 @@ for eachMonth in range(1,2):
     #Calling urlContentParser
     urlContentParser.urlContentParser(url, eachMonth)
 
-    #Resetting extraUrl to empty.
+    #Resetting extraUrl to empty
     extraUrl = []

@@ -9,68 +9,71 @@ finalResult = []
 print "Processing...\n"
 
 #Opening and reading file
-file = open("C:\Users\lenovo\PycharmProjects\GAEmotion\Result\\14.txt","r")
-file = file.read()
+def fileEmotions(outFile):
+    file = open(outFile)
+    #file = open("C:\Users\lenovo\PycharmProjects\GAEmotion\Result\\14.txt","r")
+    file = file.read()
 
-#Removing special characters from the text
-file = file.replace(".", "")
-file = file.replace(",", "")
-file = file.replace("!", "")
-file = file.replace("?", "")
+    #Removing special characters from the text
+    file = file.replace(".", "")
+    file = file.replace(",", "")
+    file = file.replace("!", "")
+    file = file.replace("?", "")
 
-#Storing words from the text into a list
-def split_sentence(input):
-    words = input.split()
-    for i in words:
-        textList.append(i)
+    #Storing words from the text into a list
+    def split_sentence(input):
+        words = input.split()
+        for i in words:
+            textList.append(i)
 
-split_sentence(file)
+    split_sentence(file)
 
-#Increasing the counter of the emotion.
-def incrementCounter(j):
-    if j == 0:
-        emo['Anger'] = emo['Anger'] + 1
-    if j == 1:
-        emo['Anticipation'] = emo['Anticipation'] + 1
-    if j == 2:
-        emo['Disgust'] = emo['Disgust'] + 1
-    if j == 3:
-        emo['Fear'] = emo['Fear'] + 1
-    if j == 4:
-        emo['Joy'] = emo['Joy'] + 1
-    if j == 5:
-        emo['Sadness'] = emo['Sadness'] + 1
-    if j == 6:
-        emo['Surprise'] = emo['Surprise'] + 1
-    if j == 7:
-        emo['Trust'] = emo['Trust'] + 1
+    #Increasing the counter of the emotion.
+    def incrementCounter(j):
+        if j == 0:
+            emo['Anger'] = emo['Anger'] + 1
+        if j == 1:
+            emo['Anticipation'] = emo['Anticipation'] + 1
+        if j == 2:
+            emo['Disgust'] = emo['Disgust'] + 1
+        if j == 3:
+            emo['Fear'] = emo['Fear'] + 1
+        if j == 4:
+            emo['Joy'] = emo['Joy'] + 1
+        if j == 5:
+            emo['Sadness'] = emo['Sadness'] + 1
+        if j == 6:
+            emo['Surprise'] = emo['Surprise'] + 1
+        if j == 7:
+            emo['Trust'] = emo['Trust'] + 1
 
-with open('emotionDatabase.csv', "r") as f:
-    mycsv = csv.reader(f)
-    for i, row in enumerate(mycsv):
-        for j, col in enumerate(row):
-            for eachword in textList:
-                if eachword == col:
-                    incrementCounter(j)
+    with open('emotionDatabase.csv', "r") as f:
+        mycsv = csv.reader(f)
+        for i, row in enumerate(mycsv):
+            for j, col in enumerate(row):
+                for eachword in textList:
+                    if eachword == col:
+                        incrementCounter(j)
 
-#Printing the count of each emotion in the text
-print ("Angry: " + str(emo['Anger']))
-print ("Anticipation: " + str(emo['Anticipation']))
-print ("Disgust: " + str(emo['Disgust']))
-print ("Fear: " + str(emo['Fear']))
-print ("Joy: " + str(emo['Joy']))
-print ("Sadness: " + str(emo['Sadness']))
-print ("Surprise: " + str(emo['Surprise']))
-print ("Trust: " + str(emo['Trust']))
+def printDominatingEmotion():
+    #Printing the count of each emotion in the text
+    print ("Angry: " + str(emo['Anger']))
+    print ("Anticipation: " + str(emo['Anticipation']))
+    print ("Disgust: " + str(emo['Disgust']))
+    print ("Fear: " + str(emo['Fear']))
+    print ("Joy: " + str(emo['Joy']))
+    print ("Sadness: " + str(emo['Sadness']))
+    print ("Surprise: " + str(emo['Surprise']))
+    print ("Trust: " + str(emo['Trust']))
 
-#Conclusion
-maximum = max(emo['Anger'], emo['Anticipation'], emo['Disgust'], emo['Fear'], emo['Joy'], emo['Sadness'], emo['Surprise'], emo['Trust'])
-for key, value in emo.iteritems():
-    if(value == maximum):
-        finalResult.append(key)
+    #Conclusion
+    maximum = max(emo['Anger'], emo['Anticipation'], emo['Disgust'], emo['Fear'], emo['Joy'], emo['Sadness'], emo['Surprise'], emo['Trust'])
+    for key, value in emo.iteritems():
+        if(value == maximum):
+            finalResult.append(key)
 
-if(finalResult.__len__() == 1):
-    print ("\n The dominating emotion is " + str(*finalResult) + ".")
+    if(finalResult.__len__() == 1):
+        print ("\n The dominating emotion is " + str(*finalResult) + ".")
 
-elif(finalResult.__len__() > 1):
-    print ("\n The dominating emotions are " + ', '.join(finalResult) + ".")
+    elif(finalResult.__len__() > 1):
+        print ("\n The dominating emotions are " + ', '.join(finalResult) + ".")
