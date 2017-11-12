@@ -11,7 +11,6 @@ print "Processing...\n"
 #Opening and reading file
 def fileEmotions(outFile):
     file = open(outFile)
-    #file = open("C:\Users\lenovo\PycharmProjects\GAEmotion\Result\\14.txt","r")
     file = file.read()
 
     #Removing special characters from the text
