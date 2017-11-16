@@ -6,24 +6,15 @@ from BeautifulSoup import BeautifulSoup
 # 1. October - 1475272800
 # 2. November - 1477954800
 # 3. December - 1480546800
-# 4. January - 1483225200
-# 5. February - 1485903600
-# 6. March - 1488322800
-# 7. April - 1490997600
-# 8. May - 1493589600
-# 9. June - 1496268000
-# 10. July - 1498860000
-# 11. August - 1501538400
-# 12. September - 1504216800
 
 baseUrl = 'https://echelog.com/logs/browse/angularjs/'
-initialUrl = ['1475272800','1477954800','1480546800','1483225200','1485903600','1488322800','1490997600','1493589600','1496268000','1498860000','1501538400','1504216800']
+initialUrl = ['1475272800','1477954800','1480546800']
 url = []
 numbers = []
 for i in range(32):
     numbers.append(str(i))
 
-for eachMonth in range(0,12):
+for eachMonth in range(0,3):
 
     opener = urllib2.build_opener()
     ourUrl = opener.open(baseUrl + initialUrl[eachMonth]).read()

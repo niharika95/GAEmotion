@@ -1,12 +1,11 @@
 import urllib2
 from BeautifulSoup import BeautifulSoup
 import emotionMain
+import csv
 
-for i in range(1,13):
+for i in range(1,2):
     print ('\nMonth '+ str(i))
 
-    #Months with 31 days
-    # if(i==1 or i==3 or i==4 or i==6 or i==8 or i==10 or i==11):
     for j in range(32):
         try:
             with open("sites/" + str(i) + "_" + str(j+1) + ".html", "r") as reader:
@@ -21,6 +20,10 @@ for i in range(1,13):
 
                 fileName = 'C://Users//lenovo//PycharmProjects//GAEmotion//Result//' + str(i) + "//" + str(j + 1) + '.txt'
                 emotionMain.fileEmotions(fileName)
+
                 print('Processing of File ' + str(j+1) + " Completed.")
         except Exception:
             pass
+
+    if i==3:
+        emotionMain.printDominatingEmotion()

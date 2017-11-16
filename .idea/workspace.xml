@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3c2eec18-3d52-4d06-8d9e-7d292fe363e5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/emotionMain.py" afterPath="$PROJECT_DIR$/emotionMain.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/urlContentParser.py" afterPath="$PROJECT_DIR$/urlContentParser.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/urlParser.py" afterPath="$PROJECT_DIR$/urlParser.py" />
     </list>
@@ -19,8 +18,8 @@
       <file leaf-file-name="urlParser.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/urlParser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="294">
+              <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -28,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urlContentParser.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="urlContentParser.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/urlContentParser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="21" column="53" lean-forward="false" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+            <state relative-caret-position="42">
+              <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -40,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="emotionMain.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="emotionMain.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/emotionMain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="58" column="35" lean-forward="true" selection-start-line="58" selection-start-column="35" selection-end-line="58" selection-end-column="35" />
+            <state relative-caret-position="1239">
+              <caret line="60" column="45" lean-forward="true" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -61,19 +60,24 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/sites/0.html" />
-        <option value="$PROJECT_DIR$/emotionMain.py" />
         <option value="$PROJECT_DIR$/urlParser.py" />
         <option value="$PROJECT_DIR$/urlContentParser.py" />
+        <option value="$PROJECT_DIR$/emotionMain.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="991" />
+    <option name="x" value="70" />
     <option name="width" value="937" />
     <option name="height" value="1088" />
   </component>
@@ -93,7 +97,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -115,7 +119,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -198,8 +202,8 @@
     <recent_temporary>
       <list size="3">
         <item index="0" class="java.lang.String" itemvalue="Python.urlContentParser" />
-        <item index="1" class="java.lang.String" itemvalue="Python.urlParser" />
-        <item index="2" class="java.lang.String" itemvalue="Python.emotionMain" />
+        <item index="1" class="java.lang.String" itemvalue="Python.emotionMain" />
+        <item index="2" class="java.lang.String" itemvalue="Python.urlParser" />
       </list>
     </recent_temporary>
   </component>
@@ -235,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509297583013</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Changed the functionality of how data is taken from the web and separation of parsed data in months (files).">
+      <created>1510457516966</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1510457516966</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -249,18 +260,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="69" y="-9" width="1860" height="1098" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2897982" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.081278026" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33225107" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3351178" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991684" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39828694" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -278,11 +288,12 @@
     <MESSAGE value="Addded urls of the months. Bugs exist." />
     <MESSAGE value="Months with 28 days and 31 days work fine. 30 days to be fixed." />
     <MESSAGE value="Slight changes done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Slight changes done" />
+    <MESSAGE value="Changed the functionality of how data is taken from the web and separation of parsed data in months (files)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed the functionality of how data is taken from the web and separation of parsed data in months (files)." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="28" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -618,20 +629,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Result/4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/BeautifulSoup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="1519" column="0" lean-forward="false" selection-start-line="1519" selection-start-column="0" selection-end-line="1519" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Result/4" />
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
@@ -679,29 +677,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/urlParser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="294">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/urlContentParser.py">
+    <entry file="file://C:/Python27/Lib/site-packages/BeautifulSoup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="53" lean-forward="false" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-274">
+          <caret line="866" column="0" lean-forward="false" selection-start-line="866" selection-start-column="0" selection-end-line="866" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/emotionMain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="58" column="35" lean-forward="true" selection-start-line="58" selection-start-column="35" selection-end-line="58" selection-end-column="35" />
+        <state relative-caret-position="1239">
+          <caret line="60" column="45" lean-forward="true" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="45" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/urlContentParser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
