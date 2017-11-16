@@ -2,9 +2,12 @@ from bs4 import BeautifulSoup
 import csv
 
 #Declaring variables
-emo = {'Anger':0, 'Anticipation':0, 'Disgust':0, 'Fear':0, 'Joy':0, 'Sadness':0, 'Surprise':0, 'Trust':0}
+emo = {'Anger': 0, 'Anticipation': 0, 'Disgust': 0, 'Fear': 0, 'Joy': 0, 'Sadness': 0, 'Surprise': 0, 'Trust': 0}
 textList = []
 finalResult = []
+
+def setEmoDictValuesToZero():
+    emo = {'Anger': 0, 'Anticipation': 0, 'Disgust': 0, 'Fear': 0, 'Joy': 0, 'Sadness': 0, 'Surprise': 0, 'Trust': 0}
 
 print "Processing...\n"
 
