@@ -69,13 +69,13 @@ def printDominatingEmotion():
     print ("Trust: " + str(emo['Trust']))
 
     #Conclusion
-    maximum = max(emo['Anger'], emo['Anticipation'], emo['Disgust'], emo['Fear'], emo['Joy'], emo['Sadness'], emo['Surprise'], emo['Trust'])
-    for key, value in emo.iteritems():
-        if(value == maximum):
-            finalResult.append(key)
-
-    if(finalResult.__len__() == 1):
-        print ("\n The dominating emotion is " + str(*finalResult) + ".")
-
-    elif(finalResult.__len__() > 1):
-        print ("\n The dominating emotions are " + ', '.join(finalResult) + ".")
+    # maximum = max(emo['Anger'], emo['Anticipation'], emo['Disgust'], emo['Fear'], emo['Joy'], emo['Sadness'], emo['Surprise'], emo['Trust'])
+    # for key, value in emo.iteritems():
+    #     if(value == maximum):
+    #         finalResult.append(key)
+    #
+    # if(finalResult.__len__() == 1):
+    #     print ("\n The dominating emotion is " + str(*finalResult) + ".")
+    #
+    # elif(finalResult.__len__() > 1):
+    #     print ("\n The dominating emotions are " + ', '.join(finalResult) + ".")
