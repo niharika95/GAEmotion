@@ -2,9 +2,12 @@ from bs4 import BeautifulSoup
 import csv
 
 #Declaring variables
-emo = {'Anger':0, 'Anticipation':0, 'Disgust':0, 'Fear':0, 'Joy':0, 'Sadness':0, 'Surprise':0, 'Trust':0}
+emo = {'Anger': 0, 'Anticipation': 0, 'Disgust': 0, 'Fear': 0, 'Joy': 0, 'Sadness': 0, 'Surprise': 0, 'Trust': 0}
 textList = []
 finalResult = []
+
+def setEmoDictValuesToZero():
+    emo = {'Anger': 0, 'Anticipation': 0, 'Disgust': 0, 'Fear': 0, 'Joy': 0, 'Sadness': 0, 'Surprise': 0, 'Trust': 0}
 
 print "Processing...\n"
 
@@ -66,13 +69,13 @@ def printDominatingEmotion():
     print ("Trust: " + str(emo['Trust']))
 
     #Conclusion
-    maximum = max(emo['Anger'], emo['Anticipation'], emo['Disgust'], emo['Fear'], emo['Joy'], emo['Sadness'], emo['Surprise'], emo['Trust'])
-    for key, value in emo.iteritems():
-        if(value == maximum):
-            finalResult.append(key)
-
-    if(finalResult.__len__() == 1):
-        print ("\n The dominating emotion is " + str(*finalResult) + ".")
-
-    elif(finalResult.__len__() > 1):
-        print ("\n The dominating emotions are " + ', '.join(finalResult) + ".")
+    # maximum = max(emo['Anger'], emo['Anticipation'], emo['Disgust'], emo['Fear'], emo['Joy'], emo['Sadness'], emo['Surprise'], emo['Trust'])
+    # for key, value in emo.iteritems():
+    #     if(value == maximum):
+    #         finalResult.append(key)
+    #
+    # if(finalResult.__len__() == 1):
+    #     print ("\n The dominating emotion is " + str(*finalResult) + ".")
+    #
+    # elif(finalResult.__len__() > 1):
+    #     print ("\n The dominating emotions are " + ', '.join(finalResult) + ".")

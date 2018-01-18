@@ -1,6 +1,5 @@
 import urllib2
 from BeautifulSoup import BeautifulSoup
-# import urlContentParser
 
 # 2016-17
 # 1. October - 1475272800
@@ -11,7 +10,7 @@ from BeautifulSoup import BeautifulSoup
 # 6. March - 1488322800
 # 7. April - 1490997600
 # 8. May - 1493589600
-# 9. June - 1496268000
+# 9. June - 496268000
 # 10. July - 1498860000
 # 11. August - 1501538400
 # 12. September - 1504216800
@@ -23,7 +22,7 @@ numbers = []
 for i in range(32):
     numbers.append(str(i))
 
-for eachMonth in range(0,12):
+for eachMonth in range(8,12):
 
     opener = urllib2.build_opener()
     ourUrl = opener.open(baseUrl + initialUrl[eachMonth]).read()

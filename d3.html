@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+      <head>
+            <meta charset="utf-8">
+            <title>D3 Demo</title>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+            <style type="text/css">
+                  .axis path,
+                  .axis line{
+                     fill: none;
+                     stroke: black;
+                     shape-rendering: crispEdges;
+                  }
+                  .axis text{
+                     font-family: sans-serif;
+                     font-size: 11px;
+                  }
+                  .legend {
+                    font-size: 16px;
+                    text-anchor: middle;
+                  }
+            </style>
+
+            <style>
+            path {
+                fill: none;
+                stroke-width: 2;
+            }
+
+            .axis {
+              shape-rendering: crispEdges;
+            }
+            .x.axis line {
+              stroke: lightgrey;
+            }
+            .x.axis .minor {
+              stroke-opacity: .5;
+            }
+            .x.axis path {
+              display: none;
+            }
+            .y.axis line, .y.axis path {
+              fill: none;
+              stroke: #000;
+            }
+        </style>
+      </head>
+      <body>
+            <div id="graph" class="aGraph" style="position:absolute;top:0px;left:0; float:left;">
+            </div>
+
+            <script type="text/javascript">
+                  var w = 1500;
+                  var h = 300;
+                  var svgHeight = 700;
+                  var padding = 5;
+                  var xOffset = 50;
+
+                  d3.csv('EmotionGraph.csv', function(data){
+                     data.forEach(function(d){
+                     });
+
+                  var max_score = 0;
+                  for(var i = 0; i < data.length; i++){
+                    var obj = data[i];
+                    for(var key in obj){
+                        if(key == "Month"){
+                            continue;
+                        }
+                        else{
+                            var value = parseInt(obj[key]);
+                            if(value > max_score){
+                                max_score = value;
+                            }
+                        }
+                    }
+                  }
+
+                  var range = [];
+                  for (var k = 0; k < data.length; k++){
+                    range.push(k*w/data.length + xOffset);
+                  }
+
+                  var yScale = d3.scale.linear().domain([0, max_score]).range([h - padding, padding]);
+
+                  var xScale = d3.scale.ordinal().domain(['October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September']).range(range);
+
+                  var svg = d3.select("body")
+                                 .append("svg")
+                                 .attr("width", w)
+                                 .attr("height", svgHeight);
+
+                  var xAxis = d3.svg.axis()
+                                 .scale(xScale)
+                                 .orient("bottom");
+
+                  var yAxis = d3.svg.axis()
+                                 .scale(yScale)
+                                 .orient("left");
+
+                  var line = d3.svg.line()
+                                .x(function(d,i){
+                                    return xScale(i);
+                                })
+                                .y(function(d){
+                                    return yScale(d);
+                                })
+
+                    var graph = d3.select("#graph").append("svg:svg")
+                                    .attr("width", w)
+                                    .attr("height", h)
+                                    .append("svg:g");
+
+                    dat = []
+                    for(var i = 0; i < data.length; i++){
+                        for(var key in data[i]){
+                            if(key != "Month"){
+                                dat[key] = []
+                            }
+                        }
+                    }
+
+                    for (var i = 0;i <data.length; i++) {
+                        for(var key in data[i]){
+                            if(key != "Month"){
+                                dat[key].push(data[i][key])
+                            }
+                        }
+                    }
+
+                    var count = xOffset;
+                    for(var key in dat){
+                        col = getColor(key);
+                        graph.append("svg:path").attr("d", line(dat[key])).attr("stroke", col);
+                        svg.append("text")
+                            .attr("x", count)
+                            .attr("y", 350)
+                            .attr("class", "legend")
+                            .style("stroke", col)
+                            .text(key);
+                        count += 70;
+                    }
+
+                    svg.append("g")
+                         .attr("class", "axis")
+                         .attr("transform", "translate(0," + (h - padding) + ")")
+                         .call(xAxis);
+
+                    svg.append("g")
+                       .attr("class", "axis")
+                       .attr("transform", "translate(" + padding + (0) + ", 0)")
+                       .call(yAxis);
+                  });
+
+
+                  function getColor(key) {
+                        if (key == 'Anger')
+                            color = '#ae0001';
+                        else if (key == 'Anticipation')
+                            color = '#ee6140';
+                        else if (key == 'Disgust')
+                            color = '#c2c9f7';
+                        else if (key == 'Fear')
+                            color = '#6497b1';
+                        else if (key == 'Joy')
+                            color = '#f9ea07';
+                        else if (key == 'Sadness')
+                            color = '#c3c3c3';
+                        else if (key == 'Surprise')
+                            color = '#d49d4b';
+                        else if (key == 'Trust')
+                            color = '#4af79c';
+                        return color;
+                    }
+
+            </script>
+      </body>
+</html>
